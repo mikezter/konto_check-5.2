@@ -1,0 +1,40 @@
+Dies ist eine Sammlung von Minimalprogrammen für konto_check, die das
+Aufrufinterface für verschiedene Programmiersprachen zeigen. Bei den meisten
+Varianten ist ein Listentest implementiert: das Programm liest eine Liste von
+Bankleitzahlen und Kontonummern ein (jeweils ein Paar pro Zeile, durch ein
+Blank getrennt), testet die Kombination und gibt das Prüfergebnis sowie (falls
+die Bank existiert) den Langnamen der Bank sowie PLZ und Ort der Hauptstelle
+aus.
+
+Die AWK-Versionen arbeitet als Filter; sie erhält BLZ und Konto über die
+<stdin> und schreibt die Ergebnisse jeweils nach <stdout>. Es wurde außer der
+"großen" Version mit Bankinfo (mini.awk) noch eine kleine Variante (mini2.awk
+und mini2i.awk) implementiert, die nur den Test macht, aber sich gut als
+Einzeiler für die Kommandozeile eignet. Bei AWK ist es möglich, konto_check als
+Modul zu kompilieren oder die AWK-Sourcen zu patchen und ein neues AWK-Binary
+zu erzeugen. Die Modulversion ließ sich bei den Tests unter FreeBSD nicht
+verwenden, während das Neukompilieren ohne Probleme funktionierte.
+
+Ein weiterer Sonderfall ist PHP: hier erfolgt die Eingabe über ein
+HTML-Formular.
+
+Für C# und VB.net gibt es zwei Varianten: mini.cs (bzw. mini.vb), das
+eigentliche mini-Programm, bei dem nur die benötigten Funktionen und
+DLL-Entrypoints definiert sind, sowie mini1.cs (bzw. mini1.vb), die eine
+ziemlig vollständige Schnittstelle mit jeweils einer Reihe Überladungen zur
+konto_check Bibliothek enthalten.
+
+Aktuell umfaßt die Sammlung die folgenden Varianten:
+
+mini.awk   : große AWK-Version Ein-/Ausgabe per Datei
+mini2.awk  : AWK-Version als Filter
+mini2i.awk : AWK-Version als Filter, AWK Binary gepatcht
+mini.c     : C-Version
+mini.cs    : C#-Version
+mini1.cs   : C#-Version mit vollständigem Interface
+mini.php   : PHP-Version
+mini.pl    : Perl-Version
+mini.rb    : Ruby-Version
+mini.vb    : Visual Basic .net Version
+mini1.vb   : Visual Basic .net Version mit vollständigem Interface
+
