@@ -1,0 +1,921 @@
+diff -Nur gawk-3.1.8/awkgram.c gawk-3.1.8.neu/awkgram.c
+--- gawk-3.1.8/awkgram.c	2010-04-13 21:24:46.000000000 +0200
++++ gawk-3.1.8.neu/awkgram.c	2011-06-08 11:20:02.443071940 +0200
+@@ -3649,6 +3649,13 @@
+ {"asort",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1)|A(2),	do_asort},
+ {"asorti",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1)|A(2),	do_asorti},
+ {"atan2",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(2),	do_atan2},
++{"bank_bic",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_bic},
++{"bank_name",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_name},
++{"bank_name_kurz",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_name_kurz},
++{"bank_ort",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_ort},
++{"bank_plz",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_plz},
++{"bank_pz",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_pz},
++{"bank_valid",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_valid},
+ {"bindtextdomain",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1)|A(2),	do_bindtextdomain},
+ {"break",	Node_K_break,	 LEX_BREAK,	0,		0},
+ #ifdef ALLOW_SWITCH
+@@ -3676,13 +3683,18 @@
+ {"gensub",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(3)|A(4), do_gensub},
+ {"getline",	Node_K_getline,	 LEX_GETLINE,	NOT_OLD,	0},
+ {"gsub",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(2)|A(3), do_gsub},
++{"iban_gen",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(2), do_iban_gen},
+ {"if",		Node_K_if,	 LEX_IF,	0,		0},
+ {"in",		Node_illegal,	 LEX_IN,	0,		0},
+ {"index",	Node_builtin,	 LEX_BUILTIN,	A(2),		do_index},
+ {"int",		Node_builtin,	 LEX_BUILTIN,	A(1),		do_int},
++{"konto_check",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(2), do_konto_check},
++{"kto_check_encoding",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_kto_check_encoding},
+ {"length",	Node_builtin,	 LEX_LENGTH,	A(0)|A(1),	do_length},
+ {"log",		Node_builtin,	 LEX_BUILTIN,	A(1),		do_log},
+ {"lshift",	Node_builtin,    LEX_BUILTIN,	GAWKX|A(2),	do_lshift},
++{"lut_free",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(0), do_lut_free},
++{"lut_init",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(2), do_lut_init},
+ {"match",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(2)|A(3), do_match},
+ {"mktime",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1),	do_mktime},
+ {"next",	Node_K_next,	 LEX_NEXT,	0,		0},
+@@ -3692,6 +3704,8 @@
+ {"printf",	Node_K_printf,	 LEX_PRINTF,	0,		0},
+ {"rand",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(0),	do_rand},
+ {"return",	Node_K_return,	 LEX_RETURN,	NOT_OLD,	0},
++{"retval2txt",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_retval2txt},
++{"retval2utf8",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_retval2utf8},
+ {"rshift",	Node_builtin,    LEX_BUILTIN,	GAWKX|A(2),	do_rshift},
+ {"sin",		Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(1),	do_sin},
+ {"split",	Node_builtin,	 LEX_BUILTIN,	A(2)|A(3),	do_split},
+diff -Nur gawk-3.1.8/awkgram.y gawk-3.1.8.neu/awkgram.y
+--- gawk-3.1.8/awkgram.y	2010-04-13 21:24:32.000000000 +0200
++++ gawk-3.1.8.neu/awkgram.y	2011-06-08 11:17:06.658075112 +0200
+@@ -1122,6 +1122,13 @@
+ {"asort",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1)|A(2),	do_asort},
+ {"asorti",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1)|A(2),	do_asorti},
+ {"atan2",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(2),	do_atan2},
++{"bank_bic",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_bic},
++{"bank_name",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_name},
++{"bank_name_kurz",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_name_kurz},
++{"bank_ort",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_ort},
++{"bank_plz",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_plz},
++{"bank_pz",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_pz},
++{"bank_valid",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_bank_valid},
+ {"bindtextdomain",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1)|A(2),	do_bindtextdomain},
+ {"break",	Node_K_break,	 LEX_BREAK,	0,		0},
+ #ifdef ALLOW_SWITCH
+@@ -1149,13 +1156,18 @@
+ {"gensub",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(3)|A(4), do_gensub},
+ {"getline",	Node_K_getline,	 LEX_GETLINE,	NOT_OLD,	0},
+ {"gsub",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(2)|A(3), do_gsub},
++{"iban_gen",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(2), do_iban_gen},
+ {"if",		Node_K_if,	 LEX_IF,	0,		0},
+ {"in",		Node_illegal,	 LEX_IN,	0,		0},
+ {"index",	Node_builtin,	 LEX_BUILTIN,	A(2),		do_index},
+ {"int",		Node_builtin,	 LEX_BUILTIN,	A(1),		do_int},
++{"konto_check",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(2), do_konto_check},
++{"kto_check_encoding",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_kto_check_encoding},
+ {"length",	Node_builtin,	 LEX_LENGTH,	A(0)|A(1),	do_length},
+ {"log",		Node_builtin,	 LEX_BUILTIN,	A(1),		do_log},
+ {"lshift",	Node_builtin,    LEX_BUILTIN,	GAWKX|A(2),	do_lshift},
++{"lut_free",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(0), do_lut_free},
++{"lut_init",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(2), do_lut_init},
+ {"match",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(2)|A(3), do_match},
+ {"mktime",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1),	do_mktime},
+ {"next",	Node_K_next,	 LEX_NEXT,	0,		0},
+@@ -1165,6 +1177,8 @@
+ {"printf",	Node_K_printf,	 LEX_PRINTF,	0,		0},
+ {"rand",	Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(0),	do_rand},
+ {"return",	Node_K_return,	 LEX_RETURN,	NOT_OLD,	0},
++{"retval2txt",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_retval2txt},
++{"retval2utf8",	Node_builtin,	 LEX_BUILTIN,	GAWKX|A(1), do_retval2utf8},
+ {"rshift",	Node_builtin,    LEX_BUILTIN,	GAWKX|A(2),	do_rshift},
+ {"sin",		Node_builtin,	 LEX_BUILTIN,	NOT_OLD|A(1),	do_sin},
+ {"split",	Node_builtin,	 LEX_BUILTIN,	A(2)|A(3),	do_split},
+Binärdateien gawk-3.1.8/.awkgram.y.swp and gawk-3.1.8.neu/.awkgram.y.swp sind verschieden.
+diff -Nur gawk-3.1.8/awk.h gawk-3.1.8.neu/awk.h
+--- gawk-3.1.8/awk.h	2010-04-21 22:32:19.000000000 +0200
++++ gawk-3.1.8.neu/awk.h	2011-06-08 11:19:21.603073392 +0200
+@@ -975,8 +975,26 @@
+ extern int check_special P((const char *name));
+ extern void register_deferred_variable P((const char *name,
+ 					  NODE *(*load_func)(void)));
++
++/* konto_check_awk.c */
++extern NODE *do_iban_gen P((NODE *tree));
++extern NODE *do_lut_init P((NODE *tree));
++extern NODE *do_lut_free P((NODE *tree));
++extern NODE *do_konto_check P((NODE *tree));
++extern NODE *do_bank_valid P((NODE *tree));
++extern NODE *do_bank_name P((NODE *tree));
++extern NODE *do_bank_name_kurz P((NODE *tree));
++extern NODE *do_bank_bic P((NODE *tree));
++extern NODE *do_bank_plz P((NODE *tree));
++extern NODE *do_bank_ort P((NODE *tree));
++extern NODE *do_bank_pz P((NODE *tree));
++extern NODE *do_kto_check_encoding P((NODE *tree));
++extern NODE *do_retval2txt P((NODE *tree));
++extern NODE *do_retval2utf8 P((NODE *tree));
++
+ /* builtin.c */
+ extern double double_to_int P((double d));
++
+ extern NODE *do_exp P((NODE *tree));
+ extern NODE *do_fflush P((NODE *tree));
+ extern NODE *do_index P((NODE *tree));
+Binärdateien gawk-3.1.8/.awk.h.swp and gawk-3.1.8.neu/.awk.h.swp sind verschieden.
+diff -Nur gawk-3.1.8/konto_check_awk.c gawk-3.1.8.neu/konto_check_awk.c
+--- gawk-3.1.8/konto_check_awk.c	1970-01-01 01:00:00.000000000 +0100
++++ gawk-3.1.8.neu/konto_check_awk.c	2011-06-08 11:36:48.252395928 +0200
+@@ -0,0 +1,329 @@
++/*
++ * konto_check_awk.c - Builtin functions for konto_check
++ */
++
++/* 
++ * Copyright (C) 1986, 1988, 1989, 1991-2010 the Free Software Foundation, Inc.
++ * Copyright (C) 2011 Michael Plugge <m.plugge@hs-mannheim.de> (for this file)
++ * 
++ * This file is part of GAWK, the GNU implementation of the
++ * AWK Programming Language.
++ * 
++ * GAWK is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ * 
++ * GAWK is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
++ */
++
++
++#include "awk.h"
++#include "konto_check.h"
++
++/* do_lut_init - Initialisierung von konto_check.
++ * Als Parameter sind nur der LUT-Name und der Level vorgesehen.
++ * Die Initialisierung wird allerdings auch schon beim Laden
++ * der Bibliothek implizit gemacht (in der Funktion dlload() ).
++ */
++NODE *
++do_lut_init(NODE *tree)
++{
++	NODE *tmp,*t1,*t2;
++   char lutfile[512];
++   int ret,level;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++	tree=tree->rnode;	/* second argument */
++   tmp=tree->lnode;
++	level=(int)force_number(tree_eval(tmp));
++
++   if(t1->stlen<512){
++      strncpy(lutfile,t1->stptr,t1->stlen);
++      lutfile[t1->stlen]=0;
++   }
++   else{
++      strncpy(lutfile,t1->stptr,511);
++      lutfile[511]=0;
++   }
++   ret=lut_init(lutfile,level,0);
++	free_temp(t1);
++	return tmp_number((AWKNUM)(ret));
++}
++
++/* do_lut_free - allen allokierten Speicher freigeben */
++NODE *
++do_lut_free(NODE *tree)
++{
++	return tmp_number((AWKNUM)(lut_cleanup()));
++}
++
++/*  do_iban_gen: aus BLZ und Kontonummer einen IBAN generieren */
++NODE *
++do_iban_gen(NODE *tree)
++{
++	NODE *tmp,*t1,*t2;
++   char blz[16],kto[16],iban[128],*papier,*ptr,*dptr;
++   int ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++	tree=tree->rnode;	/* second argument */
++   tmp=tree->lnode;
++   t2=force_string(tree_eval(tmp));
++   if(t1->stlen>15 || t2->stlen>15)return tmp_string("",0);
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   strncpy(kto,t2->stptr,t2->stlen);
++   kto[t2->stlen]=0;
++	free_temp(t1);
++   free_temp(t2);
++   papier=iban_gen(blz,kto,&ret);
++   if(ret==LUT2_NOT_INITIALIZED){
++      lut_init(NULL,0,0);
++      papier=iban_gen(blz,kto,&ret);
++   }
++   if(ret<=0)return tmp_string("",0);
++
++      /* normale Version (nicht Papier) der IBAN erzeugen */
++   for(ptr=papier,dptr=iban;*ptr;ptr++)if(*ptr!=' ')*dptr++=*ptr;
++   *dptr=0;
++   kc_free(papier);
++	return tmp_string(iban,strlen(iban));
++}
++
++/*  do_konto_check: Kontonummer testen */
++NODE *
++do_konto_check(NODE *tree)
++{
++	NODE *tmp,*t1,*t2;
++   char blz[16],kto[16];
++   int ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++	tree=tree->rnode;	/* second argument */
++   tmp=tree->lnode;
++   t2=force_string(tree_eval(tmp));
++   if(t1->stlen>15)return tmp_number((AWKNUM)(INVALID_BLZ_LENGTH));
++   if(t2->stlen>15)return tmp_number((AWKNUM)(INVALID_KTO_LENGTH));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   strncpy(kto,t2->stptr,t2->stlen);
++   kto[t2->stlen]=0;
++   ret=kto_check(blz,kto,NULL);
++	free_temp(t1);
++   free_temp(t2);
++	return tmp_number((AWKNUM)(ret));
++}
++
++/*  do_bank_valid: testen ob eine BLZ gültig ist
++ *  Die LUT-Routinen für den AWK-Port arbeiten nur mit den Hauptstellen,
++ *  der Parameter für die Nebenstellen wird immer auf 0 gesetzt.
++ */
++NODE *
++do_bank_valid(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char blz[16];
++   int ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   ret=lut_blz(blz,0);
++   if(ret==LUT2_BLZ_NOT_INITIALIZED){
++      lut_init(NULL,7,0);
++      ret=lut_blz(blz,0);
++   }
++	free_temp(t1);
++	return tmp_number((AWKNUM)(ret));
++}
++
++/*  do_bank_name: Banknamen zu einer BLZ bestimmen */
++NODE *
++do_bank_name(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char blz[16],*name;
++   int ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   name=lut_name(blz,0,&ret);
++   if(ret==LUT2_NAME_NOT_INITIALIZED){
++      lut_init(NULL,7,0);
++      name=lut_name(blz,0,NULL);
++   }
++	free_temp(t1);
++	return tmp_string(name,strlen(name));
++}
++
++/*  do_bank_name_kurz: Kurzbezeichnung der Bank zu einer BLZ bestimmen */
++NODE *
++do_bank_name_kurz(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char blz[16],*name;
++   int ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   name=lut_name_kurz(blz,0,&ret);
++   if(ret==LUT2_NAME_KURZ_NOT_INITIALIZED){
++      lut_init(NULL,7,0);
++      name=lut_name_kurz(blz,0,NULL);
++   }
++	free_temp(t1);
++	return tmp_string(name,strlen(name));
++}
++
++/*  do_bank_bic: BIC (Bank Identifier Code) zu einer BLZ bestimmen */
++NODE *
++do_bank_bic(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char blz[16],*bic;
++   int ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   bic=lut_bic(blz,0,&ret);
++   if(ret==LUT2_BIC_NOT_INITIALIZED){
++      lut_init(NULL,7,0);
++      bic=lut_bic(blz,0,NULL);
++   }
++	free_temp(t1);
++	return tmp_string(bic,strlen(bic));
++}
++
++/*  do_bank_plz: PLZ der Hauptstelle einer Bank suchen. */
++NODE *
++do_bank_plz(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char blz[16];
++   int plz,ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   plz=lut_plz(blz,0,&ret);
++   if(ret==LUT2_PLZ_NOT_INITIALIZED){
++      lut_init(NULL,7,0);
++      plz=lut_plz(blz,0,NULL);
++   }
++	free_temp(t1);
++	return tmp_number((AWKNUM)(plz));
++}
++
++/*  do_bank_ort: Ort des Hauptsitzes einer Bank bestimmen */
++NODE *
++do_bank_ort(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char blz[16],*ort;
++   int ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   ort=lut_ort(blz,0,&ret);
++   if(ret==LUT2_ORT_NOT_INITIALIZED){
++      lut_init(NULL,7,0);
++      ort=lut_ort(blz,0,NULL);
++   }
++	free_temp(t1);
++	return tmp_string(ort,strlen(ort));
++}
++
++/*  do_bank_pz: Prüfzifferberechnungsmethode für eine BLZ bestimmen */
++NODE *
++do_bank_pz(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char blz[16];
++   int pz,ret;
++
++	tmp=tree->lnode;	/* first argument */
++	t1=force_string(tree_eval(tmp));
++
++   strncpy(blz,t1->stptr,t1->stlen);
++   blz[t1->stlen]=0;
++   pz=lut_pz(blz,0,&ret);
++   if(ret==LUT2_PZ_NOT_INITIALIZED){
++      lut_init(NULL,7,0);
++      pz=lut_pz(blz,0,NULL);
++   }
++	free_temp(t1);
++	return tmp_number((AWKNUM)(pz));
++}
++
++/*  kto_check_encoding: Kodierung festlegen */
++NODE *
++do_kto_check_encoding(NODE *tree)
++{
++	NODE *tmp,*t1;
++   int mode,ret;
++
++	tmp=tree->lnode;	/* first argument */
++	mode=(int)force_number(tree_eval(tmp));
++
++   ret=kto_check_encoding(mode);
++	return tmp_number((AWKNUM)(ret));
++}
++
++/*  do_retval2txt: Rückgabewert in Text umwandeln */
++NODE *
++do_retval2txt(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char *ret_txt;
++   int status,ret;
++
++	tmp=tree->lnode;	/* first argument */
++	status=(int)force_number(tree_eval(tmp));
++
++   ret_txt=kto_check_retval2txt(status);
++	return tmp_string(ret_txt,strlen(ret_txt));
++}
++
++/*  do_retval2utf8: Rückgabewert nach UTF-8 umwandeln */
++NODE *
++do_retval2utf8(NODE *tree)
++{
++	NODE *tmp,*t1;
++   char *ret_txt;
++   int status,ret;
++
++	tmp=tree->lnode;	/* first argument */
++	status=(int)force_number(tree_eval(tmp));
++
++   ret_txt=kto_check_retval2utf8(status);
++	return tmp_string(ret_txt,strlen(ret_txt));
++}
+Binärdateien gawk-3.1.8/.konto_check_awk.c.swp and gawk-3.1.8.neu/.konto_check_awk.c.swp sind verschieden.
+diff -Nur gawk-3.1.8/Makefile.am gawk-3.1.8.neu/Makefile.am
+--- gawk-3.1.8/Makefile.am	2010-04-22 20:28:32.000000000 +0200
++++ gawk-3.1.8.neu/Makefile.am	2011-06-08 11:37:59.230826514 +0200
+@@ -98,6 +98,8 @@
+ 	gettext.h \
+ 	hard-locale.h \
+ 	io.c \
++	konto_check.c \
++	konto_check_awk.c \
+ 	mbsupport.h \
+ 	main.c \
+ 	msg.c \
+@@ -116,7 +118,7 @@
+ pgawk_SOURCES = $(base_sources) eval_p.c profile_p.c
+ 
+ # Get extra libs as needed, Automake will supply LIBINTL and SOCKET_LIBS.
+-LDADD = $(LIBSIGSEGV) $(LIBINTL) $(SOCKET_LIBS)
++LDADD = $(LIBSIGSEGV) $(LIBINTL) $(SOCKET_LIBS) -lz
+ 
+ # Directory for gawk's data files. Automake supplies datadir.
+ pkgdatadir = $(datadir)/awk
+diff -Nur gawk-3.1.8/Makefile.am.shared gawk-3.1.8.neu/Makefile.am.shared
+--- gawk-3.1.8/Makefile.am.shared	1970-01-01 01:00:00.000000000 +0100
++++ gawk-3.1.8.neu/Makefile.am.shared	2011-04-15 10:48:21.808068287 +0200
+@@ -0,0 +1,189 @@
++#
++# Makefile.am --- automake input file for gawk
++#
++# Copyright (C) 2000-2010 the Free Software Foundation, Inc.
++#
++# This file is part of GAWK, the GNU implementation of the
++# AWK Programming Language.
++#
++# GAWK is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 3 of the License, or
++# (at your option) any later version.
++#
++# GAWK is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
++#
++
++## process this file with automake to produce Makefile.in
++
++# Automatic de-ANSI-fication if needed, make .bz2 files also.
++AUTOMAKE_OPTIONS = dist-bzip2
++
++# This undocumented variable insures that aclocal runs
++# correctly after changing configure.ac
++ACLOCAL_AMFLAGS = -I m4
++
++# This insures that make flags get passed down to child makes.
++AM_MAKEFLAGS = 'CFLAGS=$(CFLAGS)' 'LDFLAGS=$(LDFLAGS)'
++
++# Stuff to include in the dist that doesn't need it's own
++# Makefile.am files
++EXTRA_DIST = \
++	COPYING \
++	FUTURES \
++	INSTALL \
++	LIMITATIONS \
++	NEWS \
++	POSIX.STD \
++	PROBLEMS \
++	README_d \
++	bisonfix.awk \
++	config.guess \
++	config.rpath  \
++	config.sub \
++	depcomp \
++	extension \
++	m4 \
++	missing \
++	missing_d \
++	pc \
++	posix \
++	regcomp.c \
++	regex_internal.c \
++	regex_internal.h \
++	regexec.c \
++	unsupported \
++	version.in \
++	vms \
++	ylwrap
++
++# The order to do things in.
++# Build explicitly in "." in order to build gawk first, so
++# that `make check' without a prior `make' works.
++SUBDIRS = \
++	. \
++	awklib \
++	doc \
++	po \
++	test
++
++# what to make and install
++bin_PROGRAMS = gawk pgawk
++
++# sources for both gawk and pgawk
++base_sources = \
++	array.c \
++	awk.h \
++	awkgram.y \
++	builtin.c \
++	custom.h \
++	dfa.c \
++	dfa.h \
++	ext.c \
++	field.c \
++	floatcomp.c \
++	floatmagic.h \
++	gawkmisc.c \
++	getopt.c \
++	getopt.h \
++	getopt1.c \
++	getopt_int.h \
++	gettext.h \
++	hard-locale.h \
++	io.c \
++	konto_check_awk.c \
++	mbsupport.h \
++	main.c \
++	msg.c \
++	node.c \
++	protos.h \
++	random.c \
++	random.h \
++	re.c \
++	regex.c \
++	regex.h \
++	replace.c \
++	version.c \
++	xalloc.h
++
++gawk_SOURCES = $(base_sources) eval.c profile.c
++pgawk_SOURCES = $(base_sources) eval_p.c profile_p.c
++
++# Get extra libs as needed, Automake will supply LIBINTL and SOCKET_LIBS.
++LDADD = $(LIBSIGSEGV) $(LIBINTL) $(SOCKET_LIBS) -lkonto_check -lz
++
++# Directory for gawk's data files. Automake supplies datadir.
++pkgdatadir = $(datadir)/awk
++
++# stuff for compiling gawk/pgawk
++DEFPATH='".$(PATH_SEPARATOR)$(pkgdatadir)"'
++
++DEFS= -DDEFPATH=$(DEFPATH) -DHAVE_CONFIG_H -DGAWK -DLOCALEDIR='"$(datadir)/locale"'
++
++# Get rid of core files when cleaning
++CLEANFILES = core core.*
++
++MAINTAINERCLEANFILES = version.c
++
++# We want hard links for install-exec-hook, below
++LN= ln
++
++# First, add a link from gawk to gawk-X.Y.Z.
++# Same for pgawk.
++#
++# For GNU systems where gawk is awk, add a link to awk.
++# (This is done universally, which may not always be right, but
++# there's no easy way to distinguish GNU from non-GNU systems.)
++install-exec-hook:
++	(cd $(DESTDIR)$(bindir); \
++	$(LN) gawk$(EXEEXT) gawk-$(VERSION)$(EXEEXT) 2>/dev/null ; \
++	$(LN) pgawk$(EXEEXT) pgawk-$(VERSION)$(EXEEXT) 2>/dev/null ; \
++	if [ ! -f awk$(EXEEXT) ]; \
++	then	$(LN_S) gawk$(EXEEXT) awk$(EXEEXT); \
++	fi; exit 0)
++
++# Undo the above when uninstalling
++uninstall-links:
++	(cd $(DESTDIR)$(bindir); \
++	if [ -f awk$(EXEEXT) ] && cmp awk$(EXEEXT) gawk$(EXEEXT) > /dev/null; then rm -f awk$(EXEEXT); fi ; \
++	rm -f gawk-$(VERSION)$(EXEEXT) pgawk-$(VERSION)$(EXEEXT); exit 0)
++
++uninstall-recursive: uninstall-links
++
++# force there to be a gawk executable before running tests
++check-local: gawk$(EXEEXT) pgawk$(EXEEXT)
++
++# A little extra clean up when making distributions.
++dist-hook:
++	cd $(distdir)/extension ; rm -f *.o *.so
++	cd $(distdir) ; find . -type d -name CVS | xargs rm -fr
++
++# Special rules for individual files
++awkgram.c: awkgram.y
++	$(YACC) $(AM_YFLAGS) $(YFLAGS) $<
++	sed 's/parse error/syntax error/g' < y.tab.c | $(AWK) -f $(srcdir)/bisonfix.awk > $*.c && rm y.tab.c
++	if test -f y.tab.h; then \
++	if cmp -s y.tab.h $*.h; then rm -f y.tab.h; else mv y.tab.h $*.h; fi; \
++	else :; fi
++
++version.c: config.status version.in
++	$(SHELL) ./config.status --file=version.c:version.in
++
++# This is for my development & testing.
++efence: gawk
++	$(CC) $(LDFLAGS) -o gawk $$(ls *.o | grep -v '_p.o$$') $(LIBS) -lefence
++
++diffout valgrind-scan:
++	@cd test && $(MAKE) $(AM_MAKEFLAGS) $@
++
++valgrind:
++	cd test; rm -f log.[0-9]*; \
++	make check AWK="valgrind --log-file=log ../gawk"; \
++	make valgrind-scan
+diff -Nur gawk-3.1.8/Makefile.am.static gawk-3.1.8.neu/Makefile.am.static
+--- gawk-3.1.8/Makefile.am.static	1970-01-01 01:00:00.000000000 +0100
++++ gawk-3.1.8.neu/Makefile.am.static	2011-04-15 10:48:21.809068147 +0200
+@@ -0,0 +1,190 @@
++#
++# Makefile.am --- automake input file for gawk
++#
++# Copyright (C) 2000-2010 the Free Software Foundation, Inc.
++#
++# This file is part of GAWK, the GNU implementation of the
++# AWK Programming Language.
++#
++# GAWK is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 3 of the License, or
++# (at your option) any later version.
++#
++# GAWK is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
++#
++
++## process this file with automake to produce Makefile.in
++
++# Automatic de-ANSI-fication if needed, make .bz2 files also.
++AUTOMAKE_OPTIONS = dist-bzip2
++
++# This undocumented variable insures that aclocal runs
++# correctly after changing configure.ac
++ACLOCAL_AMFLAGS = -I m4
++
++# This insures that make flags get passed down to child makes.
++AM_MAKEFLAGS = 'CFLAGS=$(CFLAGS)' 'LDFLAGS=$(LDFLAGS)'
++
++# Stuff to include in the dist that doesn't need it's own
++# Makefile.am files
++EXTRA_DIST = \
++	COPYING \
++	FUTURES \
++	INSTALL \
++	LIMITATIONS \
++	NEWS \
++	POSIX.STD \
++	PROBLEMS \
++	README_d \
++	bisonfix.awk \
++	config.guess \
++	config.rpath  \
++	config.sub \
++	depcomp \
++	extension \
++	m4 \
++	missing \
++	missing_d \
++	pc \
++	posix \
++	regcomp.c \
++	regex_internal.c \
++	regex_internal.h \
++	regexec.c \
++	unsupported \
++	version.in \
++	vms \
++	ylwrap
++
++# The order to do things in.
++# Build explicitly in "." in order to build gawk first, so
++# that `make check' without a prior `make' works.
++SUBDIRS = \
++	. \
++	awklib \
++	doc \
++	po \
++	test
++
++# what to make and install
++bin_PROGRAMS = gawk pgawk
++
++# sources for both gawk and pgawk
++base_sources = \
++	array.c \
++	awk.h \
++	awkgram.y \
++	builtin.c \
++	custom.h \
++	dfa.c \
++	dfa.h \
++	ext.c \
++	field.c \
++	floatcomp.c \
++	floatmagic.h \
++	gawkmisc.c \
++	getopt.c \
++	getopt.h \
++	getopt1.c \
++	getopt_int.h \
++	gettext.h \
++	hard-locale.h \
++	io.c \
++	konto_check.c \
++	konto_check_awk.c \
++	mbsupport.h \
++	main.c \
++	msg.c \
++	node.c \
++	protos.h \
++	random.c \
++	random.h \
++	re.c \
++	regex.c \
++	regex.h \
++	replace.c \
++	version.c \
++	xalloc.h
++
++gawk_SOURCES = $(base_sources) eval.c profile.c
++pgawk_SOURCES = $(base_sources) eval_p.c profile_p.c
++
++# Get extra libs as needed, Automake will supply LIBINTL and SOCKET_LIBS.
++LDADD = $(LIBSIGSEGV) $(LIBINTL) $(SOCKET_LIBS) -lz
++
++# Directory for gawk's data files. Automake supplies datadir.
++pkgdatadir = $(datadir)/awk
++
++# stuff for compiling gawk/pgawk
++DEFPATH='".$(PATH_SEPARATOR)$(pkgdatadir)"'
++
++DEFS= -DDEFPATH=$(DEFPATH) -DHAVE_CONFIG_H -DGAWK -DLOCALEDIR='"$(datadir)/locale"'
++
++# Get rid of core files when cleaning
++CLEANFILES = core core.*
++
++MAINTAINERCLEANFILES = version.c
++
++# We want hard links for install-exec-hook, below
++LN= ln
++
++# First, add a link from gawk to gawk-X.Y.Z.
++# Same for pgawk.
++#
++# For GNU systems where gawk is awk, add a link to awk.
++# (This is done universally, which may not always be right, but
++# there's no easy way to distinguish GNU from non-GNU systems.)
++install-exec-hook:
++	(cd $(DESTDIR)$(bindir); \
++	$(LN) gawk$(EXEEXT) gawk-$(VERSION)$(EXEEXT) 2>/dev/null ; \
++	$(LN) pgawk$(EXEEXT) pgawk-$(VERSION)$(EXEEXT) 2>/dev/null ; \
++	if [ ! -f awk$(EXEEXT) ]; \
++	then	$(LN_S) gawk$(EXEEXT) awk$(EXEEXT); \
++	fi; exit 0)
++
++# Undo the above when uninstalling
++uninstall-links:
++	(cd $(DESTDIR)$(bindir); \
++	if [ -f awk$(EXEEXT) ] && cmp awk$(EXEEXT) gawk$(EXEEXT) > /dev/null; then rm -f awk$(EXEEXT); fi ; \
++	rm -f gawk-$(VERSION)$(EXEEXT) pgawk-$(VERSION)$(EXEEXT); exit 0)
++
++uninstall-recursive: uninstall-links
++
++# force there to be a gawk executable before running tests
++check-local: gawk$(EXEEXT) pgawk$(EXEEXT)
++
++# A little extra clean up when making distributions.
++dist-hook:
++	cd $(distdir)/extension ; rm -f *.o *.so
++	cd $(distdir) ; find . -type d -name CVS | xargs rm -fr
++
++# Special rules for individual files
++awkgram.c: awkgram.y
++	$(YACC) $(AM_YFLAGS) $(YFLAGS) $<
++	sed 's/parse error/syntax error/g' < y.tab.c | $(AWK) -f $(srcdir)/bisonfix.awk > $*.c && rm y.tab.c
++	if test -f y.tab.h; then \
++	if cmp -s y.tab.h $*.h; then rm -f y.tab.h; else mv y.tab.h $*.h; fi; \
++	else :; fi
++
++version.c: config.status version.in
++	$(SHELL) ./config.status --file=version.c:version.in
++
++# This is for my development & testing.
++efence: gawk
++	$(CC) $(LDFLAGS) -o gawk $$(ls *.o | grep -v '_p.o$$') $(LIBS) -lefence
++
++diffout valgrind-scan:
++	@cd test && $(MAKE) $(AM_MAKEFLAGS) $@
++
++valgrind:
++	cd test; rm -f log.[0-9]*; \
++	make check AWK="valgrind --log-file=log ../gawk"; \
++	make valgrind-scan
+diff -Nur gawk-3.1.8/Makefile.in gawk-3.1.8.neu/Makefile.in
+--- gawk-3.1.8/Makefile.in	2011-04-28 08:50:48.135498520 +0200
++++ gawk-3.1.8.neu/Makefile.in	2011-06-08 11:38:03.676071739 +0200
+@@ -88,7 +88,8 @@
+ am__objects_1 = array.$(OBJEXT) awkgram.$(OBJEXT) builtin.$(OBJEXT) \
+ 	dfa.$(OBJEXT) ext.$(OBJEXT) field.$(OBJEXT) \
+ 	floatcomp.$(OBJEXT) gawkmisc.$(OBJEXT) getopt.$(OBJEXT) \
+-	getopt1.$(OBJEXT) io.$(OBJEXT) main.$(OBJEXT) msg.$(OBJEXT) \
++	getopt1.$(OBJEXT) io.$(OBJEXT) konto_check.$(OBJEXT) \
++	konto_check_awk.$(OBJEXT) main.$(OBJEXT) msg.$(OBJEXT) \
+ 	node.$(OBJEXT) random.$(OBJEXT) re.$(OBJEXT) regex.$(OBJEXT) \
+ 	replace.$(OBJEXT) version.$(OBJEXT)
+ am_gawk_OBJECTS = $(am__objects_1) eval.$(OBJEXT) profile.$(OBJEXT)
+@@ -364,6 +365,8 @@
+ 	gettext.h \
+ 	hard-locale.h \
+ 	io.c \
++	konto_check.c \
++	konto_check_awk.c \
+ 	mbsupport.h \
+ 	main.c \
+ 	msg.c \
+@@ -382,7 +385,7 @@
+ pgawk_SOURCES = $(base_sources) eval_p.c profile_p.c
+ 
+ # Get extra libs as needed, Automake will supply LIBINTL and SOCKET_LIBS.
+-LDADD = $(LIBSIGSEGV) $(LIBINTL) $(SOCKET_LIBS)
++LDADD = $(LIBSIGSEGV) $(LIBINTL) $(SOCKET_LIBS) -lz
+ 
+ # stuff for compiling gawk/pgawk
+ DEFPATH = '".$(PATH_SEPARATOR)$(pkgdatadir)"'
+@@ -512,6 +515,8 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getopt.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getopt1.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/io.Po@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/konto_check.Po@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/konto_check_awk.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/msg.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/node.Po@am__quote@
+diff -Nur gawk-3.1.8/mini.awk gawk-3.1.8.neu/mini.awk
+--- gawk-3.1.8/mini.awk	1970-01-01 01:00:00.000000000 +0100
++++ gawk-3.1.8.neu/mini.awk	2011-04-15 10:48:21.817069401 +0200
+@@ -0,0 +1,13 @@
++/^$/ ; /^#/ ; /^[^0-9]/       # Leerzeile bzw. Kommentar: direkt übernehmen
++/^[0-9]/{                     # Zeile mit numerischem Anfang -> BLZ/Kto. (testen)
++   if($1 && $2){              # Test nur, falls BLZ und Konto angegeben sind
++      ret=konto_check($1,$2)  # testen
++      if(bank_valid($1)>0)    # bei gültiger BLZ Infos holen
++         bank_info=", " bank_name($1) ", " bank_plz($1) " " bank_ort($1)
++      else 
++         bank_info=""
++      print $0 ": " ret " (" retval2txt(ret) ")" bank_info
++   }
++   else
++      print $0
++}
