@@ -1,35 +1,35 @@
 /*
  * ##########################################################################
- * #  Dies ist eine kleine main() Routine für die konto_check library.      #
+ * #  Dies ist eine kleine main() Routine fÃ¼r die konto_check library.      #
  * #  zum Testen deutscher Bankkonten.                                      #
  * #                                                                        #
  * #  Versionen: siehe Datei 0_history.txt                                  #
  * #                                                                        #
  * #  Copyright (C) 2002-2013 Michael Plugge <m.plugge@hs-mannheim.de>      #
  * #                                                                        #
- * #  Dieses Programm ist freie Software; Sie dürfen es unter den           #
+ * #  Dieses Programm ist freie Software; Sie dÃ¼rfen es unter den           #
  * #  Bedingungen der GNU Lesser General Public License, wie von der Free   #
- * #  Software Foundation veröffentlicht, weiterverteilen und/oder          #
- * #  modifizieren; entweder gemäß Version 2.1 der Lizenz oder (nach Ihrer  #
- * #  Option) jeder späteren Version.                                       #
+ * #  Software Foundation verÃ¶ffentlicht, weiterverteilen und/oder          #
+ * #  modifizieren; entweder gemÃ¤ÃŸ Version 2.1 der Lizenz oder (nach Ihrer  #
+ * #  Option) jeder spÃ¤teren Version.                                       #
  * #                                                                        #
- * #  Die GNU LGPL ist weniger infektiös als die normale GPL; Code, der von #
- * #  Ihnen hinzugefügt wird, unterliegt nicht der Offenlegungspflicht      #
- * #  (wie bei der normalen GPL); außerdem müssen Programme, die diese      #
- * #  Bibliothek benutzen, nicht (L)GPL lizensiert sein, sondern können     #
+ * #  Die GNU LGPL ist weniger infektiÃ¶s als die normale GPL; Code, der von #
+ * #  Ihnen hinzugefÃ¼gt wird, unterliegt nicht der Offenlegungspflicht      #
+ * #  (wie bei der normalen GPL); auÃŸerdem mÃ¼ssen Programme, die diese      #
+ * #  Bibliothek benutzen, nicht (L)GPL lizensiert sein, sondern kÃ¶nnen     #
  * #  beliebig kommerziell verwertet werden. Die Offenlegung des Source-    #
- * #  codes bezieht sich bei der LGPL *nur* auf geänderten Bibliothekscode. #
+ * #  codes bezieht sich bei der LGPL *nur* auf geÃ¤nderten Bibliothekscode. #
  * #                                                                        #
- * #  Dieses Programm wird in der Hoffnung weiterverbreitet, daß es         #
- * #  nützlich sein wird, jedoch OHNE IRGENDEINE GARANTIE, auch ohne die    #
- * #  implizierte Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR       #
+ * #  Dieses Programm wird in der Hoffnung weiterverbreitet, daÃŸ es         #
+ * #  nÃ¼tzlich sein wird, jedoch OHNE IRGENDEINE GARANTIE, auch ohne die    #
+ * #  implizierte Garantie der MARKTREIFE oder der VERWENDBARKEIT FÃœR       #
  * #  EINEN BESTIMMTEN ZWECK. Mehr Details finden Sie in der GNU Lesser     #
  * #  General Public License.                                               #
  * #                                                                        #
  * #  Sie sollten eine Kopie der GNU Lesser General Public License          #
  * #  zusammen mit diesem Programm erhalten haben; falls nicht,             #
  * #  schreiben Sie an die Free Software Foundation, Inc., 59 Temple        #
- * #  Place, Suite 330, Boston, MA 02111-1307, USA. Sie können sie auch     #
+ * #  Place, Suite 330, Boston, MA 02111-1307, USA. Sie kÃ¶nnen sie auch     #
  * #  von                                                                   #
  * #                                                                        #
  * #       http://www.gnu.org/licenses/lgpl.html                            #
@@ -52,8 +52,8 @@
 
 #define OUTPUT_BUFSIZE 2097152
 
-   /* FILTER_MODE==1: Rückgabewer als Zahl
-    * FILTER_MODE==2: Rückgabewert als Text (kurz)
+   /* FILTER_MODE==1: RÃ¼ckgabewer als Zahl
+    * FILTER_MODE==2: RÃ¼ckgabewert als Text (kurz)
     */
 #define FILTER_MODE 2
 
@@ -62,7 +62,7 @@ extern UINT4 lc[256];
 
 /*
  * ######################################################################
- * # Einige Makros für die innere Schleife (diese sind schneller        #
+ * # Einige Makros fÃ¼r die innere Schleife (diese sind schneller        #
  * # als die entsprechenden Funktionen der Standard-Library).           #
  * ######################################################################
  */
@@ -72,16 +72,16 @@ extern UINT4 lc[256];
 
 /*
  * ######################################################################
- * # GET_VAL: Makro für Argumente von CLI-Optionen                      #
+ * # GET_VAL: Makro fÃ¼r Argumente von CLI-Optionen                      #
  * ######################################################################
  */
 
 #define GET_VAL if(!*++ptr && (++i>=argc || *(ptr=argv[i])=='-')){ \
-      fprintf(stderr,"Die Option -%c benötigt ein Argument, aber es wurde keines angegeben; Abbruch\n",*(argv[--i]+1)); \
+      fprintf(stderr,"Die Option -%c benÃ¶tigt ein Argument, aber es wurde keines angegeben; Abbruch\n",*(argv[--i]+1)); \
       exit(4); \
    }
 
-#define FORMAT_ERROR do{fprintf(stderr,"Formatfehler im Gültigkeitszeitraum\n" \
+#define FORMAT_ERROR do{fprintf(stderr,"Formatfehler im GÃ¼ltigkeitszeitraum\n" \
       "   Sollformat: JJJJMMTT-JJJJMMTT\n" \
       "   Abbruch\n"); \
    return 1; \
@@ -89,9 +89,9 @@ extern UINT4 lc[256];
 
 /*
  * #######################################################################
- * # ZEIT(x): Zeitmessung mit hoher Auflösung. Die Funktion gettimeofday #
- * # ist nicht bei allen Compilern definiert; notfalls muß eine andere   #
- * # Funktion benutzt werden (bei MSVC++ z.B. Time() (???) o.ä.), oder   #
+ * # ZEIT(x): Zeitmessung mit hoher AuflÃ¶sung. Die Funktion gettimeofday #
+ * # ist nicht bei allen Compilern definiert; notfalls muÃŸ eine andere   #
+ * # Funktion benutzt werden (bei MSVC++ z.B. Time() (???) o.Ã¤.), oder   #
  * # das Makro als Dummy definiert werden.                               #
  * #######################################################################
  */
@@ -138,14 +138,14 @@ int gettimeofday(struct timeval *tv, void *tz)
 void print_help(void)
 {
    fprintf(stderr,"%s","\n"
-"   konto_check: kleines Programm zum Testen von Prüfziffern bei deutschen\n"
+"   konto_check: kleines Programm zum Testen von PrÃ¼fziffern bei deutschen\n"
 "   Kontonummern.\n"
 "\n"
 "   Aufruf:\n"
 "\n"
 "      konto_check [optionen] [eingabedatei [ausgabedatei [3. Parameter]]]\n"
 "\n"
-"   Mögliche Optionen sind:\n"
+"   MÃ¶gliche Optionen sind:\n"
 "      -c    copy: LUT-Datei kopieren (mit Angabe Slots)\n"
 "      -d    dir: Infos zu einer LUT-Datei anzeigen\n"
 "      -f    (fast) Schneller Modus (s. Doku/Source!!!)\n"
@@ -153,21 +153,21 @@ void print_help(void)
 "      -g1   LUT-Datei (Version 1.0) generieren\n"
 "      -g2   LUT-Datei (Version 1.1) generieren\n"
 "      -g3x  LUT-Datei (Version 2.0) generieren (mit Angabe Slots im 3. Parameter)\n"
-"            Für x kann eine Zahl zwischen 1 und 7 oder x stehen (s.u.)\n"
-"      -Gd1-d2 Gültigkeitsbereich der BLZ-Datei angeben (nur zusammen mit -g3).\n"
-"            Der Gültigkeitsbereich ist in der Form JJJJMMTT-JJJJMMTT anzugeben,\n"
-"            z.B. -G20091207-20100307. Er wird für jeden Datensatz einzeln\n"
+"            FÃ¼r x kann eine Zahl zwischen 1 und 7 oder x stehen (s.u.)\n"
+"      -Gd1-d2 GÃ¼ltigkeitsbereich der BLZ-Datei angeben (nur zusammen mit -g3).\n"
+"            Der GÃ¼ltigkeitsbereich ist in der Form JJJJMMTT-JJJJMMTT anzugeben,\n"
+"            z.B. -G20091207-20100307. Er wird fÃ¼r jeden Datensatz einzeln\n"
 "            gespeichert und bei der Initialisierung getestet.\n"
 "      -h    (diese) Hilfe anzeigen\n"
-"      -i    Infozeile für die LUT-Datei (nur zusammen mit -g)\n"
-"      -I    Infoblock(s) der LUT-Datei ausgeben (nicht für LUT 1.0/1.1)\n"
+"      -i    Infozeile fÃ¼r die LUT-Datei (nur zusammen mit -g)\n"
+"      -I    Infoblock(s) der LUT-Datei ausgeben (nicht fÃ¼r LUT 1.0/1.1)\n"
 "      -l    Name der LUT-Datei angeben\n"
 "      -n    Bankname und Ort ausgeben\n"
-"      -Nname Verbotsliste für IBAN-Berechnung\n"
-"      -r    BLZ-Datei neu generieren (als Härtetest für die LUT2-Routinen)\n"
+"      -Nname Verbotsliste fÃ¼r IBAN-Berechnung\n"
+"      -r    BLZ-Datei neu generieren (als HÃ¤rtetest fÃ¼r die LUT2-Routinen)\n"
 "            Falls der 3. Parameter angegeben ist, wird als Eingabe eine LUT-Datei\n"
 "            erwartet; der Parameter gibt das zu benutzende Set (1 oder 2) an.\n"
-"      -s    Separator: Trennzeichen für das Testergebnis\n"
+"      -s    Separator: Trennzeichen fÃ¼r das Testergebnis\n"
 "      -v    verbose: diverse Meldungen ausgeben\n"
 "      -vx level verbose debug einschalten\n"
 "      -V    Versionsinfo von Library und LUT-Datei\n"
@@ -175,22 +175,22 @@ void print_help(void)
 "      -X[1-9] [12] Klartext-Dump der LUT-Datei. Der 3. Parameter (optional)\n"
 "            gibt das auszugebende Set (1 oder 2) der LUT-Datei an.\n"
 "            Ausgabefelder s.u.\n"
-"      -zgzweck Prüfziffer für strukturieren IPI-Verwendungszweck erzeugen\n"
-"      -ztzweck Prüfziffer für strukturieren IPI-Verwendungszweck testen\n"
-"      -Z[012]  Kompressionsbibliothek für die LUT-Datei angeben (bei -g)\n"
+"      -zgzweck PrÃ¼fziffer fÃ¼r strukturieren IPI-Verwendungszweck erzeugen\n"
+"      -ztzweck PrÃ¼fziffer fÃ¼r strukturieren IPI-Verwendungszweck testen\n"
+"      -Z[012]  Kompressionsbibliothek fÃ¼r die LUT-Datei angeben (bei -g)\n"
 "\n"
 "\n"
-"   Optionen und Dateinamen können beliebig gemischt werden.\n"
+"   Optionen und Dateinamen kÃ¶nnen beliebig gemischt werden.\n"
 "\n"
 "   Format der Eingabedatei: in jeder Zeile steht zuerst die Bankleitzahl,\n"
 "   dann das zu testende Konto. Als Trennzeichen kann ein beliebiges nicht-\n"
-"   alphanumerisches Zeichen auftreten. Nach der Kontonummer können noch\n"
-"   weitere Daten kommen, die in die Ausgabedatei übernommen werden, jedoch\n"
+"   alphanumerisches Zeichen auftreten. Nach der Kontonummer kÃ¶nnen noch\n"
+"   weitere Daten kommen, die in die Ausgabedatei Ã¼bernommen werden, jedoch\n"
 "   ansonsten nicht weiter beachtet werden.\n"
 "\n"
 "   Alle Zeilen, in denen nicht eine Bankleitzahl und ein Konto gefunden\n"
-"   wird, werden unverändert in die Ausgabedatei übernommen. Die Ausgabe-\n"
-"   datei enthält die ursprüngliche Zeilen sowie (durch : oder den mit -s\n"
+"   wird, werden unverÃ¤ndert in die Ausgabedatei Ã¼bernommen. Die Ausgabe-\n"
+"   datei enthÃ¤lt die ursprÃ¼ngliche Zeilen sowie (durch : oder den mit -s\n"
 "   spezifizierten Separator) das Testergebnis im Klartext.\n"
 "\n"
 "   Mit dem Aufruf\n"
@@ -199,16 +199,16 @@ void print_help(void)
 "\n"
 "   wird die LUT-Datei blz.lut aus blz.txt generiert. Als Eingabedatei ist der\n"
 "   Name der BLZ-Datei der deutschen Bundesbank (z.B. blz0203pc.txt) anzugeben,\n"
-"   als Ausgabedatei der Name der zu generierenden LUT-Datei (defaultmäßig\n"
-"   blz.lut). Die (User-)Infozeile muß in doppelte Hochkommas eingeschlossen\n"
+"   als Ausgabedatei der Name der zu generierenden LUT-Datei (defaultmÃ¤ÃŸig\n"
+"   blz.lut). Die (User-)Infozeile muÃŸ in doppelte Hochkommas eingeschlossen\n"
 "   werden, damit sie als einzelnes Kommandozeilen-Argument erscheint.\n"
 "      \n"
-"   Für die Option -g3 kann man angeben, welche Blocks in der erzeugten\n"
+"   FÃ¼r die Option -g3 kann man angeben, welche Blocks in der erzeugten\n"
 "   LUT-Datei enthalten sein sollen. Es gibt eine Reihe vordefinierter\n"
-"   Varianten, sowie die Möglichkeit, beliebige LUT-Dateien aufzubauen.\n"
-"   Als zusätzlicher Parameter kann beim LUT2 Dateiformat auch noch die\n"
+"   Varianten, sowie die MÃ¶glichkeit, beliebige LUT-Dateien aufzubauen.\n"
+"   Als zusÃ¤tzlicher Parameter kann beim LUT2 Dateiformat auch noch die\n"
 "   Anzahl der anzulegenden Slots (3. Parameter, nach dem Ausgabenamen) \n"
-"   sowie ein Gültigkeitsbereich (mittels -G) angegeben werde. Falls die\n"
+"   sowie ein GÃ¼ltigkeitsbereich (mittels -G) angegeben werde. Falls die\n"
 "   Filialen eingebunden werden sollen, ist nach dem -g3 noch ein f anzugeben:\n"
 "   -g3f7 oder -g37f. Alle vorgegebenen Varianten enthalten ID, BLZ und PZ.\n"
 "\n"
@@ -223,12 +223,12 @@ void print_help(void)
 "      -g38: NAME_NAME_KURZ,PLZ,ORT,BIC,NACHFOLGE_BLZ,AENDERUNG,LOESCHUNG\n"
 "      -g39: NAME_NAME_KURZ,PLZ,ORT,BIC,NACHFOLGE_BLZ,AENDERUNG,LOESCHUNG,PAN,NR\n"
 "      -gx:  wie -g3x\n"
-"      -g3x: Es können die einzubindenden Blocks direkt angegeben werden (numerisch);\n"
+"      -g3x: Es kÃ¶nnen die einzubindenden Blocks direkt angegeben werden (numerisch);\n"
 "            -g33 entspricht z.B. -gx1,3,4,5,9\n"
-"            Die einzelnen Blocks müssen durch Komma getrennt (ohne Leerzeichen)\n"
-"            aufgeführt werden.\n"
+"            Die einzelnen Blocks mÃ¼ssen durch Komma getrennt (ohne Leerzeichen)\n"
+"            aufgefÃ¼hrt werden.\n"
 "            \n"
-"   Für die Option -X (Dump einer LUT-Datei) gibt es ebenfalls eine Reihe\n"
+"   FÃ¼r die Option -X (Dump einer LUT-Datei) gibt es ebenfalls eine Reihe\n"
 "   vordefinierter Varianten:\n"
 "\n"
 "      -X0: BLZ,PZ\n"
@@ -242,21 +242,21 @@ void print_help(void)
 "      -X8: BLZ,PZ,NAME,NAME_KURZ,PLZ,ORT,BIC,NACHFOLGE_BLZ,AENDERUNG,LOESCHUNG\n"
 "      -X9: BLZ,PZ,NAME,NAME_KURZ,PLZ,ORT,BIC,NACHFOLGE_BLZ,AENDERUNG,LOESCHUNG,PAN,NR\n"
 "                \n"
-"   Der zu ladende Satz kann (optional) als 3. Parameter übergeben werden:\n"
+"   Der zu ladende Satz kann (optional) als 3. Parameter Ã¼bergeben werden:\n"
 "   mit \n"
 "\n"
 "      ./konto_check -X3 blz.lut blz.out 2\n"
 "\n"
-"   wird ein Klartext-Dump des sekundären Satzes der Datei blz.lut gemacht."
+"   wird ein Klartext-Dump des sekundÃ¤ren Satzes der Datei blz.lut gemacht."
 #if FILTER_MODE
 "\n"
 "\n"
 "   Falls der Eingabename weggelassen wird, arbeitet das Programm im\n"
 "   Filtermodus; es wird von der Standardeingabe gelesen, die Ausgabe\n"
-"   geht auf die Standardausgabe. Für die Eingabe wird Prüfmethode oder\n"
+"   geht auf die Standardausgabe. FÃ¼r die Eingabe wird PrÃ¼fmethode oder\n"
 "   BLZ, dann Trennzeichen, danach das Konto erwartet; bei der Ausgabe\n"
-"   wird die Prüfmethode oder BLZ, dann das Konto und danach der numerische\n"
-"   Rückgabewert ausgegeben."
+"   wird die PrÃ¼fmethode oder BLZ, dann das Konto und danach der numerische\n"
+"   RÃ¼ckgabewert ausgegeben."
 #endif
 "\n"
 "\n"
@@ -283,74 +283,74 @@ int main(int argc,char **argv)
    struct tm *timeptr,timebuf;
 
 #if WIN32 && 0
-   cmd_help="in diesem Modus k”nnen auch Befehle (als Simulation realer Žnderungen)\n"
-"eingegeben werden. Momentan untersttzte Befehle (die Auswahl kann sich\n"
-"„ ndern, sie fangen allerdings alle mit - an):\n"
+   cmd_help="in diesem Modus kÂ”nnen auch Befehle (als Simulation realer ÂŽnderungen)\n"
+"eingegeben werden. Momentan unterstÂtzte Befehle (die Auswahl kann sich\n"
+"Â„ ndern, sie fangen allerdings alle mit - an):\n"
 "\n"
 "   -bBLZ          Infos zu der Bank anzeigen\n"
-"   -biidx [zw]    Infos zu der Bank mit Index idx anzeigen (Index z„ hlt ab 1)\n"
+"   -biidx [zw]    Infos zu der Bank mit Index idx anzeigen (Index zÂ„ hlt ab 1)\n"
 "                  optional kann noch eine Zweigstelle angegeben werden\n"
 "                  (Zahl, ab 1). Die Zweigstellen sind in der LUT-Datei\n"
-"                  u.U. nach Postleitzahlen sortiert (abh„ ngig von dem\n"
+"                  u.U. nach Postleitzahlen sortiert (abhÂ„ ngig von dem\n"
 "                  Compiler-Schalter SORT_PLZ in konto_check.h) und stimmen\n"
-"                  dann **nicht** mit denen der Bundesbankdatei berein.\n"
-"   -Biban         IBAN -> BIC fr deutsche IBANs\n"
+"                  dann **nicht** mit denen der Bundesbankdatei Âberein.\n"
+"   -Biban         IBAN -> BIC fÂr deutsche IBANs\n"
 "   -ciban         IBAN validieren\n"
 "   -Cblz kto      IBAN zu BLZ und kto generieren (vorher Konto testen)\n"
-"   -d             'Systemdatum' fr LUT-Datei (simuliert) l”schen\n"
-"   -ddatum        'Systemdatum' fr LUT-Datei (simuliert) setzen (Format: JJJJMMTT)\n"
-"   -D             Systemdatum fr LUT-Datei (simuliert und echt) anzeigen\n"
+"   -d             'Systemdatum' fÂr LUT-Datei (simuliert) lÂ”schen\n"
+"   -ddatum        'Systemdatum' fÂr LUT-Datei (simuliert) setzen (Format: JJJJMMTT)\n"
+"   -D             Systemdatum fÂr LUT-Datei (simuliert und echt) anzeigen\n"
 "   -E[dihsu]      Ausgabe-Kodierung festlegen\n"
 "   -i[1-7]dateiname [set]  Bibliothek mit der angegebenen Datei initialisieren\n"
 "                  Die Zahl gibt die zu ladenden Blocks an (wie bei -g3)\n"
 "                  Der Parameter set kann weggelassen werden; dann wird das\n"
-"                  aktuell gltige Set (bzw. das prim„ re Set, falls keines gltig ist)\n"
-"                  geladen; falls er angegeben ist, sollte er 1 (fr das prim„ re Set)\n"
-"                  oder 2 (fr das sekund„ re Set) sein.\n"
+"                  aktuell gÂltige Set (bzw. das primÂ„ re Set, falls keines gÂltig ist)\n"
+"                  geladen; falls er angegeben ist, sollte er 1 (fÂr das primÂ„ re Set)\n"
+"                  oder 2 (fÂr das sekundÂ„ re Set) sein.\n"
 "   -Idateiname    Infoblocks der angegebenen LUT-Datei anzeigen\n"
 "   -I             Infoblock der geladenen LUT-Datei anzeigen\n"
 "   -ldateiname    Verzeichnis der angegebenen LUT-Datei anzeigen\n"
 "   -sname         Namens(anfang) suchen -> BLZ\n"
 "   -Sort          Ort suchen -> BLZ\n"
-"   -v             geladenen Datensatz auf Gltigkeit testen\n"
-"   -zgzweck       Prfziffer fr strukturieren IPI-Verwendungszweck erzeugen\n"
-"   -ztzweck       Prfziffer fr strukturieren IPI-Verwendungszweck testen\n"
+"   -v             geladenen Datensatz auf GÂltigkeit testen\n"
+"   -zgzweck       PrÂfziffer fÂr strukturieren IPI-Verwendungszweck erzeugen\n"
+"   -ztzweck       PrÂfziffer fÂr strukturieren IPI-Verwendungszweck testen\n"
 "   -Zkompression  Kompressionsbibliothek (0 keine, 1 zlib, 2 bzlib2)\n"
 "   -h             (diese) Hilfe anzeigen\n"
 "   -?             dto.";
 #else
-   cmd_help="in diesem Modus können auch Befehle (als Simulation realer Änderungen)\n"
-"eingegeben werden. Momentan unterstützte Befehle (die Auswahl kann sich\n"
-"ändern, sie fangen allerdings alle mit - an):\n"
+   cmd_help="in diesem Modus kÃ¶nnen auch Befehle (als Simulation realer Ã„nderungen)\n"
+"eingegeben werden. Momentan unterstÃ¼tzte Befehle (die Auswahl kann sich\n"
+"Ã¤ndern, sie fangen allerdings alle mit - an):\n"
 "\n"
 "   -bBLZ          Infos zu der Bank anzeigen\n"
-"   -biidx [zw]    Infos zu der Bank mit Index idx anzeigen (Index zählt ab 1)\n"
+"   -biidx [zw]    Infos zu der Bank mit Index idx anzeigen (Index zÃ¤hlt ab 1)\n"
 "                  optional kann noch eine Zweigstelle angegeben werden\n"
 "                  (Zahl, ab 1). Die Zweigstellen sind in der LUT-Datei\n"
-"                  u.U. nach Postleitzahlen sortiert (abhängig von dem\n"
+"                  u.U. nach Postleitzahlen sortiert (abhÃ¤ngig von dem\n"
 "                  Compiler-Schalter SORT_PLZ in konto_check.h) und stimmen\n"
-"                  dann **nicht** mit denen der Bundesbankdatei überein.\n"
-"   -Biban         IBAN -> BIC für deutsche IBANs\n"
+"                  dann **nicht** mit denen der Bundesbankdatei Ã¼berein.\n"
+"   -Biban         IBAN -> BIC fÃ¼r deutsche IBANs\n"
 "   -ciban         IBAN validieren\n"
 "   -Cblz kto      IBAN zu BLZ und kto generieren (vorher Konto testen)\n"
-"   -d             'Systemdatum' für LUT-Datei (simuliert) löschen\n"
-"   -ddatum        'Systemdatum' für LUT-Datei (simuliert) setzen (Format: JJJJMMTT)\n"
-"   -D             Systemdatum für LUT-Datei (simuliert und echt) anzeigen\n"
+"   -d             'Systemdatum' fÃ¼r LUT-Datei (simuliert) lÃ¶schen\n"
+"   -ddatum        'Systemdatum' fÃ¼r LUT-Datei (simuliert) setzen (Format: JJJJMMTT)\n"
+"   -D             Systemdatum fÃ¼r LUT-Datei (simuliert und echt) anzeigen\n"
 "   -E[dihsu]      Ausgabe-Kodierung festlegen\n"
 "   -i[1-7]dateiname [set]  Bibliothek mit der angegebenen Datei initialisieren\n"
 "                  Die Zahl gibt die zu ladenden Blocks an (wie bei -g3)\n"
 "                  Der Parameter set kann weggelassen werden; dann wird das\n"
-"                  aktuell gültige Set (bzw. das primäre Set, falls keines gültig ist)\n"
-"                  geladen; falls er angegeben ist, sollte er 1 (für das primäre Set)\n"
-"                  oder 2 (für das sekundäre Set) sein.\n"
+"                  aktuell gÃ¼ltige Set (bzw. das primÃ¤re Set, falls keines gÃ¼ltig ist)\n"
+"                  geladen; falls er angegeben ist, sollte er 1 (fÃ¼r das primÃ¤re Set)\n"
+"                  oder 2 (fÃ¼r das sekundÃ¤re Set) sein.\n"
 "   -Idateiname    Infoblocks der angegebenen LUT-Datei anzeigen\n"
 "   -I             Infoblock der geladenen LUT-Datei anzeigen\n"
 "   -ldateiname    Verzeichnis der angegebenen LUT-Datei anzeigen\n"
 "   -sname         Namens(anfang) suchen -> BLZ\n"
 "   -Sort          Ort suchen -> BLZ\n"
-"   -v             geladenen Datensatz auf Gültigkeit testen\n"
-"   -zgzweck       Prüfziffer für strukturieren IPI-Verwendungszweck erzeugen\n"
-"   -ztzweck       Prüfziffer für strukturieren IPI-Verwendungszweck testen\n"
+"   -v             geladenen Datensatz auf GÃ¼ltigkeit testen\n"
+"   -zgzweck       PrÃ¼fziffer fÃ¼r strukturieren IPI-Verwendungszweck erzeugen\n"
+"   -ztzweck       PrÃ¼fziffer fÃ¼r strukturieren IPI-Verwendungszweck testen\n"
 "   -Zkompression  Kompressionsbibliothek (0 keine, 1 zlib, 2 bzlib2)\n"
 "   -h             (diese) Hilfe anzeigen\n"
 "   -?             dto.";
@@ -443,7 +443,7 @@ int main(int argc,char **argv)
             case 'l':
                GET_VAL;
                if(*ptr=='u' && *(ptr+1)=='t' && *(ptr+2)==0){
-                  gen_lut=2;  /* Option -lut für Kompatibilität mit altem Programm */
+                  gen_lut=2;  /* Option -lut fÃ¼r KompatibilitÃ¤t mit altem Programm */
                   action=GEN_LUT;
                }
                else
@@ -530,7 +530,7 @@ int main(int argc,char **argv)
 #endif
    if(action==LUT_INFO){
       lut_info(inputname,&ptr,&ptr1,&i,&j);
-      fprintf(stderr,"%sPrimärer Datensatz:   %s\nSekundärer Datensatz: %s\n%s",
+      fprintf(stderr,"%sPrimÃ¤rer Datensatz:   %s\nSekundÃ¤rer Datensatz: %s\n%s",
             trennzeile,kto_check_retval2txt(i),kto_check_retval2txt(j),trennzeile);
       if(ptr){
          fprintf(stderr,"%s%s",ptr,trennzeile);
@@ -609,7 +609,7 @@ int main(int argc,char **argv)
    if(action==GEN_LUT){
       if(!outputname)outputname="blz.lut";
       fprintf(stderr,"Generiere die Lookup-Datei %s aus %s\n",outputname,inputname);
-      if(gen_lut<3)  /* alte Routine für LUT 1.0/1.1 aufrufen */
+      if(gen_lut<3)  /* alte Routine fÃ¼r LUT 1.0/1.1 aufrufen */
          ret=generate_lut(inputname,outputname,user_info,gen_lut);
       else if(felder=='x'){
          for(i=0,ptr=opt_ptr;i<255 && *ptr;i++){
@@ -656,16 +656,16 @@ int main(int argc,char **argv)
 #if DEBUG
             if(*buffer=='-'){ /* Kommandomodus */
                for(ptr=buffer;*ptr && *ptr!='\r' && *ptr!='\n';ptr++);
-               *ptr=0;  /* \r bzw. \n am Zeilenende entfernen (stört i.A.) */
+               *ptr=0;  /* \r bzw. \n am Zeilenende entfernen (stÃ¶rt i.A.) */
 
-               switch(*(buffer+1)){   /* Kommando ausführen */
+               switch(*(buffer+1)){   /* Kommando ausfÃ¼hren */
 
-                  case 'b':   /* Bankinfos anzeigen (holen über lut_multiple()) */
+                  case 'b':   /* Bankinfos anzeigen (holen Ã¼ber lut_multiple()) */
                      if(*(buffer+2)=='i'){   /* Dateien per Index holen */
                         id=strtoul(buffer+3,NULL,10)-1;  /* Index beginnt mit 1 */
                         if(id<0)id=0;
-                        for(ptr=buffer+3;!isdigit(*ptr);ptr++);   /* Leerzeichen etc. vor Index überspringen */
-                        while(isdigit(*ptr))ptr++; /* erste Zahl überspringen (Index der Bank) */
+                        for(ptr=buffer+3;!isdigit(*ptr);ptr++);   /* Leerzeichen etc. vor Index Ã¼berspringen */
+                        while(isdigit(*ptr))ptr++; /* erste Zahl Ã¼berspringen (Index der Bank) */
                         if(*ptr){                  /* zweite Zahl -> Index der Zweigstelle */
                            while(!isdigit(*ptr))ptr++;
                            id2=strtoul(ptr,NULL,10);
@@ -694,14 +694,14 @@ int main(int argc,char **argv)
                         if(id2)printf(",  %d. Zweigstelle",id2);
                         printf("):\n");
 
-                           /* zunächst testen, ob die Arrays inititalisiert sind
-                            * (bzw. in der LUT-Datei enthalten waren). Für
+                           /* zunÃ¤chst testen, ob die Arrays inititalisiert sind
+                            * (bzw. in der LUT-Datei enthalten waren). FÃ¼r
                             * numerische Arrays ist im Fehlerfall -1 als erstes
-                            * Element enthalten, für char- und Stringarrays ein '~'.
-                            * Der Test ist beim Zugriff über Indizes notwendig,
+                            * Element enthalten, fÃ¼r char- und Stringarrays ein '~'.
+                            * Der Test ist beim Zugriff Ã¼ber Indizes notwendig,
                             * da die Fehler-Arrays nur 256 Elemente enthalten
-                            * - genug für alle üblichen Zweigstellen, aber nicht
-                            * genügend für den Offset vom Start des Arrays.
+                            * - genug fÃ¼r alle Ã¼blichen Zweigstellen, aber nicht
+                            * genÃ¼gend fÃ¼r den Offset vom Start des Arrays.
                             */
                         if(**p_name!='~')p_name+=id1;
                         if(**p_name_kurz!='~')p_name_kurz+=id1;
@@ -709,7 +709,7 @@ int main(int argc,char **argv)
                         if(**p_ort!='~')p_ort+=id1;
                         if(*p_pan>=0)p_pan+=id1;
                         if(**p_bic!='~')p_bic+=id1;
-                            /* die Prüfziffer muß direkt bestimmt werden, geht
+                            /* die PrÃ¼fziffer muÃŸ direkt bestimmt werden, geht
                              * bei lut_multiple() mit Index nicht (nur bei BLZ).
                              */
                         sprintf(blz_buffer,"%d",p_blz[id]);
@@ -730,9 +730,9 @@ int main(int argc,char **argv)
                      }
                      printf("Name/Ort: %s, %d %s\n",*p_name,*p_plz,*p_ort);
                      printf("Kurzbezeichnung: %s\n",*p_name_kurz);
-                     printf("PAN: %d, BIC: %s, Prüfzifferverf.: %c%d\n",
+                     printf("PAN: %d, BIC: %s, PrÃ¼fzifferverf.: %c%d\n",
                            *p_pan,*p_bic,p_pz>100?p_pz/10-10+'A':p_pz/10+'0',p_pz%10);
-                     printf("Lfd.Nr.: %d, Änderung: %c, Löschung: %c, Nachfolge-BLZ: %d\n",
+                     printf("Lfd.Nr.: %d, Ã„nderung: %c, LÃ¶schung: %c, Nachfolge-BLZ: %d\n",
                            *p_nr,*p_aenderung,*p_loeschung,*p_nachfolge_blz);
                      break;
 
@@ -770,7 +770,7 @@ int main(int argc,char **argv)
                      fprintf(stderr,"aktuelles modifiziertes Systemdatum: %08u\n",current_date);
                      break;
 
-                  case 'f':   /* Speicher aufräumen */
+                  case 'f':   /* Speicher aufrÃ¤umen */
                      lut_cleanup();
                      break;
 
@@ -807,9 +807,9 @@ int main(int argc,char **argv)
                   case 'I':   /* Info zu Datei oder geladenem Datensatz anzeigen */
                      ret=lut_info(buffer+2,&ptr,&ptr1,&i,&j);
                      if(*(buffer+2))   /* es wurde ein Dateiname angegeben */
-                        printf("%sPrimärer Datensatz:   %s\nSekundärer Datensatz: %s\n%s",
+                        printf("%sPrimÃ¤rer Datensatz:   %s\nSekundÃ¤rer Datensatz: %s\n%s",
                               trennzeile,kto_check_retval2txt(i),kto_check_retval2txt(j),trennzeile);
-                     else  /* kein Dateiname, Info über aktuell geladene Daten */
+                     else  /* kein Dateiname, Info Ã¼ber aktuell geladene Daten */
                         printf("%sgeladener Datensatz: %s\n%s",
                               trennzeile,kto_check_retval2txt(i),trennzeile);
                      if(ret==OK){
@@ -850,7 +850,7 @@ int main(int argc,char **argv)
                               break;
                            case 'p':
                               typ=1;   /* Ergebnis ist ein Integer, nur Basis-BLZs (ohne Filialen) */
-                              suchfeld="Prüfziffermethode";
+                              suchfeld="PrÃ¼fziffermethode";
                               a1=atoi(ptr);
                               while(*ptr && isdigit(*ptr++));
                               if(*ptr)
@@ -895,9 +895,9 @@ int main(int argc,char **argv)
                               break;
 
                         }
-                           /* Mittels lut_multiple() werden zunächst die Anfangsadressen der Arrays der
+                           /* Mittels lut_multiple() werden zunÃ¤chst die Anfangsadressen der Arrays der
                             * LUT-Datei bestimmt (mit der Kontonummer NULL), um dann auch auf die Daten
-                            * der Filialen zugreifen zu können.
+                            * der Filialen zugreifen zu kÃ¶nnen.
                             */
                         if(ret!=OK)
                            fprintf(stderr,"Fehler bei der Suche: %d (%s)\n",ret,kto_check_retval2txt_short(ret));
@@ -923,7 +923,7 @@ int main(int argc,char **argv)
                      }
                      break;
 
-                  case 'v':   /* Info, ob geladener Datensatz gültig ist */
+                  case 'v':   /* Info, ob geladener Datensatz gÃ¼ltig ist */
                      lut_info(NULL,NULL,NULL,&i,NULL);
                      printf("%s\n",kto_check_retval2txt(i));
                      break;
@@ -1050,7 +1050,7 @@ if(!inputname)inputname="blz_in.txt";
    fprintf(stderr,"Teste die Konten in %s; Ausgabe nach %s\n",inputname,outputname);
    fstat(in,&s_buf);
    if(!(buffer=malloc(s_buf.st_size+256))){
-      fprintf(stderr,"Kann Speicher für filebuffer nicht allokieren; Abbruch\n");
+      fprintf(stderr,"Kann Speicher fÃ¼r filebuffer nicht allokieren; Abbruch\n");
       exit(4);
    }
    ZEIT(lesen1);
@@ -1073,36 +1073,36 @@ if(!inputname)inputname="blz_in.txt";
          schreiben+=(schreiben2-schreiben1);
       }
 
-         /* es wird für jede Zeile eine Länge von 20 Bytes angenommen,
-          * ohne daß dieses getestet wird. Falls diese Bedingung nicht
-          * erfüllt ist, geht die Funktion natürlich komplett daneben;
-          * aber sie ist auch nur für Testzwecke gedacht, nicht für den
+         /* es wird fÃ¼r jede Zeile eine LÃ¤nge von 20 Bytes angenommen,
+          * ohne daÃŸ dieses getestet wird. Falls diese Bedingung nicht
+          * erfÃ¼llt ist, geht die Funktion natÃ¼rlich komplett daneben;
+          * aber sie ist auch nur fÃ¼r Testzwecke gedacht, nicht fÃ¼r den
           * normalen Gebrauch!!!
           * Der einzige Test, der gemacht wird, ist auf Zeilenvorschub nach
-          * 20 Bytes. Falls dies nicht erfüllt ist, wird ein Fehlerzähler
+          * 20 Bytes. Falls dies nicht erfÃ¼llt ist, wird ein FehlerzÃ¤hler
           * inkrementiert; falls dieser nach den Tests nicht 0 ist, war
-          * die Datei nicht für den schnellen Test geeignet; das Ergebnis
-          * dürfte normalerweise unbrauchbar sein.
+          * die Datei nicht fÃ¼r den schnellen Test geeignet; das Ergebnis
+          * dÃ¼rfte normalerweise unbrauchbar sein.
           */
 
       memcpy(dptr,ptr1,20);   /* Zeile komplett zur Ausgabe kopieren */
 
          /* das \n am Zeilenende wurde hier mitkopiert; das Kopieren
           * von 20 Zeichen ist schneller als das Kopieren von 19 Zeichen,
-          * da dabei long-Transfers benutzt werden können. dptr wird in der
-          * nächsten Zeile allerdings nur um 19 Zeichen vorgerückt, nicht
-          * um 20; das störende \n wird so bei der Ergebnisausgabe
-          * überschrieben.
+          * da dabei long-Transfers benutzt werden kÃ¶nnen. dptr wird in der
+          * nÃ¤chsten Zeile allerdings nur um 19 Zeichen vorgerÃ¼ckt, nicht
+          * um 20; das stÃ¶rende \n wird so bei der Ergebnisausgabe
+          * Ã¼berschrieben.
           */
       dptr+=19;
       ptr2=ptr1+8;
-      *ptr2++=0;     /* Endemarkierung für BLZ */
+      *ptr2++=0;     /* Endemarkierung fÃ¼r BLZ */
 
           /* falls kein Zeilenvorschub am Zeilenende gefunden wird,
-           * Fehlerzähler inkrementieren */
+           * FehlerzÃ¤hler inkrementieren */
       if(*(ptr2+10)!='\n')lf_error++;
 
-      *(ptr2+10)=0;  /* Endemarkierung für das Konto */
+      *(ptr2+10)=0;  /* Endemarkierung fÃ¼r das Konto */
       zeilen++;
       konten++;
       sptr+=20;
@@ -1114,30 +1114,30 @@ if(!inputname)inputname="blz_in.txt";
 #endif
 
          /* Die Ergebnisausgabe erfolgt hier in einem switch-Statement, um
-          * die Vorteile von memcpy mit festem Zähler nutzen zu können (es kann
+          * die Vorteile von memcpy mit festem ZÃ¤hler nutzen zu kÃ¶nnen (es kann
           * vom Compiler besser optimiert werden). Damit lassen sich wieder
           * einige Taktzyklen herausschlagen ;-)))
           *
-          * Das Switch-Statement enthält alle definierten Rückgabewerte, obwohl
-          * viele nicht benötigt werden. Das liegt daran, daß es automatisch
-          * generiert wird und eine Auswahl mehr Arbeit machen würde, als alle
+          * Das Switch-Statement enthÃ¤lt alle definierten RÃ¼ckgabewerte, obwohl
+          * viele nicht benÃ¶tigt werden. Das liegt daran, daÃŸ es automatisch
+          * generiert wird und eine Auswahl mehr Arbeit machen wÃ¼rde, als alle
           * Werte aufzunehmen.
           */
       switch(ret){
          case IBAN_CHKSUM_OK_NACHFOLGE_BLZ_DEFINED: 
-            memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, für die Bank gibt es allerdings eine (andere) Nachfolge-BLZ\n",93);
+            memcpy(dptr,": ### Die IBAN-PrÃ¼fsumme stimmt, fÃ¼r die Bank gibt es allerdings eine (andere) Nachfolge-BLZ\n",93);
             dptr+=93;
             break;
          case LUT2_NOT_ALL_IBAN_BLOCKS_LOADED: 
-            memcpy(dptr,": ### es konnten nicht alle Datenblocks die für die IBAN-Berechnung notwendig sind geladen werden\n",98);
+            memcpy(dptr,": ### es konnten nicht alle Datenblocks die fÃ¼r die IBAN-Berechnung notwendig sind geladen werden\n",98);
             dptr+=98;
             break;
          case LUT2_NOT_YET_VALID_PARTIAL_OK: 
-            memcpy(dptr,": ### Der Datensatz ist noch nicht gültig, außerdem konnten nicht alle Blocks geladen werden\n",93);
+            memcpy(dptr,": ### Der Datensatz ist noch nicht gÃ¼ltig, auÃŸerdem konnten nicht alle Blocks geladen werden\n",93);
             dptr+=93;
             break;
          case LUT2_NO_LONGER_VALID_PARTIAL_OK: 
-            memcpy(dptr,": ### Der Datensatz ist nicht mehr gültig, außerdem konnten nicht alle Blocks geladen werdeng\n",94);
+            memcpy(dptr,": ### Der Datensatz ist nicht mehr gÃ¼ltig, auÃŸerdem konnten nicht alle Blocks geladen werdeng\n",94);
             dptr+=94;
             break;
          case LUT2_BLOCKS_MISSING: 
@@ -1145,31 +1145,31 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=98;
             break;
          case FALSE_UNTERKONTO_ATTACHED: 
-            memcpy(dptr,": ### falsch, es wurde ein Unterkonto hinzugefügt (IBAN-Regel)\n",63);
+            memcpy(dptr,": ### falsch, es wurde ein Unterkonto hinzugefÃ¼gt (IBAN-Regel)\n",63);
             dptr+=63;
             break;
          case BLZ_BLACKLISTED: 
-            memcpy(dptr,": ### Die BLZ findet sich in der Ausschlussliste für IBAN-Berechnungen\n",71);
+            memcpy(dptr,": ### Die BLZ findet sich in der Ausschlussliste fÃ¼r IBAN-Berechnungen\n",71);
             dptr+=71;
             break;
          case BLZ_MARKED_AS_DELETED: 
-            memcpy(dptr,": ### Die BLZ ist in der Bundesbank-Datei als gelöscht markiert und somit ungültig\n",83);
+            memcpy(dptr,": ### Die BLZ ist in der Bundesbank-Datei als gelÃ¶scht markiert und somit ungÃ¼ltig\n",83);
             dptr+=83;
             break;
          case IBAN_CHKSUM_OK_SOMETHING_WRONG: 
-            memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, es gibt allerdings einen Fehler in der eigenen IBAN-Bestimmung (wahrscheinlich falsch)\n",120);
+            memcpy(dptr,": ### Die IBAN-PrÃ¼fsumme stimmt, es gibt allerdings einen Fehler in der eigenen IBAN-Bestimmung (wahrscheinlich falsch)\n",120);
             dptr+=120;
             break;
          case IBAN_CHKSUM_OK_NO_IBAN_CALCULATION: 
-            memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, eine IBAN-Berechnung ist allerdings nicht erlaubt (wahrscheinlich falsch)\n",107);
+            memcpy(dptr,": ### Die IBAN-PrÃ¼fsumme stimmt, eine IBAN-Berechnung ist allerdings nicht erlaubt (wahrscheinlich falsch)\n",107);
             dptr+=107;
             break;
          case IBAN_CHKSUM_OK_RULE_IGNORED: 
-            memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, es wurde allerdings eine IBAN-Regel nicht beachtet (wahrscheinlich falsch)\n",108);
+            memcpy(dptr,": ### Die IBAN-PrÃ¼fsumme stimmt, es wurde allerdings eine IBAN-Regel nicht beachtet (wahrscheinlich falsch)\n",108);
             dptr+=108;
             break;
          case IBAN_CHKSUM_OK_UNTERKTO_MISSING: 
-            memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, es fehlt aber ein Unterkonto (wahrscheinlich falsch)\n",86);
+            memcpy(dptr,": ### Die IBAN-PrÃ¼fsumme stimmt, es fehlt aber ein Unterkonto (wahrscheinlich falsch)\n",86);
             dptr+=86;
             break;
          case IBAN_INVALID_RULE: 
@@ -1177,7 +1177,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=53;
             break;
          case IBAN_AMBIGUOUS_KTO: 
-            memcpy(dptr,": ### Die Kontonummer ist nicht eindeutig (es gibt mehrere Möglichkeiten)\n",74);
+            memcpy(dptr,": ### Die Kontonummer ist nicht eindeutig (es gibt mehrere MÃ¶glichkeiten)\n",74);
             dptr+=74;
             break;
          case IBAN_RULE_NOT_IMPLEMENTED: 
@@ -1189,7 +1189,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=39;
             break;
          case NO_IBAN_CALCULATION: 
-            memcpy(dptr,": ### Für die Bankverbindung ist keine IBAN-Berechnung erlaubt\n",63);
+            memcpy(dptr,": ### FÃ¼r die Bankverbindung ist keine IBAN-Berechnung erlaubt\n",63);
             dptr+=63;
             break;
          case OLD_BLZ_OK_NEW_NOT: 
@@ -1201,7 +1201,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=52;
             break;
          case INVALID_IBAN_LENGTH: 
-            memcpy(dptr,": ### Die Länge der IBAN für das angegebene Länderkürzel ist falsch\n",68);
+            memcpy(dptr,": ### Die LÃ¤nge der IBAN fÃ¼r das angegebene LÃ¤nderkÃ¼rzel ist falsch\n",68);
             dptr+=68;
             break;
          case LUT2_NO_ACCOUNT_GIVEN: 
@@ -1209,7 +1209,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=42;
             break;
          case LUT2_VOLLTEXT_INVALID_CHAR: 
-            memcpy(dptr,": ### Ungültiges Zeichen ( ()+-/&.,\' ) für die Volltextsuche gefunden\n",71);
+            memcpy(dptr,": ### UngÃ¼ltiges Zeichen ( ()+-/&.,\' ) fÃ¼r die Volltextsuche gefunden\n",71);
             dptr+=71;
             break;
          case LUT2_VOLLTEXT_SINGLE_WORD_ONLY: 
@@ -1217,15 +1217,15 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=127;
             break;
          case LUT_SUCHE_INVALID_RSC: 
-            memcpy(dptr,": ### die angegebene Suchresource ist ungültig\n",47);
+            memcpy(dptr,": ### die angegebene Suchresource ist ungÃ¼ltig\n",47);
             dptr+=47;
             break;
          case LUT_SUCHE_INVALID_CMD: 
-            memcpy(dptr,": ### Suche: im Verknüpfungsstring sind nur die Zeichen a-z sowie + und - erlaubt\n",82);
+            memcpy(dptr,": ### Suche: im VerknÃ¼pfungsstring sind nur die Zeichen a-z sowie + und - erlaubt\n",82);
             dptr+=82;
             break;
          case LUT_SUCHE_INVALID_CNT: 
-            memcpy(dptr,": ### Suche: es müssen zwischen 1 und 26 Suchmuster angegeben werden\n",69);
+            memcpy(dptr,": ### Suche: es mÃ¼ssen zwischen 1 und 26 Suchmuster angegeben werden\n",69);
             dptr+=69;
             break;
          case LUT2_VOLLTEXT_NOT_INITIALIZED: 
@@ -1241,19 +1241,19 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=87;
             break;
          case KTO_CHECK_INVALID_COMPRESSION_LIB: 
-            memcpy(dptr,": ### der angegebene Wert für die Default-Kompression ist ungültig\n",67);
+            memcpy(dptr,": ### der angegebene Wert fÃ¼r die Default-Kompression ist ungÃ¼ltig\n",67);
             dptr+=67;
             break;
          case OK_UNTERKONTO_ATTACHED_OLD: 
-            memcpy(dptr,": ### (nicht mehr als Fehler, sondern positive Ausgabe - Dummy für den alten Wert)\n",83);
+            memcpy(dptr,": ### (nicht mehr als Fehler, sondern positive Ausgabe - Dummy fÃ¼r den alten Wert)\n",83);
             dptr+=83;
             break;
          case KTO_CHECK_DEFAULT_BLOCK_INVALID: 
-            memcpy(dptr,": ### Ungültige Signatur im Default-Block\n",42);
+            memcpy(dptr,": ### UngÃ¼ltige Signatur im Default-Block\n",42);
             dptr+=42;
             break;
          case KTO_CHECK_DEFAULT_BLOCK_FULL: 
-            memcpy(dptr,": ### Die maximale Anzahl Einträge für den Default-Block wurde erreicht\n",72);
+            memcpy(dptr,": ### Die maximale Anzahl EintrÃ¤ge fÃ¼r den Default-Block wurde erreicht\n",72);
             dptr+=72;
             break;
          case KTO_CHECK_NO_DEFAULT_BLOCK: 
@@ -1261,11 +1261,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=48;
             break;
          case KTO_CHECK_KEY_NOT_FOUND: 
-            memcpy(dptr,": ### Der angegebene Schlüssel wurde im Default-Block nicht gefunden\n",69);
+            memcpy(dptr,": ### Der angegebene SchlÃ¼ssel wurde im Default-Block nicht gefunden\n",69);
             dptr+=69;
             break;
          case LUT2_NO_LONGER_VALID_BETTER: 
-            memcpy(dptr,": ### Beide Datensätze sind nicht mehr gültig, dieser ist aber jünger als der andere\n",85);
+            memcpy(dptr,": ### Beide DatensÃ¤tze sind nicht mehr gÃ¼ltig, dieser ist aber jÃ¼nger als der andere\n",85);
             dptr+=85;
             break;
          case DTA_SRC_KTO_DIFFERENT: 
@@ -1277,11 +1277,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=94;
             break;
          case DTA_CR_LF_IN_FILE: 
-            memcpy(dptr,": ### Die DTA-Datei enthält (unzulässige) Zeilenvorschübe\n",58);
+            memcpy(dptr,": ### Die DTA-Datei enthÃ¤lt (unzulÃ¤ssige) ZeilenvorschÃ¼be\n",58);
             dptr+=58;
             break;
          case DTA_INVALID_C_EXTENSION: 
-            memcpy(dptr,": ### ungültiger Typ bei einem Erweiterungsblock eines C-Datensatzes\n",69);
+            memcpy(dptr,": ### ungÃ¼ltiger Typ bei einem Erweiterungsblock eines C-Datensatzes\n",69);
             dptr+=69;
             break;
          case DTA_FOUND_SET_A_NOT_C: 
@@ -1301,19 +1301,19 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=79;
             break;
          case DTA_INVALID_EXTENSION_COUNT: 
-            memcpy(dptr,": ### Die Anzahl Erweiterungen paßt nicht zur Blocklänge\n",57);
+            memcpy(dptr,": ### Die Anzahl Erweiterungen paÃŸt nicht zur BlocklÃ¤nge\n",57);
             dptr+=57;
             break;
          case DTA_INVALID_NUM: 
-            memcpy(dptr,": ### Ungültige Zeichen in numerischem Feld\n",44);
+            memcpy(dptr,": ### UngÃ¼ltige Zeichen in numerischem Feld\n",44);
             dptr+=44;
             break;
          case DTA_INVALID_CHARS: 
-            memcpy(dptr,": ### Ungültige Zeichen im Textfeld\n",36);
+            memcpy(dptr,": ### UngÃ¼ltige Zeichen im Textfeld\n",36);
             dptr+=36;
             break;
          case DTA_CURRENCY_NOT_EURO: 
-            memcpy(dptr,": ### Die Währung des DTA-Datensatzes ist nicht Euro\n",53);
+            memcpy(dptr,": ### Die WÃ¤hrung des DTA-Datensatzes ist nicht Euro\n",53);
             dptr+=53;
             break;
          case DTA_EMPTY_AMOUNT: 
@@ -1321,11 +1321,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=57;
             break;
          case DTA_INVALID_TEXT_KEY: 
-            memcpy(dptr,": ### Ungültiger Textschlüssel in der DTA-Datei\n",48);
+            memcpy(dptr,": ### UngÃ¼ltiger TextschlÃ¼ssel in der DTA-Datei\n",48);
             dptr+=48;
             break;
          case DTA_EMPTY_STRING: 
-            memcpy(dptr,": ### Für ein (alphanumerisches) Feld wurde kein Wert angegeben\n",64);
+            memcpy(dptr,": ### FÃ¼r ein (alphanumerisches) Feld wurde kein Wert angegeben\n",64);
             dptr+=64;
             break;
          case DTA_MARKER_A_NOT_FOUND: 
@@ -1341,23 +1341,23 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=65;
             break;
          case DTA_INVALID_SET_C_LEN: 
-            memcpy(dptr,": ### Die Satzlänge eines C-Datensatzes muß zwischen 187 und 622 Byte betragen\n",79);
+            memcpy(dptr,": ### Die SatzlÃ¤nge eines C-Datensatzes muÃŸ zwischen 187 und 622 Byte betragen\n",79);
             dptr+=79;
             break;
          case DTA_INVALID_SET_LEN: 
-            memcpy(dptr,": ### Die Satzlänge eines A- bzw. E-Satzes muß 128 Byte betragen\n",65);
+            memcpy(dptr,": ### Die SatzlÃ¤nge eines A- bzw. E-Satzes muÃŸ 128 Byte betragen\n",65);
             dptr+=65;
             break;
          case DTA_WAERUNG_NOT_EURO: 
-            memcpy(dptr,": ### als Währung in der DTA-Datei ist nicht Euro eingetragen\n",62);
+            memcpy(dptr,": ### als WÃ¤hrung in der DTA-Datei ist nicht Euro eingetragen\n",62);
             dptr+=62;
             break;
          case DTA_INVALID_ISSUE_DATE: 
-            memcpy(dptr,": ### das Ausführungsdatum ist zu früh oder zu spät (max. 15 Tage nach Dateierstellung)\n",88);
+            memcpy(dptr,": ### das AusfÃ¼hrungsdatum ist zu frÃ¼h oder zu spÃ¤t (max. 15 Tage nach Dateierstellung)\n",88);
             dptr+=88;
             break;
          case DTA_INVALID_DATE: 
-            memcpy(dptr,": ### das Datum ist ungültig\n",29);
+            memcpy(dptr,": ### das Datum ist ungÃ¼ltig\n",29);
             dptr+=29;
             break;
          case DTA_FORMAT_ERROR: 
@@ -1365,11 +1365,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=36;
             break;
          case DTA_FILE_WITH_ERRORS: 
-            memcpy(dptr,": ### die DTA-Datei enthält Fehler\n",35);
+            memcpy(dptr,": ### die DTA-Datei enthÃ¤lt Fehler\n",35);
             dptr+=35;
             break;
          case INVALID_SEARCH_RANGE: 
-            memcpy(dptr,": ### ungültiger Suchbereich angegeben (unten>oben)\n",52);
+            memcpy(dptr,": ### ungÃ¼ltiger Suchbereich angegeben (unten>oben)\n",52);
             dptr+=52;
             break;
          case KEY_NOT_FOUND: 
@@ -1377,31 +1377,31 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=39;
             break;
          case BAV_FALSE: 
-            memcpy(dptr,": ### BAV denkt, das Konto ist falsch (konto_check hält es für richtig)\n",72);
+            memcpy(dptr,": ### BAV denkt, das Konto ist falsch (konto_check hÃ¤lt es fÃ¼r richtig)\n",72);
             dptr+=72;
             break;
          case LUT2_NO_USER_BLOCK: 
-            memcpy(dptr,": ### User-Blocks müssen einen Typ > 500 haben\n",47);
+            memcpy(dptr,": ### User-Blocks mÃ¼ssen einen Typ > 500 haben\n",47);
             dptr+=47;
             break;
          case INVALID_SET: 
-            memcpy(dptr,": ### für ein LUT-Set sind nur die Werte 0, 1 oder 2 möglich\n",61);
+            memcpy(dptr,": ### fÃ¼r ein LUT-Set sind nur die Werte 0, 1 oder 2 mÃ¶glich\n",61);
             dptr+=61;
             break;
          case NO_GERMAN_BIC: 
-            memcpy(dptr,": ### Ein Konto kann kann nur für deutsche Banken geprüft werden\n",65);
+            memcpy(dptr,": ### Ein Konto kann kann nur fÃ¼r deutsche Banken geprÃ¼ft werden\n",65);
             dptr+=65;
             break;
          case IPI_CHECK_INVALID_LENGTH: 
-            memcpy(dptr,": ### Der zu validierende strukturierete Verwendungszweck muß genau 20 Zeichen enthalten\n",89);
+            memcpy(dptr,": ### Der zu validierende strukturierete Verwendungszweck muÃŸ genau 20 Zeichen enthalten\n",89);
             dptr+=89;
             break;
          case IPI_INVALID_CHARACTER: 
-            memcpy(dptr,": ### Im strukturierten Verwendungszweck dürfen nur alphanumerische Zeichen vorkommen\n",86);
+            memcpy(dptr,": ### Im strukturierten Verwendungszweck dÃ¼rfen nur alphanumerische Zeichen vorkommen\n",86);
             dptr+=86;
             break;
          case IPI_INVALID_LENGTH: 
-            memcpy(dptr,": ### Die Länge des IPI-Verwendungszwecks darf maximal 18 Byte sein\n",68);
+            memcpy(dptr,": ### Die LÃ¤nge des IPI-Verwendungszwecks darf maximal 18 Byte sein\n",68);
             dptr+=68;
             break;
          case LUT1_FILE_USED: 
@@ -1409,7 +1409,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=56;
             break;
          case MISSING_PARAMETER: 
-            memcpy(dptr,": ### Für die aufgerufene Funktion fehlt ein notwendiger Parameter\n",67);
+            memcpy(dptr,": ### FÃ¼r die aufgerufene Funktion fehlt ein notwendiger Parameter\n",67);
             dptr+=67;
             break;
          case IBAN2BIC_ONLY_GERMAN: 
@@ -1417,15 +1417,15 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=72;
             break;
          case IBAN_OK_KTO_NOT: 
-            memcpy(dptr,": ### Die Prüfziffer der IBAN stimmt, die der Kontonummer nicht\n",64);
+            memcpy(dptr,": ### Die PrÃ¼fziffer der IBAN stimmt, die der Kontonummer nicht\n",64);
             dptr+=64;
             break;
          case KTO_OK_IBAN_NOT: 
-            memcpy(dptr,": ### Die Prüfziffer der Kontonummer stimmt, die der IBAN nicht\n",64);
+            memcpy(dptr,": ### Die PrÃ¼fziffer der Kontonummer stimmt, die der IBAN nicht\n",64);
             dptr+=64;
             break;
          case TOO_MANY_SLOTS: 
-            memcpy(dptr,": ### Es sind nur maximal 500 Slots pro LUT-Datei möglich (Neukompilieren erforderlich)\n",88);
+            memcpy(dptr,": ### Es sind nur maximal 500 Slots pro LUT-Datei mÃ¶glich (Neukompilieren erforderlich)\n",88);
             dptr+=88;
             break;
          case INIT_FATAL_ERROR: 
@@ -1433,11 +1433,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=58;
             break;
          case INCREMENTAL_INIT_NEEDS_INFO: 
-            memcpy(dptr,": ### Ein inkrementelles Initialisieren benötigt einen Info-Block in der LUT-Datei\n",83);
+            memcpy(dptr,": ### Ein inkrementelles Initialisieren benÃ¶tigt einen Info-Block in der LUT-Datei\n",83);
             dptr+=83;
             break;
          case INCREMENTAL_INIT_FROM_DIFFERENT_FILE: 
-            memcpy(dptr,": ### Ein inkrementelles Initialisieren mit einer anderen LUT-Datei ist nicht möglich\n",86);
+            memcpy(dptr,": ### Ein inkrementelles Initialisieren mit einer anderen LUT-Datei ist nicht mÃ¶glich\n",86);
             dptr+=86;
             break;
          case DEBUG_ONLY_FUNCTION: 
@@ -1445,27 +1445,27 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=58;
             break;
          case LUT2_INVALID: 
-            memcpy(dptr,": ### Kein Datensatz der LUT-Datei ist aktuell gültig\n",54);
+            memcpy(dptr,": ### Kein Datensatz der LUT-Datei ist aktuell gÃ¼ltig\n",54);
             dptr+=54;
             break;
          case LUT2_NOT_YET_VALID: 
-            memcpy(dptr,": ### Der Datensatz ist noch nicht gültig\n",42);
+            memcpy(dptr,": ### Der Datensatz ist noch nicht gÃ¼ltig\n",42);
             dptr+=42;
             break;
          case LUT2_NO_LONGER_VALID: 
-            memcpy(dptr,": ### Der Datensatz ist nicht mehr gültig\n",42);
+            memcpy(dptr,": ### Der Datensatz ist nicht mehr gÃ¼ltig\n",42);
             dptr+=42;
             break;
          case LUT2_GUELTIGKEIT_SWAPPED: 
-            memcpy(dptr,": ### Im Gültigkeitsdatum sind Anfangs- und Enddatum vertauscht\n",64);
+            memcpy(dptr,": ### Im GÃ¼ltigkeitsdatum sind Anfangs- und Enddatum vertauscht\n",64);
             dptr+=64;
             break;
          case LUT2_INVALID_GUELTIGKEIT: 
-            memcpy(dptr,": ### Das angegebene Gültigkeitsdatum ist ungültig (Soll: JJJJMMTT-JJJJMMTT)\n",77);
+            memcpy(dptr,": ### Das angegebene GÃ¼ltigkeitsdatum ist ungÃ¼ltig (Soll: JJJJMMTT-JJJJMMTT)\n",77);
             dptr+=77;
             break;
          case LUT2_INDEX_OUT_OF_RANGE: 
-            memcpy(dptr,": ### Der Index für die Filiale ist ungültig\n",45);
+            memcpy(dptr,": ### Der Index fÃ¼r die Filiale ist ungÃ¼ltig\n",45);
             dptr+=45;
             break;
          case LUT2_INIT_IN_PROGRESS: 
@@ -1505,7 +1505,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=45;
             break;
          case LUT2_PZ_NOT_INITIALIZED: 
-            memcpy(dptr,": ### Das Feld Prüfziffer wurde nicht initialisiert\n",52);
+            memcpy(dptr,": ### Das Feld PrÃ¼fziffer wurde nicht initialisiert\n",52);
             dptr+=52;
             break;
          case LUT2_NR_NOT_INITIALIZED: 
@@ -1513,11 +1513,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=44;
             break;
          case LUT2_AENDERUNG_NOT_INITIALIZED: 
-            memcpy(dptr,": ### Das Feld Änderung wurde nicht initialisiert\n",50);
+            memcpy(dptr,": ### Das Feld Ã„nderung wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
          case LUT2_LOESCHUNG_NOT_INITIALIZED: 
-            memcpy(dptr,": ### Das Feld Löschung wurde nicht initialisiert\n",50);
+            memcpy(dptr,": ### Das Feld LÃ¶schung wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
          case LUT2_NACHFOLGE_BLZ_NOT_INITIALIZED: 
@@ -1573,31 +1573,31 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=45;
             break;
          case EXCLUDED_AT_COMPILETIME: 
-            memcpy(dptr,": ### Der benötigte Programmteil wurde beim Kompilieren deaktiviert\n",68);
+            memcpy(dptr,": ### Der benÃ¶tigte Programmteil wurde beim Kompilieren deaktiviert\n",68);
             dptr+=68;
             break;
          case INVALID_LUT_VERSION: 
-            memcpy(dptr,": ### Die Versionsnummer für die LUT-Datei ist ungültig\n",56);
+            memcpy(dptr,": ### Die Versionsnummer fÃ¼r die LUT-Datei ist ungÃ¼ltig\n",56);
             dptr+=56;
             break;
          case INVALID_PARAMETER_STELLE1: 
-            memcpy(dptr,": ### ungültiger Prüfparameter (erste zu prüfende Stelle)\n",58);
+            memcpy(dptr,": ### ungÃ¼ltiger PrÃ¼fparameter (erste zu prÃ¼fende Stelle)\n",58);
             dptr+=58;
             break;
          case INVALID_PARAMETER_COUNT: 
-            memcpy(dptr,": ### ungültiger Prüfparameter (Anzahl zu prüfender Stellen)\n",61);
+            memcpy(dptr,": ### ungÃ¼ltiger PrÃ¼fparameter (Anzahl zu prÃ¼fender Stellen)\n",61);
             dptr+=61;
             break;
          case INVALID_PARAMETER_PRUEFZIFFER: 
-            memcpy(dptr,": ### ungültiger Prüfparameter (Position der Prüfziffer)\n",57);
+            memcpy(dptr,": ### ungÃ¼ltiger PrÃ¼fparameter (Position der PrÃ¼fziffer)\n",57);
             dptr+=57;
             break;
          case INVALID_PARAMETER_WICHTUNG: 
-            memcpy(dptr,": ### ungültiger Prüfparameter (Wichtung)\n",42);
+            memcpy(dptr,": ### ungÃ¼ltiger PrÃ¼fparameter (Wichtung)\n",42);
             dptr+=42;
             break;
          case INVALID_PARAMETER_METHODE: 
-            memcpy(dptr,": ### ungültiger Prüfparameter (Rechenmethode)\n",47);
+            memcpy(dptr,": ### ungÃ¼ltiger PrÃ¼fparameter (Rechenmethode)\n",47);
             dptr+=47;
             break;
          case LIBRARY_INIT_ERROR: 
@@ -1605,27 +1605,27 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=57;
             break;
          case LUT_CRC_ERROR: 
-            memcpy(dptr,": ### Prüfsummenfehler in der blz.lut Datei\n",44);
+            memcpy(dptr,": ### PrÃ¼fsummenfehler in der blz.lut Datei\n",44);
             dptr+=44;
             break;
          case FALSE_GELOESCHT: 
-            memcpy(dptr,": ### falsch (die BLZ wurde außerdem gelöscht)\n",47);
+            memcpy(dptr,": ### falsch (die BLZ wurde auÃŸerdem gelÃ¶scht)\n",47);
             dptr+=47;
             break;
          case OK_NO_CHK_GELOESCHT: 
-            memcpy(dptr,": ### ok, ohne Prüfung (die BLZ wurde allerdings gelöscht)\n",59);
+            memcpy(dptr,": ### ok, ohne PrÃ¼fung (die BLZ wurde allerdings gelÃ¶scht)\n",59);
             dptr+=59;
             break;
          case OK_GELOESCHT: 
-            memcpy(dptr,": ### ok (die BLZ wurde allerdings gelöscht)\n",45);
+            memcpy(dptr,": ### ok (die BLZ wurde allerdings gelÃ¶scht)\n",45);
             dptr+=45;
             break;
          case BLZ_GELOESCHT: 
-            memcpy(dptr,": ### die Bankleitzahl wurde gelöscht\n",38);
+            memcpy(dptr,": ### die Bankleitzahl wurde gelÃ¶scht\n",38);
             dptr+=38;
             break;
          case INVALID_BLZ_FILE: 
-            memcpy(dptr,": ### Fehler in der blz.txt Datei (falsche Zeilenlänge)\n",56);
+            memcpy(dptr,": ### Fehler in der blz.txt Datei (falsche ZeilenlÃ¤nge)\n",56);
             dptr+=56;
             break;
          case LIBRARY_IS_NOT_THREAD_SAFE: 
@@ -1637,7 +1637,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=43;
             break;
          case INVALID_KTO_LENGTH: 
-            memcpy(dptr,": ### ein Konto muß zwischen 1 und 10 Stellen haben\n",52);
+            memcpy(dptr,": ### ein Konto muÃŸ zwischen 1 und 10 Stellen haben\n",52);
             dptr+=52;
             break;
          case FILE_WRITE_ERROR: 
@@ -1657,7 +1657,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=45;
             break;
          case INVALID_LUT_FILE: 
-            memcpy(dptr,": ### die blz.lut Datei ist inkosistent/ungültig\n",49);
+            memcpy(dptr,": ### die blz.lut Datei ist inkosistent/ungÃ¼ltig\n",49);
             dptr+=49;
             break;
          case NO_LUT_FILE: 
@@ -1669,11 +1669,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=45;
             break;
          case INVALID_BLZ: 
-            memcpy(dptr,": ### die Bankleitzahl ist ungültig\n",36);
+            memcpy(dptr,": ### die Bankleitzahl ist ungÃ¼ltig\n",36);
             dptr+=36;
             break;
          case INVALID_KTO: 
-            memcpy(dptr,": ### das Konto ist ungültig\n",29);
+            memcpy(dptr,": ### das Konto ist ungÃ¼ltig\n",29);
             dptr+=29;
             break;
          case NOT_IMPLEMENTED: 
@@ -1693,19 +1693,19 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=5;
             break;
          case OK_NO_CHK: 
-            memcpy(dptr,": ok, ohne Prüfung\n",19);
+            memcpy(dptr,": ok, ohne PrÃ¼fung\n",19);
             dptr+=19;
             break;
          case OK_TEST_BLZ_USED: 
-            memcpy(dptr,": ok, für den Test wurde eine Test-BLZ verwendet\n",49);
+            memcpy(dptr,": ok, fÃ¼r den Test wurde eine Test-BLZ verwendet\n",49);
             dptr+=49;
             break;
          case LUT2_VALID: 
-            memcpy(dptr,": Der Datensatz ist aktuell gültig\n",35);
+            memcpy(dptr,": Der Datensatz ist aktuell gÃ¼ltig\n",35);
             dptr+=35;
             break;
          case LUT2_NO_VALID_DATE: 
-            memcpy(dptr,": Der Datensatz enthält kein Gültigkeitsdatum\n",46);
+            memcpy(dptr,": Der Datensatz enthÃ¤lt kein GÃ¼ltigkeitsdatum\n",46);
             dptr+=46;
             break;
          case LUT1_SET_LOADED: 
@@ -1725,7 +1725,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=82;
             break;
          case KTO_CHECK_VALUE_REPLACED: 
-            memcpy(dptr,": ok, der Wert für den Schlüssel wurde überschrieben\n",53);
+            memcpy(dptr,": ok, der Wert fÃ¼r den SchlÃ¼ssel wurde Ã¼berschrieben\n",53);
             dptr+=53;
             break;
          case OK_UNTERKONTO_POSSIBLE: 
@@ -1733,7 +1733,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=94;
             break;
          case OK_UNTERKONTO_GIVEN: 
-            memcpy(dptr,": wahrscheinlich ok, die Kontonummer enthält eine Unterkontonummer\n",67);
+            memcpy(dptr,": wahrscheinlich ok, die Kontonummer enthÃ¤lt eine Unterkontonummer\n",67);
             dptr+=67;
             break;
          case OK_SLOT_CNT_MIN_USED: 
@@ -1741,7 +1741,7 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=63;
             break;
          case SOME_KEYS_NOT_FOUND: 
-            memcpy(dptr,": ok, ein(ige) Schlüssel wurden nicht gefunden\n",47);
+            memcpy(dptr,": ok, ein(ige) SchlÃ¼ssel wurden nicht gefunden\n",47);
             dptr+=47;
             break;
          case LUT2_KTO_NOT_CHECKED: 
@@ -1749,11 +1749,11 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=42;
             break;
          case LUT2_OK_WITHOUT_IBAN_RULES: 
-            memcpy(dptr,": Es wurden fast alle Blocks (außer den IBAN-Regeln) geladen\n",61);
+            memcpy(dptr,": Es wurden fast alle Blocks (auÃŸer den IBAN-Regeln) geladen\n",61);
             dptr+=61;
             break;
          case OK_NACHFOLGE_BLZ_USED: 
-            memcpy(dptr,": ok, für die BLZ wurde allerdings die Nachfolge-BLZ eingesetzt\n",64);
+            memcpy(dptr,": ok, fÃ¼r die BLZ wurde allerdings die Nachfolge-BLZ eingesetzt\n",64);
             dptr+=64;
             break;
          case OK_KTO_REPLACED: 
@@ -1773,19 +1773,19 @@ if(!inputname)inputname="blz_in.txt";
             dptr+=63;
             break;
          case OK_INVALID_FOR_IBAN: 
-            memcpy(dptr,": ok, für IBAN ist (durch eine Regel) allerdings ein anderer BIC definiert\n",75);
+            memcpy(dptr,": ok, fÃ¼r IBAN ist (durch eine Regel) allerdings ein anderer BIC definiert\n",75);
             dptr+=75;
             break;
          case OK_HYPO_REQUIRES_KTO: 
-            memcpy(dptr,": ok, für die BIC-Bestimmung der ehemaligen Hypo-Bank für IBAN wird i.A. zusätzlich die Kontonummer benötigt\n",109);
+            memcpy(dptr,": ok, fÃ¼r die BIC-Bestimmung der ehemaligen Hypo-Bank fÃ¼r IBAN wird i.A. zusÃ¤tzlich die Kontonummer benÃ¶tigt\n",109);
             dptr+=109;
             break;
          case OK_KTO_REPLACED_NO_PZ: 
-            memcpy(dptr,": ok, die Kontonummer wurde ersetzt, die neue Kontonummer hat keine Prüfziffer\n",79);
+            memcpy(dptr,": ok, die Kontonummer wurde ersetzt, die neue Kontonummer hat keine PrÃ¼fziffer\n",79);
             dptr+=79;
             break;
          case OK_UNTERKONTO_ATTACHED: 
-            memcpy(dptr,": ok, es wurde ein (weggelassenes) Unterkonto angefügt\n",55);
+            memcpy(dptr,": ok, es wurde ein (weggelassenes) Unterkonto angefÃ¼gt\n",55);
             dptr+=55;
             break;
       }
@@ -1804,14 +1804,14 @@ if(!inputname)inputname="blz_in.txt";
       }
       ptr1=sptr;  /* Startposition merken */
       while((*dptr= *sptr++)!='\n')dptr++;      /* ganze Zeile kopieren */
-      while(*ptr1==' ' || *ptr1=='\t')ptr1++;   /* Blanks am Zeilenanfang überspringen */
+      while(*ptr1==' ' || *ptr1=='\t')ptr1++;   /* Blanks am Zeilenanfang Ã¼berspringen */
       zeilen++;
       if(!ISXDIGIT(*ptr1)){                     /* keine BLZ gefunden */
          *dptr++='\n';
          continue;
       }
 
-		for(ptr2=ptr1+1;ISXDIGIT(*ptr2);ptr2++);    /* BLZ/Prüfziffer gefunden */
+		for(ptr2=ptr1+1;ISXDIGIT(*ptr2);ptr2++);    /* BLZ/PrÃ¼fziffer gefunden */
       *ptr2++=0;
       while(!ISDIGIT(*ptr2) && *ptr2!='\n')ptr2++; /* Kontonummer suchen */
       if(*ptr2=='\n'){
@@ -1889,13 +1889,13 @@ if(!inputname)inputname="blz_in.txt";
    cnt=write(out,dbuffer,dptr-dbuffer);
    if(cnt!=(dptr-dbuffer))perror("Schreibfehler bei Ausgabe");
 
-      /* Die Datei muß noch auf die richtige Länge abgeschnitten werden,
+      /* Die Datei muÃŸ noch auf die richtige LÃ¤nge abgeschnitten werden,
        * denn, falls sie schon existierte,wurden existierende Sektoren 
-       * nicht freigegeben, sondern nur überschrieben (etwas schneller);
+       * nicht freigegeben, sondern nur Ã¼berschrieben (etwas schneller);
        * ein einfaches ftruncate() mit der Anzahl geschriebener Bytes geht
        * allerdings bei M$* daneben, da hier immer statt \n ein \r\n
-       * geschrieben wird, und die Dateilänge dann nicht mehr stimmt.
-       * Daher wird mit fdopen() ein neuer Deskriptor für die Datei eröffnet
+       * geschrieben wird, und die DateilÃ¤nge dann nicht mehr stimmt.
+       * Daher wird mit fdopen() ein neuer Deskriptor fÃ¼r die Datei erÃ¶ffnet
        * und die aktuelle Schreibposition mit ftell() erfragt.
        */
 

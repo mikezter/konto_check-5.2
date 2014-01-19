@@ -3,37 +3,37 @@
 
 /*
  * ##########################################################################
- * #  Dies ist konto_check, ein Programm zum Testen der Prüfziffern         #
- * #  von deutschen Bankkonten. Es kann als eigenständiges Programm         #
+ * #  Dies ist konto_check, ein Programm zum Testen der PrÃ¼fziffern         #
+ * #  von deutschen Bankkonten. Es kann als eigenstÃ¤ndiges Programm         #
  * #  (z.B. mit der beigelegten main() Routine) oder als Library zur        #
  * #  Verwendung in anderen Programmen bzw. Programmiersprachen benutzt     #
  * #  werden.                                                               #
  * #                                                                        #
  * #  Copyright (C) 2002-2011 Michael Plugge <m.plugge@hs-mannheim.de>      #
  * #                                                                        #
- * #  Dieses Programm ist freie Software; Sie dürfen es unter den           #
+ * #  Dieses Programm ist freie Software; Sie dÃ¼rfen es unter den           #
  * #  Bedingungen der GNU Lesser General Public License, wie von der Free   #
- * #  Software Foundation veröffentlicht, weiterverteilen und/oder          #
- * #  modifizieren; entweder gemäß Version 2.1 der Lizenz oder (nach Ihrer  #
- * #  Option) jeder späteren Version.                                       #
+ * #  Software Foundation verÃ¶ffentlicht, weiterverteilen und/oder          #
+ * #  modifizieren; entweder gemÃ¤ÃŸ Version 2.1 der Lizenz oder (nach Ihrer  #
+ * #  Option) jeder spÃ¤teren Version.                                       #
  * #                                                                        #
- * #  Die GNU LGPL ist weniger infektiös als die normale GPL; Code, der von #
- * #  Ihnen hinzugefügt wird, unterliegt nicht der Offenlegungspflicht      #
- * #  (wie bei der normalen GPL); außerdem müssen Programme, die diese      #
- * #  Bibliothek benutzen, nicht (L)GPL lizensiert sein, sondern können     #
+ * #  Die GNU LGPL ist weniger infektiÃ¶s als die normale GPL; Code, der von #
+ * #  Ihnen hinzugefÃ¼gt wird, unterliegt nicht der Offenlegungspflicht      #
+ * #  (wie bei der normalen GPL); auÃŸerdem mÃ¼ssen Programme, die diese      #
+ * #  Bibliothek benutzen, nicht (L)GPL lizensiert sein, sondern kÃ¶nnen     #
  * #  beliebig kommerziell verwertet werden. Die Offenlegung des Sourcecodes#
- * #  bezieht sich bei der LGPL *nur* auf geänderten Bibliothekscode.       #
+ * #  bezieht sich bei der LGPL *nur* auf geÃ¤nderten Bibliothekscode.       #
  * #                                                                        #
- * #  Dieses Programm wird in der Hoffnung weiterverbreitet, daß es         #
- * #  nützlich sein wird, jedoch OHNE IRGENDEINE GARANTIE, auch ohne die    #
- * #  implizierte Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR       #
+ * #  Dieses Programm wird in der Hoffnung weiterverbreitet, daÃŸ es         #
+ * #  nÃ¼tzlich sein wird, jedoch OHNE IRGENDEINE GARANTIE, auch ohne die    #
+ * #  implizierte Garantie der MARKTREIFE oder der VERWENDBARKEIT FÃœR       #
  * #  EINEN BESTIMMTEN ZWECK. Mehr Details finden Sie in der GNU Lesser     #
  * #  General Public License.                                               #
  * #                                                                        #
  * #  Sie sollten eine Kopie der GNU Lesser General Public License          #
  * #  zusammen mit diesem Programm erhalten haben; falls nicht,             #
  * #  schreiben Sie an die Free Software Foundation, Inc., 59 Temple        #
- * #  Place, Suite 330, Boston, MA 02111-1307, USA. Sie können sie auch     #
+ * #  Place, Suite 330, Boston, MA 02111-1307, USA. Sie kÃ¶nnen sie auch     #
  * #  von                                                                   #
  * #                                                                        #
  * #       http://www.gnu.org/licenses/lgpl.html                            #
@@ -54,70 +54,70 @@
  * # Aktuelles Bankleitzahl/BIC                                             #
  * #                                                                        #
  * # Im Rahmen eines umfassenden Konsolidierungsprojekts der Deutschen      #
- * # Bundesbank und der Europäischen Zentralbank werden immer mehr Filialen #
+ * # Bundesbank und der EuropÃ¤ischen Zentralbank werden immer mehr Filialen #
  * # der Deutschen Bundesbank geschlossen. Dabei wird auch die aktuelle     #
- * # Bankleitzahlenlogik für die Deutsche Bundesbank überarbeitet.          #
+ * # Bankleitzahlenlogik fÃ¼r die Deutsche Bundesbank Ã¼berarbeitet.          #
  * #                                                                        #
- * # Um als FLESSABANK dieser veränderten Situation gerecht zu werden,      #
+ * # Um als FLESSABANK dieser verÃ¤nderten Situation gerecht zu werden,      #
  * # haben wir uns entschlossen, unsere Bankleitzahlenstruktur zu           #
  * # vereinfachen und auf die zentrale Bankleitzahl 793 301 11 umzustellen. #
- * # Ihre Kontonummern bleiben dabei unverändert gültig!                    #
+ * # Ihre Kontonummern bleiben dabei unverÃ¤ndert gÃ¼ltig!                    #
  * #                                                                        #
  * # Betroffen sind hiervon folgende Bankleitzahlen:                        #
- * # 700 301 11 (Niederlassung München)                                     #
+ * # 700 301 11 (Niederlassung MÃ¼nchen)                                     #
  * # 763 301 11 (Niederlassung Erlangen)                                    #
  * # 770 301 11 (Niederlassung Bamberg)                                     #
  * # 783 301 11 (Niederlassung Coburg)                                      #
  * # 840 301 11 (Niederlassung Meiningen)                                   #
  * #                                                                        #
- * # Für die Bereiche Internet-Banking und girocard ist bereits heute nur   #
- * # die Bankleitzahl 793 301 11 gültig. Auch Ihre IBAN (International Bank #
- * # Account Number = Internationale Kontonummer) wird ausschließlich mit   #
+ * # FÃ¼r die Bereiche Internet-Banking und girocard ist bereits heute nur   #
+ * # die Bankleitzahl 793 301 11 gÃ¼ltig. Auch Ihre IBAN (International Bank #
+ * # Account Number = Internationale Kontonummer) wird ausschlieÃŸlich mit   #
  * # der Bankleitzahl 793 301 11 erstellt. Wir teilen Ihnen diese zusammen  #
  * # mit unserem BIC (Bank Identifier Code = Bankkennung) auf jedem         #
  * # Kontoauszug mit.                                                       #
  * #                                                                        #
  * # Update zur Flessa-Bank (abgerufen 28.10.13): Die obigen Bankleitzahlen #
- * # haben in der aktuellen BLZ-Datei das Löschflag gesetzt und als         #
- * # Nachfolge-BLZ die 79330111 eingetragen. Damit erübrigt sich die        #
- * # Korrektur für die Flessa-Bank.                                         #
+ * # haben in der aktuellen BLZ-Datei das LÃ¶schflag gesetzt und als         #
+ * # Nachfolge-BLZ die 79330111 eingetragen. Damit erÃ¼brigt sich die        #
+ * # Korrektur fÃ¼r die Flessa-Bank.                                         #
  * ##########################################################################
  */
 
 #define FLESSA_KORREKTUR 0
 
-/* IBAN-Regeln benutzen (gültig ab 3.6.2013) */
+/* IBAN-Regeln benutzen (gÃ¼ltig ab 3.6.2013) */
 #define USE_IBAN_RULES 1
 
-   /* Änderungen der Prüfziffermethoden zum 9. September 2013 erzwingen
-    * (bei 0 werden sie abhängig vom Datum aktiviert).
+   /* Ã„nderungen der PrÃ¼fziffermethoden zum 9. September 2013 erzwingen
+    * (bei 0 werden sie abhÃ¤ngig vom Datum aktiviert).
    */
 #define FORCE_AENDERUNGEN_2013_09 0
 
-   /* die neue Version der Regel 20 wird zum 9. Dezember in den offiziellen IBAN-Regeln veröffentlicht;
-    * die Bundesbank hat jedoch schon die Regelversion am 28. August veröffentlicht, mit der Bitte, sie
-    * möglichst schon zum 9. September einzusetzen. Durch die neue Regelversion werden die Fälle mit dem
-    * Rückgabewert IBAN_AMBIGUOUS_KTO komplett eliminiert.
+   /* die neue Version der Regel 20 wird zum 9. Dezember in den offiziellen IBAN-Regeln verÃ¶ffentlicht;
+    * die Bundesbank hat jedoch schon die Regelversion am 28. August verÃ¶ffentlicht, mit der Bitte, sie
+    * mÃ¶glichst schon zum 9. September einzusetzen. Durch die neue Regelversion werden die FÃ¤lle mit dem
+    * RÃ¼ckgabewert IBAN_AMBIGUOUS_KTO komplett eliminiert.
     */
 
 #define DB_NEUE_VERSION 1  /* bei 1: neue Version der DB-Regel benutzen */
 
-/* Debug-Version für iban_gen in Perl aktivieren (zur Ausgabe der benutzten
- * Prüfziffermethode in iban_gen()). Dies ist nur möglich, falls das Makro
+/* Debug-Version fÃ¼r iban_gen in Perl aktivieren (zur Ausgabe der benutzten
+ * PrÃ¼fziffermethode in iban_gen()). Dies ist nur mÃ¶glich, falls das Makro
  * DEBUG auf 1 gesetzt ist.
  */
 #define PERL_IBAN_DBG 1
 
-/* Das Makro DEFAULT_ENCODING legt die Ausgabe-Kodierung für die Funktion
+/* Das Makro DEFAULT_ENCODING legt die Ausgabe-Kodierung fÃ¼r die Funktion
  * kto_check_retval2txt() und die Blocks Name, Kurzname und Ort aus der
- * LUT-Datei fest. Die folgenden Werte sind möglich:
+ * LUT-Datei fest. Die folgenden Werte sind mÃ¶glich:
  *
  *    1: ISO-8859-1
  *    2: UTF-8
  *    3: HTML Entities
  *    4: DOS CP-850
  *
- * Werte außerhalb dieses Bereichs dürften schnell zum Absturz führen, da
+ * Werte auÃŸerhalb dieses Bereichs dÃ¼rften schnell zum Absturz fÃ¼hren, da
  * einige Arrays damit initialisiert werden.
  */
 
@@ -127,7 +127,7 @@
 /*
  * ##########################################################################
  * # Fallls das folgende Makro auf 1 gesetzt wird, werden unterschiedliche  #
- * # Interpretationen der Prüfziffermethoden interpretiert wie in BAV       #
+ * # Interpretationen der PrÃ¼fziffermethoden interpretiert wie in BAV       #
  * # (Bank Account Validator, http://sourceforge.net/projects/bav)          #
  * # Dieses Makro dient zum Test der beiden Pakete, damit bei den Tests     #
  * # nicht immer Unterschiede ausgegeben werden, wo nur (bekannte)          #
@@ -151,10 +151,10 @@
  * # stellige Methoden (Methode + evl. Untermethode) akzeptiert, sowie noch #
  * # diverser Debug-Code mit eingebaut.                                     #
  * #                                                                        #
- * # Das Makro VERBOSE_DEBUG wird für einige spezielle Problemfälle benutzt;#
+ * # Das Makro VERBOSE_DEBUG wird fÃ¼r einige spezielle ProblemfÃ¤lle benutzt;#
  * # falls es gesetzt ist, wird im Fehlerfall mittels perror() eine etwas   #
  * # detailliertere Fehlermeldung ausgegeben (im Moment nur bei fopen()).   #
- * # Es wird ebenfalls für zum Debuggen von RückgabewerteN (Makro RETURN(r) #
+ * # Es wird ebenfalls fÃ¼r zum Debuggen von RÃ¼ckgabewerteN (Makro RETURN(r) #
  * # bei Problemen benutzt.                                                 #
  * ##########################################################################
  */
@@ -168,7 +168,7 @@
 
 /*
  * ##########################################################################
- * # falls das folgende Makro auf 1 gesetzt wird, werden für das PHP-Modul  #
+ * # falls das folgende Makro auf 1 gesetzt wird, werden fÃ¼r das PHP-Modul  #
  * # symbolische Konstanten definiert (analog zu den #define's aus der      #
  * # C Bibliothek. Der Wert false ist in PHP allerdings schon belegt und    #
  * # kann nicht verwendet werden; stattdessen wird NOT_OK definiert.        #
@@ -178,8 +178,8 @@
 
 /*
  * ##########################################################################
- * # falls das folgende Makro auf 1 gesetzt wird, werden Dummys für die     #
- * # alten globalen Variablen eingebunden; die alte Funktionalität wird     #
+ * # falls das folgende Makro auf 1 gesetzt wird, werden Dummys fÃ¼r die     #
+ * # alten globalen Variablen eingebunden; die alte FunktionalitÃ¤t wird     #
  * # jedoch aufgrund der Threadfestigkeit nicht implementiert.              #
  * ##########################################################################
  */
@@ -189,8 +189,8 @@
  * ##########################################################################
  * # falls das folgende Makro auf 1 gesetzt wird, werden die Zweigstellen   #
  * # in der LUT-Datei nach Postleitzahlen sortiert; andernfalls wird die    #
- * # Reihenfolge aus der Datei der Deutschen Bundesbank übernommen (mit der #
- * # Ausnahme, daß Hauptstellen vor die Zweigstellen gesetzt werden und die #
+ * # Reihenfolge aus der Datei der Deutschen Bundesbank Ã¼bernommen (mit der #
+ * # Ausnahme, daÃŸ Hauptstellen vor die Zweigstellen gesetzt werden und die #
  * # gesamte Datei nach BLZs sortiert wird).                                #
  * ##########################################################################
  */
@@ -198,7 +198,7 @@
 
 /*
  * ######################################################################
- * # DLL-Optionen für Windows                                           #
+ * # DLL-Optionen fÃ¼r Windows                                           #
  * # Der DLL-Code wurde aus der Datei dllhelpers (beim MinGW-Compiler   #
  * # enthalten, http://www.mingw.org/) entnommen                        #
  * #                                                                    #
@@ -239,11 +239,11 @@
 
 /*
  * ######################################################################
- * # AWK_ADD_MICROTIME: AWK-Funktionalität mit Mikrosekunden-Auflösung  #
+ * # AWK_ADD_MICROTIME: AWK-FunktionalitÃ¤t mit Mikrosekunden-AuflÃ¶sung  #
  * # Falls das folgende Makro auf 1 gesetzt wird, wird im awk-Port die  #
  * # Funktion microtime() definiert, die - anders als systime() - mit   #
- * # hoher Auflösung (Mikrosekunden) arbeitet. Parameter etc. finden    #
- * # sich in konto_check_awk.c. Standardmäßig ist die Funktion nicht    #
+ * # hoher AuflÃ¶sung (Mikrosekunden) arbeitet. Parameter etc. finden    #
+ * # sich in konto_check_awk.c. StandardmÃ¤ÃŸig ist die Funktion nicht    #
  * # aktiviert.                                                         #
  * ######################################################################
  */
@@ -252,7 +252,7 @@
 
 /*
  * ######################################################################
- * #          Defaultnamen und Suchpfad für die LUT-Datei               #
+ * #          Defaultnamen und Suchpfad fÃ¼r die LUT-Datei               #
  * ######################################################################
  */
 
@@ -264,12 +264,12 @@
 #define DEFAULT_LUT_PATH ".","/usr/local/etc","/etc","/usr/local/bin","/opt/konto_check"
 #endif
 
-   /* maximale Länge für Default-Suchpfad und Dateiname der LUT-Datei */
+   /* maximale LÃ¤nge fÃ¼r Default-Suchpfad und Dateiname der LUT-Datei */
 #define LUT_PATH_LEN 512
 
 /*
  * ######################################################################
- * #               Felder für die LUT-Datei (ab LUT-Version 2.0)        #
+ * #               Felder fÃ¼r die LUT-Datei (ab LUT-Version 2.0)        #
  * ######################################################################
  */
 
@@ -280,23 +280,23 @@
 #define DEFAULT_INIT_LEVEL       5
 #define LAST_LUT_BLOCK           100
 
-   /* falls das nächste Makro auf 0 gesetzt wird, werden von generate_lut2() immer
-    * LUT-Dateien im neuen Format generieret; falls für lut_version ein Wert <3 angegeben
+   /* falls das nÃ¤chste Makro auf 0 gesetzt wird, werden von generate_lut2() immer
+    * LUT-Dateien im neuen Format generieret; falls fÃ¼r lut_version ein Wert <3 angegeben
     * wurde, wird er auf 3 gesetzt.
     */
 #define GENERATE_OLD_LUTFILE     0
 
    /* Das folgende Makro bestimmt das Verhalten, wenn zu einer LUT-Datei Blocks
-    * hinzugefügt werden sollen und bereits (mindestens) ein Block mit
-    * demselben Typ in der Datei enthalten ist. Falls das Makro 1 ist, wird für
+    * hinzugefÃ¼gt werden sollen und bereits (mindestens) ein Block mit
+    * demselben Typ in der Datei enthalten ist. Falls das Makro 1 ist, wird fÃ¼r
     * den neuen Block der alte Slots der LUT-Datei benutzt; bei 0 wird ein
     * neuer Slot allokiert.
     *
-    * Falls das Makro 0 ist, kann man auch später noch auf alte Blocks
-    * zugreifen (falls das einmal notwendig sein sollte); allerdings läßt sich
-    * das LUT-Verzeichnis nicht vergrößern, so daß u.U. nach mehreren Updates
+    * Falls das Makro 0 ist, kann man auch spÃ¤ter noch auf alte Blocks
+    * zugreifen (falls das einmal notwendig sein sollte); allerdings lÃ¤ÃŸt sich
+    * das LUT-Verzeichnis nicht vergrÃ¶ÃŸern, so daÃŸ u.U. nach mehreren Updates
     * alle Slots belegt sind und daher keine neuen Blocks mehr geschrieben
-    * werden können.
+    * werden kÃ¶nnen.
     */
 
 #define REPLACE_LUT_DIR_ENTRIES 1
@@ -365,7 +365,7 @@ extern const char *lut2_feld_namen[256];
 
 /*
  * ######################################################################
- * #               mögliche Rückgabewerte von kto_check() & Co          #
+ * #               mÃ¶gliche RÃ¼ckgabewerte von kto_check() & Co          #
  * ######################################################################
  */
 
@@ -549,16 +549,16 @@ typedef unsigned int UINT4;
 typedef long INT4;
 typedef unsigned long UINT4;
 #else  /* Notausstieg, kann 4 Byte Integer nicht bestimmen */
-#error "Typedef für 4 Byte Integer nicht definiert"
+#error "Typedef fÃ¼r 4 Byte Integer nicht definiert"
 #endif
 #endif
 
    /* in den alten Versionen war reserved als 'void *reserved[5]' definiert;
     * es ist allerdings geschickter, einen Teil davon als char-Array zu
     * definieren.  Dieses kann dann flexibler verwendet werden (auch
-    * byteweise). Die Größe der Struktur wird auf diese Weise nicht verändert.
+    * byteweise). Die GrÃ¶ÃŸe der Struktur wird auf diese Weise nicht verÃ¤ndert.
     *
-    * Als erstes neues Element wird pz_pos (Position der Prüfziffer) eingeführt.
+    * Als erstes neues Element wird pz_pos (Position der PrÃ¼fziffer) eingefÃ¼hrt.
     */
 typedef struct{
    const char *methode;
@@ -573,25 +573,25 @@ typedef struct{
 /* ######################################################################
  * # Dies ist der alte Kommentar zu KTO_CHK_CTX; die Struktur ist ab    #
  * # Version 3.0 obsolet und wird nicht mehr verwendet. Die Deklaration #
- * # ist allerdings noch in der Headerdatei enthalten, um Abwärtskompa- #
- * # tibilität mit dem alten Interface zu wahren; Funktionen, die die   #
+ * # ist allerdings noch in der Headerdatei enthalten, um AbwÃ¤rtskompa- #
+ * # tibilitÃ¤t mit dem alten Interface zu wahren; Funktionen, die die   #
  * # Struktur benutzen, rufen einfach die neuen (threadfesten)          #
  * # Funktionen auf; die ctx-Variable wird dabei einfach ignoriert.     #
  * #                                                                    #
- * # Definition der Struktur KTO_CHK_CTX. Diese Struktur enthält alle   #
+ * # Definition der Struktur KTO_CHK_CTX. Diese Struktur enthÃ¤lt alle   #
  * # globalen bzw. static Variablen der alten Library und wird bei den  #
- * # threadfesten Varianten als Parameter übergeben. Damit treten keine #
+ * # threadfesten Varianten als Parameter Ã¼bergeben. Damit treten keine #
  * # Interferenzen zwischen verschiedenen Instanzen bei einem gleich-   #
  * # zeitigen Aufruf der library mehr auf, wie es bei den nicht thread- #
  * # festen Varianten der Fall ist (beispielsweise werden kto_check_msg,#
- * # pz_str, pz_methode und pz von jeder Instanz überschrieben; dadurch #
+ * # pz_str, pz_methode und pz von jeder Instanz Ã¼berschrieben; dadurch #
  * # sind diese Variablen in einem Thread-Kontext unbrauchbar.          #
- * # Die alten (nicht threadfesten) Varianten sind so realisiert, daß   #
+ * # Die alten (nicht threadfesten) Varianten sind so realisiert, daÃŸ   #
  * # eine (static) globale Struktur global_ctx definiert wird, die von  #
  * # den diesen Funktionen benutzt wird. Diese Vorgehensweise ist       #
- * # wesentlich schneller als die Alternative, lokale Variablen für die #
- * # Problemfälle zu benutzen; die Umsetzung zwischen nicht threadfesten#
- * # und threadfesten Variablen geschieht über Präprozessor #defines    #
+ * # wesentlich schneller als die Alternative, lokale Variablen fÃ¼r die #
+ * # ProblemfÃ¤lle zu benutzen; die Umsetzung zwischen nicht threadfesten#
+ * # und threadfesten Variablen geschieht Ã¼ber PrÃ¤prozessor #defines    #
  * # in konto_check.c.                                                  #
  * ######################################################################
  */
@@ -607,22 +607,22 @@ typedef struct{
 
 /*
  * ##########################################################################
- * # SLOT_CNT_MIN: Minimale Anzahl Slots für eine LUT-Daei.                 #
+ * # SLOT_CNT_MIN: Minimale Anzahl Slots fÃ¼r eine LUT-Daei.                 #
  * # Dieser Parameter gibt an, wieviele Slots das Inhaltsverzeichnis einer  #
- * # LUT-Datei mindestens haben soll. Für jeden Block in der LUT-Datei wird #
- * # ein Slot im Inhaltsverzeichnis benötigt; bei einer LUT-Datei mit allen #
- * # Einträgen (Level 9) sind das 23 Slots, falls zwei Datensätze in der    #
+ * # LUT-Datei mindestens haben soll. FÃ¼r jeden Block in der LUT-Datei wird #
+ * # ein Slot im Inhaltsverzeichnis benÃ¶tigt; bei einer LUT-Datei mit allen #
+ * # EintrÃ¤gen (Level 9) sind das 23 Slots, falls zwei DatensÃ¤tze in der    #
  * # Datei gehalten werden sollen, 46 (inklusive Indexblocks).              #
  * #                                                                        #
  * # Das Slotverzeichnis ist eine relativ einfache Datenstruktur; es        #
- * # enthält für jeden Slot nur drei 4 Byte-Integers (Typ, Offset und       #
- * # Länge); daher ist es auch kein Problem, für das Slotverzeichnis einen  #
- * # etwas größeren Wert zu wählen. Die Datei wird dadurch nur minimal      #
- * # größer. Die angegebene Anzahl Slots kann nachträglich nicht mehr       #
- * # geändert werden, da das Slotverzeichnis am Beginn des Datenblocks      #
- * # steht und sich bei einer Vergrößerung alle Offsets in der Datei ändern #
- * # würden; außerdem müßten alle Blocks verschoben werden. Es gibt die     #
- * # Möglichkeit, eine LUT-Datei zu kopieren (mittels copy_lutfile()); bei  #
+ * # enthÃ¤lt fÃ¼r jeden Slot nur drei 4 Byte-Integers (Typ, Offset und       #
+ * # LÃ¤nge); daher ist es auch kein Problem, fÃ¼r das Slotverzeichnis einen  #
+ * # etwas grÃ¶ÃŸeren Wert zu wÃ¤hlen. Die Datei wird dadurch nur minimal      #
+ * # grÃ¶ÃŸer. Die angegebene Anzahl Slots kann nachtrÃ¤glich nicht mehr       #
+ * # geÃ¤ndert werden, da das Slotverzeichnis am Beginn des Datenblocks      #
+ * # steht und sich bei einer VergrÃ¶ÃŸerung alle Offsets in der Datei Ã¤ndern #
+ * # wÃ¼rden; auÃŸerdem mÃ¼ÃŸten alle Blocks verschoben werden. Es gibt die     #
+ * # MÃ¶glichkeit, eine LUT-Datei zu kopieren (mittels copy_lutfile()); bei  #
  * # dieser Funktion kann eine neue Anzahl Slots angegeben werden.          #
  * #                                                                        #
  * ##########################################################################
@@ -631,7 +631,7 @@ typedef struct{
 
 /*
  * ##########################################################################
- * # Benutzte Kompressionsbibliothek für die LUT-Datei. Mögliche Werte:     #
+ * # Benutzte Kompressionsbibliothek fÃ¼r die LUT-Datei. MÃ¶gliche Werte:     #
  * #    COMPRESSION_NONE     keine Kompression                              #
  * #    COMPRESSION_ZLIB     zlib                                           #
  * #    COMPRESSION_BZIP2    bzip2                                          #
@@ -643,7 +643,7 @@ typedef struct{
  * # Kompression geschrieben werden soll, kann die Umstellung durch einen   #
  * # Aufruf der Funktion set_default_compression() erfolgen.                #
  * #                                                                        #
- * # Die Unterschiede der verschiedenen Kompressionsbibliotheken können im  #
+ * # Die Unterschiede der verschiedenen Kompressionsbibliotheken kÃ¶nnen im  #
  * # Detail der Datei 0test_compression.txt entnommen werden.               #
  * ##########################################################################
  */
@@ -660,26 +660,26 @@ DLL_EXPORT int set_default_compression(int mode);
  * ######################################################################
  * # kto_check(): Test eines Kontos                                     #
  * #              Diese Funktion stammt aus der alten Programmier-      #
- * #              schnittstelle und ist aus Kompatibilitätsgründen noch #
- * #              in der Library enthalten. Da alle möglichen Fälle     #
+ * #              schnittstelle und ist aus KompatibilitÃ¤tsgrÃ¼nden noch #
+ * #              in der Library enthalten. Da alle mÃ¶glichen FÃ¤lle     #
  * #              behandelt werden und Initialisierung und Test nicht   #
  * #              getrennt sind, hat diese Funktion im Vergleich zu dem #
  * #              neuen Interface einen relativ hohen Overhead, und     #
  * #              sollte durch die neuen Funktionen (s.u.) ersetzt      #
  * #              werden.                                               #
  * #                                                                    #
- * # Parameter: x_blz:      falls 2-stellig: Prüfziffer                 #
+ * # Parameter: x_blz:      falls 2-stellig: PrÃ¼fziffer                 #
  * #                        falls 8-stellig: Bankleitzahl               #
  * #                                                                    #
  * #            kto:        Kontonummer (wird vor der Berechnung        #
- * #                        linksbündig mit Nullen auf 10 Stellen       #
- * #                        aufgefüllt)                                 #
+ * #                        linksbÃ¼ndig mit Nullen auf 10 Stellen       #
+ * #                        aufgefÃ¼llt)                                 #
  * #                                                                    #
  * #            lut_name:   Dateiname der Lookup-Tabelle.               #
- * #                        Falls NULL oder ein leerer String übergeben #
+ * #                        Falls NULL oder ein leerer String Ã¼bergeben #
  * #                        wird, wird DEFAULT_LUT_NAME benutzt.        #
  * #                                                                    #
- * # Rückgabewerte: s.o.                                                #
+ * # RÃ¼ckgabewerte: s.o.                                                #
  * ######################################################################
  */
 DLL_EXPORT int kto_check(char *x_blz,char *kto,char *lut_name);
@@ -688,16 +688,16 @@ DLL_EXPORT const char *kto_check_str(char *x_blz,char *kto,char *lut_name);
 
 /* ###########################################################################
  * # Die Funktion kto_check_blz() ist die neue externe Schnittstelle zur     #
- * # Überprüfung einer BLZ/Kontonummer Kombination. Es wird grundsätzlich    #
- * # nur mit Bankleitzahlen gearbeitet; falls eine Prüfziffermethode direkt  #
+ * # ÃœberprÃ¼fung einer BLZ/Kontonummer Kombination. Es wird grundsÃ¤tzlich    #
+ * # nur mit Bankleitzahlen gearbeitet; falls eine PrÃ¼fziffermethode direkt  #
  * # aufgerufen werden soll, ist stattdessen die Funktion kto_check_pz()     #
  * # zu benutzen.                                                            #
  * #                                                                         #
- * # Bei dem neuen Interface sind außerdem Initialisierung und Test          #
+ * # Bei dem neuen Interface sind auÃŸerdem Initialisierung und Test          #
  * # getrennt. Vor einem Test ist (einmal) die Funktion kto_check_init()     #
  * # aufzurufen; diese Funktion liest die LUT-Datei und initialisiert einige #
  * # interne Variablen. Wenn diese Funktion nicht aufgerufen wurde, wird die #
- * # Fehlermeldung LUT2_NOT_INITIALIZED zurückgegeben.                       #
+ * # Fehlermeldung LUT2_NOT_INITIALIZED zurÃ¼ckgegeben.                       #
  * #                                                                         #
  * # Parameter:                                                              #
  * #    blz:        Bankleitzahl (immer 8-stellig)                           #
@@ -714,14 +714,14 @@ DLL_EXPORT int kto_check_blz_dbg(char *blz,char *kto,RETVAL *retvals);
 
 /* ###########################################################################
  * # Die Funktion kto_check_pz() ist die neue externe Schnittstelle zur      #
- * # Überprüfung einer Prüfziffer/Kontonummer Kombination. Diese Funktion    #
- * # dient zum Test mit direktem Aufruf einer Prüfziffermethode. Bei dieser  #
+ * # ÃœberprÃ¼fung einer PrÃ¼fziffer/Kontonummer Kombination. Diese Funktion    #
+ * # dient zum Test mit direktem Aufruf einer PrÃ¼fziffermethode. Bei dieser  #
  * # Funktion kann der Aufruf von kto_check_init() entfallen. Die BLZ wird   #
- * # bei einigen Methoden, die auf das ESER-Altsystem zurückgehen, benötigt  #
+ * # bei einigen Methoden, die auf das ESER-Altsystem zurÃ¼ckgehen, benÃ¶tigt  #
  * # (52, 53, B6, C0); ansonsten wird sie ignoriert.                         #
  * #                                                                         #
  * # Parameter:                                                              #
- * #    pz:         Prüfziffer (2- oder 3-stellig)                           #
+ * #    pz:         PrÃ¼fziffer (2- oder 3-stellig)                           #
  * #    blz:        Bankleitzahl (immer 8-stellig)                           #
  * #    kto:        Kontonummer                                              #
  * #                                                                         #
@@ -736,17 +736,17 @@ DLL_EXPORT int kto_check_pz_dbg(char *pz,char *kto,char *blz,RETVAL *retvals);
 
 /* ###########################################################################
  * # Die Funktion kto_check_regel() entspricht der Funktion                  #
- * # kto_check_blz(). Der einzige Unterschied ist, daß vor dem Test geprüft  #
- * # wird, ob für die  BLZ/Konto-Kombination eine IBAN-Regel angewendet      #
- * # werden muß (z.B. bei Spendenkonten etc.). U.U. wird die BLZ und/oder    #
+ * # kto_check_blz(). Der einzige Unterschied ist, daÃŸ vor dem Test geprÃ¼ft  #
+ * # wird, ob fÃ¼r die  BLZ/Konto-Kombination eine IBAN-Regel angewendet      #
+ * # werden muÃŸ (z.B. bei Spendenkonten etc.). U.U. wird die BLZ und/oder    #
  * # Kontonummer ersetzt  und die Berechnung mit den modifizierten Werten    #
- * # gemacht. Die Werte für BLZ und Kontonummer werden nicht zurückgegeben;  #
+ * # gemacht. Die Werte fÃ¼r BLZ und Kontonummer werden nicht zurÃ¼ckgegeben;  #
  * # das kann mittels der Funktion kto_check_blz2() erfolgen.                #
  * #                                                                         #
- * # Die Funktion kto_check_regel_dbg() ist das Gegenstück zu                #
- * # kto_check_blz_dbg(); bei dieser Funktion werden zusätzlich noch einige  #
- * # interne Werte zurückgegeben. Die beiden Variablen blz2 und kto2         #
- * # müssen auf einen Speicherbereich von mindestens 9 bzw. 11 Byte zeigen;  #
+ * # Die Funktion kto_check_regel_dbg() ist das GegenstÃ¼ck zu                #
+ * # kto_check_blz_dbg(); bei dieser Funktion werden zusÃ¤tzlich noch einige  #
+ * # interne Werte zurÃ¼ckgegeben. Die beiden Variablen blz2 und kto2         #
+ * # mÃ¼ssen auf einen Speicherbereich von mindestens 9 bzw. 11 Byte zeigen;  #
  * # in diese Speicherbereiche werden die neue BLZ bzw. Kontonummer          #
  * # geschrieben. Praktischerweise sollten dies lokale Variablen der         #
  * # aufrufenden Funktion sein.                                              #
@@ -758,8 +758,8 @@ DLL_EXPORT int kto_check_pz_dbg(char *pz,char *kto,char *blz,RETVAL *retvals);
  * #    kto2:       benutzte Kontonummer (evl. modifiziert)                  #
  * #    bic:        BIC der benutzten Bank                                   #
  * #    Regel:      benutzte IBAN-Regel                                      #
- * #    retvals:    Struktur, in der die benutzte Prüfziffermethode und die  #
- * #                berechnete Prüfziffer zurückgegeben werden               #
+ * #    retvals:    Struktur, in der die benutzte PrÃ¼fziffermethode und die  #
+ * #                berechnete PrÃ¼fziffer zurÃ¼ckgegeben werden               #
  * #                                                                         #
  * # Copyright (C) 2013 Michael Plugge <m.plugge@hs-mannheim.de>             #
  * ###########################################################################
@@ -769,14 +769,14 @@ DLL_EXPORT int kto_check_regel_dbg(char *blz,char *kto,char *blz2,char *kto2,con
 
 /*
  * ######################################################################
- * # cleanup_kto(): Aufräumarbeiten                                     #
+ * # cleanup_kto(): AufrÃ¤umarbeiten                                     #
  * #                                                                    #
  * # Die Funktion gibt allokierten Speicher frei und setzt die Variable #
- * # cnt_blz auf 0, um anzuzeigen, daß die Library bei Bedarf neu       #
- * # initialisiert werden muß.                                          #
+ * # cnt_blz auf 0, um anzuzeigen, daÃŸ die Library bei Bedarf neu       #
+ * # initialisiert werden muÃŸ.                                          #
  * #                                                                    #
- * # Rückgabewerte: 0: es war nichts zu tun (library wurde nicht init.) #
- * #                1: Aufräumen fertig                                 #
+ * # RÃ¼ckgabewerte: 0: es war nichts zu tun (library wurde nicht init.) #
+ * #                1: AufrÃ¤umen fertig                                 #
  * ######################################################################
  */
 DLL_EXPORT int cleanup_kto(void);
@@ -787,27 +787,27 @@ DLL_EXPORT int cleanup_kto_t(KTO_CHK_CTX *ctx);
  * # generate_lut(): Lookup-Table generieren                            #
  * #                                                                    #
  * # Die Funktion generiert die Datei blz.lut, die alle Bankleitzahlen  #
- * # und die zugehörigen Prüfziffermethoden in komprimierter Form       #
- * # enthält.                                                           #
+ * # und die zugehÃ¶rigen PrÃ¼fziffermethoden in komprimierter Form       #
+ * # enthÃ¤lt.                                                           #
  * #                                                                    #
  * # Parameter: inputname:  Name der Bankleitzahlendatei der Deutschen  #
  * #                        Bundesbank (z.B. blz0303pc.txt)             #
  * #                                                                    #
  * #            outputname: Name der Zieldatei (z.B. blz.lut)           #
  * #                                                                    #
- * #            user_info:  Info-Zeile, die zusätzlich in die LUT-Datei #
+ * #            user_info:  Info-Zeile, die zusÃ¤tzlich in die LUT-Datei #
  * #                        geschrieben wird. Diese Zeile wird von der  #
- * #                        Funktion get_lut_info() in zurückgegeben,   #
+ * #                        Funktion get_lut_info() in zurÃ¼ckgegeben,   #
  * #                        aber ansonsten nicht ausgewertet.           #
  * #                                                                    #
  * #                                                                    #
  * #                                                                    #
- * #           lut_version: Format der LUT-Datei. Mögliche Werte:       #
+ * #           lut_version: Format der LUT-Datei. MÃ¶gliche Werte:       #
  * #                        1: altes Format (1.0)                       #
  * #                        2: altes Format (1.1) mit Infozeile         #
  * #                        3: neues Format (2.0) mit Blocks            #
  * #                                                                    #
- * # Rückgabewerte:                                                     #
+ * # RÃ¼ckgabewerte:                                                     #
  * #    NO_BLZ_FILE          Bankleitzahlendatei nicht gefunden         #
  * #    FILE_WRITE_ERROR     kann Datei nicht schreiben (Schreibschutz?)#
  * #    OK                   Erfolg                                     #
@@ -822,13 +822,13 @@ DLL_EXPORT int generate_lut(char *inputname,char *outputname,char *user_info,int
  * # Die Funktion holt die Infozeile(n) der LUT-Datei in einen          #
  * # statischen Speicherbereich und setzt die Variable info auf diesen  #
  * # Speicher. Diese Funktion wird erst ab Version 1.1 der LUT-Datei    #
- * # unterstützt.                                                       #
+ * # unterstÃ¼tzt.                                                       #
  * #                                                                    #
  * # Parameter:                                                         #
  * #    info:     Die Variable wird auf die Infozeile gesetzt           #
  * #    lut_name: Name der LUT-Datei                                    #
  * #                                                                    #
- * # Rückgabewerte: wie in read_lut():                                  #
+ * # RÃ¼ckgabewerte: wie in read_lut():                                  #
  * #    ERROR_MALLOC       kann keinen Speicher allokieren              #
  * #    NO_LUT_FILE        LUT-Datei nicht gefunden (Pfad falsch?)      #
  * #    FATAL_ERROR        kann die LUT-Datei nicht lesen               #
@@ -842,7 +842,7 @@ DLL_EXPORT int get_lut_info_t(char **info,char *lut_name,KTO_CHK_CTX *ctx);
 /*
  * ######################################################################
  * # get_kto_check_version(): Version und Releasedate der library holen #
- * # Diese Funktion wird erst ab Version 1.1 der library unterstützt.   #
+ * # Diese Funktion wird erst ab Version 1.1 der library unterstÃ¼tzt.   #
  * ######################################################################
  */
 DLL_EXPORT const char *get_kto_check_version(void);
@@ -850,7 +850,7 @@ DLL_EXPORT const char *get_kto_check_version_x(int mode);
 
 /*
  * ######################################################################
- * # kc_free(): Speicher freigeben (für das Perl-Modul)                 #
+ * # kc_free(): Speicher freigeben (fÃ¼r das Perl-Modul)                 #
  * ######################################################################
  */
 DLL_EXPORT void kc_free(char *ptr);
@@ -858,9 +858,9 @@ DLL_EXPORT void kc_free(char *ptr);
 #if DEBUG>0
 /* ###########################################################################
  * # Die Funktion kto_check_test_vars() macht nichts anderes, als die beiden #
- * # übergebenen Variablen txt und i auszugeben und als String zurückzugeben.#
- * # Sie kann für Debugzwecke benutzt werden, wenn Probleme mit Variablen in #
- * # der DLL auftreten; ansonsten ist sie nicht allzu nützlich.              #
+ * # Ã¼bergebenen Variablen txt und i auszugeben und als String zurÃ¼ckzugeben.#
+ * # Sie kann fÃ¼r Debugzwecke benutzt werden, wenn Probleme mit Variablen in #
+ * # der DLL auftreten; ansonsten ist sie nicht allzu nÃ¼tzlich.              #
  * #                                                                         #
  * # Parameter:                                                              #
  * #    txt:        Textvariable                                             #
@@ -873,7 +873,7 @@ DLL_EXPORT char *kto_check_test_vars(char *txt,UINT4 i);
 
 /*
  * ############################################################################
- * # set_verbose_debug(): zusätzliche Debugmeldungen einschalten (bei Bedarf) #
+ * # set_verbose_debug(): zusÃ¤tzliche Debugmeldungen einschalten (bei Bedarf) #
  * ############################################################################
  */
 DLL_EXPORT int set_verbose_debug(int mode);
@@ -881,8 +881,8 @@ DLL_EXPORT int set_verbose_debug(int mode);
 /*
  * ######################################################################
  * # public interface der lut2-Routinen                                 #
- * # Eine nähere Beschreibung findet sich momentan nur im C-Code, sie   #
- * # wird aber später nachgeliefert.                                    #
+ * # Eine nÃ¤here Beschreibung findet sich momentan nur im C-Code, sie   #
+ * # wird aber spÃ¤ter nachgeliefert.                                    #
  * ######################################################################
  */
    /* public interface von lut2 */
@@ -913,7 +913,7 @@ DLL_EXPORT int rebuild_blzfile(char *inputname,char *outputname,UINT4 set);
 DLL_EXPORT int dump_lutfile(char *outputname,UINT4 *required);
 DLL_EXPORT int dump_lutfile_p(char *outputname,UINT4 felder);
 
-   /* Universalfunktion, die Pointer auf die internen Variablen zurückliefert (von Haupt- und Nebenstellen) */
+   /* Universalfunktion, die Pointer auf die internen Variablen zurÃ¼ckliefert (von Haupt- und Nebenstellen) */
 DLL_EXPORT int lut_multiple(char *b,int *cnt,int **p_blz,char ***p_name,char ***p_name_kurz,int **p_plz,char ***p_ort,
       int **p_pan,char ***p_bic,int *p_pz,int **p_nr,char **p_aenderung,char **p_loeschung,int **p_nachfolge_blz,
       int *id,int *cnt_all,int **start_idx);
@@ -922,7 +922,7 @@ DLL_EXPORT int lut_multiple_i(int b,int *cnt,int **p_blz,char ***p_name,char ***
       char **p_aenderung,char **p_loeschung,int **p_nachfolge_blz,int *id,
       int *cnt_all,int **start_idx);
 
-   /* Funktionen, um einzelne Felder zu bestimmen (Rückgabe direkt) */
+   /* Funktionen, um einzelne Felder zu bestimmen (RÃ¼ckgabe direkt) */
 DLL_EXPORT int lut_blz(char *b,int zweigstelle);
 DLL_EXPORT int lut_filialen(char *b,int *retval);
 DLL_EXPORT int lut_filialen_i(int b,int *retval);
@@ -968,14 +968,14 @@ DLL_EXPORT int lut_iban_regel_i(int b,int zweigstelle,int *retval);
 #define LUT_SUCHE_PZ          8
 #define LUT_SUCHE_REGEL       9
 
-   /* Defaultwert für sort/uniq bei Suchfunktionen (=> nur eine Zweigstelle
-    * zurückgeben) (betrifft nur PHP, Perl und Ruby, bei denen der Parameter
+   /* Defaultwert fÃ¼r sort/uniq bei Suchfunktionen (=> nur eine Zweigstelle
+    * zurÃ¼ckgeben) (betrifft nur PHP, Perl und Ruby, bei denen der Parameter
     * weggelassen werden kann).
     *
-    * Für Perl gibt es eine eigene Definition, da sort und uniq bis einschließlich
-    * Version 4.1 nicht unterstützt wurden. Mit der Standarddefinition von
-    * UNIQ_DEFAULT (2) würde sich eine Änderung im Verhalten ergeben,
-    * die so nicht erwünscht ist.
+    * FÃ¼r Perl gibt es eine eigene Definition, da sort und uniq bis einschlieÃŸlich
+    * Version 4.1 nicht unterstÃ¼tzt wurden. Mit der Standarddefinition von
+    * UNIQ_DEFAULT (2) wÃ¼rde sich eine Ã„nderung im Verhalten ergeben,
+    * die so nicht erwÃ¼nscht ist.
     */
 #define UNIQ_DEFAULT 2
 #define UNIQ_DEFAULT_PERL 0
@@ -1001,7 +1001,7 @@ DLL_EXPORT int lut_suche(int such_id,char *such_cmd,UINT4 *such_cnt,UINT4 **fili
 DLL_EXPORT int lut_blocks(int mode,char **lut_filename,char **lut_blocks_ok,char **lut_blocks_fehler);
 
    /* (Benutzerdefinierte) Default-Werte in der LUT-Datei lesen und schreiben */
-#define DEFAULT_CNT 50                 /* Anzahl Einträge (fest) */
+#define DEFAULT_CNT 50                 /* Anzahl EintrÃ¤ge (fest) */
 
 DLL_EXPORT int kto_check_init_default(char *lut_name,int block_id);
 DLL_EXPORT int kto_check_default_keys(char ***keys,int *cnt);
@@ -1010,7 +1010,7 @@ DLL_EXPORT int kto_check_set_default_bin(char *key,char *val,int size);
 DLL_EXPORT int kto_check_get_default(char *key,char **val,int *size);
 DLL_EXPORT int kto_check_write_default(char *lutfile,int block_id);
 
-   /* Aufräumarbeiten */
+   /* AufrÃ¤umarbeiten */
 DLL_EXPORT int lut_cleanup(void);
 
    /* IBAN-Sachen */
@@ -1023,7 +1023,7 @@ DLL_EXPORT char *iban_bic_gen1(char *blz,char *kto,const char **bicp,int *retval
 DLL_EXPORT int ipi_gen(char *zweck,char *dst,char *papier);
 DLL_EXPORT int ipi_check(char *zweck);
 
-   /* Rückgabewerte in Klartext umwandeln */
+   /* RÃ¼ckgabewerte in Klartext umwandeln */
 DLL_EXPORT int kto_check_encoding(int mode);
 DLL_EXPORT int keep_raw_data(int mode);
 DLL_EXPORT const char *kto_check_encoding_str(int mode);
@@ -1034,7 +1034,7 @@ DLL_EXPORT const char *kto_check_retval2html(int retval);
 DLL_EXPORT const char *kto_check_retval2utf8(int retval);
 DLL_EXPORT const char *kto_check_retval2dos(int retval);
 
-   /* Prüfziffer (numerisch) in String umwandeln */
+   /* PrÃ¼fziffer (numerisch) in String umwandeln */
 const DLL_EXPORT char *pz2str(int pz,int *ret);
 
 /*
@@ -1045,7 +1045,7 @@ const DLL_EXPORT char *pz2str(int pz,int *ret);
 
 #ifndef KONTO_CHECK_VARS
 #if DEBUG>0
-   /* "aktuelles" Datum für die Testumgebung (um einen Datumswechsel zu simulieren) */
+   /* "aktuelles" Datum fÃ¼r die Testumgebung (um einen Datumswechsel zu simulieren) */
 DLL_EXPORT_V extern UINT4 current_date;
 #endif
 
@@ -1056,17 +1056,17 @@ DLL_EXPORT_V extern char *lut_blocks_missing;
  * ######################################################################
  * # die folgenden globalen Variablen waren in Version 1 und 2 von      #
  * # konto_check definiert; ab Version 3 werden sie nicht mehr unter-   #
- * # stützt. Zur Vermeidung von Linker-Fehlermeldungen können jedoch    #
- * # Dummyversionen eingebunden werden (ohne Funktionalität).           #
+ * # stÃ¼tzt. Zur Vermeidung von Linker-Fehlermeldungen kÃ¶nnen jedoch    #
+ * # Dummyversionen eingebunden werden (ohne FunktionalitÃ¤t).           #
  * ######################################################################
  */
 
 #if INCLUDE_DUMMY_GLOBALS>0
 DLL_EXPORT_V extern const char *kto_check_msg;  /* globaler char-ptr mit Klartext-Ergebnis des Tests */
-DLL_EXPORT_V extern const char pz_str[];        /* benutzte Prüfziffer-Methode und -Untermethode (als String) */
-DLL_EXPORT_V extern int pz_methode;             /* pz_methode: benutzte Prüfziffer-Methode (numerisch) */
+DLL_EXPORT_V extern const char pz_str[];        /* benutzte PrÃ¼fziffer-Methode und -Untermethode (als String) */
+DLL_EXPORT_V extern int pz_methode;             /* pz_methode: benutzte PrÃ¼fziffer-Methode (numerisch) */
 #if DEBUG>0
-DLL_EXPORT_V extern int pz;                     /* Prüfziffer (bei DEBUG als globale Variable für Testzwecke) */
+DLL_EXPORT_V extern int pz;                     /* PrÃ¼fziffer (bei DEBUG als globale Variable fÃ¼r Testzwecke) */
 #endif   /* DEBUG */
 #endif   /* INCLUDE_DUMMY_GLOBALS */
 #endif   /* KONTO_CHECK_VARS */

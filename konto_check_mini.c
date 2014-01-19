@@ -16,55 +16,55 @@ void print_help(void);
 
 enum {TEST,GENERATE_LUT,IBAN2BIC,GENERATE_ZWECK};
 
-   /* globale Variablen (aus Faulheitsgründen) */
+   /* globale Variablen (aus FaulheitsgrÃ¼nden) */
 int ret,verbose;
 
 void print_help(void)
 {
    printf("Aufruf: konto_check_mini [optionen/argumente]\n"
          "\n"
-         "Das Programm dient zum Test von BLZ/Kontonummern, Prüfziffer/Kontonummern,\n"
-         "IBAN oder Strukturieretem Verwendungszweck. Außerdem können einige Infos zu\n"
+         "Das Programm dient zum Test von BLZ/Kontonummern, PrÃ¼fziffer/Kontonummern,\n"
+         "IBAN oder Strukturieretem Verwendungszweck. AuÃŸerdem kÃ¶nnen einige Infos zu\n"
          "Banken ausgegeben werden, sowie eine LUT-Datei generiert werden.\n"
          "\n"
-         "Der Default-Modus ist Test; in diesem Modus werden für die Übergabeparameter\n"
-         "(abhängig von der Länge des Arguments) die folgenden Aktionen gemacht:\n"
+         "Der Default-Modus ist Test; in diesem Modus werden fÃ¼r die Ãœbergabeparameter\n"
+         "(abhÃ¤ngig von der LÃ¤nge des Arguments) die folgenden Aktionen gemacht:\n"
          "\n"
          "   8 Byte            BLZ           Bank-Infos ausgeben\n"
-         "   11...12 Byte      methode:kto   Prüfziffermethode/Konto testen\n"
+         "   11...12 Byte      methode:kto   PrÃ¼fziffermethode/Konto testen\n"
          "   13...19 Byte      kto@blz       Bankverbindung testen\n"
          "   13...19 Byte      blz+kto       Bankverbindung testen\n"
          "   20 Byte           Zweck         Strukturierten Verwendungszweck testen\n"
          "  >20 Byte           IBAN          IBAN testen (EDV- oder Papierform)\n"
          "\n"
-         "Mit der Option -z können Strukturierte Verwendungszwecke generiert werden;\n"
+         "Mit der Option -z kÃ¶nnen Strukturierte Verwendungszwecke generiert werden;\n"
          "bei der Option -b wird aus einer IBAN BIC, BLZ und Kontonummer extrahiert \n"
-         "(nur für deutsche Konten).\n"
+         "(nur fÃ¼r deutsche Konten).\n"
          "\n"
          "Falls als *erste* Option -m angegeben wird, wird die Bibliothek nicht initialisiert;\n"
-         "dieser Modus dient dazu, nur Prüfziffer/Konto-Kombinationen in der Form pz:kto\n"
-         "zu prüfen. Er wird sofort abgebrochen, falls eine Option außer -v oder \n"
+         "dieser Modus dient dazu, nur PrÃ¼fziffer/Konto-Kombinationen in der Form pz:kto\n"
+         "zu prÃ¼fen. Er wird sofort abgebrochen, falls eine Option auÃŸer -v oder \n"
          "eine BLZ/Kto-Kombination der Form blz+kto oder kto@blz gefunden wird.\n"
          "\n"
-         "Folgende Optionen sind möglich:\n"
-         "   -1 Set 1 auswählen (bei Option -l)\n"
-         "   -2 Set 2 auswählen (bei Option -l)\n"
+         "Folgende Optionen sind mÃ¶glich:\n"
+         "   -1 Set 1 auswÃ¤hlen (bei Option -l)\n"
+         "   -2 Set 2 auswÃ¤hlen (bei Option -l)\n"
          "   -b Modus: IBAN -> BIC\n"
-         "   -d [12] ausführliches Debug einschalten (für Testzwecke)\n"
-         "   -g LUT-Datei generieren (s.u.; muß als erste Option stehen)\n"
+         "   -d [12] ausfÃ¼hrliches Debug einschalten (fÃ¼r Testzwecke)\n"
+         "   -g LUT-Datei generieren (s.u.; muÃŸ als erste Option stehen)\n"
          "   -i ID der LUT-Datei ausgeben\n"
-         "   -I Infos über die LUT-Datei ausgeben\n"
-         "   -l LUT-Name für Initialisierung\n"
-         "   -m Methoden-Test: nur Prüfziffermethoden, ohne LUT-Initialisierung\n"
+         "   -I Infos Ã¼ber die LUT-Datei ausgeben\n"
+         "   -l LUT-Name fÃ¼r Initialisierung\n"
+         "   -m Methoden-Test: nur PrÃ¼fziffermethoden, ohne LUT-Initialisierung\n"
          "   -t Modus: Test\n"
          "   -v verbose, 1: Zahl, 2: kurz, 4: lang, 8: HTML, 16: UTF-8\n" //, 32: CSV-Darstellung
          "   -z Modus: Strukturierten Verwendungszweck generieren\n"
          "   -?, -h kurze Hilfe anzeigen\n"
          "\n"
-         "Unteroptionen für -g (LUT-Datei generieren):\n"
-         "      -1 Set 1 auswählen (bei Option -l)\n"
-         "      -2 Set 2 auswählen (bei Option -l)\n"
-         "      -G Gültigkeitsdatum angeben (Format JJJJMMTT-JJJJMMTT)\n"
+         "Unteroptionen fÃ¼r -g (LUT-Datei generieren):\n"
+         "      -1 Set 1 auswÃ¤hlen (bei Option -l)\n"
+         "      -2 Set 2 auswÃ¤hlen (bei Option -l)\n"
+         "      -G GÃ¼ltigkeitsdatum angeben (Format JJJJMMTT-JJJJMMTT)\n"
          "      -i User-Infozeile der LUT-Datei\n"
          "      -s Anzahl Slots in der LUT-Datei\n");
    exit(0);
@@ -115,7 +115,7 @@ void print_status(char *txt)
                   else if(++i<argc && *argv[i]!='-') \
                      optarg=argv[i]; \
                   else{ \
-                     fprintf(stderr,"Die Option -%c benötigt ein Argument, aber es wurde keins angegeben; Abbruch\n",*(argv[--i]+1)); \
+                     fprintf(stderr,"Die Option -%c benÃ¶tigt ein Argument, aber es wurde keins angegeben; Abbruch\n",*(argv[--i]+1)); \
                      return 2; \
                   }}while(0)
 
@@ -177,13 +177,13 @@ int main(int argc,char **argv)
                   if(*ptr++!='-')ok=0;
                   for(j=0;j<8;j++)if(!isdigit(*ptr++))ok=0;
                   if(!ok || *ptr){
-                     printf("Fehler: ungültiges Format für den Gültigkeitszeitraum\nSollformat: JJJJMMTT-JJJJMMTT (angegeben: %s)\n",gueltigkeit);
+                     printf("Fehler: ungÃ¼ltiges Format fÃ¼r den GÃ¼ltigkeitszeitraum\nSollformat: JJJJMMTT-JJJJMMTT (angegeben: %s)\n",gueltigkeit);
                      exit(1);
                   }
                   g1=atoi(gueltigkeit);
                   g2=atoi(gueltigkeit+9);
                   if(g1>g2){
-                     printf("Fehler: Das Anfangsdatum für die Gültigkeit liegt nach dem Enddatum\n");
+                     printf("Fehler: Das Anfangsdatum fÃ¼r die GÃ¼ltigkeit liegt nach dem Enddatum\n");
                      exit(1);
                   }
                   break;
@@ -210,7 +210,7 @@ int main(int argc,char **argv)
                   break;
 
                default:
-                  fprintf(stderr,"Ungültige Option %s (ignoriert)\n",argv[i]);
+                  fprintf(stderr,"UngÃ¼ltige Option %s (ignoriert)\n",argv[i]);
                   break;
             }
          }
@@ -226,7 +226,7 @@ int main(int argc,char **argv)
 
    if(*argv[1]=='-' && *(argv[1]+1)=='r'){   /* Sonderfall -r: rebuild BLZ-File */
       if(argc<4){
-         fprintf(stderr,"konto_check_mini: Bei der Option -r müssen noch Eingabe- und Ausgabedateiname angegeben werden");
+         fprintf(stderr,"konto_check_mini: Bei der Option -r mÃ¼ssen noch Eingabe- und Ausgabedateiname angegeben werden");
          exit(1);
       }
       inputname=argv[2];
@@ -236,9 +236,9 @@ int main(int argc,char **argv)
       return 0;
    }
 
-   if(*argv[1]=='-' && *(argv[1]+1)=='m'){   /* Sonderbehandlung für Methodentest (-m, ohne Initialisierung) */
+   if(*argv[1]=='-' && *(argv[1]+1)=='m'){   /* Sonderbehandlung fÃ¼r Methodentest (-m, ohne Initialisierung) */
       for(i=2;i<argc;i++){
-         if(*argv[i]=='-'){ /* bei Optionen (außer -v) wird dieser Test abgebrochen */
+         if(*argv[i]=='-'){ /* bei Optionen (auÃŸer -v) wird dieser Test abgebrochen */
             if(*(argv[i]+1)=='v'){
                GET_OPTARG;
                verbose=atoi(optarg);
@@ -253,9 +253,9 @@ int main(int argc,char **argv)
             for(ptr=argv[i];isalnum(*ptr);ptr++);
             delimiter=*ptr;
             *ptr++=0;
-            if(len>13 || delimiter!=':'){   /* keine Prüfziffermethode */
+            if(len>13 || delimiter!=':'){   /* keine PrÃ¼fziffermethode */
                i1=i;
-               *--ptr=delimiter; /* alten delimiter zurückschreiben für nächsten Test */
+               *--ptr=delimiter; /* alten delimiter zurÃ¼ckschreiben fÃ¼r nÃ¤chsten Test */
                break;
             }
             ret=kto_check_pz(argv[i],ptr,NULL);
@@ -267,8 +267,8 @@ int main(int argc,char **argv)
       i1=i;
    }
 
-      /* Normale Fälle (außer generate_lut()) behandeln
-       * zunächst komplett mit Default-Werten initialisieren 
+      /* Normale FÃ¤lle (auÃŸer generate_lut()) behandeln
+       * zunÃ¤chst komplett mit Default-Werten initialisieren 
        */
    if((ret=lut_init(NULL,DEFAULT_LUT_LEVEL,0))<OK && ret!=LUT2_PARTIAL_OK){
       print_status_nl("lut_init");
@@ -296,7 +296,7 @@ int main(int argc,char **argv)
                break;
 
             case 'g':
-               fprintf(stderr,"Die Option -g muß an erster Stelle stehen\n");
+               fprintf(stderr,"Die Option -g muÃŸ an erster Stelle stehen\n");
                exit(3);
 
             case 'i':
@@ -311,7 +311,7 @@ int main(int argc,char **argv)
                GET_OPTARG;
                ret=lut_info(optarg,&ptr,&ptr1,&j,&k);
                print_status_nl("lut_info");
-               printf("%sPrimärer Datensatz:   %s\nSekundärer Datensatz: %s\n%s",
+               printf("%sPrimÃ¤rer Datensatz:   %s\nSekundÃ¤rer Datensatz: %s\n%s",
                      trennzeile,kto_check_retval2txt(j),kto_check_retval2txt(k),trennzeile);
                if(ptr){
                   printf("%s%s",ptr,trennzeile);
@@ -355,7 +355,7 @@ int main(int argc,char **argv)
                break;
 
             default:
-               fprintf(stderr,"Ungültige Option %s (ignoriert)\n",argv[i]);
+               fprintf(stderr,"UngÃ¼ltige Option %s (ignoriert)\n",argv[i]);
                break;
          }
       }
@@ -381,7 +381,7 @@ int main(int argc,char **argv)
                   ret=lut_multiple(blz=argv[i],NULL,NULL,&name,&name_kurz,&plz,&ort,NULL,&bic,
                         NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
-                     /* im Fehlerfall wird u.U. für die Felder NULL zurückgegeben; das muß
+                     /* im Fehlerfall wird u.U. fÃ¼r die Felder NULL zurÃ¼ckgegeben; das muÃŸ
                       * auf ein Dummy-Array umgelenkt werden, damit das *var in
                       * printf() keinen Lesezugriff auf einen NULL-Pointer macht
                       */
@@ -404,7 +404,7 @@ int main(int argc,char **argv)
                   printf("Test Zweck %s",argv[i]);
                   print_status_nl("");
                }
-               else if(len>20){  /* etwas willkürlich (Papierform wird nur für IBAN akzeptiert */
+               else if(len>20){  /* etwas willkÃ¼rlich (Papierform wird nur fÃ¼r IBAN akzeptiert */
                   ret=iban_check(argv[i],&ret2);
                   printf("Test IBAN %s",argv[i]);
                   print_status("");
