@@ -107,7 +107,8 @@ install: lib #you must be root to do this
 	ldconfig
 
 clean:
-	- rm -f *.bck *.o *.obj testkonten.out
+	- rm -f *.bck *.o *.obj testkonten.out konto_check konto_check_mini
+
 distclean:
 	- rm -f konto_check konto_check.exe konto_check_dll.exe konto_check.dll libkonto_check.so.* blz.lut blz.lut2 blz.lut2f
 
