@@ -58,7 +58,8 @@ konto_check: konto_check.c main.c konto_check.h
 	$(CC) $(CFLAGS_OPT) $(LDFLAGS) konto_check.c main.c -o konto_check
 
 dtaus_test: dtaus_test.o konto_check.o
-konto_check_mini: konto_check.o konto_check.h konto_check_mini.o
+konto_check_mini: konto_check
+	$(CC) $(CFLAGS_OPT) $(LDFLAGS) konto_check.c konto_check_mini.c -o konto_check_mini
 
 lut: lut2 lut2f
 
