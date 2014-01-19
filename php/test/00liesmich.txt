@@ -1,0 +1,46 @@
+Dieses Verzeichnis enthält einige Testroutinen, die aus der Perl-Version
+adaptiert wurden. Die Programme enthalten alle eine Schleife um den eigentlichen
+Testblock, damit sie länger laufen; so kann man dann den Prozess mit top ansehen
+um zu kontrollieren, ob Speicherlecks auftreten. Außerdem werden in einigen
+Testdateien die Funktionen malloc_cnt() und malloc_report() benutzt;  diese sind
+aktuell noch (Version 3.0, 24. Oktober 2009) im Quellcode enthalten, werden aber
+bei einer der nächsten Versionen entfernt. Sie sind standardmäßig nicht
+eingeschaltet; configure muß vor dem Kompilieren noch mit der Option
+
+   ./configure --enable-check_malloc
+
+aufgerufen werden.
+
+
+Die Programme sind zur Verwendung mit der PHP-Shell konzipiert; auf einem
+Webserver werden sie wahrscheinlich wegen Überschreitung der maximalen
+Ausführungszeit vorzeitig beendet.
+
+
+Das Programm new_pz.t ist ein Härtetest für die Speicherverwaltung; es macht vor
+jedem Test eine inkrementelle Initialisierung (mit den Leveln 1 bis 9); nach 63
+Tests wird der Speicher wieder freigegeben. Bei der inkrementellen
+Initialisierung trat in Version 2.98/2.99 noch ein Speicherleck auf; in dieser
+Version ist es behoben. Das Programm nutzt noch die Funktionen malloc_cnt() und
+malloc_report(). Falls nach einem Aufruf von lut_free() noch nicht alle
+Speicherblocks freigegeben sind, wird dabei gleich ein Fehler gemeldet. Mit der
+neuen Version läuft das Testprogramm jedoch problemlos, es treten keine
+Speicherlecks auf.
+
+Das Programm wurde einige Stunden laufen gelassen; dabei änderte sich der
+Speicherbedarf nicht. Es wurden dabei einige Millionen (inkrementelle)
+Initialisierungen sowie einige hunderttausend Aufrufe von lut_free() gemacht,
+ohne daß Probleme auftraten; alle allokierten Speicherblocks wurden wieder
+freigegeben.
+
+
+Das Programm new_blz.t macht einen ähnlichen Test; dabei werden nur statt
+Prüfziffern Bankleitzahlen verwendet. Vor jedem Test wird die Initialisierung um
+eine Stufe weiter gemacht (inkrementell); nach jeweils neun Initialisierungen
+wird der Speicher wieder freigegeben und es wird nach Speicherlecks gefahndet.
+
+Die Programme lut.t, ipi.t und iban.t testen die entsprechenden Funktionen; sie
+sind nicht direkt als Härtetest konzipiert.
+
+Das Programm konto_test.php ist das Testprogramm der Webseite; in ihm sind
+exemplarisch einige Aufrufe der PHP-Bibliothek gezeigt.

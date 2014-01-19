@@ -1,0 +1,8 @@
+<IfModule mod_php5.c>
+   php_value konto_check.default_lut_file /etc/blz.lut
+   php_value konto_check.request_auto_init 0
+   php_value konto_check.request_init_default_level 0
+   php_value konto_check.init_default_level 5
+   php_value konto_check.request_auto_cleanup 1
+   php_value konto_check.check_malloc 0
+</IfModule>

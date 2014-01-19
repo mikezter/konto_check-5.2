@@ -1,0 +1,12 @@
+# Vorbereitung: nur einmal nötig
+# Der Zielpfad der .ini-Datei hängt von der Distribution ab; unter Ubuntu ist es z.B. /etc/php5/conf.d/
+cp konto_check.ini /etc/php.d/   # ini-Datei kopieren
+phpize                           # configure etc. erzeugen
+
+# PHP-Modul kompilieren, evl. mit Optionen:
+./configure [--enable-check_malloc] [--enable-beschreibung] [--enable-bav]
+make
+
+# PHP-Modul installieren (als root):
+make install                     # nach jedem Kompilieren
+

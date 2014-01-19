@@ -1,0 +1,36 @@
+* { color:#4e2c07; }
+
+a img { border:none; }
+
+.chk { font-weight:bold; color:#f18a01; background-color:lightgreen; padding-left:30px; padding-right:30px; padding-top:8px; padding-bottom:8px;}
+.nchk { background-color:#efefef; padding-left:30px; padding-right:30px; padding-top:8px; padding-bottom:8px; }
+.braun { color:#4e2c07; }
+
+.orange { color:#f18a01; }
+
+a:link { 
+   font-weight:bold;
+   color:#f18a01;
+   text-decoration:none;
+   border-style:none;
+}
+
+a:visited {
+   font-weight:bold;
+   color:#f18a01;
+   text-decoration:none;
+}
+
+a:hover {
+   font-weight:bold;
+   color:#7ac3af;
+   text-decoration:none;
+}
+
+a:active {
+   font-weight:bold;
+   color:lime;
+   text-decoration:underline;
+}
+
+
