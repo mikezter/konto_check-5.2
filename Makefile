@@ -49,8 +49,11 @@ LIB_VERSION = $(LIB_MAJOR_VERSION).$(LIB_MINOR_VERSION).$(LIB_PATCHLEVEL)
 
 all: konto_check konto_check_mini lut test
 
-test: konto_check
+test: konto_check testkonten
 	./konto_check testkonten.txt testkonten.out
+
+testkonten:
+	touch testkonten.txt
 
 konto_check: konto_check.c main.c konto_check.h
 	$(CC) $(CFLAGS_OPT) $(LDFLAGS) konto_check.c main.c -o konto_check
@@ -104,7 +107,7 @@ install: lib #you must be root to do this
 	ldconfig
 
 clean:
-	- rm -f *.bck *.o *.obj
+	- rm -f *.bck *.o *.obj testkonten.out
 distclean:
 	- rm -f konto_check konto_check.exe konto_check_dll.exe konto_check.dll libkonto_check.so.* blz.lut blz.lut2 blz.lut2f
 
