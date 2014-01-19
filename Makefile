@@ -47,7 +47,7 @@ LIB_MINOR_VERSION = 5
 LIB_PATCHLEVEL    = 2
 LIB_VERSION = $(LIB_MAJOR_VERSION).$(LIB_MINOR_VERSION).$(LIB_PATCHLEVEL)
 
-all: konto_check konto_check_mini lut test dtaus_test
+all: konto_check konto_check_mini lut test
 
 test: konto_check
 	./konto_check testkonten.txt testkonten.out
@@ -55,7 +55,6 @@ test: konto_check
 konto_check: konto_check.c main.c konto_check.h
 	$(CC) $(CFLAGS_OPT) $(LDFLAGS) konto_check.c main.c -o konto_check
 
-dtaus_test: dtaus_test.o konto_check.o
 konto_check_mini: konto_check
 	$(CC) $(CFLAGS_OPT) $(LDFLAGS) konto_check.c konto_check_mini.c -o konto_check_mini
 
