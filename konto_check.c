@@ -1,6 +1,3 @@
-/* C prolog +§§§1
-   vim:cindent:ft=c:foldmethod=marker:fmr=+§§§,-§§§
-   Copyright-Notitz +§§§2 */
 /*
  * ##########################################################################
  * #  Dies ist konto_check, ein Programm zum Testen der Prüfziffern         #
