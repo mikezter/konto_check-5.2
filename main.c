@@ -270,7 +270,7 @@ int main(int argc,char **argv)
    int *p_blz,*p_nachfolge_blz,p_pz,*p_nr,*p_plz,*p_pan,id,id1,id2,cnt_all,*start_idx;
    char *buffer,*dbuffer,*sptr,*dptr,*eptr,*user_info,*cmd_help,blz_buffer[12],ipi_buffer[24],ipi_papier[32];
    const char *ptrc;
-	int i,j,ret,cnt,verbose,zeilen,konten,out_cnt,separator,lf_error,action,incremental,*iptr,felder;
+   int i,j,ret,cnt,verbose,zeilen,konten,out_cnt,separator,lf_error,action,incremental,*iptr,felder;
    UINT4 gen_lut,set,blocks[256];
    double t1,t2,lesen1,lesen2,schreiben,schreiben1,schreiben2;
    int in,out;
@@ -318,7 +318,9 @@ int main(int argc,char **argv)
 "   -Zkompression  Kompressionsbibliothek (0 keine, 1 zlib, 2 bzlib2)\n"
 "   -h             (diese) Hilfe anzeigen\n"
 "   -?             dto.";
+
 #else
+
    cmd_help="in diesem Modus können auch Befehle (als Simulation realer Änderungen)\n"
 "eingegeben werden. Momentan unterstützte Befehle (die Auswahl kann sich\n"
 "ändern, sie fangen allerdings alle mit - an):\n"
@@ -355,6 +357,7 @@ int main(int argc,char **argv)
 "   -h             (diese) Hilfe anzeigen\n"
 "   -?             dto.";
 #endif
+
    ZEIT(t1);
    buffer=dbuffer=NULL;
    separator=':';
@@ -476,7 +479,7 @@ int main(int argc,char **argv)
                else
                   verbose|=1;
                break;
-				case 'V':
+            case 'V':
                if((ret=get_lut_info(&ptr,lutname))!=OK){
                   fprintf(stderr,"%s\n",kto_check_retval2txt(ret));
                   return 1;
@@ -1060,7 +1063,7 @@ if(!inputname)inputname="blz_in.txt";
    if(verbose)fprintf(stderr,"%d Byte gelesen aus %s\n",cnt,inputname);
    dbuffer=malloc(OUTPUT_BUFSIZE);
 
-		 /******************** schneller Modus ********************/
+   /******************** schneller Modus ********************/
    if(action==FAST)for(eptr=buffer+cnt,sptr=buffer,dptr=dbuffer,out_cnt=zeilen=konten=0;sptr<eptr;){
       ptr1=sptr;  /* Startposition merken */
       if(dptr>dbuffer+OUTPUT_BUFSIZE-2000){
@@ -1791,8 +1794,8 @@ if(!inputname)inputname="blz_in.txt";
       }
    }
 
-		 /******************** langsamer Modus ********************/
-	else for(eptr=buffer+cnt,sptr=buffer,dptr=dbuffer,out_cnt=zeilen=konten=0;sptr<eptr;){
+   /******************** langsamer Modus ********************/
+   else for(eptr=buffer+cnt,sptr=buffer,dptr=dbuffer,out_cnt=zeilen=konten=0;sptr<eptr;){
       if(dptr>dbuffer+OUTPUT_BUFSIZE-2000){
          ZEIT(schreiben1);
          cnt=write(out,dbuffer,dptr-dbuffer);
