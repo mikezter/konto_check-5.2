@@ -1,6 +1,14 @@
 KontoCheck
 ===========
 
+This repository aims to stay close to Michael Plugge's ongoing work on the
+[Konto_check library](http://kontocheck.sourceforge.net/), while providing
+some defaults for common use cases. Building the library is intended to work
+out of the box on Linux and MacOS X.
+
+Synced with [SourceForge repository](http://sourceforge.net/projects/kontocheck/)
+on 2014-01-19
+
 make targets
 -------------
 
