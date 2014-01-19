@@ -54,11 +54,14 @@ test: konto_check testkonten
 testkonten:
 	touch testkonten.txt
 
-konto_check: konto_check.c main.c konto_check.h
-	$(CC) $(CFLAGS) $(LDFLAGS) konto_check.c main.c -o konto_check
+konto_check.o: konto_check.c
+	$(CC) $(CFLAGS) -c konto_check.c -o konto_check.o
 
-konto_check_mini: konto_check
-	$(CC) $(CFLAGS) $(LDFLAGS) konto_check.c konto_check_mini.c -o konto_check_mini
+konto_check: konto_check.o main.c
+	$(CC) $(CFLAGS) $(LDFLAGS) konto_check.o main.c -o konto_check
+
+konto_check_mini: konto_check.o konto_check_mini.c
+	$(CC) $(CFLAGS) $(LDFLAGS) konto_check.o konto_check_mini.c -o konto_check_mini
 
 lut: lut2 lut2f
 
