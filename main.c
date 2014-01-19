@@ -598,7 +598,7 @@ int main(int argc,char **argv)
          set=atoi(extra_opt);
       else
          set=0;
-      if(set<0 || set>2)set=0;
+      if(set>2)set=0;
       if((ret=kto_check_init_p(inputname,9,set,0))!=OK && ret!=LUT2_PARTIAL_OK && ret!=LUT1_SET_LOADED){
          fprintf(stderr,"%s\n",kto_check_retval2txt(ret));
          return 1;
@@ -1814,7 +1814,9 @@ if(!inputname)inputname="blz_in.txt";
          continue;
       }
 
-		for(ptr2=ptr1+1;ISXDIGIT(*ptr2);ptr2++);    /* BLZ/Prüfziffer gefunden */
+      for(ptr2=ptr1+1;ISXDIGIT(*ptr2);ptr2++)
+        ;    /* BLZ/Prüfziffer gefunden */
+
       *ptr2++=0;
       while(!ISDIGIT(*ptr2) && *ptr2!='\n')ptr2++; /* Kontonummer suchen */
       if(*ptr2=='\n'){
