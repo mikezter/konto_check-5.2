@@ -29,9 +29,8 @@ LD_LZMA =
 endif
 
 DEBUG = -DDEBUG=1 -g
-CFLAGS = -Wall $(C_BZ2) $(C_LZO) $(C_LZMA)
+CFLAGS = -O3 -funroll-loops -Wall $(C_BZ2) $(C_LZO) $(C_LZMA)
 LDFLAGS = -lz $(LD_BZ2) $(LD_LZMA)
-CFLAGS_OPT = $(CFLAGS) -O3 -funroll-loops
 
 BLZ_LEVEL   = -g37
 BLZ_LEVELF  = -g39f
@@ -56,10 +55,10 @@ testkonten:
 	touch testkonten.txt
 
 konto_check: konto_check.c main.c konto_check.h
-	$(CC) $(CFLAGS_OPT) $(LDFLAGS) konto_check.c main.c -o konto_check
+	$(CC) $(CFLAGS) $(LDFLAGS) konto_check.c main.c -o konto_check
 
 konto_check_mini: konto_check
-	$(CC) $(CFLAGS_OPT) $(LDFLAGS) konto_check.c konto_check_mini.c -o konto_check_mini
+	$(CC) $(CFLAGS) $(LDFLAGS) konto_check.c konto_check_mini.c -o konto_check_mini
 
 lut: lut2 lut2f
 
@@ -96,7 +95,7 @@ blz.lut2fx: konto_check
 
 lib: libkonto_check.so.$(LIB_VERSION)
 libkonto_check.so.$(LIB_VERSION): konto_check.c konto_check.h
-	gcc -fPIC -c $(CFLAGS_OPT) konto_check.c
+	gcc -fPIC -c $(CFLAGS) konto_check.c
 	gcc -shared -Wl,-soname,libkonto_check.so.$(LIB_VERSION) -o libkonto_check.so.$(LIB_VERSION) konto_check.o -lc -s
 
 install: lib #you must be root to do this
