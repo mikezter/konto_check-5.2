@@ -1,6 +1,3 @@
-/* vim: ft=c:set si:set fileencoding=iso-8859-1
- */
-
 /*
  * ##########################################################################
  * #  Dies ist konto_check, ein Programm zum Testen der Prüfziffern         #
