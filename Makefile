@@ -8,10 +8,10 @@ LZMA  = 0
 
 ifeq ($(BZIP2),1)
 C_BZ2 = -DUSE_BZIP2=1
-LD_BZ2 = -lbz2 
+LD_BZ2 = -lbz2
 else
 C_BZ2 =
-LD_BZ2 = 
+LD_BZ2 =
 endif
 
 ifeq ($(LZO),1)
@@ -25,7 +25,7 @@ C_LZMA = -DUSE_LZMA=1
 LD_LZMA = -llzma
 else
 C_LZMA =
-LD_LZMA = 
+LD_LZMA =
 endif
 
 DEBUG = -DDEBUG=1 -g
