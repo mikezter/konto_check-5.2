@@ -1,0 +1,1486 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADD_ASSOC_STRING	php/konto_check.c	/^#define ADD_ASSOC_STRING(/;"	d	file:
+AWK_ADD_MICROTIME	konto_check.h	/^#define AWK_ADD_MICROTIME /;"	d
+AWK_FILES	awk/makefile	/^AWK_FILES = awk\/00readme.txt awk\/konto_check_awk.c awk\/makefile awk\/mini.awk awk\/mini2.awk awk\/testkonten.txt awk\/*diff$/;"	m
+Abfrage von Bankdaten aus der BLZ	latex/00liesmich.tex	/^\\subsection{Abfrage von Bankdaten (aus der BLZ)}$/;"	b
+Aktualisierung der Bankdaten	latex/00liesmich.tex	/^\\subsection{Aktualisierung der Bankdaten}$/;"	b
+Aktuelle Version	latex/00liesmich.tex	/^\\subsection{Aktuelle Version}$/;"	b
+Aufrufparameter	latex/00liesmich.tex	/^\\subsection{Aufrufparameter:}$/;"	b
+BASE	konto_check.c	/^#define BASE /;"	d	file:
+BAV_ENABLE	konto_check.h	/^#define BAV_ENABLE /;"	d
+BAV_FALSE	konto_check.h	/^#define BAV_FALSE /;"	d
+BAV_KOMPATIBEL	konto_check.h	/^#define BAV_KOMPATIBEL /;"	d
+BAV_KOMPATIBEL	konto_check.h	/^#undef BAV_KOMPATIBEL$/;"	d
+BAV_KOMPATIBEL	php/php_konto_check.h	/^#define BAV_KOMPATIBEL /;"	d
+BESCHREIBUNG_TXT	php/php_konto_check.h	/^#define BESCHREIBUNG_TXT /;"	d
+BLZ_BLACKLISTED	konto_check.h	/^#define BLZ_BLACKLISTED /;"	d
+BLZ_CMT	Makefile	/^BLZ_CMT     = Bankleitzahlentabelle gueltig vom  09.09.2013 bis 08.12.2013; IBAN blacklist vom 09.09.2013$/;"	m
+BLZ_CMT2	Makefile	/^BLZ_CMT2    = Bankleitzahlentabelle gueltig vom 09.12.2013 bis 02.03.2014; IBAN blacklist vom 09.12.2013$/;"	m
+BLZ_FEHLER	konto_check.c	/^#define BLZ_FEHLER /;"	d	file:
+BLZ_FILE	Makefile	/^BLZ_FILE    = blz2_20130909.txt$/;"	m
+BLZ_FILE2	Makefile	/^BLZ_FILE2   = blz2_20131209.txt$/;"	m
+BLZ_GELOESCHT	konto_check.h	/^#define BLZ_GELOESCHT /;"	d
+BLZ_LEVEL	Makefile	/^BLZ_LEVEL   = -g37$/;"	m
+BLZ_LEVELF	Makefile	/^BLZ_LEVELF  = -g39f$/;"	m
+BLZ_MARKED_AS_DELETED	konto_check.h	/^#define BLZ_MARKED_AS_DELETED /;"	d
+BZIP2	Makefile	/^BZIP2 = 0$/;"	m
+Bekannte Fehler	latex/00liesmich.tex	/^\\subsection{Bekannte Fehler}$/;"	b
+C2UI	konto_check.c	/^#define C2UI(/;"	d	file:
+C2UL	konto_check.c	/^#define C2UL(/;"	d	file:
+C2UM	konto_check.c	/^#define C2UM(/;"	d	file:
+CFLAGS	Makefile	/^CFLAGS = -Wall $(C_BZ2) $(C_LZO) $(C_LZMA) -DDEBUG=1 -g$/;"	m
+CFLAGS	awk/makefile	/^CFLAGS = -Igawk-3.1.8\/ -I. -O -fPIC -DHAVE_CONFIG_H -g$/;"	m
+CFLAGS_OPT	Makefile	/^CFLAGS_OPT = $(CFLAGS) -O3 -fexpensive-optimizations -fomit-frame-pointer -funroll-loops$/;"	m
+CFLAGS_OPT1	Makefile	/^CFLAGS_OPT1= $(CFLAGS) -O3 -fexpensive-optimizations -funroll-loops$/;"	m
+CHECK	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+CHECK_MALLOC	php/php_konto_check.h	/^#define CHECK_MALLOC /;"	d
+CHECK_OFFSET_I	konto_check.c	/^#define CHECK_OFFSET_I /;"	d	file:
+CHECK_OFFSET_S	konto_check.c	/^#define CHECK_OFFSET_S /;"	d	file:
+CHECK_PZ10	konto_check.c	/^#   define CHECK_PZ10 /;"	d	file:
+CHECK_PZ3	konto_check.c	/^#   define CHECK_PZ3 /;"	d	file:
+CHECK_PZ6	konto_check.c	/^#   define CHECK_PZ6 /;"	d	file:
+CHECK_PZ7	konto_check.c	/^#   define CHECK_PZ7 /;"	d	file:
+CHECK_PZ8	konto_check.c	/^#   define CHECK_PZ8 /;"	d	file:
+CHECK_PZ9	konto_check.c	/^#   define CHECK_PZ9 /;"	d	file:
+CHECK_PZX10	konto_check.c	/^#   define CHECK_PZX10 /;"	d	file:
+CHECK_PZX7	konto_check.c	/^#   define CHECK_PZX7 /;"	d	file:
+CHECK_PZX8	konto_check.c	/^#   define CHECK_PZX8 /;"	d	file:
+CHECK_PZX9	konto_check.c	/^#   define CHECK_PZX9 /;"	d	file:
+CHECK_RETURN	konto_check.c	/^#define CHECK_RETURN(/;"	d	file:
+CHECK_RETVAL	konto_check.c	/^#define CHECK_RETVAL(/;"	d	file:
+COMPRESS	konto_check.c	/^#define COMPRESS /;"	d	file:
+COMPRESSION_BZIP2	konto_check.h	/^#define COMPRESSION_BZIP2 /;"	d
+COMPRESSION_DEFAULT	konto_check.c	/^#define COMPRESSION_DEFAULT /;"	d	file:
+COMPRESSION_LZMA	konto_check.h	/^#define COMPRESSION_LZMA /;"	d
+COMPRESSION_LZO	konto_check.h	/^#define COMPRESSION_LZO /;"	d
+COMPRESSION_NONE	konto_check.h	/^#define COMPRESSION_NONE /;"	d
+COMPRESSION_ZLIB	konto_check.h	/^#define COMPRESSION_ZLIB /;"	d
+COPY	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+C_BZ2	Makefile	/^C_BZ2 = -DUSE_BZIP2=1$/;"	m
+C_BZ2	Makefile	/^C_BZ2 =$/;"	m
+C_LZMA	Makefile	/^C_LZMA = -DUSE_LZMA=1$/;"	m
+C_LZMA	Makefile	/^C_LZMA =$/;"	m
+C_LZO	Makefile	/^C_LZO = -DUSE_LZO=1$/;"	m
+C_LZO	Makefile	/^C_LZO =$/;"	m
+Copyright	latex/00liesmich.tex	/^\\section{Copyright}$/;"	s
+DB_NEUE_VERSION	konto_check.h	/^#define DB_NEUE_VERSION /;"	d
+DEBUG	konto_check.h	/^#define DEBUG /;"	d
+DEBUG_ONLY_FUNCTION	konto_check.h	/^#define DEBUG_ONLY_FUNCTION /;"	d
+DEFAULT_CNT	konto_check.h	/^#define DEFAULT_CNT /;"	d
+DEFAULT_ENCODING	konto_check.h	/^#define DEFAULT_ENCODING /;"	d
+DEFAULT_INIT_LEVEL	konto_check.h	/^#define DEFAULT_INIT_LEVEL /;"	d
+DEFAULT_LUT_FIELDS	konto_check.h	/^#define DEFAULT_LUT_FIELDS /;"	d
+DEFAULT_LUT_FIELDS_NUM	konto_check.h	/^#define DEFAULT_LUT_FIELDS_NUM /;"	d
+DEFAULT_LUT_LEVEL	konto_check_mini.c	/^#define DEFAULT_LUT_LEVEL /;"	d	file:
+DEFAULT_LUT_LEVEL	konto_check_mini.c	/^#undef DEFAULT_LUT_LEVEL$/;"	d	file:
+DEFAULT_LUT_NAME	konto_check.h	/^#define DEFAULT_LUT_NAME /;"	d
+DEFAULT_LUT_PATH	konto_check.h	/^#define DEFAULT_LUT_PATH /;"	d
+DEFAULT_LUT_VERSION	konto_check.h	/^#define DEFAULT_LUT_VERSION /;"	d
+DEFAULT_SLOTS	konto_check.h	/^#define DEFAULT_SLOTS /;"	d
+DLL_EXPORT	konto_check.h	/^#      define DLL_EXPORT /;"	d
+DLL_EXPORT	konto_check.h	/^#      define DLL_EXPORT$/;"	d
+DLL_EXPORT	konto_check.h	/^#  define DLL_EXPORT$/;"	d
+DLL_EXPORT_V	konto_check.h	/^#      define DLL_EXPORT_V /;"	d
+DLL_EXPORT_V	konto_check.h	/^#      define DLL_EXPORT_V$/;"	d
+DLL_EXPORT_V	konto_check.h	/^#  define DLL_EXPORT_V$/;"	d
+DO1	konto_check.c	/^#define DO1(/;"	d	file:
+DO16	konto_check.c	/^#define DO16(/;"	d	file:
+DO2	konto_check.c	/^#define DO2(/;"	d	file:
+DO4	konto_check.c	/^#define DO4(/;"	d	file:
+DO8	konto_check.c	/^#define DO8(/;"	d	file:
+DTA_CR_LF_IN_FILE	konto_check.h	/^#define DTA_CR_LF_IN_FILE /;"	d
+DTA_CURRENCY_NOT_EURO	konto_check.h	/^#define DTA_CURRENCY_NOT_EURO /;"	d
+DTA_EMPTY_AMOUNT	konto_check.h	/^#define DTA_EMPTY_AMOUNT /;"	d
+DTA_EMPTY_STRING	konto_check.h	/^#define DTA_EMPTY_STRING /;"	d
+DTA_FILE_WITH_ERRORS	konto_check.h	/^#define DTA_FILE_WITH_ERRORS /;"	d
+DTA_FILE_WITH_WARNINGS	konto_check.h	/^#define DTA_FILE_WITH_WARNINGS /;"	d
+DTA_FORMAT_ERROR	konto_check.h	/^#define DTA_FORMAT_ERROR /;"	d
+DTA_FOUND_SET_A_NOT_C	konto_check.h	/^#define DTA_FOUND_SET_A_NOT_C /;"	d
+DTA_FOUND_SET_C_NOT_EXTENSION	konto_check.h	/^#define DTA_FOUND_SET_C_NOT_EXTENSION /;"	d
+DTA_FOUND_SET_E_NOT_C	konto_check.h	/^#define DTA_FOUND_SET_E_NOT_C /;"	d
+DTA_FOUND_SET_E_NOT_EXTENSION	konto_check.h	/^#define DTA_FOUND_SET_E_NOT_EXTENSION /;"	d
+DTA_INVALID_CHARS	konto_check.h	/^#define DTA_INVALID_CHARS /;"	d
+DTA_INVALID_C_EXTENSION	konto_check.h	/^#define DTA_INVALID_C_EXTENSION /;"	d
+DTA_INVALID_DATE	konto_check.h	/^#define DTA_INVALID_DATE /;"	d
+DTA_INVALID_EXTENSION_COUNT	konto_check.h	/^#define DTA_INVALID_EXTENSION_COUNT /;"	d
+DTA_INVALID_ISSUE_DATE	konto_check.h	/^#define DTA_INVALID_ISSUE_DATE /;"	d
+DTA_INVALID_NUM	konto_check.h	/^#define DTA_INVALID_NUM /;"	d
+DTA_INVALID_SET_C_LEN	konto_check.h	/^#define DTA_INVALID_SET_C_LEN /;"	d
+DTA_INVALID_SET_LEN	konto_check.h	/^#define DTA_INVALID_SET_LEN /;"	d
+DTA_INVALID_TEXT_KEY	konto_check.h	/^#define DTA_INVALID_TEXT_KEY /;"	d
+DTA_MARKER_A_NOT_FOUND	konto_check.h	/^#define DTA_MARKER_A_NOT_FOUND /;"	d
+DTA_MARKER_C_NOT_FOUND	konto_check.h	/^#define DTA_MARKER_C_NOT_FOUND /;"	d
+DTA_MARKER_E_NOT_FOUND	konto_check.h	/^#define DTA_MARKER_E_NOT_FOUND /;"	d
+DTA_SRC_BLZ_DIFFERENT	konto_check.h	/^#define DTA_SRC_BLZ_DIFFERENT /;"	d
+DTA_SRC_KTO_DIFFERENT	konto_check.h	/^#define DTA_SRC_KTO_DIFFERENT /;"	d
+DTA_WAERUNG_NOT_EURO	konto_check.h	/^#define DTA_WAERUNG_NOT_EURO /;"	d
+DUMP_LUT	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+Das alte PHP API	latex/00liesmich.tex	/^\\section{Das alte PHP API}$/;"	s
+Das neue PHP API	latex/00liesmich.tex	/^\\section{Das neue PHP API}$/;"	s
+Datenblocks f r verschiedene skalare Werte von texttt required	latex/00liesmich.tex	/^\\subsection{Datenblocks für verschiedene (skalare) Werte von \\texttt{required}}$/;"	b
+Die Datendatei blz lut	latex/00liesmich.tex	/^\\section{Die Datendatei blz.lut}$/;"	s
+Die PHP Version von emph konto _check	latex/00liesmich.tex	/^\\section{Die PHP-Version von \\emph{konto\\_check}}$/;"	s
+EE	konto_check.c	/^#define EE /;"	d	file:
+ERROR_MALLOC	konto_check.h	/^#define ERROR_MALLOC /;"	d
+EXCLUDED	konto_check.c	/^#define EXCLUDED /;"	d	file:
+EXCLUDED_AT_COMPILETIME	konto_check.h	/^#define EXCLUDED_AT_COMPILETIME /;"	d
+EXCLUDED_S	konto_check.c	/^#define EXCLUDED_S /;"	d	file:
+EXCLUDED_V	konto_check.c	/^#define EXCLUDED_V /;"	d	file:
+EXCLUDED_VP	konto_check.c	/^#define EXCLUDED_VP /;"	d	file:
+EXTRACT	konto_check.c	/^#define EXTRACT(/;"	d	file:
+EXTRACT	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+E_END	konto_check.c	/^#define E_END(/;"	d	file:
+E_START	konto_check.c	/^#define E_START(/;"	d	file:
+Einf hrung	latex/00liesmich.tex	/^\\subsection{Einführung}$/;"	b
+Einf hrung Kompatiblit t zur Vorversion	latex/00liesmich.tex	/^\\subsection{Einführung, Kompatiblität zur Vorversion}$/;"	b
+F r Ungeduldige einige Minimalbeispiele	latex/00liesmich.tex	/^\\section{Für Ungeduldige: einige Minimalbeispiele}$/;"	s
+FALSE	konto_check.h	/^#define FALSE /;"	d
+FALSE	konto_check.h	/^#undef FALSE$/;"	d
+FALSE_GELOESCHT	konto_check.h	/^#define FALSE_GELOESCHT /;"	d
+FALSE_UNTERKONTO_ATTACHED	konto_check.h	/^#define FALSE_UNTERKONTO_ATTACHED /;"	d
+FAST	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+FATAL_ERROR	konto_check.h	/^#define FATAL_ERROR /;"	d
+FILE_READ_ERROR	konto_check.h	/^#define FILE_READ_ERROR /;"	d
+FILE_WRITE_ERROR	konto_check.h	/^#define FILE_WRITE_ERROR /;"	d
+FILTER_MODE	main.c	/^#define FILTER_MODE /;"	d	file:
+FLESSA_KORREKTUR	konto_check.h	/^#define FLESSA_KORREKTUR /;"	d
+FORCE_AENDERUNGEN_2013_09	konto_check.h	/^#define FORCE_AENDERUNGEN_2013_09 /;"	d
+FORMAT_ERROR	main.c	/^#define FORMAT_ERROR /;"	d	file:
+FREE	konto_check.c	/^#define FREE(/;"	d	file:
+FUNCTION_ENTRY	php/konto_check.c	/^#define FUNCTION_ENTRY /;"	d	file:
+Format der LUT Datei	latex/00liesmich.tex	/^\\subsection{Format der LUT-Datei}$/;"	b
+GENERATE_LUT	konto_check_mini.c	/^enum {TEST,GENERATE_LUT,IBAN2BIC,GENERATE_ZWECK};$/;"	e	enum:__anon6	file:
+GENERATE_OLD_LUTFILE	konto_check.h	/^#define GENERATE_OLD_LUTFILE /;"	d
+GENERATE_ZWECK	konto_check_mini.c	/^enum {TEST,GENERATE_LUT,IBAN2BIC,GENERATE_ZWECK};$/;"	e	enum:__anon6	file:
+GEN_LUT	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+GET_OPTARG	konto_check_mini.c	/^#define GET_OPTARG /;"	d	file:
+GET_VAL	main.c	/^#define GET_VAL /;"	d	file:
+GUELTIG	Makefile	/^GUELTIG     = 20130909-20131208$/;"	m
+GUELTIG2	Makefile	/^GUELTIG2    = 20131209-20140302$/;"	m
+HASH_BUFFER_SIZE	konto_check.c	/^#define HASH_BUFFER_SIZE /;"	d	file:
+I	konto_check.c	/^#define I /;"	d	file:
+IBAN2BIC	konto_check_mini.c	/^enum {TEST,GENERATE_LUT,IBAN2BIC,GENERATE_ZWECK};$/;"	e	enum:__anon6	file:
+IBAN2BIC_ONLY_GERMAN	konto_check.h	/^#define IBAN2BIC_ONLY_GERMAN /;"	d
+IBAN_AMBIGUOUS_KTO	konto_check.h	/^#define IBAN_AMBIGUOUS_KTO /;"	d
+IBAN_CHKSUM_OK_NACHFOLGE_BLZ_DEFINED	konto_check.h	/^#define IBAN_CHKSUM_OK_NACHFOLGE_BLZ_DEFINED /;"	d
+IBAN_CHKSUM_OK_NO_IBAN_CALCULATION	konto_check.h	/^#define IBAN_CHKSUM_OK_NO_IBAN_CALCULATION /;"	d
+IBAN_CHKSUM_OK_RULE_IGNORED	konto_check.h	/^#define IBAN_CHKSUM_OK_RULE_IGNORED /;"	d
+IBAN_CHKSUM_OK_SOMETHING_WRONG	konto_check.h	/^#define IBAN_CHKSUM_OK_SOMETHING_WRONG /;"	d
+IBAN_CHKSUM_OK_UNTERKTO_MISSING	konto_check.h	/^#define IBAN_CHKSUM_OK_UNTERKTO_MISSING /;"	d
+IBAN_INVALID_RULE	konto_check.h	/^#define IBAN_INVALID_RULE /;"	d
+IBAN_OK_KTO_NOT	konto_check.h	/^#define IBAN_OK_KTO_NOT /;"	d
+IBAN_RULE_NOT_IMPLEMENTED	konto_check.h	/^#define IBAN_RULE_NOT_IMPLEMENTED /;"	d
+IBAN_RULE_UNKNOWN	konto_check.h	/^#define IBAN_RULE_UNKNOWN /;"	d
+IMPLEMENTED_PZ_METHODEN	php/konto_check.c	/^#define IMPLEMENTED_PZ_METHODEN /;"	d	file:
+INCLUDE_DUMMY_GLOBALS	konto_check.h	/^#define INCLUDE_DUMMY_GLOBALS /;"	d
+INCLUDE_KONTO_CHECK_DE	konto_check.c	/^#define INCLUDE_KONTO_CHECK_DE /;"	d	file:
+INCREMENTAL_INIT_FROM_DIFFERENT_FILE	konto_check.h	/^#define INCREMENTAL_INIT_FROM_DIFFERENT_FILE /;"	d
+INCREMENTAL_INIT_NEEDS_INFO	konto_check.h	/^#define INCREMENTAL_INIT_NEEDS_INFO /;"	d
+INITIALIZE_WAIT	konto_check.c	/^#define INITIALIZE_WAIT /;"	d	file:
+INITIAL_DEFAULT_BUFSIZE	konto_check.c	/^#define INITIAL_DEFAULT_BUFSIZE /;"	d	file:
+INIT_DEFAULT_LUT_FILE	php/konto_check.c	/^#define INIT_DEFAULT_LUT_FILE /;"	d	file:
+INIT_FATAL_ERROR	konto_check.h	/^#define INIT_FATAL_ERROR /;"	d
+INT4	konto_check.h	/^typedef int INT4;$/;"	t
+INT4	konto_check.h	/^typedef long INT4;$/;"	t
+INT4_DEFINED	konto_check.h	/^#define INT4_DEFINED$/;"	d
+INVALID_BLZ	konto_check.h	/^#define INVALID_BLZ /;"	d
+INVALID_BLZ_FILE	konto_check.h	/^#define INVALID_BLZ_FILE /;"	d
+INVALID_BLZ_LENGTH	konto_check.h	/^#define INVALID_BLZ_LENGTH /;"	d
+INVALID_C	konto_check.c	/^#define INVALID_C(/;"	d	file:
+INVALID_I	konto_check.c	/^#define INVALID_I(/;"	d	file:
+INVALID_IBAN_LENGTH	konto_check.h	/^#define INVALID_IBAN_LENGTH /;"	d
+INVALID_KTO	konto_check.h	/^#define INVALID_KTO /;"	d
+INVALID_KTO_LENGTH	konto_check.h	/^#define INVALID_KTO_LENGTH /;"	d
+INVALID_LUT_FILE	konto_check.h	/^#define INVALID_LUT_FILE /;"	d
+INVALID_LUT_VERSION	konto_check.h	/^#define INVALID_LUT_VERSION /;"	d
+INVALID_PARAMETER_COUNT	konto_check.h	/^#define INVALID_PARAMETER_COUNT /;"	d
+INVALID_PARAMETER_METHODE	konto_check.h	/^#define INVALID_PARAMETER_METHODE /;"	d
+INVALID_PARAMETER_PRUEFZIFFER	konto_check.h	/^#define INVALID_PARAMETER_PRUEFZIFFER /;"	d
+INVALID_PARAMETER_STELLE1	konto_check.h	/^#define INVALID_PARAMETER_STELLE1 /;"	d
+INVALID_PARAMETER_WICHTUNG	konto_check.h	/^#define INVALID_PARAMETER_WICHTUNG /;"	d
+INVALID_PZ10	konto_check.c	/^#   define INVALID_PZ10 /;"	d	file:
+INVALID_SEARCH_RANGE	konto_check.h	/^#define INVALID_SEARCH_RANGE /;"	d
+INVALID_SET	konto_check.h	/^#define INVALID_SET /;"	d
+IPI_CHECK_INVALID_LENGTH	konto_check.h	/^#define IPI_CHECK_INVALID_LENGTH /;"	d
+IPI_INVALID_CHARACTER	konto_check.h	/^#define IPI_INVALID_CHARACTER /;"	d
+IPI_INVALID_LENGTH	konto_check.h	/^#define IPI_INVALID_LENGTH /;"	d
+ISDIGIT	konto_check.c	/^#define ISDIGIT(/;"	d	file:
+ISDIGIT	main.c	/^#define ISDIGIT(/;"	d	file:
+ISXDIGIT	main.c	/^#define ISXDIGIT(/;"	d	file:
+Initialisierung Infos zur LUT Datei Speicherfreigabe	latex/00liesmich.tex	/^\\subsection{Initialisierung, Infos zur LUT-Datei, Speicherfreigabe}$/;"	b
+Initialisierung Infos zur LUT Datei etc Speicherfreigabe	latex/00liesmich.tex	/^\\subsection{Initialisierung, Infos zur LUT-Datei etc., Speicherfreigabe}$/;"	b
+Initialisierung der Bibliothek	latex/00liesmich.tex	/^\\subsection{Initialisierung der Bibliothek}$/;"	b
+Installation	latex/00liesmich.tex	/^\\subsection{Installation}$/;"	b
+Installation der PHP Version	latex/00liesmich.tex	/^\\subsection{Installation der PHP-Version}$/;"	b
+KEEP_RAW_DATA	konto_check.h	/^#define KEEP_RAW_DATA /;"	d
+KEY_NOT_FOUND	konto_check.h	/^#define KEY_NOT_FOUND /;"	d
+KONTO_CHECK_H_INCLUDED	konto_check.h	/^#define KONTO_CHECK_H_INCLUDED$/;"	d
+KONTO_CHECK_VARS	konto_check.c	/^#define KONTO_CHECK_VARS$/;"	d	file:
+KTO_CHECK_DEFAULT_BLOCK_FULL	konto_check.h	/^#define KTO_CHECK_DEFAULT_BLOCK_FULL /;"	d
+KTO_CHECK_DEFAULT_BLOCK_INVALID	konto_check.h	/^#define KTO_CHECK_DEFAULT_BLOCK_INVALID /;"	d
+KTO_CHECK_INVALID_COMPRESSION_LIB	konto_check.h	/^#define KTO_CHECK_INVALID_COMPRESSION_LIB /;"	d
+KTO_CHECK_KEY_NOT_FOUND	konto_check.h	/^#define KTO_CHECK_KEY_NOT_FOUND /;"	d
+KTO_CHECK_NO_DEFAULT_BLOCK	konto_check.h	/^#define KTO_CHECK_NO_DEFAULT_BLOCK /;"	d
+KTO_CHECK_UNSUPPORTED_COMPRESSION	konto_check.h	/^#define KTO_CHECK_UNSUPPORTED_COMPRESSION /;"	d
+KTO_CHECK_VALUE_REPLACED	konto_check.h	/^#define KTO_CHECK_VALUE_REPLACED /;"	d
+KTO_CHK_CTX	konto_check.h	/^} KTO_CHK_CTX;$/;"	t	typeref:struct:__anon5
+KTO_OK_IBAN_NOT	konto_check.h	/^#define KTO_OK_IBAN_NOT /;"	d
+Klartextbeschreibung der R ckgabewerte	latex/00liesmich.tex	/^\\subsection{Klartextbeschreibung der Rückgabewerte}$/;"	b
+Konvertierung der numerischen R ckgabewerte in Klartext	latex/00liesmich.tex	/^\\subsection{Konvertierung der numerischen Rückgabewerte in Klartext}$/;"	b
+LAST_LUT_BLOCK	konto_check.h	/^#define LAST_LUT_BLOCK /;"	d
+LDFLAGS	Makefile	/^LDFLAGS = -lz $(LD_BZ2) $(LD_LZMA) -g$/;"	m
+LDFLAGS	awk/makefile	/^LDFLAGS = -shared -lz$/;"	m
+LD_BZ2	Makefile	/^LD_BZ2 = $/;"	m
+LD_BZ2	Makefile	/^LD_BZ2 = -lbz2 $/;"	m
+LD_LZMA	Makefile	/^LD_LZMA = $/;"	m
+LD_LZMA	Makefile	/^LD_LZMA = -llzma$/;"	m
+LIBRARY_INIT_ERROR	konto_check.h	/^#define LIBRARY_INIT_ERROR /;"	d
+LIBRARY_IS_NOT_THREAD_SAFE	konto_check.h	/^#define LIBRARY_IS_NOT_THREAD_SAFE /;"	d
+LIB_MAJOR_VERSION	Makefile	/^LIB_MAJOR_VERSION = 3$/;"	m
+LIB_MINOR_VERSION	Makefile	/^LIB_MINOR_VERSION = 5$/;"	m
+LIB_PATCHLEVEL	Makefile	/^LIB_PATCHLEVEL    = 2$/;"	m
+LIB_VERSION	Makefile	/^LIB_VERSION = $(LIB_MAJOR_VERSION).$(LIB_MINOR_VERSION).$(LIB_PATCHLEVEL)$/;"	m
+LUT1_FILE_GENERATED	konto_check.h	/^#define LUT1_FILE_GENERATED /;"	d
+LUT1_FILE_USED	konto_check.h	/^#define LUT1_FILE_USED /;"	d
+LUT1_SET_LOADED	konto_check.h	/^#define LUT1_SET_LOADED /;"	d
+LUT2_2_AENDERUNG	konto_check.h	/^#define LUT2_2_AENDERUNG /;"	d
+LUT2_2_BIC	konto_check.h	/^#define LUT2_2_BIC /;"	d
+LUT2_2_BIC_SORT	konto_check.h	/^#define LUT2_2_BIC_SORT /;"	d
+LUT2_2_BLZ	konto_check.h	/^#define LUT2_2_BLZ /;"	d
+LUT2_2_FILIALEN	konto_check.h	/^#define LUT2_2_FILIALEN /;"	d
+LUT2_2_IBAN_REGEL	konto_check.h	/^#define LUT2_2_IBAN_REGEL /;"	d
+LUT2_2_IBAN_REGEL_SORT	konto_check.h	/^#define LUT2_2_IBAN_REGEL_SORT /;"	d
+LUT2_2_INFO	konto_check.h	/^#define LUT2_2_INFO /;"	d
+LUT2_2_LOESCHUNG	konto_check.h	/^#define LUT2_2_LOESCHUNG /;"	d
+LUT2_2_NACHFOLGE_BLZ	konto_check.h	/^#define LUT2_2_NACHFOLGE_BLZ /;"	d
+LUT2_2_NAME	konto_check.h	/^#define LUT2_2_NAME /;"	d
+LUT2_2_NAME_KURZ	konto_check.h	/^#define LUT2_2_NAME_KURZ /;"	d
+LUT2_2_NAME_KURZ_SORT	konto_check.h	/^#define LUT2_2_NAME_KURZ_SORT /;"	d
+LUT2_2_NAME_NAME_KURZ	konto_check.h	/^#define LUT2_2_NAME_NAME_KURZ /;"	d
+LUT2_2_NAME_SORT	konto_check.h	/^#define LUT2_2_NAME_SORT /;"	d
+LUT2_2_NR	konto_check.h	/^#define LUT2_2_NR /;"	d
+LUT2_2_ORT	konto_check.h	/^#define LUT2_2_ORT /;"	d
+LUT2_2_ORT_SORT	konto_check.h	/^#define LUT2_2_ORT_SORT /;"	d
+LUT2_2_OWN_IBAN	konto_check.h	/^#define LUT2_2_OWN_IBAN /;"	d
+LUT2_2_PAN	konto_check.h	/^#define LUT2_2_PAN /;"	d
+LUT2_2_PLZ	konto_check.h	/^#define LUT2_2_PLZ /;"	d
+LUT2_2_PLZ_SORT	konto_check.h	/^#define LUT2_2_PLZ_SORT /;"	d
+LUT2_2_PZ	konto_check.h	/^#define LUT2_2_PZ /;"	d
+LUT2_2_PZ_SORT	konto_check.h	/^#define LUT2_2_PZ_SORT /;"	d
+LUT2_2_VOLLTEXT_IDX	konto_check.h	/^#define LUT2_2_VOLLTEXT_IDX /;"	d
+LUT2_2_VOLLTEXT_TXT	konto_check.h	/^#define LUT2_2_VOLLTEXT_TXT /;"	d
+LUT2_AENDERUNG	konto_check.h	/^#define LUT2_AENDERUNG /;"	d
+LUT2_AENDERUNG_NOT_INITIALIZED	konto_check.h	/^#define LUT2_AENDERUNG_NOT_INITIALIZED /;"	d
+LUT2_BIC	konto_check.h	/^#define LUT2_BIC /;"	d
+LUT2_BIC_NOT_INITIALIZED	konto_check.h	/^#define LUT2_BIC_NOT_INITIALIZED /;"	d
+LUT2_BIC_SORT	konto_check.h	/^#define LUT2_BIC_SORT /;"	d
+LUT2_BLOCKS_MISSING	konto_check.h	/^#define LUT2_BLOCKS_MISSING /;"	d
+LUT2_BLOCK_NOT_IN_FILE	konto_check.h	/^#define LUT2_BLOCK_NOT_IN_FILE /;"	d
+LUT2_BLZ	konto_check.h	/^#define LUT2_BLZ /;"	d
+LUT2_BLZ_NOT_INITIALIZED	konto_check.h	/^#define LUT2_BLZ_NOT_INITIALIZED /;"	d
+LUT2_COMPRESS_ERROR	konto_check.h	/^#define LUT2_COMPRESS_ERROR /;"	d
+LUT2_DECOMPRESS_ERROR	konto_check.h	/^#define LUT2_DECOMPRESS_ERROR /;"	d
+LUT2_DEFAULT	konto_check.h	/^#define LUT2_DEFAULT /;"	d
+LUT2_FILE_CORRUPTED	konto_check.h	/^#define LUT2_FILE_CORRUPTED /;"	d
+LUT2_FILIALEN	konto_check.h	/^#define LUT2_FILIALEN /;"	d
+LUT2_FILIALEN_MISSING	konto_check.h	/^#define LUT2_FILIALEN_MISSING /;"	d
+LUT2_FILIALEN_NOT_INITIALIZED	konto_check.h	/^#define LUT2_FILIALEN_NOT_INITIALIZED /;"	d
+LUT2_GUELTIGKEIT_SWAPPED	konto_check.h	/^#define LUT2_GUELTIGKEIT_SWAPPED /;"	d
+LUT2_IBAN_REGEL	konto_check.h	/^#define LUT2_IBAN_REGEL /;"	d
+LUT2_IBAN_REGEL_NOT_INITIALIZED	konto_check.h	/^#define LUT2_IBAN_REGEL_NOT_INITIALIZED /;"	d
+LUT2_IBAN_REGEL_SORT	konto_check.h	/^#define LUT2_IBAN_REGEL_SORT /;"	d
+LUT2_INDEX_OUT_OF_RANGE	konto_check.h	/^#define LUT2_INDEX_OUT_OF_RANGE /;"	d
+LUT2_INFO	konto_check.h	/^#define LUT2_INFO /;"	d
+LUT2_INIT_IN_PROGRESS	konto_check.h	/^#define LUT2_INIT_IN_PROGRESS /;"	d
+LUT2_INVALID	konto_check.h	/^#define LUT2_INVALID /;"	d
+LUT2_INVALID_GUELTIGKEIT	konto_check.h	/^#define LUT2_INVALID_GUELTIGKEIT /;"	d
+LUT2_KTO_NOT_CHECKED	konto_check.h	/^#define LUT2_KTO_NOT_CHECKED /;"	d
+LUT2_LOESCHUNG	konto_check.h	/^#define LUT2_LOESCHUNG /;"	d
+LUT2_LOESCHUNG_NOT_INITIALIZED	konto_check.h	/^#define LUT2_LOESCHUNG_NOT_INITIALIZED /;"	d
+LUT2_NACHFOLGE_BLZ	konto_check.h	/^#define LUT2_NACHFOLGE_BLZ /;"	d
+LUT2_NACHFOLGE_BLZ_NOT_INITIALIZED	konto_check.h	/^#define LUT2_NACHFOLGE_BLZ_NOT_INITIALIZED /;"	d
+LUT2_NAME	konto_check.h	/^#define LUT2_NAME /;"	d
+LUT2_NAME_KURZ	konto_check.h	/^#define LUT2_NAME_KURZ /;"	d
+LUT2_NAME_KURZ_NOT_INITIALIZED	konto_check.h	/^#define LUT2_NAME_KURZ_NOT_INITIALIZED /;"	d
+LUT2_NAME_KURZ_SORT	konto_check.h	/^#define LUT2_NAME_KURZ_SORT /;"	d
+LUT2_NAME_NAME_KURZ	konto_check.h	/^#define LUT2_NAME_NAME_KURZ /;"	d
+LUT2_NAME_NOT_INITIALIZED	konto_check.h	/^#define LUT2_NAME_NOT_INITIALIZED /;"	d
+LUT2_NAME_SORT	konto_check.h	/^#define LUT2_NAME_SORT /;"	d
+LUT2_NOT_ALL_IBAN_BLOCKS_LOADED	konto_check.h	/^#define LUT2_NOT_ALL_IBAN_BLOCKS_LOADED /;"	d
+LUT2_NOT_INITIALIZED	konto_check.h	/^#define LUT2_NOT_INITIALIZED /;"	d
+LUT2_NOT_YET_VALID	konto_check.h	/^#define LUT2_NOT_YET_VALID /;"	d
+LUT2_NOT_YET_VALID_PARTIAL_OK	konto_check.h	/^#define LUT2_NOT_YET_VALID_PARTIAL_OK /;"	d
+LUT2_NO_ACCOUNT_GIVEN	konto_check.h	/^#define LUT2_NO_ACCOUNT_GIVEN /;"	d
+LUT2_NO_LONGER_VALID	konto_check.h	/^#define LUT2_NO_LONGER_VALID /;"	d
+LUT2_NO_LONGER_VALID_BETTER	konto_check.h	/^#define LUT2_NO_LONGER_VALID_BETTER /;"	d
+LUT2_NO_LONGER_VALID_PARTIAL_OK	konto_check.h	/^#define LUT2_NO_LONGER_VALID_PARTIAL_OK /;"	d
+LUT2_NO_SLOT_FREE	konto_check.h	/^#define LUT2_NO_SLOT_FREE /;"	d
+LUT2_NO_USER_BLOCK	konto_check.h	/^#define LUT2_NO_USER_BLOCK /;"	d
+LUT2_NO_VALID_DATE	konto_check.h	/^#define LUT2_NO_VALID_DATE /;"	d
+LUT2_NR	konto_check.h	/^#define LUT2_NR /;"	d
+LUT2_NR_NOT_INITIALIZED	konto_check.h	/^#define LUT2_NR_NOT_INITIALIZED /;"	d
+LUT2_OK_WITHOUT_IBAN_RULES	konto_check.h	/^#define LUT2_OK_WITHOUT_IBAN_RULES /;"	d
+LUT2_ORT	konto_check.h	/^#define LUT2_ORT /;"	d
+LUT2_ORT_NOT_INITIALIZED	konto_check.h	/^#define LUT2_ORT_NOT_INITIALIZED /;"	d
+LUT2_ORT_SORT	konto_check.h	/^#define LUT2_ORT_SORT /;"	d
+LUT2_OWN_IBAN	konto_check.h	/^#define LUT2_OWN_IBAN /;"	d
+LUT2_PAN	konto_check.h	/^#define LUT2_PAN /;"	d
+LUT2_PAN_NOT_INITIALIZED	konto_check.h	/^#define LUT2_PAN_NOT_INITIALIZED /;"	d
+LUT2_PARTIAL_OK	konto_check.h	/^#define LUT2_PARTIAL_OK /;"	d
+LUT2_PLZ	konto_check.h	/^#define LUT2_PLZ /;"	d
+LUT2_PLZ_NOT_INITIALIZED	konto_check.h	/^#define LUT2_PLZ_NOT_INITIALIZED /;"	d
+LUT2_PLZ_SORT	konto_check.h	/^#define LUT2_PLZ_SORT /;"	d
+LUT2_PZ	konto_check.h	/^#define LUT2_PZ /;"	d
+LUT2_PZ_NOT_INITIALIZED	konto_check.h	/^#define LUT2_PZ_NOT_INITIALIZED /;"	d
+LUT2_PZ_SORT	konto_check.h	/^#define LUT2_PZ_SORT /;"	d
+LUT2_VALID	konto_check.h	/^#define LUT2_VALID /;"	d
+LUT2_VOLLTEXT_IDX	konto_check.h	/^#define LUT2_VOLLTEXT_IDX /;"	d
+LUT2_VOLLTEXT_INVALID_CHAR	konto_check.h	/^#define LUT2_VOLLTEXT_INVALID_CHAR /;"	d
+LUT2_VOLLTEXT_NOT_INITIALIZED	konto_check.h	/^#define LUT2_VOLLTEXT_NOT_INITIALIZED /;"	d
+LUT2_VOLLTEXT_SINGLE_WORD_ONLY	konto_check.h	/^#define LUT2_VOLLTEXT_SINGLE_WORD_ONLY /;"	d
+LUT2_VOLLTEXT_TXT	konto_check.h	/^#define LUT2_VOLLTEXT_TXT /;"	d
+LUT2_Z_BUF_ERROR	konto_check.h	/^#define LUT2_Z_BUF_ERROR /;"	d
+LUT2_Z_DATA_ERROR	konto_check.h	/^#define LUT2_Z_DATA_ERROR /;"	d
+LUT2_Z_MEM_ERROR	konto_check.h	/^#define LUT2_Z_MEM_ERROR /;"	d
+LUT_CRC_ERROR	konto_check.h	/^#define LUT_CRC_ERROR /;"	d
+LUT_DIR	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+LUT_INFO	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+LUT_NAME_BUFFER	php/php_konto_check.h	/^#define LUT_NAME_BUFFER /;"	d
+LUT_PATH_LEN	konto_check.h	/^#define LUT_PATH_LEN /;"	d
+LUT_SUCHE	konto_check.c	/^} LUT_SUCHE;$/;"	t	typeref:struct:__anon1	file:
+LUT_SUCHERGEBNIS	konto_check.c	/^} LUT_SUCHERGEBNIS[LUT_SUCHE_MAX_CNT];$/;"	t	typeref:struct:__anon3	file:
+LUT_SUCHE_ARR	konto_check.c	/^} LUT_SUCHE_ARR;$/;"	t	typeref:struct:__anon2	file:
+LUT_SUCHE_BIC	konto_check.h	/^#define LUT_SUCHE_BIC /;"	d
+LUT_SUCHE_BLZ	konto_check.h	/^#define LUT_SUCHE_BLZ /;"	d
+LUT_SUCHE_INVALID_CMD	konto_check.h	/^#define LUT_SUCHE_INVALID_CMD /;"	d
+LUT_SUCHE_INVALID_CNT	konto_check.h	/^#define LUT_SUCHE_INVALID_CNT /;"	d
+LUT_SUCHE_INVALID_RSC	konto_check.h	/^#define LUT_SUCHE_INVALID_RSC /;"	d
+LUT_SUCHE_MAX_CNT	konto_check.c	/^#define LUT_SUCHE_MAX_CNT /;"	d	file:
+LUT_SUCHE_NAMEN	konto_check.h	/^#define LUT_SUCHE_NAMEN /;"	d
+LUT_SUCHE_NAMEN_KURZ	konto_check.h	/^#define LUT_SUCHE_NAMEN_KURZ /;"	d
+LUT_SUCHE_ORT	konto_check.h	/^#define LUT_SUCHE_ORT /;"	d
+LUT_SUCHE_PLZ	konto_check.h	/^#define LUT_SUCHE_PLZ /;"	d
+LUT_SUCHE_PZ	konto_check.h	/^#define LUT_SUCHE_PZ /;"	d
+LUT_SUCHE_REGEL	konto_check.h	/^#define LUT_SUCHE_REGEL /;"	d
+LUT_SUCHE_VOLLTEXT	konto_check.h	/^#define LUT_SUCHE_VOLLTEXT /;"	d
+LUT_V2_FILE_GENERATED	konto_check.h	/^#define LUT_V2_FILE_GENERATED /;"	d
+LZMA	Makefile	/^LZMA  = 0$/;"	m
+LZO	Makefile	/^LZO   = 0$/;"	m
+MAX_BLZ_CNT	konto_check.h	/^#define MAX_BLZ_CNT /;"	d
+MAX_SLOTS	konto_check.c	/^#define MAX_SLOTS /;"	d	file:
+MISSING_PARAMETER	konto_check.h	/^#define MISSING_PARAMETER /;"	d
+MOD_10_10	konto_check.c	/^#   define MOD_10_10 /;"	d	file:
+MOD_10_160	konto_check.c	/^#   define MOD_10_160 /;"	d	file:
+MOD_10_20	konto_check.c	/^#   define MOD_10_20 /;"	d	file:
+MOD_10_320	konto_check.c	/^#   define MOD_10_320 /;"	d	file:
+MOD_10_40	konto_check.c	/^#   define MOD_10_40 /;"	d	file:
+MOD_10_80	konto_check.c	/^#   define MOD_10_80 /;"	d	file:
+MOD_11_11	konto_check.c	/^#   define MOD_11_11 /;"	d	file:
+MOD_11_176	konto_check.c	/^#   define MOD_11_176 /;"	d	file:
+MOD_11_22	konto_check.c	/^#   define MOD_11_22 /;"	d	file:
+MOD_11_352	konto_check.c	/^#   define MOD_11_352 /;"	d	file:
+MOD_11_44	konto_check.c	/^#   define MOD_11_44 /;"	d	file:
+MOD_11_88	konto_check.c	/^#   define MOD_11_88 /;"	d	file:
+MOD_7_112	konto_check.c	/^#   define MOD_7_112 /;"	d	file:
+MOD_7_14	konto_check.c	/^#   define MOD_7_14 /;"	d	file:
+MOD_7_224	konto_check.c	/^#   define MOD_7_224 /;"	d	file:
+MOD_7_28	konto_check.c	/^#   define MOD_7_28 /;"	d	file:
+MOD_7_56	konto_check.c	/^#   define MOD_7_56 /;"	d	file:
+MOD_7_7	konto_check.c	/^#   define MOD_7_7 /;"	d	file:
+MOD_9_144	konto_check.c	/^#   define MOD_9_144 /;"	d	file:
+MOD_9_18	konto_check.c	/^#   define MOD_9_18 /;"	d	file:
+MOD_9_288	konto_check.c	/^#   define MOD_9_288 /;"	d	file:
+MOD_9_36	konto_check.c	/^#   define MOD_9_36 /;"	d	file:
+MOD_9_72	konto_check.c	/^#   define MOD_9_72 /;"	d	file:
+MOD_9_9	konto_check.c	/^#   define MOD_9_9 /;"	d	file:
+Main	mini/mini.cs	/^      static void Main(string[] args)$/;"	m	class:mini.Program	file:
+Main	mini/mini1.cs	/^      static void Main(string[] args)$/;"	m	class:mini.Program	file:
+Makronamen bzw Kurznamen der R ckgabewerte alphabetisch sortiert	latex/00liesmich.tex	/^\\subsection{Makronamen bzw. Kurznamen der Rückgabewerte (alphabetisch sortiert)}$/;"	b
+Mini Programm in C	latex/00liesmich.tex	/^\\subsection{Mini-Programm in C}$/;"	b
+Mini Programm in PHP altes Interface	latex/00liesmich.tex	/^\\subsection{Mini-Programm in PHP (altes Interface)}$/;"	b
+Mini Programm in PHP neues Interface	latex/00liesmich.tex	/^\\subsection{Mini-Programm in PHP (neues Interface)}$/;"	b
+Mini Programm in Perl	latex/00liesmich.tex	/^\\subsection{Mini-Programm in Perl}$/;"	b
+NMAX	konto_check.c	/^#define NMAX /;"	d	file:
+NOT_DEFINED	konto_check.h	/^#define NOT_DEFINED /;"	d
+NOT_IMPLEMENTED	konto_check.h	/^#define NOT_IMPLEMENTED /;"	d
+NO_BLZ_FILE	konto_check.h	/^#define NO_BLZ_FILE /;"	d
+NO_GERMAN_BIC	konto_check.h	/^#define NO_GERMAN_BIC /;"	d
+NO_IBAN_CALCULATION	konto_check.h	/^#define NO_IBAN_CALCULATION /;"	d
+NO_LUT_FILE	konto_check.h	/^#define NO_LUT_FILE /;"	d
+NO_OWN_IBAN_CALCULATION	konto_check.h	/^#define NO_OWN_IBAN_CALCULATION /;"	d
+Namen der Datenblocks	latex/00liesmich.tex	/^\\subsection{Namen der Datenblocks}$/;"	b
+OK	konto_check.h	/^#define OK /;"	d
+OK_BLZ_KTO_REPLACED	konto_check.h	/^#define OK_BLZ_KTO_REPLACED /;"	d
+OK_BLZ_REPLACED	konto_check.h	/^#define OK_BLZ_REPLACED /;"	d
+OK_GELOESCHT	konto_check.h	/^#define OK_GELOESCHT /;"	d
+OK_HYPO_REQUIRES_KTO	konto_check.h	/^#define OK_HYPO_REQUIRES_KTO /;"	d
+OK_IBAN_WITHOUT_KC_TEST	konto_check.h	/^#define OK_IBAN_WITHOUT_KC_TEST /;"	d
+OK_INVALID_FOR_IBAN	konto_check.h	/^#define OK_INVALID_FOR_IBAN /;"	d
+OK_KTO_REPLACED	konto_check.h	/^#define OK_KTO_REPLACED /;"	d
+OK_KTO_REPLACED_NO_PZ	konto_check.h	/^#define OK_KTO_REPLACED_NO_PZ /;"	d
+OK_NACHFOLGE_BLZ_USED	konto_check.h	/^#define OK_NACHFOLGE_BLZ_USED /;"	d
+OK_NO_CHK	konto_check.h	/^#define OK_NO_CHK /;"	d
+OK_NO_CHK_GELOESCHT	konto_check.h	/^#define OK_NO_CHK_GELOESCHT /;"	d
+OK_SLOT_CNT_MIN_USED	konto_check.h	/^#define OK_SLOT_CNT_MIN_USED /;"	d
+OK_TEST_BLZ_USED	konto_check.h	/^#define OK_TEST_BLZ_USED /;"	d
+OK_UNTERKONTO_ATTACHED	konto_check.h	/^#define OK_UNTERKONTO_ATTACHED /;"	d
+OK_UNTERKONTO_ATTACHED_OLD	konto_check.h	/^#define OK_UNTERKONTO_ATTACHED_OLD /;"	d
+OK_UNTERKONTO_GIVEN	konto_check.h	/^#define OK_UNTERKONTO_GIVEN /;"	d
+OK_UNTERKONTO_POSSIBLE	konto_check.h	/^#define OK_UNTERKONTO_POSSIBLE /;"	d
+OLD_BLZ_OK_NEW_NOT	konto_check.h	/^#define OLD_BLZ_OK_NEW_NOT /;"	d
+OUTPUT_BUFSIZE	main.c	/^#define OUTPUT_BUFSIZE /;"	d	file:
+O_BINARY	konto_check.c	/^#define O_BINARY /;"	d	file:
+PACKAGE_BUGREPORT	php/php_konto_check.h	/^#   undef PACKAGE_BUGREPORT$/;"	d
+PACKAGE_NAME	php/php_konto_check.h	/^#   undef PACKAGE_NAME$/;"	d
+PACKAGE_STRING	php/php_konto_check.h	/^#   undef PACKAGE_STRING$/;"	d
+PACKAGE_VERSION	php/php_konto_check.h	/^#   undef PACKAGE_VERSION$/;"	d
+PERL_IBAN_DBG	konto_check.h	/^#define PERL_IBAN_DBG /;"	d
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(ci_check)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(copy_lutfile)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(current_lutfile_name)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(generate_lut2)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(get_kto_check_version)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(iban2bic)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(iban_check)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(iban_gen)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(ipi_check)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(ipi_gen)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(keep_raw_data)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_blz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_blz_dbg)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_encoding)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_encoding_str)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_init)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_pz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_pz_dbg)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_regel_dbg)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_retval)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_retval2dos)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_retval2html)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_retval2iso)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_retval2txt)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_retval2txt_short)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_retval2utf8)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(kto_check_str)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut2_status)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_aenderung)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_bic)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_blocks)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_blz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_cleanup)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_filialen)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_iban_regel)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_info)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_init)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_loeschung)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_methode_txt)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_multiple)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_nachfolge_blz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_name)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_name_kurz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_nr)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_ort)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_pan)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_plz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_pz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_bic)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_blz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_free)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_init)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_multiple)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_namen)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_namen_kurz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_ort)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_plz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_pz)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_regel)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_set)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_suche_volltext)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(lut_valid)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(malloc_cnt)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(malloc_report)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(pz2str)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(read_lut_block)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(set_default_compression)$/;"	f
+PHP_FUNCTION	php/konto_check.c	/^PHP_FUNCTION(write_lut_block)$/;"	f
+PHP_KONTO_CHECK_EXTNAME	php/php_konto_check.h	/^#define PHP_KONTO_CHECK_EXTNAME /;"	d
+PHP_KONTO_CHECK_H	php/php_konto_check.h	/^#define PHP_KONTO_CHECK_H /;"	d
+PHP_KONTO_CHECK_VERSION	php/php_konto_check.h	/^#define PHP_KONTO_CHECK_VERSION /;"	d
+PHP_MALLOC	php/konto_check.c	/^#define PHP_MALLOC /;"	d	file:
+PHP_MINFO_FUNCTION	php/konto_check.c	/^PHP_MINFO_FUNCTION(konto_check)$/;"	f
+PHP_MINIT_FUNCTION	php/konto_check.c	/^PHP_MINIT_FUNCTION(konto_check)$/;"	f
+PHP_MSHUTDOWN_FUNCTION	php/konto_check.c	/^PHP_MSHUTDOWN_FUNCTION(konto_check)$/;"	f
+PHP_RINIT_FUNCTION	php/konto_check.c	/^PHP_RINIT_FUNCTION(konto_check)$/;"	f
+PHP_RSHUTDOWN_FUNCTION	php/konto_check.c	/^PHP_RSHUTDOWN_FUNCTION(konto_check)$/;"	f
+PRINT_VERBOSE_DEBUG_FILE	konto_check.c	/^#define PRINT_VERBOSE_DEBUG_FILE(/;"	d	file:
+Paketliste	latex/00liesmich.tex	/^\\section{Paketliste}$/;"	s
+Program	mini/mini.cs	/^   class Program$/;"	c	namespace:mini
+Program	mini/mini1.cs	/^   class Program$/;"	c	namespace:mini
+R ckgabewerte der Bibliothek	latex/00liesmich.tex	/^\\subsection{Rückgabewerte der Bibliothek}$/;"	b
+READ_LONG	konto_check.c	/^#define READ_LONG(/;"	d	file:
+REBUILD	main.c	/^enum{CHECK,FAST,GEN_LUT,LUT_DIR,DUMP_LUT,REBUILD,COPY,EXTRACT,LUT_INFO};$/;"	e	enum:__anon7	file:
+REPLACE_LUT_DIR_ENTRIES	konto_check.h	/^#define REPLACE_LUT_DIR_ENTRIES /;"	d
+RETURN	konto_check.c	/^#define RETURN(/;"	d	file:
+RETURN_OK	konto_check.c	/^#define RETURN_OK /;"	d	file:
+RETURN_OK_KTO_REPLACED	konto_check.c	/^#define RETURN_OK_KTO_REPLACED /;"	d	file:
+RETVAL	konto_check.h	/^} RETVAL;$/;"	t	typeref:struct:__anon4
+SCP	konto_check.c	/^#define SCP /;"	d	file:
+SECTION00010000000000000000	lgpl-ger.html	/^<P>  <H1><A NAME="SECTION00010000000000000000">$/;"	a
+SECTION00020000000000000000	lgpl-ger.html	/^<P>  <\/SMALL><H1><A NAME="SECTION00020000000000000000">$/;"	a
+SECTION00030000000000000000	lgpl-ger.html	/^<P>  <H1><A NAME="SECTION00030000000000000000">$/;"	a
+SECTION00031000000000000000	lgpl-ger.html	/^<P>  <H2><A NAME="SECTION00031000000000000000">$/;"	a
+SECTION00032000000000000000	lgpl-ger.html	/^<P>  <\/B><H2><A NAME="SECTION00032000000000000000">$/;"	a
+SECTION00033000000000000000	lgpl-ger.html	/^<P>  <H2><A NAME="SECTION00033000000000000000">$/;"	a
+SECTION00040000000000000000	lgpl-ger.html	/^<P><H1><A NAME="SECTION00040000000000000000">$/;"	a
+SET_NULL	konto_check.c	/^#define SET_NULL /;"	d	file:
+SET_OFFSET	konto_check.c	/^#define SET_OFFSET /;"	d	file:
+SLOT_BUFFER	konto_check.c	/^#define SLOT_BUFFER /;"	d	file:
+SLOT_CNT_MIN	konto_check.h	/^#define SLOT_CNT_MIN /;"	d
+SOME_KEYS_NOT_FOUND	konto_check.h	/^#define SOME_KEYS_NOT_FOUND /;"	d
+SORT_PLZ	konto_check.h	/^#define SORT_PLZ /;"	d
+STATIC	php/konto_check.c	/^#define STATIC /;"	d	file:
+STATIC	php/konto_check.c	/^#define STATIC$/;"	d	file:
+SUB	konto_check.c	/^#   define SUB(/;"	d	file:
+SUB1	konto_check.c	/^#   define SUB1(/;"	d	file:
+SUB1_11	konto_check.c	/^#   define SUB1_11 /;"	d	file:
+SUB1_22	konto_check.c	/^#   define SUB1_22 /;"	d	file:
+SUCHE_NOT	konto_check.c	/^#define SUCHE_NOT /;"	d	file:
+SUCHE_STD	konto_check.c	/^#define SUCHE_STD /;"	d	file:
+SYMBOLIC_RETVALS	konto_check.h	/^#define SYMBOLIC_RETVALS /;"	d
+SYMBOLIC_RETVALS	php/konto_check.c	/^#define SYMBOLIC_RETVALS /;"	d	file:
+Sonstige Funktionen	latex/00liesmich.tex	/^\\subsection{Sonstige Funktionen}$/;"	b
+TEST	konto_check_mini.c	/^enum {TEST,GENERATE_LUT,IBAN2BIC,GENERATE_ZWECK};$/;"	e	enum:__anon6	file:
+TOO_MANY_SLOTS	konto_check.h	/^#define TOO_MANY_SLOTS /;"	d
+Technische Informationen Geschwindigkeit	latex/00liesmich.tex	/^\\subsection{Technische Informationen, Geschwindigkeit}$/;"	b
+Test einer Bankverbindung	latex/00liesmich.tex	/^\\subsection{Test einer Bankverbindung}$/;"	b
+Test von IBAN und strukturiertem Verwendungszweck	latex/00liesmich.tex	/^\\subsection{Test von IBAN und strukturiertem Verwendungszweck}$/;"	b
+Testfunktionen BLZ Pr fziffer und Konto	latex/00liesmich.tex	/^\\subsection{Testfunktionen: BLZ\/Prüfziffer und Konto}$/;"	b
+Testfunktionen IBAN Strukturierter Verwendungszweck	latex/00liesmich.tex	/^\\subsection{Testfunktionen: IBAN, Strukturierter Verwendungszweck}$/;"	b
+UCP	konto_check.c	/^#define UCP /;"	d	file:
+UCPP	konto_check.c	/^#define UCPP /;"	d	file:
+UI	konto_check.c	/^#define UI /;"	d	file:
+UI2C	konto_check.c	/^#define UI2C(/;"	d	file:
+UINT4	konto_check.h	/^typedef unsigned int UINT4;$/;"	t
+UINT4	konto_check.h	/^typedef unsigned long UINT4;$/;"	t
+UL2C	konto_check.c	/^#define UL2C(/;"	d	file:
+ULP	konto_check.c	/^#define ULP /;"	d	file:
+UM2C	konto_check.c	/^#define UM2C(/;"	d	file:
+UNDEFINED_SUBMETHOD	konto_check.h	/^#define UNDEFINED_SUBMETHOD /;"	d
+UNIQ_DEFAULT	konto_check.h	/^#define UNIQ_DEFAULT /;"	d
+UNIQ_DEFAULT_PERL	konto_check.h	/^#define UNIQ_DEFAULT_PERL /;"	d
+USE_ARGS	php/php_konto_check.h	/^#define USE_ARGS /;"	d
+USE_BZIP2	konto_check.c	/^#define USE_BZIP2 /;"	d	file:
+USE_IBAN_RULES	konto_check.h	/^#define USE_IBAN_RULES /;"	d
+USE_LZMA	konto_check.c	/^#define USE_LZMA /;"	d	file:
+USE_LZO	konto_check.c	/^#define USE_LZO /;"	d	file:
+USE_RET	php/php_konto_check.h	/^#define USE_RET /;"	d
+USE_RET1	php/php_konto_check.h	/^#define USE_RET1 /;"	d
+USE_RET2	php/php_konto_check.h	/^#define USE_RET2 /;"	d
+USE_RET3	php/php_konto_check.h	/^#define USE_RET3 /;"	d
+USE_RINIT	php/php_konto_check.h	/^#define USE_RINIT /;"	d
+USE_RSHUTDOWN	php/php_konto_check.h	/^#define USE_RSHUTDOWN /;"	d
+Unterschiede zwischen emph konto _check	latex/00liesmich.tex	/^\\subsection{Unterschiede zwischen \\emph{konto\\_check} 2.x und 3.0}$/;"	b
+VERBOSE_DEBUG	konto_check.h	/^#define VERBOSE_DEBUG /;"	d
+VERSION	konto_check.c	/^#define VERSION /;"	d	file:
+VERSIONEN	latex/00liesmich.tex	/^\\section{VERSIONEN}$/;"	s
+VERSION_DATE	konto_check.c	/^#define VERSION_DATE /;"	d	file:
+VT_CNT	konto_check.c	/^#define VT_CNT /;"	d	file:
+WRITE_LONG	konto_check.c	/^#define WRITE_LONG(/;"	d	file:
+Wichtige Funktionen der C Bibliothek nicht komplett	latex/00liesmich.tex	/^\\section{Wichtige Funktionen der C Bibliothek (nicht komplett)}$/;"	s
+XC	konto_check.c	/^#define XC /;"	d	file:
+XCC	konto_check.c	/^#define XCC /;"	d	file:
+XI	konto_check.c	/^#define XI /;"	d	file:
+XV	konto_check.c	/^#define XV /;"	d	file:
+Z	konto_check.c	/^#define Z(/;"	d	file:
+ZEIT	main.c	/^#define ZEIT(/;"	d	file:
+ZVAL_DTOR	php/konto_check.c	/^#define ZVAL_DTOR(/;"	d	file:
+Z_RETURN_LONG	php/konto_check.c	/^#define Z_RETURN_LONG(/;"	d	file:
+Z_RETURN_STRING	php/konto_check.c	/^#define Z_RETURN_STRING(/;"	d	file:
+__FUNCTION__	konto_check.c	/^#define __FUNCTION__ /;"	d	file:
+a	php/test/konto_test.php	/^   $a=ord('A');$/;"	v
+a5	konto_check.h	/^   int c2,d2,a5,p,konto[11];$/;"	m	struct:__anon5
+adler32a	konto_check.c	/^static UINT4 adler32a(UINT4 adler,const char *buf,unsigned int len)$/;"	f	file:
+aenderung	konto_check.c	/^            *ort_data,**bic,*bic_buffer,*aenderung,*loeschung,**volltext,*volltext_data;$/;"	v	file:
+anzahl	konto_check.c	/^   int anzahl;$/;"	m	struct:__anon2	file:
+anzahl_filialen	php/test.php	/^function anzahl_filialen($blz)$/;"	f
+ausgabe	php/test/konto_test.php	/^   $ausgabe=1;$/;"	v
+ausgabe	php/test/konto_test.php	/^   $ausgabe=4;$/;"	v
+ausgabe	php/test/konto_test.php	/^$ausgabe=intval($ausgabe);$/;"	v
+b	php/test/konto_test.php	/^         $b=$zeile_a[0];$/;"	v
+b0	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b1	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b1	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+b1	php/test/konto_test.php	/^   case 1: $b1="chk"; break;$/;"	v
+b1	php/test/konto_test.php	/^$b1=$b2=$b3=$b4="nchk";$/;"	v
+b2	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b2	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+b2	php/test/konto_test.php	/^   case 2: $b2="chk"; break;$/;"	v
+b3	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b3	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+b3	php/test/konto_test.php	/^   case 3: $b3="chk"; break;$/;"	v
+b4	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b4	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+b4	php/test/konto_test.php	/^   case 4: $b4="chk"; break;$/;"	v
+b5	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b5	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+b6	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b6	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+b7	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b7	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+b8	konto_check.c	/^static unsigned int b0[256],b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256],$/;"	v	file:
+b8	konto_check.h	/^   UINT4 b1[256],b2[256],b3[256],b4[256],b5[256],b6[256],b7[256],b8[256];$/;"	m	struct:__anon5
+bank_aenderung	mini/mini1.cs	/^      static Int32 bank_aenderung(String blz)$/;"	m	class:mini.Program	file:
+bank_aenderung	mini/mini1.cs	/^      static Int32 bank_aenderung(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_aenderung	mini/mini1.cs	/^      static Int32 bank_aenderung(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_aenderung	mini/mini1.cs	/^      static Int32 bank_aenderung(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_bic	mini/mini1.cs	/^      static String bank_bic(String blz)$/;"	m	class:mini.Program	file:
+bank_bic	mini/mini1.cs	/^      static String bank_bic(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_bic	mini/mini1.cs	/^      static String bank_bic(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_bic	mini/mini1.cs	/^      static String bank_bic(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_blz	mini/mini1.cs	/^      static Int32 bank_blz(String blz)$/;"	m	class:mini.Program	file:
+bank_blz	mini/mini1.cs	/^      static Int32 bank_blz(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_filialen	mini/mini1.cs	/^      static Int32 bank_filialen(String blz)$/;"	m	class:mini.Program	file:
+bank_filialen	mini/mini1.cs	/^      static Int32 bank_filialen(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_loeschung	mini/mini1.cs	/^      static Int32 bank_loeschung(String blz)$/;"	m	class:mini.Program	file:
+bank_loeschung	mini/mini1.cs	/^      static Int32 bank_loeschung(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_loeschung	mini/mini1.cs	/^      static Int32 bank_loeschung(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_loeschung	mini/mini1.cs	/^      static Int32 bank_loeschung(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_nachfolge_blz	mini/mini1.cs	/^      static Int32 bank_nachfolge_blz(String blz)$/;"	m	class:mini.Program	file:
+bank_nachfolge_blz	mini/mini1.cs	/^      static Int32 bank_nachfolge_blz(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_nachfolge_blz	mini/mini1.cs	/^      static Int32 bank_nachfolge_blz(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_nachfolge_blz	mini/mini1.cs	/^      static Int32 bank_nachfolge_blz(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_name	mini/mini.cs	/^      static String bank_name(String blz)$/;"	m	class:mini.Program	file:
+bank_name	mini/mini1.cs	/^      static String bank_name(String blz)$/;"	m	class:mini.Program	file:
+bank_name	mini/mini1.cs	/^      static String bank_name(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_name	mini/mini1.cs	/^      static String bank_name(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_name	mini/mini1.cs	/^      static String bank_name(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_name_kurz	mini/mini1.cs	/^      static String bank_name_kurz(String blz)$/;"	m	class:mini.Program	file:
+bank_name_kurz	mini/mini1.cs	/^      static String bank_name_kurz(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_name_kurz	mini/mini1.cs	/^      static String bank_name_kurz(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_name_kurz	mini/mini1.cs	/^      static String bank_name_kurz(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_nr	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+bank_nr	mini/mini1.cs	/^      static Int32 bank_nr(String blz)$/;"	m	class:mini.Program	file:
+bank_nr	mini/mini1.cs	/^      static Int32 bank_nr(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_nr	mini/mini1.cs	/^      static Int32 bank_nr(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_nr	mini/mini1.cs	/^      static Int32 bank_nr(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_ort	mini/mini.cs	/^      static String bank_ort(String blz)$/;"	m	class:mini.Program	file:
+bank_ort	mini/mini.cs	/^      static String bank_ort(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_ort	mini/mini1.cs	/^      static String bank_ort(String blz)$/;"	m	class:mini.Program	file:
+bank_ort	mini/mini1.cs	/^      static String bank_ort(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_ort	mini/mini1.cs	/^      static String bank_ort(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_ort	mini/mini1.cs	/^      static String bank_ort(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_pan	mini/mini1.cs	/^      static Int32 bank_pan(String blz)$/;"	m	class:mini.Program	file:
+bank_pan	mini/mini1.cs	/^      static Int32 bank_pan(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_pan	mini/mini1.cs	/^      static Int32 bank_pan(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_pan	mini/mini1.cs	/^      static Int32 bank_pan(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_plz	mini/mini.cs	/^      static Int32 bank_plz(String blz)$/;"	m	class:mini.Program	file:
+bank_plz	mini/mini1.cs	/^      static Int32 bank_plz(String blz)$/;"	m	class:mini.Program	file:
+bank_plz	mini/mini1.cs	/^      static Int32 bank_plz(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_plz	mini/mini1.cs	/^      static Int32 bank_plz(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_plz	mini/mini1.cs	/^      static Int32 bank_plz(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_pz	mini/mini1.cs	/^      static Int32 bank_pz(String blz)$/;"	m	class:mini.Program	file:
+bank_pz	mini/mini1.cs	/^      static Int32 bank_pz(String blz, Int32 zweigstelle)$/;"	m	class:mini.Program	file:
+bank_pz	mini/mini1.cs	/^      static Int32 bank_pz(String blz, Int32 zweigstelle, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_pz	mini/mini1.cs	/^      static Int32 bank_pz(String blz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_bic	mini/mini1.cs	/^      static Int32[] bank_suche_bic(String bic)$/;"	m	class:mini.Program	file:
+bank_suche_bic	mini/mini1.cs	/^      static Int32[] bank_suche_bic(String bic, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_bic	mini/mini1.cs	/^      static Int32[] bank_suche_bic(String bic, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_bic	mini/mini1.cs	/^      static Int32[] bank_suche_bic(String bic, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_blz	mini/mini1.cs	/^      static Int32[] bank_suche_blz(Int32 blz)$/;"	m	class:mini.Program	file:
+bank_suche_blz	mini/mini1.cs	/^      static Int32[] bank_suche_blz(Int32 blz1, Int32 blz2)$/;"	m	class:mini.Program	file:
+bank_suche_blz	mini/mini1.cs	/^      static Int32[] bank_suche_blz(Int32 blz1, Int32 blz2, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_blz	mini/mini1.cs	/^      static Int32[] bank_suche_blz(Int32 blz1, Int32 blz2, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_blz	mini/mini1.cs	/^      static Int32[] bank_suche_blz(Int32 blz1, Int32 blz2, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_multiple	mini/mini1.cs	/^      static Int32[] bank_suche_multiple(String such_str)$/;"	m	class:mini.Program	file:
+bank_suche_multiple	mini/mini1.cs	/^      static Int32[] bank_suche_multiple(String such_str, Int32 uniq, String such_cmd, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_multiple	mini/mini1.cs	/^      static Int32[] bank_suche_multiple(String such_str,Int32 uniq, String such_cmd)$/;"	m	class:mini.Program	file:
+bank_suche_multiple	mini/mini1.cs	/^      static Int32[] bank_suche_multiple(String such_str,Int32 uniq, String such_cmd, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_namen	mini/mini1.cs	/^      static Int32[] bank_suche_namen(String namen)$/;"	m	class:mini.Program	file:
+bank_suche_namen	mini/mini1.cs	/^      static Int32[] bank_suche_namen(String namen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_namen	mini/mini1.cs	/^      static Int32[] bank_suche_namen(String namen, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_namen	mini/mini1.cs	/^      static Int32[] bank_suche_namen(String namen, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_namen_kurz	mini/mini1.cs	/^      static Int32[] bank_suche_namen_kurz(String namen_kurz)$/;"	m	class:mini.Program	file:
+bank_suche_namen_kurz	mini/mini1.cs	/^      static Int32[] bank_suche_namen_kurz(String namen_kurz, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_namen_kurz	mini/mini1.cs	/^      static Int32[] bank_suche_namen_kurz(String namen_kurz, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_namen_kurz	mini/mini1.cs	/^      static Int32[] bank_suche_namen_kurz(String namen_kurz, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_ort	mini/mini1.cs	/^      static Int32[] bank_suche_ort(String ort)$/;"	m	class:mini.Program	file:
+bank_suche_ort	mini/mini1.cs	/^      static Int32[] bank_suche_ort(String ort, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_ort	mini/mini1.cs	/^      static Int32[] bank_suche_ort(String ort, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_ort	mini/mini1.cs	/^      static Int32[] bank_suche_ort(String ort, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_plz	mini/mini1.cs	/^      static Int32[] bank_suche_plz(Int32 plz)$/;"	m	class:mini.Program	file:
+bank_suche_plz	mini/mini1.cs	/^      static Int32[] bank_suche_plz(Int32 plz1, Int32 plz2)$/;"	m	class:mini.Program	file:
+bank_suche_plz	mini/mini1.cs	/^      static Int32[] bank_suche_plz(Int32 plz1, Int32 plz2, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_plz	mini/mini1.cs	/^      static Int32[] bank_suche_plz(Int32 plz1, Int32 plz2, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_plz	mini/mini1.cs	/^      static Int32[] bank_suche_plz(Int32 plz1, Int32 plz2, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_pz	mini/mini1.cs	/^      static Int32[] bank_suche_pz(Int32 pz)$/;"	m	class:mini.Program	file:
+bank_suche_pz	mini/mini1.cs	/^      static Int32[] bank_suche_pz(Int32 pz1, Int32 pz2)$/;"	m	class:mini.Program	file:
+bank_suche_pz	mini/mini1.cs	/^      static Int32[] bank_suche_pz(Int32 pz1, Int32 pz2, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_pz	mini/mini1.cs	/^      static Int32[] bank_suche_pz(Int32 pz1, Int32 pz2, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_pz	mini/mini1.cs	/^      static Int32[] bank_suche_pz(Int32 pz1, Int32 pz2, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_volltext	mini/mini1.cs	/^      static Int32[] bank_suche_volltext(String such_wort)$/;"	m	class:mini.Program	file:
+bank_suche_volltext	mini/mini1.cs	/^      static Int32[] bank_suche_volltext(String such_wort, out Int32 retval)$/;"	m	class:mini.Program	file:
+bank_suche_volltext	mini/mini1.cs	/^      static Int32[] bank_suche_volltext(String such_wort, out int[] zweigstellen)$/;"	m	class:mini.Program	file:
+bank_suche_volltext	mini/mini1.cs	/^      static Int32[] bank_suche_volltext(String such_wort, out int[] zweigstellen, out Int32 retval)$/;"	m	class:mini.Program	file:
+berblick Anmerkungen zur Version	latex/00liesmich.tex	/^\\section{Überblick, Anmerkungen zur Version}$/;"	s
+bic	konto_check.c	/^            *ort_data,**bic,*bic_buffer,*aenderung,*loeschung,**volltext,*volltext_data;$/;"	v	file:
+bic	php/test.php	/^   $bic=iban2bic($iban,$ret,$blz,$kto);$/;"	v
+bic	php/test/konto_test.php	/^   $bic=iban2bic($iban,$ret,$blz,$kto);   \/* Die Funktion gibt BIC, BLZ und kto zurück *\/$/;"	v
+bic	php/test2.php	/^      $bic=$i2b['bic'];$/;"	v
+bic_buffer	konto_check.c	/^            *ort_data,**bic,*bic_buffer,*aenderung,*loeschung,**volltext,*volltext_data;$/;"	v	file:
+binary_search	konto_check.c	/^static int binary_search(char *a,char **base,int *sort_a,int cnt,int *unten,int *anzahl)$/;"	f	file:
+binary_search_int	konto_check.c	/^static int binary_search_int(int a1,int a2,int *base,int *sort_a,int cnt,int *unten,int *anzahl)$/;"	f	file:
+blz	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+blz	php/test.php	/^$blz=72120078;$/;"	v
+blz	php/test/konto_test.php	/^         $blz=$blz1[$i];$/;"	v
+blz	php/test2.php	/^      $blz=$i2b['blz'];$/;"	v
+blz_array	konto_check.h	/^   UINT4 cnt_blz,*blz_array,*pz_array,*blz_hash_low,*blz_hash_high,*invalid;$/;"	m	struct:__anon5
+blz_f	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+blz_hash_high	konto_check.h	/^   UINT4 cnt_blz,*blz_array,*pz_array,*blz_hash_low,*blz_hash_high,*invalid;$/;"	m	struct:__anon5
+blz_hash_low	konto_check.h	/^   UINT4 cnt_blz,*blz_array,*pz_array,*blz_hash_low,*blz_hash_high,*invalid;$/;"	m	struct:__anon5
+blz_link	php/test/konto_test.php	/^            $blz_link=blz_link($b);$/;"	v
+blz_link	php/test/konto_test.php	/^            $blz_link=sprintf("%8s",$b);$/;"	v
+blz_link	php/test/konto_test.php	/^         $blz_link=blz_link($blz);$/;"	v
+blz_link	php/test/konto_test.php	/^function blz_link($blz)$/;"	f
+blz_suche_sort	konto_check.c	/^static int *blz_suche_sort,*zw_suche_sort;   \/* Hilfsvariablen *\/$/;"	v	file:
+bx1	konto_check.c	/^          bx1[256],bx2[256],by1[256],by4[256],is_not_digit[256];$/;"	v	file:
+bx2	konto_check.c	/^          bx1[256],bx2[256],by1[256],by4[256],is_not_digit[256];$/;"	v	file:
+by1	konto_check.c	/^          bx1[256],bx2[256],by1[256],by4[256],is_not_digit[256];$/;"	v	file:
+by4	konto_check.c	/^          bx1[256],bx2[256],by1[256],by4[256],is_not_digit[256];$/;"	v	file:
+c2	konto_check.h	/^   int c2,d2,a5,p,konto[11];$/;"	m	struct:__anon5
+calloc	konto_check.c	/^#define calloc(/;"	d	file:
+calloc	konto_check.c	/^#undef calloc$/;"	d	file:
+ci_check	konto_check.c	/^DLL_EXPORT int ci_check(char *ci)$/;"	f
+ci_check	mini/mini1.cs	/^      static Int32 ci_check(String ci)$/;"	m	class:mini.Program	file:
+ci_check	php/php_konto_check.h	/^PHP_FUNCTION(ci_check);$/;"	v
+ci_check_i	mini/mini1.cs	/^         private static extern Int32 ci_check_i(String ci);$/;"	m	class:mini.Program	file:
+cleanup_kto	konto_check.c	/^DLL_EXPORT int cleanup_kto(void)$/;"	f
+cleanup_kto	mini/mini.cs	/^         private static extern void cleanup_kto();$/;"	m	class:mini.Program	file:
+cleanup_kto	mini/mini1.cs	/^         private static extern void cleanup_kto();$/;"	m	class:mini.Program	file:
+cleanup_kto_t	konto_check.c	/^DLL_EXPORT int cleanup_kto_t(KTO_CHK_CTX *ctx)$/;"	f
+cmp_int	konto_check.c	/^static int cmp_int(const void *a,const void *b)$/;"	f	file:
+cmp_suche_sort	konto_check.c	/^static int cmp_suche_sort(const void *ap,const void *bp)$/;"	f	file:
+cnt	konto_check.c	/^   int cnt;$/;"	m	struct:__anon3	file:
+cnt	php/test.php	/^   $cnt=lut_filialen($blz);$/;"	v
+cnt	php/test/konto_test.php	/^   $cnt=0;$/;"	v
+cnt_blz	konto_check.h	/^   UINT4 cnt_blz,*blz_array,*pz_array,*blz_hash_low,*blz_hash_high,*invalid;$/;"	m	struct:__anon5
+compr_str	konto_check.c	/^static const char *compr_str[]={$/;"	v	file:
+compression_lib	konto_check.c	/^static int compression_lib=COMPRESSION_DEFAULT;$/;"	v	file:
+convert_encoding	konto_check.c	/^static int convert_encoding(char **data,UINT4 *len)$/;"	f	file:
+copy_lutfile	konto_check.c	/^DLL_EXPORT int copy_lutfile(char *old_name,char *new_name,int new_slots)$/;"	f
+copy_lutfile	php/php_konto_check.h	/^PHP_FUNCTION(copy_lutfile);$/;"	v
+create_lutfile	konto_check.c	/^DLL_EXPORT int create_lutfile(char *filename, char *prolog, int slots)$/;"	f
+create_lutfile_int	konto_check.c	/^static int create_lutfile_int(char *name, char *prolog, int slots,FILE **lut)$/;"	f	file:
+current_date	konto_check.c	/^DLL_EXPORT_V UINT4 current_date;$/;"	v
+current_encoding	konto_check.c	/^static int encoding=DEFAULT_ENCODING,current_encoding,keep_raw_data_flag=KEEP_RAW_DATA;$/;"	v	file:
+current_info	konto_check.c	/^static char *lut2_block_data[400],*current_info;$/;"	v	file:
+current_info_len	konto_check.c	/^static UINT4 current_info_len,current_v1,current_v2,lut_blocks_missing,set_offset;$/;"	v	file:
+current_lut_level	konto_check.c	/^static int lut_id_status,lut_init_level,current_lut_set,current_lut_level,lut_init_level_tmp=-1;$/;"	v	file:
+current_lut_set	konto_check.c	/^static int lut_id_status,lut_init_level,current_lut_set,current_lut_level,lut_init_level_tmp=-1;$/;"	v	file:
+current_lutfile	konto_check.c	/^static char lut_id[36],*current_lutfile;$/;"	v	file:
+current_lutfile_name	konto_check.c	/^DLL_EXPORT const char *current_lutfile_name(int *set,int *level,int *retval)$/;"	f
+current_lutfile_name	mini/mini1.cs	/^      static String current_lutfile_name()$/;"	m	class:mini.Program	file:
+current_lutfile_name	mini/mini1.cs	/^      static String current_lutfile_name(out Int32 set)$/;"	m	class:mini.Program	file:
+current_lutfile_name	mini/mini1.cs	/^      static String current_lutfile_name(out Int32 set,out Int32 level)$/;"	m	class:mini.Program	file:
+current_lutfile_name	mini/mini1.cs	/^      static String current_lutfile_name(out Int32 set,out Int32 level,out Int32 retval)$/;"	m	class:mini.Program	file:
+current_lutfile_name	php/php_konto_check.h	/^PHP_FUNCTION(current_lutfile_name);$/;"	v
+current_lutfile_name_i	mini/mini1.cs	/^         private static extern IntPtr current_lutfile_name_i(out Int32 set, out Int32 level, out Int32 retval);$/;"	m	class:mini.Program	file:
+current_v1	konto_check.c	/^static UINT4 current_info_len,current_v1,current_v2,lut_blocks_missing,set_offset;$/;"	v	file:
+current_v2	konto_check.c	/^static UINT4 current_info_len,current_v1,current_v2,lut_blocks_missing,set_offset;$/;"	v	file:
+d	php/test/konto_test.php	/^      $d="";$/;"	v
+d	php/test/konto_test.php	/^      $d="&detail=${_REQUEST['detail']}";$/;"	v
+d2	konto_check.h	/^   int c2,d2,a5,p,konto[11];$/;"	m	struct:__anon5
+default_buffer	konto_check.c	/^static char *default_buffer,*default_ptr,*default_key[DEFAULT_CNT],*default_val[DEFAULT_CNT];$/;"	v	file:
+default_bufsize	konto_check.c	/^static int default_cnt,default_bufsize,default_val_size[DEFAULT_CNT];$/;"	v	file:
+default_cnt	konto_check.c	/^static int default_cnt,default_bufsize,default_val_size[DEFAULT_CNT];$/;"	v	file:
+default_key	konto_check.c	/^static char *default_buffer,*default_ptr,*default_key[DEFAULT_CNT],*default_val[DEFAULT_CNT];$/;"	v	file:
+default_lutname	konto_check.c	/^static const char *default_lutname[]={DEFAULT_LUT_NAME};$/;"	v	file:
+default_ptr	konto_check.c	/^static char *default_buffer,*default_ptr,*default_key[DEFAULT_CNT],*default_val[DEFAULT_CNT];$/;"	v	file:
+default_val	konto_check.c	/^static char *default_buffer,*default_ptr,*default_key[DEFAULT_CNT],*default_val[DEFAULT_CNT];$/;"	v	file:
+default_val_size	konto_check.c	/^static int default_cnt,default_bufsize,default_val_size[DEFAULT_CNT];$/;"	v	file:
+dlload	awk/konto_check_awk.c	/^NODE *dlload(NODE *tree,void *dl)$/;"	f
+do_bank_bic	awk/konto_check_awk.c	/^static NODE* do_bank_bic(NODE *tree)$/;"	f	file:
+do_bank_name	awk/konto_check_awk.c	/^static NODE* do_bank_name(NODE *tree)$/;"	f	file:
+do_bank_name_kurz	awk/konto_check_awk.c	/^static NODE* do_bank_name_kurz(NODE *tree)$/;"	f	file:
+do_bank_ort	awk/konto_check_awk.c	/^static NODE* do_bank_ort(NODE *tree)$/;"	f	file:
+do_bank_plz	awk/konto_check_awk.c	/^static NODE* do_bank_plz(NODE *tree)$/;"	f	file:
+do_bank_pz	awk/konto_check_awk.c	/^static NODE* do_bank_pz(NODE *tree)$/;"	f	file:
+do_bank_valid	awk/konto_check_awk.c	/^static NODE* do_bank_valid(NODE *tree)$/;"	f	file:
+do_konto_check	awk/konto_check_awk.c	/^static NODE* do_konto_check(NODE *tree)$/;"	f	file:
+do_lut_free	awk/konto_check_awk.c	/^static NODE* do_lut_free(NODE *tree)$/;"	f	file:
+do_lut_init	awk/konto_check_awk.c	/^static NODE* do_lut_init(NODE *tree)$/;"	f	file:
+do_retval2txt	awk/konto_check_awk.c	/^static NODE* do_retval2txt(NODE *tree)$/;"	f	file:
+do_retval2utf8	awk/konto_check_awk.c	/^static NODE* do_retval2utf8(NODE *tree)$/;"	f	file:
+dump	php/test2.php	/^   $dump=$_REQUEST["dump"]; $/;"	v
+dump	php/test2.php	/^   $dump=0;$/;"	v
+dump_lutfile	konto_check.c	/^DLL_EXPORT int dump_lutfile(char *outputname,UINT4 *required)$/;"	f
+dump_lutfile_p	konto_check.c	/^DLL_EXPORT int dump_lutfile_p(char *outputname,UINT4 felder)$/;"	f
+ee	konto_check.c	/^static unsigned char ee[500],*eeh,*eep,eec[]={$/;"	v	file:
+eec	konto_check.c	/^static unsigned char ee[500],*eeh,*eep,eec[]={$/;"	v	file:
+eeh	konto_check.c	/^static unsigned char ee[500],*eeh,*eep,eec[]={$/;"	v	file:
+eep	konto_check.c	/^static unsigned char ee[500],*eeh,*eep,eec[]={$/;"	v	file:
+encoding	konto_check.c	/^static int encoding=DEFAULT_ENCODING,current_encoding,keep_raw_data_flag=KEEP_RAW_DATA;$/;"	v	file:
+extra_init_done	konto_check.c	/^           extra_init_done;$/;"	v	file:
+filialen	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+folgemethode	php/methoden_txt.c	/^static long folgemethode(long methode)$/;"	f	file:
+free	konto_check.c	/^#define free(/;"	d	file:
+free	konto_check.c	/^#undef free$/;"	d	file:
+ftruncate	main.c	/^#define ftruncate(/;"	d	file:
+generate_lut	konto_check.c	/^DLL_EXPORT int generate_lut(char *inputname,char *outputname,char *user_info,int lut_version)$/;"	f
+generate_lut	mini/mini1.cs	/^      static Int32 generate_lut(String inputname,String outputname)$/;"	m	class:mini.Program	file:
+generate_lut	mini/mini1.cs	/^      static Int32 generate_lut(String inputname,String outputname,String user_info)$/;"	m	class:mini.Program	file:
+generate_lut	mini/mini1.cs	/^      static Int32 generate_lut(String inputname,String outputname,String user_info,$/;"	m	class:mini.Program	file:
+generate_lut2	konto_check.c	/^DLL_EXPORT int generate_lut2(char *inputname,char *outputname,const char *user_info,$/;"	f
+generate_lut2	php/php_konto_check.h	/^PHP_FUNCTION(generate_lut2);$/;"	v
+generate_lut2_p	konto_check.c	/^DLL_EXPORT int generate_lut2_p(char *inputname,char *outputname,char *user_info,char *gueltigkeit,$/;"	f
+generate_lut2_p	mini/mini1.cs	/^         private static extern Int32 generate_lut2_p(String inputname,String outputname,String user_info,$/;"	m	class:mini.Program	file:
+generate_lut_t	konto_check.c	/^DLL_EXPORT int generate_lut_t(char *inputname,char *outputname,char *user_info,int lut_version,KTO_CHK_CTX *ctx)$/;"	f
+get_kto_check_version	konto_check.c	/^DLL_EXPORT const char *get_kto_check_version(void)$/;"	f
+get_kto_check_version	php/php_konto_check.h	/^PHP_FUNCTION(get_kto_check_version);$/;"	v
+get_kto_check_version_x	konto_check.c	/^DLL_EXPORT const char *get_kto_check_version_x(int mode)$/;"	f
+get_lut_id	konto_check.c	/^DLL_EXPORT int get_lut_id(char *lut_name,int set,char *id)$/;"	f
+get_lut_info	konto_check.c	/^DLL_EXPORT int get_lut_info(char **info,char *lut_name)$/;"	f
+get_lut_info2	konto_check.c	/^DLL_EXPORT int get_lut_info2(char *lut_name,int *version_p,char **prolog_p,char **info_p,char **user_info_p)$/;"	f
+get_lut_info2_b	konto_check.c	/^DLL_EXPORT int get_lut_info2_b(char *lutname,int *version,char **prolog_p,char **info_p,char **user_info_p)$/;"	f
+get_lut_info_b	konto_check.c	/^DLL_EXPORT int get_lut_info_b(char **info_p,char *lutname)$/;"	f
+get_lut_info_t	konto_check.c	/^DLL_EXPORT int get_lut_info_t(char **info,char *lut_name,KTO_CHK_CTX *ctx)$/;"	f
+get_sortc	konto_check.c	/^static int get_sortc(char **a,int enc)$/;"	f	file:
+get_var	php/test/konto_test.php	/^function get_var($var)$/;"	f
+get_var1	php/test/konto_test.php	/^function get_var1($var)$/;"	f
+get_var_bool	php/test/konto_test.php	/^function get_var_bool($var)$/;"	f
+gettimeofday	main.c	/^int gettimeofday(struct timeval *tv, void *tz)$/;"	f
+h1	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+h2	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+h3	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+h4	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+h5	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+h6	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+h7	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+h8	konto_check.c	/^static int h1['9'+1],h2['9'+1],h3['9'+1],h4['9'+1],h5['9'+1],h6['9'+1],h7['9'+1],h8['9'+1];$/;"	v	file:
+hash	konto_check.c	/^static short *hash;$/;"	v	file:
+hauptstellen	php/test/konto_test.php	/^         \/* bei $hauptstellen=1 nur die Hauptstellen ausgeben (diese haben $index=0) *\/$/;"	v
+hauptstellen2	php/test/konto_test.php	/^        $hauptstellen2=1;$/;"	v
+hauptstellen2	php/test/konto_test.php	/^   $hauptstellen2=0;$/;"	v
+head_link	php/test/konto_test.php	/^function head_link($i,$extra,$name)$/;"	f
+hs	php/test/konto_test.php	/^      $hs="";$/;"	v
+hs	php/test/konto_test.php	/^      $hs="&hauptstellen=1";$/;"	v
+hs	php/test/konto_test.php	/^   $hs=0;$/;"	v
+hsx	php/test/konto_test.php	/^      $hsx=" ($hs Hauptstellen)";$/;"	v
+hsx	php/test/konto_test.php	/^      $hsx="";$/;"	v
+hx1	konto_check.c	/^    hx1[]={   2,  733, 1637, 2677, 3701, 4799, 5881, 7027, 8233, 9397},$/;"	v	file:
+hx2	konto_check.c	/^    hx2[]={  89,  883, 1831, 2833, 3907, 4999, 6121, 7247, 8443, 9601},$/;"	v	file:
+hx3	konto_check.c	/^    hx3[]={ 211, 1049, 2011, 3023, 4091, 5197, 6311, 7499, 8669, 9791},$/;"	v	file:
+hx4	konto_check.c	/^    hx4[]={ 349, 1217, 2203, 3229, 4271, 5417, 6529, 7673, 8839, 10009},$/;"	v	file:
+hx5	konto_check.c	/^    hx5[]={ 487, 1399, 2371, 3413, 4483, 5591, 6719, 7879, 9049, 10223},$/;"	v	file:
+hx6	konto_check.c	/^    hx6[]={ 641, 1553, 2551, 3593, 4673, 5801, 6917, 8101, 9277, 10433},$/;"	v	file:
+hx7	konto_check.c	/^    hx7[]={ 797, 1721, 2719, 3779, 4903, 6007, 7127, 8297, 9461, 10657},$/;"	v	file:
+hx8	konto_check.c	/^    hx8[]={ 953, 1901, 2903, 3967, 5077, 6203, 7349, 8539, 9677, 10883};$/;"	v	file:
+i	mini/mini.php	/^   foreach($zeilen as $i=>$v){$/;"	v
+i	php/test.php	/^foreach($slots as $i=>$v)echo "$v\\n";$/;"	v
+i	php/test/konto_test.php	/^      foreach($liste2 as $i=>$v){$/;"	v
+i	php/test/konto_test.php	/^   foreach($liste3 as $i=>$zeile){$/;"	v
+i	php/test/konto_test.php	/^   foreach($result as $i=>$v){$/;"	v
+i	php/test/konto_test.php	/^   if(!$hauptstellen2)foreach($result as $i=>$v)if(!$idx[$i])$hs++;$/;"	v
+i2b	php/test2.php	/^   $i2b=iban2bic($iban);   \/* Die Funktion gibt BIC, BLZ und kto zurück *\/$/;"	v
+iban2bic	konto_check.c	/^DLL_EXPORT const char *iban2bic(char *iban,int *retval,char *blz,char *kto)$/;"	f
+iban2bic	mini/mini1.cs	/^      static String iban2bic(String iban)$/;"	m	class:mini.Program	file:
+iban2bic	mini/mini1.cs	/^      static String iban2bic(String iban,out Int32 retval)$/;"	m	class:mini.Program	file:
+iban2bic	mini/mini1.cs	/^      static String iban2bic(String iban,out String blz, out String kto)$/;"	m	class:mini.Program	file:
+iban2bic	mini/mini1.cs	/^      static String iban2bic(String iban,out String blz, out String kto,out Int32 retval)$/;"	m	class:mini.Program	file:
+iban2bic	php/php_konto_check.h	/^PHP_FUNCTION(iban2bic);$/;"	v
+iban2bic	php/test2.php	/^   $iban2bic=$_REQUEST["iban2bic"]; $/;"	v
+iban2bic	php/test2.php	/^   $iban2bic=0;$/;"	v
+iban2bic_i	mini/mini1.cs	/^         private static extern IntPtr iban2bic_i(String iban, out Int32 retval,IntPtr blz,IntPtr kto);$/;"	m	class:mini.Program	file:
+iban_bic_gen	konto_check.c	/^DLL_EXPORT char *iban_bic_gen(char *blz,char *kto,const char **bicp,char *blz2,char *kto2,int *retval)$/;"	f
+iban_bic_gen1	konto_check.c	/^DLL_EXPORT char *iban_bic_gen1(char *blz,char *kto,const char **bicp,int *retval)$/;"	f
+iban_check	konto_check.c	/^DLL_EXPORT int iban_check(char *iban,int *retval)$/;"	f
+iban_check	mini/mini1.cs	/^      static Int32 iban_check(String iban)$/;"	m	class:mini.Program	file:
+iban_check	mini/mini1.cs	/^      static Int32 iban_check(String iban, out Int32 retval)$/;"	m	class:mini.Program	file:
+iban_check	php/php_konto_check.h	/^PHP_FUNCTION(iban_check);$/;"	v
+iban_check_i	mini/mini1.cs	/^         private static extern Int32 iban_check_i(String iban, out Int32 retval);$/;"	m	class:mini.Program	file:
+iban_gen	konto_check.c	/^DLL_EXPORT char *iban_gen(char *blz,char *kto,int *retval)$/;"	f
+iban_gen	mini/mini1.cs	/^      static String iban_gen(String blz, String kto)$/;"	m	class:mini.Program	file:
+iban_gen	mini/mini1.cs	/^      static String iban_gen(String blz, String kto, out Int32 retval)$/;"	m	class:mini.Program	file:
+iban_gen	mini/mini1.cs	/^      static String iban_gen(String blz, String kto,out String bic)$/;"	m	class:mini.Program	file:
+iban_gen	mini/mini1.cs	/^      static String iban_gen(String blz, String kto,out String bic,out Int32 retval)$/;"	m	class:mini.Program	file:
+iban_gen	php/php_konto_check.h	/^PHP_FUNCTION(iban_gen);$/;"	v
+iban_gen_i	mini/mini1.cs	/^         private static extern IntPtr iban_gen_i(String blz, String kto, out IntPtr bic, out Int32 retval);$/;"	m	class:mini.Program	file:
+iban_init	konto_check.c	/^static int iban_init(void)$/;"	f	file:
+iban_regel	konto_check.c	/^           *own_iban,own_iban_cnt,vt_cnt,vt_cnt_uniq,*volltext_banken,*volltext_start,*iban_regel,$/;"	v	file:
+iban_regel_cvt	konto_check.c	/^static int iban_regel_cvt(char *blz,char *kto,const char **bicp,int regel_version)$/;"	f	file:
+iban_test	php/test2.php	/^   $iban_test=$_REQUEST["iban_test"];$/;"	v
+iban_test	php/test2.php	/^   $iban_test=0;$/;"	v
+idx	php/test/konto_test.php	/^      foreach($slots as $idx=>$value)echo $value,"\\n";$/;"	v
+index	php/test/konto_test.php	/^            $index=lut_filialen($blz); \/* Anzahl Filialen *\/$/;"	v
+index	php/test/konto_test.php	/^      $index=$idx[$i];$/;"	v
+info	mini/mini.php	/^               $info="";   \/* Fehler in BLZ; Banknamen leer lassen *\/$/;"	v
+info	mini/mini.php	/^               $info="$name<\/td><td>$plz $ort"; \/* Bankinfo zusammenstellen *\/$/;"	v
+info	php/test.php	/^$info=lut_info("",$info1,$valid1,$info2,$valid2);$/;"	v
+info	php/test.php	/^$info=lut_info($lutfile,$info1,$valid1,$info2,$valid2,$info3,$slots);$/;"	v
+info	php/test2.php	/^   $info=$_REQUEST["info"]; $/;"	v
+info	php/test2.php	/^   $info=0;$/;"	v
+init_atoi_table	konto_check.c	/^static void init_atoi_table(void)$/;"	f	file:
+init_blzf	konto_check.c	/^static int init_blzf(int *cnt_p)$/;"	f	file:
+init_in_progress	konto_check.c	/^static volatile int init_status,init_in_progress;$/;"	v	file:
+init_status	konto_check.c	/^static volatile int init_status,init_in_progress;$/;"	v	file:
+inline	konto_check.c	/^#define inline$/;"	d	file:
+invalid	konto_check.h	/^   UINT4 cnt_blz,*blz_array,*pz_array,*blz_hash_low,*blz_hash_high,*invalid;$/;"	m	struct:__anon5
+ipi	php/test.php	/^   $ipi=ipi_gen($zweck,$ret,$papier);$/;"	v
+ipi_check	konto_check.c	/^DLL_EXPORT int ipi_check(char *zweck)$/;"	f
+ipi_check	mini/mini1.cs	/^         private static extern Int32 ipi_check(String ipi);$/;"	m	class:mini.Program	file:
+ipi_check	php/php_konto_check.h	/^PHP_FUNCTION(ipi_check);$/;"	v
+ipi_gen	konto_check.c	/^DLL_EXPORT int ipi_gen(char *zweck,char *dst,char *papier)$/;"	f
+ipi_gen	mini/mini1.cs	/^      static String ipi_gen(String zweck)$/;"	m	class:mini.Program	file:
+ipi_gen	mini/mini1.cs	/^      static String ipi_gen(String zweck, out Int32 retval)$/;"	m	class:mini.Program	file:
+ipi_gen	mini/mini1.cs	/^      static String ipi_gen(String zweck, out String papier)$/;"	m	class:mini.Program	file:
+ipi_gen	mini/mini1.cs	/^      static String ipi_gen(String zweck, out String papier,out Int32 retval)$/;"	m	class:mini.Program	file:
+ipi_gen	php/php_konto_check.h	/^PHP_FUNCTION(ipi_gen);$/;"	v
+ipi_gen_i	mini/mini1.cs	/^         private static extern Int32 ipi_gen_i(String zweck, out IntPtr dst, out IntPtr papier);$/;"	m	class:mini.Program	file:
+is_not_digit	konto_check.c	/^          bx1[256],bx2[256],by1[256],by4[256],is_not_digit[256];$/;"	v	file:
+k	php/test/konto_test.php	/^         $k=$zeile_a[1];$/;"	v
+kc_alloc	konto_check.c	/^DLL_EXPORT void *kc_alloc(int size,int *retval)$/;"	f
+kc_alloc	mini/mini1.cs	/^         private static extern IntPtr kc_alloc(Int32 size,out Int32 retval);$/;"	m	class:mini.Program	file:
+kc_free	konto_check.c	/^DLL_EXPORT void kc_free(char *ptr)$/;"	f
+kc_free	mini/mini1.cs	/^         private static extern void kc_free(IntPtr ptr);$/;"	m	class:mini.Program	file:
+kct	php/test/konto_test.php	/^   $kct=kc_test_var();$/;"	v
+keep_raw_data	konto_check.c	/^DLL_EXPORT int keep_raw_data(int mode)$/;"	f
+keep_raw_data	php/php_konto_check.h	/^PHP_FUNCTION(keep_raw_data);$/;"	v
+keep_raw_data_flag	konto_check.c	/^static int encoding=DEFAULT_ENCODING,current_encoding,keep_raw_data_flag=KEEP_RAW_DATA;$/;"	v	file:
+konto	konto_check.h	/^   int c2,d2,a5,p,konto[11];$/;"	m	struct:__anon5
+konto_check	php/php_konto_check.h	/^PHP_MINFO_FUNCTION(konto_check);$/;"	v
+konto_check	php/php_konto_check.h	/^PHP_MINIT_FUNCTION(konto_check);$/;"	v
+konto_check	php/php_konto_check.h	/^PHP_MSHUTDOWN_FUNCTION(konto_check);$/;"	v
+konto_check	php/php_konto_check.h	/^PHP_RINIT_FUNCTION(konto_check);$/;"	v
+konto_check	php/php_konto_check.h	/^PHP_RSHUTDOWN_FUNCTION(konto_check);$/;"	v
+konto_check_functions	php/konto_check.c	/^static FUNCTION_ENTRY konto_check_functions[]={$/;"	v	file:
+konto_check_idx2blz	konto_check.c	/^DLL_EXPORT int konto_check_idx2blz(int idx,int *zweigstelle,int *retval)$/;"	f
+konto_check_module_entry	php/konto_check.c	/^zend_module_entry konto_check_module_entry={$/;"	v
+kto	php/test2.php	/^      $kto=$i2b['kto'];$/;"	v
+kto_check	konto_check.c	/^DLL_EXPORT int kto_check(char *pz_or_blz,char *kto,char *lut_name)$/;"	f
+kto_check	php/php_konto_check.h	/^PHP_FUNCTION(kto_check);$/;"	v
+kto_check_blz	konto_check.c	/^DLL_EXPORT int kto_check_blz(char *blz,char *kto)$/;"	f
+kto_check_blz	mini/mini.cs	/^         private static extern Int32 kto_check_blz(String blz, String kto);$/;"	m	class:mini.Program	file:
+kto_check_blz	mini/mini1.cs	/^         private static extern Int32 kto_check_blz(String blz, String kto);$/;"	m	class:mini.Program	file:
+kto_check_blz	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_blz);$/;"	v
+kto_check_blz_dbg	konto_check.c	/^DLL_EXPORT int kto_check_blz_dbg(char *blz,char *kto,RETVAL *retvals)$/;"	f
+kto_check_blz_dbg	konto_check.c	/^DLL_EXPORT int kto_check_blz_dbg(char *blz,char *kto,RETVAL *retvals){return DEBUG_ONLY_FUNCTION;}$/;"	f
+kto_check_blz_dbg	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_blz_dbg);$/;"	v
+kto_check_blz_x	konto_check.c	/^static int kto_check_blz_x(char *blz,char *kto,int *uk_cnt)$/;"	f	file:
+kto_check_clear_default	konto_check.c	/^static int kto_check_clear_default(void)$/;"	f	file:
+kto_check_default_keys	konto_check.c	/^DLL_EXPORT int kto_check_default_keys(char ***keys,int *cnt)$/;"	f
+kto_check_encoding	konto_check.c	/^DLL_EXPORT int kto_check_encoding(int mode)$/;"	f
+kto_check_encoding	mini/mini1.cs	/^      static Int32 kto_check_encoding()$/;"	m	class:mini.Program	file:
+kto_check_encoding	mini/mini1.cs	/^      static Int32 kto_check_encoding(Int32 encoding)$/;"	m	class:mini.Program	file:
+kto_check_encoding	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_encoding);$/;"	v
+kto_check_encoding_i	mini/mini1.cs	/^         private static extern Int32 kto_check_encoding_i(Int32 encoding);$/;"	m	class:mini.Program	file:
+kto_check_encoding_str	konto_check.c	/^DLL_EXPORT const char *kto_check_encoding_str(int mode)$/;"	f
+kto_check_encoding_str	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_encoding_str);$/;"	v
+kto_check_free	mini/mini.cs	/^      static void kto_check_free()$/;"	m	class:mini.Program	file:
+kto_check_free	mini/mini1.cs	/^      static void kto_check_free()$/;"	m	class:mini.Program	file:
+kto_check_get_default	konto_check.c	/^DLL_EXPORT int kto_check_get_default(char *key,char **val,int *size)$/;"	f
+kto_check_idx2blz	konto_check.c	/^DLL_EXPORT int kto_check_idx2blz(int idx,int *zweigstelle,int *retval)$/;"	f
+kto_check_idx2blz	mini/mini1.cs	/^         private static extern Int32 kto_check_idx2blz(Int32 idx, out Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+kto_check_init	konto_check.c	/^DLL_EXPORT int kto_check_init(char *lut_name,int *required,int **status,int set,int incremental)$/;"	f
+kto_check_init	mini/mini.cs	/^      static Int32 kto_check_init()$/;"	m	class:mini.Program	file:
+kto_check_init	mini/mini1.cs	/^      static Int32 kto_check_init()$/;"	m	class:mini.Program	file:
+kto_check_init	mini/mini1.cs	/^      static Int32 kto_check_init(Int32 level)$/;"	m	class:mini.Program	file:
+kto_check_init	mini/mini1.cs	/^      static Int32 kto_check_init(Int32 level,Int32 set)$/;"	m	class:mini.Program	file:
+kto_check_init	mini/mini1.cs	/^      static Int32 kto_check_init(String lutfile)$/;"	m	class:mini.Program	file:
+kto_check_init	mini/mini1.cs	/^      static Int32 kto_check_init(String lutfile, Int32 level)$/;"	m	class:mini.Program	file:
+kto_check_init	mini/mini1.cs	/^      static Int32 kto_check_init(String lutfile, Int32 level, Int32 set)$/;"	m	class:mini.Program	file:
+kto_check_init	mini/mini1.cs	/^      static Int32 kto_check_init(String lutfile, Int32 level, Int32 set, Int32 incremental)$/;"	m	class:mini.Program	file:
+kto_check_init	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_init);$/;"	v
+kto_check_init2	konto_check.c	/^DLL_EXPORT int kto_check_init2(char *lut_name)$/;"	f
+kto_check_init_default	konto_check.c	/^DLL_EXPORT int kto_check_init_default(char *lut_name,int block_id)$/;"	f
+kto_check_init_i	mini/mini.cs	/^         private static extern Int32 kto_check_init_i(String lutName, Int32 required, Int32 set, Int32 incremental);$/;"	m	class:mini.Program	file:
+kto_check_init_i	mini/mini1.cs	/^         private static extern Int32 kto_check_init_i(String lutName, Int32 required, Int32 set, Int32 incremental);$/;"	m	class:mini.Program	file:
+kto_check_init_p	konto_check.c	/^DLL_EXPORT int kto_check_init_p(char *lut_name,int required,int set,int incremental)$/;"	f
+kto_check_int	konto_check.c	/^static int kto_check_int(char *x_blz,int pz_methode,char *kto,int untermethode,RETVAL *retvals)$/;"	f	file:
+kto_check_msg	konto_check.c	/^DLL_EXPORT_V char *kto_check_msg="Die Variable kto_check_msg wird nicht mehr unterstÃ¼tzt; bitte kto_check_retval2txt() benutzen";$/;"	v
+kto_check_msg	konto_check.h	/^   char *kto_check_msg,pz_str[4];$/;"	m	struct:__anon5
+kto_check_pz	konto_check.c	/^DLL_EXPORT int kto_check_pz(char *pz,char *kto,char *blz)$/;"	f
+kto_check_pz	mini/mini1.cs	/^         private static extern Int32 kto_check_pz(String pz, String kto, String blz);$/;"	m	class:mini.Program	file:
+kto_check_pz	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_pz);$/;"	v
+kto_check_pz_dbg	konto_check.c	/^DLL_EXPORT int kto_check_pz_dbg(char *pz,char *kto,char *blz,RETVAL *retvals)$/;"	f
+kto_check_pz_dbg	konto_check.c	/^DLL_EXPORT int kto_check_pz_dbg(char *pz,char *kto,char *blz,RETVAL *retvals){return DEBUG_ONLY_FUNCTION;}$/;"	f
+kto_check_pz_dbg	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_pz_dbg);$/;"	v
+kto_check_regel	konto_check.c	/^DLL_EXPORT int kto_check_regel(char *blz,char *kto)$/;"	f
+kto_check_regel_dbg	konto_check.c	/^DLL_EXPORT int kto_check_regel_dbg(char *blz,char *kto,char *blz2,char *kto2,const char **bic,int *regel,RETVAL *retvals)$/;"	f
+kto_check_regel_dbg	konto_check.c	/^DLL_EXPORT int kto_check_regel_dbg(char *blz,char *kto,char *blz2,char *kto2,const char **bic,int *regel,RETVAL *retvals){return DEBUG_ONLY_FUNCTION;}$/;"	f
+kto_check_regel_dbg	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_regel_dbg);$/;"	v
+kto_check_retval	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_retval);$/;"	v
+kto_check_retval2dos	konto_check.c	/^DLL_EXPORT const char *kto_check_retval2dos(int retval)$/;"	f
+kto_check_retval2dos	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_retval2dos);$/;"	v
+kto_check_retval2html	konto_check.c	/^DLL_EXPORT const char *kto_check_retval2html(int retval)$/;"	f
+kto_check_retval2html	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_retval2html);$/;"	v
+kto_check_retval2iso	konto_check.c	/^DLL_EXPORT const char *kto_check_retval2iso(int retval)$/;"	f
+kto_check_retval2iso	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_retval2iso);$/;"	v
+kto_check_retval2txt	konto_check.c	/^DLL_EXPORT const char *kto_check_retval2txt(int retval)$/;"	f
+kto_check_retval2txt	mini/mini.cs	/^         private static extern IntPtr kto_check_retval2txt(Int32 retval);$/;"	m	class:mini.Program	file:
+kto_check_retval2txt	mini/mini1.cs	/^         private static extern IntPtr kto_check_retval2txt(Int32 retval);$/;"	m	class:mini.Program	file:
+kto_check_retval2txt	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_retval2txt);$/;"	v
+kto_check_retval2txt_short	konto_check.c	/^DLL_EXPORT const char *kto_check_retval2txt_short(int retval)$/;"	f
+kto_check_retval2txt_short	mini/mini1.cs	/^         private static extern IntPtr kto_check_retval2txt_short(Int32 retval);$/;"	m	class:mini.Program	file:
+kto_check_retval2txt_short	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_retval2txt_short);$/;"	v
+kto_check_retval2utf8	konto_check.c	/^DLL_EXPORT const char *kto_check_retval2utf8(int retval)$/;"	f
+kto_check_retval2utf8	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_retval2utf8);$/;"	v
+kto_check_set_default	konto_check.c	/^DLL_EXPORT int kto_check_set_default(char *key,char *val)$/;"	f
+kto_check_set_default_bin	konto_check.c	/^DLL_EXPORT int kto_check_set_default_bin(char *key,char *val,int size)$/;"	f
+kto_check_str	konto_check.c	/^DLL_EXPORT const char *kto_check_str(char *x_blz,char *kto,char *lut_name)$/;"	f
+kto_check_str	php/php_konto_check.h	/^PHP_FUNCTION(kto_check_str);$/;"	v
+kto_check_t	konto_check.c	/^DLL_EXPORT int kto_check_t(char *x_blz,char *kto,char *lut_name,KTO_CHK_CTX *ctx)$/;"	f
+kto_check_test_vars	konto_check.c	/^DLL_EXPORT char *kto_check_test_vars(char *txt,UINT4 i)$/;"	f
+kto_check_write_default	konto_check.c	/^DLL_EXPORT int kto_check_write_default(char *lutfile,int block_id)$/;"	f
+kto_test	php/test2.php	/^   $kto_test=$_REQUEST["kto_test"]; $/;"	v
+kto_test	php/test2.php	/^   $kto_test=0;$/;"	v
+last_lut_suche_idx	konto_check.c	/^static int last_lut_suche_idx;$/;"	v	file:
+leer_char	konto_check.c	/^static char *leer_string[256],leer_char[256];$/;"	v	file:
+leer_string	konto_check.c	/^static char *leer_string[256],leer_char[256];$/;"	v	file:
+leer_zahl	konto_check.c	/^static int leer_zahl[256];$/;"	v	file:
+liste2	php/test/konto_test.php	/^      $liste2=explode("\\n",$liste);$/;"	v
+liste3	php/test/konto_test.php	/^      $liste3=array();$/;"	v
+liste_neu	php/test/konto_test.php	/^      $liste_neu=implode("\\n",$liste3);$/;"	v
+localtime_r	konto_check.c	/^#define localtime_r(/;"	d	file:
+localtime_r	konto_check.c	/^#undef localtime_r$/;"	d	file:
+localtime_r	konto_check.h	/^#  define localtime_r(/;"	d
+loeschung	konto_check.c	/^            *ort_data,**bic,*bic_buffer,*aenderung,*loeschung,**volltext,*volltext_data;$/;"	v	file:
+lut2_block_data	konto_check.c	/^static char *lut2_block_data[400],*current_info;$/;"	v	file:
+lut2_block_len	konto_check.c	/^static int lut2_block_status[400],lut2_block_len[400],$/;"	v	file:
+lut2_block_status	konto_check.c	/^static int lut2_block_status[400],lut2_block_len[400],$/;"	v	file:
+lut2_cnt	konto_check.c	/^           lut2_cnt,lut2_cnt_hs;$/;"	v	file:
+lut2_cnt_hs	konto_check.c	/^           lut2_cnt,lut2_cnt_hs;$/;"	v	file:
+lut2_feld_namen	konto_check.h	/^const char *lut2_feld_namen[256];$/;"	v
+lut2_status	konto_check.c	/^DLL_EXPORT int *lut2_status(void)$/;"	f
+lut2_status	php/php_konto_check.h	/^PHP_FUNCTION(lut2_status);$/;"	v
+lut_aenderung	konto_check.c	/^DLL_EXPORT int lut_aenderung(char *b,int zweigstelle,int *retval)$/;"	f
+lut_aenderung	mini/mini1.cs	/^         private static extern Int32 lut_aenderung(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_aenderung	php/php_konto_check.h	/^PHP_FUNCTION(lut_aenderung);$/;"	v
+lut_aenderung_i	konto_check.c	/^DLL_EXPORT int lut_aenderung_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_bic	konto_check.c	/^DLL_EXPORT const char *lut_bic(char *b,int zweigstelle,int *retval)$/;"	f
+lut_bic	mini/mini1.cs	/^         private static extern IntPtr lut_bic(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_bic	php/php_konto_check.h	/^PHP_FUNCTION(lut_bic);$/;"	v
+lut_bic_i	konto_check.c	/^DLL_EXPORT const char *lut_bic_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_bic_int	konto_check.c	/^static const char *lut_bic_int(char *b,int zweigstelle,int *retval)$/;"	f	file:
+lut_block_idx	konto_check.c	/^static int lut_block_idx[400],lut_blocklen_max;$/;"	v	file:
+lut_block_name1	konto_check.c	/^static const char *lut_block_name1[400],*lut_block_name2[400];$/;"	v	file:
+lut_block_name2	konto_check.c	/^static const char *lut_block_name1[400],*lut_block_name2[400];$/;"	v	file:
+lut_blocklen_max	konto_check.c	/^static int lut_block_idx[400],lut_blocklen_max;$/;"	v	file:
+lut_blocks	konto_check.c	/^DLL_EXPORT int lut_blocks(int mode,char **lut_filename,char **lut_blocks_ok,char **lut_blocks_fehler)$/;"	f
+lut_blocks	php/php_konto_check.h	/^PHP_FUNCTION(lut_blocks);$/;"	v
+lut_blocks_missing	konto_check.c	/^static UINT4 current_info_len,current_v1,current_v2,lut_blocks_missing,set_offset;$/;"	v	file:
+lut_blz	konto_check.c	/^DLL_EXPORT int lut_blz(char *b,int zweigstelle)$/;"	f
+lut_blz	mini/mini1.cs	/^         private static extern Int32 lut_blz(String blz, Int32 zweigstelle);$/;"	m	class:mini.Program	file:
+lut_blz	php/php_konto_check.h	/^PHP_FUNCTION(lut_blz);$/;"	v
+lut_cleanup	konto_check.c	/^DLL_EXPORT int lut_cleanup(void)$/;"	f
+lut_cleanup	php/php_konto_check.h	/^PHP_FUNCTION(lut_cleanup);$/;"	v
+lut_dir	konto_check.c	/^static int lut_dir(FILE *lut,int id,UINT4 *slot_cnt,UINT4 *typ,UINT4 *len,$/;"	f	file:
+lut_dir_dump	konto_check.c	/^DLL_EXPORT int lut_dir_dump(char *lutname,char *outputname)$/;"	f
+lut_dir_dump_str	konto_check.c	/^DLL_EXPORT int lut_dir_dump_str(char *lutname,char **dptr)$/;"	f
+lut_dir_dump_str	mini/mini1.cs	/^      static String lut_dir_dump_str(String lutfile)$/;"	m	class:mini.Program	file:
+lut_dir_dump_str	mini/mini1.cs	/^      static String lut_dir_dump_str(String lutfile,out Int32 retval)$/;"	m	class:mini.Program	file:
+lut_dir_dump_str_i	mini/mini1.cs	/^         private static extern Int32 lut_dir_dump_str_i(String lutname, out IntPtr dptr);$/;"	m	class:mini.Program	file:
+lut_filialen	konto_check.c	/^DLL_EXPORT int lut_filialen(char *b,int *retval)$/;"	f
+lut_filialen	mini/mini1.cs	/^         private static extern Int32 lut_filialen(String blz, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_filialen	php/php_konto_check.h	/^PHP_FUNCTION(lut_filialen);$/;"	v
+lut_filialen_i	konto_check.c	/^DLL_EXPORT int lut_filialen_i(int b,int *retval)$/;"	f
+lut_iban_regel	konto_check.c	/^DLL_EXPORT int lut_iban_regel(char *b,int zweigstelle,int *retval)$/;"	f
+lut_iban_regel	php/php_konto_check.h	/^PHP_FUNCTION(lut_iban_regel);$/;"	v
+lut_iban_regel_i	konto_check.c	/^DLL_EXPORT int lut_iban_regel_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_id	konto_check.c	/^static char lut_id[36],*current_lutfile;$/;"	v	file:
+lut_id_status	konto_check.c	/^static int lut_id_status,lut_init_level,current_lut_set,current_lut_level,lut_init_level_tmp=-1;$/;"	v	file:
+lut_index	konto_check.c	/^static int lut_index(char *b)$/;"	f	file:
+lut_index_i	konto_check.c	/^static int lut_index_i(int b)$/;"	f	file:
+lut_info	konto_check.c	/^DLL_EXPORT int lut_info(char *lut_name,char **info1,char **info2,int *valid1,int *valid2)$/;"	f
+lut_info	konto_check.h	/^   char lut_info[1024];$/;"	m	struct:__anon5
+lut_info	mini/mini1.cs	/^      static Int32 lut_info(String lutfile,Int32 set,out String info,out Int32 valid)$/;"	m	class:mini.Program	file:
+lut_info	mini/mini1.cs	/^      static Int32 lut_info(String lutfile,out String info1,out Int32 valid1,out String info2,out Int32 valid2)$/;"	m	class:mini.Program	file:
+lut_info	mini/mini1.cs	/^      static Int32 lut_info(out String info,out Int32 valid)$/;"	m	class:mini.Program	file:
+lut_info	php/php_konto_check.h	/^PHP_FUNCTION(lut_info);$/;"	v
+lut_info_b	konto_check.c	/^DLL_EXPORT int lut_info_b(char *lut_name,char **info1,char **info2,int *valid1,int *valid2)$/;"	f
+lut_info_i	mini/mini1.cs	/^      private static extern Int32 lut_info_i(String lutname,out IntPtr info1,out IntPtr info2,out Int32 valid1,out Int32 valid2);$/;"	m	class:mini.Program	file:
+lut_init	konto_check.c	/^DLL_EXPORT int lut_init(char *lut_name,int required,int set)$/;"	f
+lut_init	php/php_konto_check.h	/^PHP_FUNCTION(lut_init);$/;"	v
+lut_init_level	konto_check.c	/^static int lut_id_status,lut_init_level,current_lut_set,current_lut_level,lut_init_level_tmp=-1;$/;"	v	file:
+lut_init_level_tmp	konto_check.c	/^static int lut_id_status,lut_init_level,current_lut_set,current_lut_level,lut_init_level_tmp=-1;$/;"	v	file:
+lut_keine_iban_berechnung	konto_check.c	/^DLL_EXPORT int lut_keine_iban_berechnung(char *iban_blacklist,char *lutfile,int set)$/;"	f
+lut_keine_iban_berechnung	mini/mini1.cs	/^      static Int32 lut_keine_iban_berechnung(String iban_blacklist,String lutfile)$/;"	m	class:mini.Program	file:
+lut_keine_iban_berechnung	mini/mini1.cs	/^      static Int32 lut_keine_iban_berechnung(String iban_blacklist,String lutfile,Int32 set)$/;"	m	class:mini.Program	file:
+lut_keine_iban_berechnung_i	mini/mini1.cs	/^         private static extern Int32 lut_keine_iban_berechnung_i(String iban_blacklist,String lutfile,Int32 set);$/;"	m	class:mini.Program	file:
+lut_loeschung	konto_check.c	/^DLL_EXPORT int lut_loeschung(char *b,int zweigstelle,int *retval)$/;"	f
+lut_loeschung	mini/mini1.cs	/^         private static extern Int32 lut_loeschung(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_loeschung	php/php_konto_check.h	/^PHP_FUNCTION(lut_loeschung);$/;"	v
+lut_loeschung_i	konto_check.c	/^DLL_EXPORT int lut_loeschung_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_methode_txt	php/php_konto_check.h	/^PHP_FUNCTION(lut_methode_txt);$/;"	v
+lut_multiple	konto_check.c	/^DLL_EXPORT int lut_multiple(char *b,int *cnt,int **p_blz,char  ***p_name,char ***p_name_kurz,$/;"	f
+lut_multiple	php/php_konto_check.h	/^PHP_FUNCTION(lut_multiple);$/;"	v
+lut_multiple_i	konto_check.c	/^DLL_EXPORT int lut_multiple_i(int b,int *cnt,int **p_blz,char  ***p_name,char ***p_name_kurz,$/;"	f
+lut_multiple_int	konto_check.c	/^static int lut_multiple_int(int idx,int *cnt,int **p_blz,char  ***p_name,char ***p_name_kurz,$/;"	f	file:
+lut_nachfolge_blz	konto_check.c	/^DLL_EXPORT int lut_nachfolge_blz(char *b,int zweigstelle,int *retval)$/;"	f
+lut_nachfolge_blz	mini/mini1.cs	/^         private static extern Int32 lut_nachfolge_blz(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_nachfolge_blz	php/php_konto_check.h	/^PHP_FUNCTION(lut_nachfolge_blz);$/;"	v
+lut_nachfolge_blz_i	konto_check.c	/^DLL_EXPORT int lut_nachfolge_blz_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_name	konto_check.c	/^DLL_EXPORT const char *lut_name(char *b,int zweigstelle,int *retval)$/;"	f
+lut_name	mini/mini.cs	/^         private static extern IntPtr lut_name(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_name	mini/mini1.cs	/^         private static extern IntPtr lut_name(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_name	php/php_konto_check.h	/^PHP_FUNCTION(lut_name);$/;"	v
+lut_name_cnt	konto_check.c	/^static const int lut_name_cnt=sizeof(default_lutname)\/sizeof(char *);$/;"	v	file:
+lut_name_i	konto_check.c	/^DLL_EXPORT const char *lut_name_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_name_kurz	konto_check.c	/^DLL_EXPORT const char *lut_name_kurz(char *b,int zweigstelle,int *retval)$/;"	f
+lut_name_kurz	mini/mini1.cs	/^         private static extern IntPtr lut_name_kurz(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_name_kurz	php/php_konto_check.h	/^PHP_FUNCTION(lut_name_kurz);$/;"	v
+lut_name_kurz_i	konto_check.c	/^DLL_EXPORT const char *lut_name_kurz_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_nr	konto_check.c	/^DLL_EXPORT int lut_nr(char *b,int zweigstelle,int *retval)$/;"	f
+lut_nr	mini/mini1.cs	/^         private static extern Int32 lut_nr(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_nr	php/php_konto_check.h	/^PHP_FUNCTION(lut_nr);$/;"	v
+lut_nr_i	konto_check.c	/^DLL_EXPORT int lut_nr_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_ort	konto_check.c	/^DLL_EXPORT const char *lut_ort(char *b,int zweigstelle,int *retval)$/;"	f
+lut_ort	mini/mini.cs	/^         private static extern IntPtr lut_ort(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_ort	mini/mini1.cs	/^         private static extern IntPtr lut_ort(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_ort	php/php_konto_check.h	/^PHP_FUNCTION(lut_ort);$/;"	v
+lut_ort_i	konto_check.c	/^DLL_EXPORT const char *lut_ort_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_pan	konto_check.c	/^DLL_EXPORT int lut_pan(char *b,int zweigstelle,int *retval)$/;"	f
+lut_pan	mini/mini1.cs	/^         private static extern Int32 lut_pan(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_pan	php/php_konto_check.h	/^PHP_FUNCTION(lut_pan);$/;"	v
+lut_pan_i	konto_check.c	/^DLL_EXPORT int lut_pan_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_plz	konto_check.c	/^DLL_EXPORT int lut_plz(char *b,int zweigstelle,int *retval)$/;"	f
+lut_plz	mini/mini.cs	/^         private static extern Int32 lut_plz(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_plz	mini/mini1.cs	/^         private static extern Int32 lut_plz(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_plz	php/php_konto_check.h	/^PHP_FUNCTION(lut_plz);$/;"	v
+lut_plz_i	konto_check.c	/^DLL_EXPORT int lut_plz_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_prolog	konto_check.c	/^static char *lut_prolog,*lut_sys_info,*lut_user_info;$/;"	v	file:
+lut_pz	konto_check.c	/^DLL_EXPORT int lut_pz(char *b,int zweigstelle,int *retval)$/;"	f
+lut_pz	mini/mini1.cs	/^         private static extern Int32 lut_pz(String blz, Int32 zweigstelle, out Int32 retval);$/;"	m	class:mini.Program	file:
+lut_pz	php/php_konto_check.h	/^PHP_FUNCTION(lut_pz);$/;"	v
+lut_pz_i	konto_check.c	/^DLL_EXPORT int lut_pz_i(int b,int zweigstelle,int *retval)$/;"	f
+lut_searchpath	konto_check.c	/^static const char *lut_searchpath[]={DEFAULT_LUT_PATH};$/;"	v	file:
+lut_searchpath_cnt	konto_check.c	/^static const int lut_searchpath_cnt=sizeof(lut_searchpath)\/sizeof(char *);$/;"	v	file:
+lut_set_0	konto_check.c	/^    lut_set_0[]={LUT2_BLZ,LUT2_PZ,0},$/;"	v
+lut_set_1	konto_check.c	/^    lut_set_1[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_KURZ,0},$/;"	v
+lut_set_2	konto_check.c	/^    lut_set_2[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_KURZ,LUT2_BIC,0},$/;"	v
+lut_set_3	konto_check.c	/^    lut_set_3[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME,LUT2_PLZ,LUT2_ORT,0},$/;"	v
+lut_set_4	konto_check.c	/^    lut_set_4[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,0},$/;"	v
+lut_set_5	konto_check.c	/^    lut_set_5[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,0},$/;"	v
+lut_set_6	konto_check.c	/^    lut_set_6[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,0},$/;"	v
+lut_set_7	konto_check.c	/^    lut_set_7[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,LUT2_LOESCHUNG,0},$/;"	v
+lut_set_8	konto_check.c	/^    lut_set_8[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,LUT2_LOESCHUNG,LUT2_PAN,0},$/;"	v
+lut_set_9	konto_check.c	/^    lut_set_9[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,LUT2_LOESCHUNG,LUT2_PAN,LUT2_NR,0},$/;"	v
+lut_set_iban	konto_check.c	/^    lut_set_iban[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_BLZ,LUT2_BIC,LUT2_NACHFOLGE_BLZ,LUT2_LOESCHUNG,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,0},  \/* notwendige Felder fÃ¼r IBAN-Bestimmung *\/$/;"	v
+lut_set_o0	konto_check.c	/^    lut_set_o0[]={LUT2_BLZ,LUT2_PZ,0},$/;"	v
+lut_set_o1	konto_check.c	/^    lut_set_o1[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_KURZ,0},$/;"	v
+lut_set_o2	konto_check.c	/^    lut_set_o2[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_KURZ,LUT2_BIC,0},$/;"	v
+lut_set_o3	konto_check.c	/^    lut_set_o3[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME,LUT2_PLZ,LUT2_ORT,0},$/;"	v
+lut_set_o4	konto_check.c	/^    lut_set_o4[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,0},$/;"	v
+lut_set_o5	konto_check.c	/^    lut_set_o5[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,0},$/;"	v
+lut_set_o6	konto_check.c	/^    lut_set_o6[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,0},$/;"	v
+lut_set_o7	konto_check.c	/^    lut_set_o7[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,LUT2_LOESCHUNG,0},$/;"	v
+lut_set_o8	konto_check.c	/^    lut_set_o8[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,LUT2_LOESCHUNG,LUT2_PAN,0},$/;"	v
+lut_set_o9	konto_check.c	/^    lut_set_o9[]={LUT2_BLZ,LUT2_PZ,LUT2_AENDERUNG,LUT2_NAME_NAME_KURZ,LUT2_PLZ,LUT2_ORT,LUT2_IBAN_REGEL,LUT2_OWN_IBAN,LUT2_BIC,LUT2_NACHFOLGE_BLZ,LUT2_LOESCHUNG,LUT2_PAN,LUT2_NR,0};$/;"	v
+lut_suche	konto_check.c	/^DLL_EXPORT int lut_suche(int such_id,char *such_cmd,UINT4 *such_cnt,UINT4 **filiale,UINT4 **blz)$/;"	f
+lut_suche	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche);$/;"	v
+lut_suche_arr	konto_check.c	/^static LUT_SUCHE_ARR **lut_suche_arr;$/;"	v	file:
+lut_suche_bic	konto_check.c	/^DLL_EXPORT int lut_suche_bic(char *such_name,int *anzahl,int **start_idx,int **zweigstellen_base,$/;"	f
+lut_suche_bic	mini/mini1.cs	/^         private static extern Int32 lut_suche_bic(String such_name, out Int32 anzahl, out IntPtr start_idx, $/;"	m	class:mini.Program	file:
+lut_suche_bic	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_bic);$/;"	v
+lut_suche_blz	konto_check.c	/^DLL_EXPORT int lut_suche_blz(int such1,int such2,int *anzahl,int **start_idx,int **zweigstellen_base,int **base_name,int **blz_base)$/;"	f
+lut_suche_blz	mini/mini1.cs	/^         private static extern Int32 lut_suche_blz(Int32 such1, Int32 such2, out Int32 anzahl, out IntPtr start_idx, $/;"	m	class:mini.Program	file:
+lut_suche_blz	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_blz);$/;"	v
+lut_suche_free	konto_check.c	/^DLL_EXPORT int lut_suche_free(int id)$/;"	f
+lut_suche_free	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_free);$/;"	v
+lut_suche_init	konto_check.c	/^DLL_EXPORT int lut_suche_init(int uniq)$/;"	f
+lut_suche_init	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_init);$/;"	v
+lut_suche_multiple	konto_check.c	/^DLL_EXPORT int lut_suche_multiple(char *such_str,int uniq,char *such_cmd,UINT4 *anzahl,UINT4 **zweigstellen,UINT4 **blz)$/;"	f
+lut_suche_multiple	mini/mini1.cs	/^         private static extern Int32 lut_suche_multiple(String such_str, Int32 uniq, String such_cmd, out Int32 anzahl,$/;"	m	class:mini.Program	file:
+lut_suche_multiple	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_multiple);$/;"	v
+lut_suche_multiple_and	konto_check.c	/^static int *lut_suche_multiple_and(int *such_array,int *start1,int cnt1,int *start2,int cnt2,int *cnt,int *retval)$/;"	f	file:
+lut_suche_multiple_not	konto_check.c	/^static int *lut_suche_multiple_not(int *such_array1,int **such_array2,int *cnt)$/;"	f	file:
+lut_suche_multiple_or	konto_check.c	/^static int *lut_suche_multiple_or(int *such_array1,int **such_array2,int *cnt)$/;"	f	file:
+lut_suche_namen	konto_check.c	/^DLL_EXPORT int lut_suche_namen(char *such_name,int *anzahl,int **start_idx,int **zweigstellen_base,$/;"	f
+lut_suche_namen	mini/mini1.cs	/^         private static extern Int32 lut_suche_namen(String such_name, out Int32 anzahl, out IntPtr start_idx, $/;"	m	class:mini.Program	file:
+lut_suche_namen	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_namen);$/;"	v
+lut_suche_namen_kurz	konto_check.c	/^DLL_EXPORT int lut_suche_namen_kurz(char *such_name,int *anzahl,int **start_idx,int **zweigstellen_base,$/;"	f
+lut_suche_namen_kurz	mini/mini1.cs	/^         private static extern Int32 lut_suche_namen_kurz(String such_name, out Int32 anzahl, out IntPtr start_idx, $/;"	m	class:mini.Program	file:
+lut_suche_namen_kurz	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_namen_kurz);$/;"	v
+lut_suche_ort	konto_check.c	/^DLL_EXPORT int lut_suche_ort(char *such_name,int *anzahl,int **start_idx,int **zweigstellen_base,$/;"	f
+lut_suche_ort	mini/mini1.cs	/^         private static extern Int32 lut_suche_ort(String such_name, out Int32 anzahl, out IntPtr start_idx, $/;"	m	class:mini.Program	file:
+lut_suche_ort	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_ort);$/;"	v
+lut_suche_plz	konto_check.c	/^DLL_EXPORT int lut_suche_plz(int such1,int such2,int *anzahl,int **start_idx,int **zweigstellen_base,int **base_name,int **blz_base)$/;"	f
+lut_suche_plz	mini/mini1.cs	/^         private static extern Int32 lut_suche_plz(Int32 such1, Int32 such2, out Int32 anzahl, out IntPtr start_idx, $/;"	m	class:mini.Program	file:
+lut_suche_plz	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_plz);$/;"	v
+lut_suche_pz	konto_check.c	/^DLL_EXPORT int lut_suche_pz(int such1,int such2,int *anzahl,int **start_idx,int **zweigstellen_base,int **base_name,int **blz_base)$/;"	f
+lut_suche_pz	mini/mini1.cs	/^         private static extern Int32 lut_suche_pz(Int32 such1, Int32 such2, out Int32 anzahl, out IntPtr start_idx, $/;"	m	class:mini.Program	file:
+lut_suche_pz	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_pz);$/;"	v
+lut_suche_regel	konto_check.c	/^DLL_EXPORT int lut_suche_regel(int such1,int such2,int *anzahl,int **start_idx,int **zweigstellen_base,int **base_name,int **blz_base)$/;"	f
+lut_suche_regel	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_regel);$/;"	v
+lut_suche_set	konto_check.c	/^DLL_EXPORT int lut_suche_set(int such_id,int idx,int typ,int i1,int i2,char *txt)$/;"	f
+lut_suche_set	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_set);$/;"	v
+lut_suche_sort1	konto_check.c	/^DLL_EXPORT int lut_suche_sort1(int anzahl,int *blz_base,int *zweigstellen_base,int *idx,int *anzahl_o,int **idx_op,int **cnt_op,int uniq)$/;"	f
+lut_suche_sort2	konto_check.c	/^DLL_EXPORT int lut_suche_sort2(int anzahl,int *blz,int *zweigstellen,int *anzahl_o,int **blz_op,int **zweigstellen_op,int **cnt_o,int uniq)$/;"	f
+lut_suche_volltext	konto_check.c	/^DLL_EXPORT int lut_suche_volltext(char *such_wort,int *anzahl,int *base_name_idx,char ***base_name,$/;"	f
+lut_suche_volltext	mini/mini1.cs	/^         private static extern Int32 lut_suche_volltext(String such_wort, out Int32 anzahl, out Int32 base_name_idx,$/;"	m	class:mini.Program	file:
+lut_suche_volltext	php/php_konto_check.h	/^PHP_FUNCTION(lut_suche_volltext);$/;"	v
+lut_sys_info	konto_check.c	/^static char *lut_prolog,*lut_sys_info,*lut_user_info;$/;"	v	file:
+lut_user_info	konto_check.c	/^static char *lut_prolog,*lut_sys_info,*lut_user_info;$/;"	v	file:
+lut_valid	konto_check.c	/^DLL_EXPORT int lut_valid(void)$/;"	f
+lut_valid	php/php_konto_check.h	/^PHP_FUNCTION(lut_valid);$/;"	v
+lut_version	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+lutfile	php/test.php	/^$lutfile="blz.lut";$/;"	v
+m10h_digits	konto_check.c	/^static const int m10h_digits[4][10]={$/;"	v	file:
+main	konto_check_mini.c	/^int main(int argc,char **argv)$/;"	f
+main	main.c	/^int main(int argc,char **argv)$/;"	f
+main	mini/mini.c	/^int main(int argc,char **argv)$/;"	f
+malloc	konto_check.c	/^#define malloc(/;"	d	file:
+malloc	konto_check.c	/^#undef malloc$/;"	d	file:
+malloc_cnt	php/php_konto_check.h	/^PHP_FUNCTION(malloc_cnt);$/;"	v
+malloc_report	php/php_konto_check.h	/^PHP_FUNCTION(malloc_report);$/;"	v
+methode	konto_check.h	/^   const char *methode;$/;"	m	struct:__anon4
+methode_test	php/test2.php	/^   $methode_test=$_REQUEST["methode_test"]; $/;"	v
+methode_test	php/test2.php	/^   $methode_test=0;$/;"	v
+mini	mini/mini.cs	/^namespace mini$/;"	n
+mini	mini/mini1.cs	/^namespace mini$/;"	n
+ml	php/test/konto_test.php	/^            $ml=" mit Methode $methode";$/;"	v
+ml	php/test/konto_test.php	/^            $ml="";$/;"	v
+mtxt	php/methoden_txt.c	/^static char *mtxt(long methode)$/;"	f	file:
+multi	php/test/konto_test.php	/^   $multi=lut_multiple($blz,0,$anzahl,$name,$name_kurz,$plz,$ort,$pan,$bic,$pz,$nr,$/;"	v
+multi	php/test2.php	/^   $multi=lut_multiple($blz,0,$cnt,$name,$name_kurz,$plz,$ort,$pan,$bic); \/* alle Infos zu der Bank in einem Rutsch holen *\/$/;"	v
+n_titel	php/test/konto_test.php	/^      $n_titel='<th title="Name der Bank (Kurzform)">Kurzname<\/th>';$/;"	v
+n_titel	php/test/konto_test.php	/^      $n_titel='<th title="Name der Bank (Langform)">Name<\/th>';$/;"	v
+nachfolge_blz	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+name	konto_check.c	/^static char **name,**name_kurz,**ort,*name_data,*name_name_kurz_data,*name_kurz_data,$/;"	v	file:
+name	mini/mini.php	/^            $name=lut_name($blz,$ret);          \/* Banknamen holen *\/$/;"	v
+name	php/test/konto_test.php	/^      $name=lut_name($blz,$ret1);   \/* hier werden die Infos einzeln geholt *\/$/;"	v
+name	php/test/konto_test.php	/^   $name=$_SERVER["SCRIPT_FILENAME"];  \/* Skriptnamen holen *\/$/;"	v
+name	php/test2.php	/^         $name=$name['wert'];$/;"	v
+name	php/test2.php	/^      $name=lut_name($blz);   \/* hier werden die Infos einzeln geholt *\/$/;"	v
+name	php/test2.php	/^   $name=$_SERVER["SCRIPT_FILENAME"];  \/* Skriptnamen holen *\/$/;"	v
+name_data	konto_check.c	/^static char **name,**name_kurz,**ort,*name_data,*name_name_kurz_data,*name_kurz_data,$/;"	v	file:
+name_kurz	konto_check.c	/^static char **name,**name_kurz,**ort,*name_data,*name_name_kurz_data,*name_kurz_data,$/;"	v	file:
+name_kurz	php/test/konto_test.php	/^         $name_kurz=lut_name_kurz($blz);$/;"	v
+name_kurz	php/test2.php	/^         $name_kurz=$name_kurz['wert'];$/;"	v
+name_kurz	php/test2.php	/^         $name_kurz=lut_name_kurz($blz);$/;"	v
+name_kurz_data	konto_check.c	/^static char **name,**name_kurz,**ort,*name_data,*name_name_kurz_data,*name_kurz_data,$/;"	v	file:
+name_kurz_raw	konto_check.c	/^static char *name_raw,*name_kurz_raw,*name_name_kurz_raw,*ort_raw;$/;"	v	file:
+name_kurz_raw_len	konto_check.c	/^static int name_raw_len,name_kurz_raw_len,name_name_kurz_raw_len,ort_raw_len;$/;"	v	file:
+name_name_kurz_data	konto_check.c	/^static char **name,**name_kurz,**ort,*name_data,*name_name_kurz_data,*name_kurz_data,$/;"	v	file:
+name_name_kurz_raw	konto_check.c	/^static char *name_raw,*name_kurz_raw,*name_name_kurz_raw,*ort_raw;$/;"	v	file:
+name_name_kurz_raw_len	konto_check.c	/^static int name_raw_len,name_kurz_raw_len,name_name_kurz_raw_len,ort_raw_len;$/;"	v	file:
+name_raw	konto_check.c	/^static char *name_raw,*name_kurz_raw,*name_name_kurz_raw,*ort_raw;$/;"	v	file:
+name_raw_len	konto_check.c	/^static int name_raw_len,name_kurz_raw_len,name_name_kurz_raw_len,ort_raw_len;$/;"	v	file:
+optr	konto_check.c	/^static char *own_buffer,*optr;$/;"	v	file:
+ort	konto_check.c	/^static char **name,**name_kurz,**ort,*name_data,*name_name_kurz_data,*name_kurz_data,$/;"	v	file:
+ort	mini/mini.php	/^               $ort=lut_ort($blz);              \/* Ort der Bank *\/$/;"	v
+ort	php/test/konto_test.php	/^         $ort=lut_ort($blz);$/;"	v
+ort	php/test2.php	/^         $ort=$ort['wert'];$/;"	v
+ort	php/test2.php	/^         $ort=lut_ort($blz);$/;"	v
+ort_data	konto_check.c	/^            *ort_data,**bic,*bic_buffer,*aenderung,*loeschung,**volltext,*volltext_data;$/;"	v	file:
+ort_raw	konto_check.c	/^static char *name_raw,*name_kurz_raw,*name_name_kurz_raw,*ort_raw;$/;"	v	file:
+ort_raw_len	konto_check.c	/^static int name_raw_len,name_kurz_raw_len,name_name_kurz_raw_len,ort_raw_len;$/;"	v	file:
+out	php/test/konto_test.php	/^   $out=ipi_gen($zweck,$ret,$papier);$/;"	v
+own_buffer	konto_check.c	/^static char *own_buffer,*optr;$/;"	v	file:
+own_iban	konto_check.c	/^           *own_iban,own_iban_cnt,vt_cnt,vt_cnt_uniq,*volltext_banken,*volltext_start,*iban_regel,$/;"	v	file:
+own_iban_cnt	konto_check.c	/^           *own_iban,own_iban_cnt,vt_cnt,vt_cnt_uniq,*volltext_banken,*volltext_start,*iban_regel,$/;"	v	file:
+p	konto_check.h	/^   int c2,d2,a5,p,konto[11];$/;"	m	struct:__anon5
+p1	php/test/konto_test.php	/^         $p1=strtolower(substr($zeile,0,1));$/;"	v
+p2	php/test/konto_test.php	/^         $p2=strtolower(substr($zeile,1,1));$/;"	v
+pan	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+papier	php/test2.php	/^   $papier=$ret_ipi['papier'];$/;"	v
+phpext_konto_check_ptr	php/php_konto_check.h	/^#define phpext_konto_check_ptr /;"	d
+plz	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+plz	mini/mini.php	/^               $plz=lut_plz($blz);              \/* Postleitzahl der Bank *\/$/;"	v
+plz	php/test/konto_test.php	/^         $plz=lut_plz($blz);$/;"	v
+plz	php/test2.php	/^         $plz=$plz['wert'];$/;"	v
+plz	php/test2.php	/^         $plz=lut_plz($blz);$/;"	v
+print_help	konto_check_mini.c	/^void print_help(void)$/;"	f
+print_help	main.c	/^void print_help(void)$/;"	f
+print_status	konto_check_mini.c	/^void print_status(char *txt)$/;"	f
+print_status_nl	konto_check_mini.c	/^void print_status_nl(char *txt)$/;"	f
+pz	konto_check.c	/^int pz=-777;$/;"	v
+pz	konto_check.h	/^   INT4 pz;$/;"	m	struct:__anon4
+pz	konto_check.h	/^   int pz;$/;"	m	struct:__anon5
+pz	php/test/konto_test.php	/^         $pz=$xpz[$pz];$/;"	v
+pz2str	konto_check.c	/^DLL_EXPORT const char *pz2str(int pz,int *ret)$/;"	f
+pz2str	php/php_konto_check.h	/^PHP_FUNCTION(pz2str);$/;"	v
+pz_aenderungen_aktivieren	konto_check.c	/^static int pz_aenderungen_aktivieren;$/;"	v	file:
+pz_array	konto_check.h	/^   UINT4 cnt_blz,*blz_array,*pz_array,*blz_hash_low,*blz_hash_high,*invalid;$/;"	m	struct:__anon5
+pz_f	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+pz_methode	konto_check.c	/^DLL_EXPORT_V int pz_methode=-777;$/;"	v
+pz_methode	konto_check.h	/^   INT4 pz_methode;$/;"	m	struct:__anon4
+pz_methode	konto_check.h	/^   int pz_methode;$/;"	m	struct:__anon5
+pz_methoden	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+pz_pos	konto_check.h	/^   signed char pz_pos;$/;"	m	struct:__anon4
+pz_str	konto_check.c	/^DLL_EXPORT_V char pz_str[]="Die Variable pz_str wird nicht mehr unterstÃ¼tzt; bitte das neue Interface benutzen";$/;"	v
+pz_str	konto_check.h	/^   char *kto_check_msg,pz_str[4];$/;"	m	struct:__anon5
+qcmp_bic	konto_check.c	/^static int qcmp_bic(const void *ap,const void *bp)$/;"	f	file:
+qcmp_blz	konto_check.c	/^static int qcmp_blz(const void *ap,const void *bp)$/;"	f	file:
+qcmp_iban_regel	konto_check.c	/^static int qcmp_iban_regel(const void *ap,const void *bp)$/;"	f	file:
+qcmp_name	konto_check.c	/^static int qcmp_name(const void *ap,const void *bp)$/;"	f	file:
+qcmp_name_kurz	konto_check.c	/^static int qcmp_name_kurz(const void *ap,const void *bp)$/;"	f	file:
+qcmp_ort	konto_check.c	/^static int qcmp_ort(const void *ap,const void *bp)$/;"	f	file:
+qcmp_plz	konto_check.c	/^static int qcmp_plz(const void *ap,const void *bp)$/;"	f	file:
+qcmp_pz_f	konto_check.c	/^static int qcmp_pz_f(const void *ap,const void *bp)$/;"	f	file:
+qcmp_sortc	konto_check.c	/^static int qcmp_sortc(const void *ap,const void *bp)$/;"	f	file:
+qcmp_sorti	konto_check.c	/^static int qcmp_sorti(const void *ap,const void *bp)$/;"	f	file:
+qs_blz	konto_check.c	/^static int *qs_blz,*qs_plz,*qs_sortidx,*qs_iban_regel;$/;"	v	file:
+qs_hauptstelle	konto_check.c	/^static char **qs_zeilen,*qs_hauptstelle;$/;"	v	file:
+qs_iban_regel	konto_check.c	/^static int *qs_blz,*qs_plz,*qs_sortidx,*qs_iban_regel;$/;"	v	file:
+qs_plz	konto_check.c	/^static int *qs_blz,*qs_plz,*qs_sortidx,*qs_iban_regel;$/;"	v	file:
+qs_sortidx	konto_check.c	/^static int *qs_blz,*qs_plz,*qs_sortidx,*qs_iban_regel;$/;"	v	file:
+qs_zeilen	konto_check.c	/^static char **qs_zeilen,*qs_hauptstelle;$/;"	v	file:
+read_lut	konto_check.c	/^static int read_lut(char *filename,int *cnt_blz)$/;"	f	file:
+read_lut_block	konto_check.c	/^DLL_EXPORT int read_lut_block(char *lutname, UINT4 typ,UINT4 *blocklen,char **data)$/;"	f
+read_lut_block	php/php_konto_check.h	/^PHP_FUNCTION(read_lut_block);$/;"	v
+read_lut_block_int	konto_check.c	/^static int read_lut_block_int(FILE *lut,int slot,int typ,UINT4 *blocklen,char **data)$/;"	f	file:
+read_lut_slot	konto_check.c	/^DLL_EXPORT int read_lut_slot(char *lutname,int slot,UINT4 *blocklen,char **data)$/;"	f
+realloc	konto_check.c	/^#define realloc(/;"	d	file:
+realloc	konto_check.c	/^#undef realloc$/;"	d	file:
+rebuild_blzfile	konto_check.c	/^DLL_EXPORT int rebuild_blzfile(char *inputname,char *outputname,UINT4 set)$/;"	f
+reserved_chr	konto_check.h	/^   char reserved_chr[3*sizeof(void*)-1];$/;"	m	struct:__anon4
+reserved_ptr	konto_check.h	/^   void *reserved_ptr[2];$/;"	m	struct:__anon4
+result	php/test/konto_test.php	/^        $result=lut_suche_bic($bic1,$ret,$blz1,$idx);$/;"	v
+result	php/test/konto_test.php	/^        $result=lut_suche_blz($blz1,$blz2,$ret,$blz1,$idx);$/;"	v
+result	php/test/konto_test.php	/^        $result=lut_suche_namen($name,$ret,$blz1,$idx);$/;"	v
+result	php/test/konto_test.php	/^        $result=lut_suche_namen_kurz($name_kurz,$ret,$blz1,$idx);$/;"	v
+result	php/test/konto_test.php	/^        $result=lut_suche_ort($ort,$ret,$blz1,$idx);$/;"	v
+result	php/test/konto_test.php	/^        $result=lut_suche_plz($plz1,$plz2,$ret,$blz1,$idx);$/;"	v
+result	php/test/konto_test.php	/^        $result=lut_suche_pz($pz1,$pz2,$ret,$blz1,$idx);$/;"	v
+ret	konto_check_mini.c	/^int ret,verbose;$/;"	v
+ret	php/test.php	/^   $ret=$cnt>0?"OK":kto_check_retval2txt($cnt);$/;"	v
+ret	php/test.php	/^   $ret=iban_check($iban,$ret_kto);$/;"	v
+ret	php/test.php	/^   $ret=ipi_check($zweck);$/;"	v
+ret	php/test.php	/^   $ret=kto_check_blz($blz,$kto);$/;"	v
+ret	php/test.php	/^$ret=lut_cleanup();  \/* noch Speicher aufräumen (wäre zu Hause auch mal angebracht ;-))) *\/$/;"	v
+ret	php/test.php	/^$ret=lut_init($lutfile,0,0,$lut_name);$/;"	v
+ret	php/test.php	/^$ret=lut_init($lutfile,9,0,$lut_name);$/;"	v
+ret	php/test.php	/^$ret=lut_multiple("10020890",0,$cnt,$name,$name_kurz,$plz,$ort,$pan,$bic,$pz);$/;"	v
+ret	php/test.php	/^$ret=lut_multiple("10020890",10,$cnt,$name,$name_kurz,$plz,$ort,$pan,$bic,$pz);$/;"	v
+ret	php/test.php	/^$ret=lut_multiple("10020890",3,$cnt,$name,$name_kurz,$plz,$ort,$pan,$bic,$pz);$/;"	v
+ret	php/test/konto_test.php	/^            $ret=kto_check_blz_dbg($b,$k,$methode);$/;"	v
+ret	php/test/konto_test.php	/^            $ret=kto_check_pz_dbg("0$b",$k,0,$methode);$/;"	v
+ret	php/test/konto_test.php	/^            $ret=kto_check_pz_dbg($b,$k,0,$methode);$/;"	v
+ret	php/test/konto_test.php	/^         $ret=kto_check_retval2txt_short(lut_multiple($blz,$index,$/;"	v
+ret	php/test/konto_test.php	/^   $ret=iban_check($iban,$ret1);$/;"	v
+ret	php/test/konto_test.php	/^   $ret=ipi_check($zweck);$/;"	v
+ret	php/test/konto_test.php	/^   $ret=kto_check_blz_dbg($blz,$kto,$methode,$methode1);$/;"	v
+ret	php/test/konto_test.php	/^   $ret=kto_check_pz_dbg($methode,$kto1,0,$methode,$methode1);$/;"	v
+ret	php/test/konto_test.php	/^   $ret=lut_info("",$info,$valid); \/* Aufruf mit leerem Dateinamen: Info zu geladenen Blocks *\/$/;"	v
+ret	php/test/konto_test.php	/^   $ret=lut_info("\/etc\/blz.lut",$info1,$valid1,$info2,$valid2,$info3,$slots);$/;"	v
+ret	php/test2.php	/^   $ret=$ret_iban['ret'];$/;"	v
+ret	php/test2.php	/^   $ret=$ret_ipi['ret'];$/;"	v
+ret	php/test2.php	/^   $ret=kto_check_blz($blz,$kto);$/;"	v
+ret	php/test2.php	/^   $ret=kto_check_pz($methode,$kto1);$/;"	v
+ret	php/test2.php	/^   $ret=lut_info("",$info1,$valid1); \/* Aufruf ohne Dateinamen => Ausgabe von geladenen Blocks *\/$/;"	v
+ret	php/test2.php	/^   $ret=lut_info("\/etc\/blz.lut",$info1,$valid1,$info2,$valid2);$/;"	v
+ret1	php/test.php	/^   $ret1=kto_check_retval2txt_short($ret);$/;"	v
+ret1	php/test.php	/^$ret1=kto_check_retval2txt_short($ret);$/;"	v
+ret1_html	php/test/konto_test.php	/^      $ret1_html=kto_check_retval2html($ret1);$/;"	v
+ret1_html	php/test/konto_test.php	/^   $ret1_html=kto_check_retval2html($ret1);$/;"	v
+ret2	php/test.php	/^   $ret2=kto_check_retval2txt($ret);$/;"	v
+ret2	php/test.php	/^$ret2=kto_check_retval2txt($ret);$/;"	v
+ret3	php/test2.php	/^   $ret3=$ret_iban['ret3'];$/;"	v
+ret3	php/test2.php	/^   $ret3=$ret_ipi['ret3'];$/;"	v
+ret_html	php/test/konto_test.php	/^   $ret_html=kto_check_retval2html($ret);$/;"	v
+ret_iban	php/test2.php	/^   $ret_iban=iban_check($iban);$/;"	v
+ret_ipi	php/test2.php	/^   $ret_ipi=ipi_check($zweck);$/;"	v
+ret_ipi	php/test2.php	/^   $ret_ipi=ipi_gen($zweck);$/;"	v
+retk	php/test2.php	/^   $retk=$ret_iban['ret_kto'];$/;"	v
+retk3	php/test2.php	/^   $retk3=$ret_iban['ret3_kto'];$/;"	v
+retval	mini/mini.php	/^            $retval=kto_check_blz($blz,$kto);   \/* Bankverbindung testen *\/$/;"	v
+retval2txt	mini/mini.cs	/^      static String retval2txt(Int32 retval)$/;"	m	class:mini.Program	file:
+retval2txt	mini/mini1.cs	/^      static String retval2txt(Int32 retval)$/;"	m	class:mini.Program	file:
+retval2txt_short	mini/mini1.cs	/^      static String retval2txt_short(Int32 retval)$/;"	m	class:mini.Program	file:
+retval_enc	konto_check.c	/^DLL_EXPORT const char *(*retval_enc)(int)=NULL;$/;"	v
+rv_txt	mini/mini.php	/^            $rv_txt=kc_html($retval);           \/* Rückgabewert als Klartext *\/$/;"	v
+search_lutfile	php/konto_check.c	/^static int search_lutfile(char *name)$/;"	f	file:
+sep1	php/test.php	/^$sep1="-----------------------------------------------------------------";$/;"	v
+sep2	php/test.php	/^$sep2="=================================================================";$/;"	v
+set_default_compression	konto_check.c	/^DLL_EXPORT int set_default_compression(int mode)$/;"	f
+set_default_compression	php/php_konto_check.h	/^PHP_FUNCTION(set_default_compression);$/;"	v
+set_offset	konto_check.c	/^static UINT4 current_info_len,current_v1,current_v2,lut_blocks_missing,set_offset;$/;"	v	file:
+set_var	mini/mini.php	/^function set_var($var)$/;"	f
+set_verbose_debug	konto_check.c	/^DLL_EXPORT int set_verbose_debug(int mode)$/;"	f
+sort_bic	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_blz	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_cmp	konto_check.c	/^static int sort_cmp(const void *ap,const void *bp)$/;"	f	file:
+sort_iban_regel	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_name	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_name_kurz	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_ort	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_plz	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_pz_f	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sort_volltext	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+sortc_buf	konto_check.c	/^static char **sortc_buf;$/;"	v	file:
+sorti_buf	konto_check.c	/^static int *sorti_buf;$/;"	v	file:
+start_idx	konto_check.c	/^   int *start_idx;$/;"	m	struct:__anon3	file:
+startidx	konto_check.c	/^static int lut_version,*blz,*startidx,*plz,*filialen,*pan,*pz_methoden,*bank_nr,*nachfolge_blz,$/;"	v	file:
+stri_cmp	konto_check.c	/^static int stri_cmp(char *a,char *b)$/;"	f	file:
+strni_cmp	konto_check.c	/^static int strni_cmp(char *a,char *b)$/;"	f	file:
+such_typ	konto_check.c	/^   int such_typ;$/;"	m	struct:__anon1	file:
+suche	konto_check.c	/^   LUT_SUCHE suche[LUT_SUCHE_MAX_CNT];$/;"	m	struct:__anon2	file:
+suche_int1	konto_check.c	/^   int suche_int1;$/;"	m	struct:__anon1	file:
+suche_int1	konto_check.c	/^static int suche_int1(int a1,int a2,int *anzahl,int **start_idx,int **zweigstellen_base,int **blz_base,$/;"	f	file:
+suche_int2	konto_check.c	/^   int suche_int2;$/;"	m	struct:__anon1	file:
+suche_int2	konto_check.c	/^static int suche_int2(int a1,int a2,int *anzahl,int **start_idx,int **zweigstellen_base,int **blz_base,$/;"	f	file:
+suche_str	konto_check.c	/^   char *suche_str;$/;"	m	struct:__anon1	file:
+suche_str	konto_check.c	/^static int suche_str(char *such_name,int *anzahl,int **start_idx,int **zweigstellen_base,int **blz_base,$/;"	f	file:
+suchen	php/test/konto_test.php	/^$suchen=$suchenx=0;$/;"	v
+t1_chk	php/test/konto_test.php	/^         $t1_chk=" checked";$/;"	v
+t1_chk	php/test/konto_test.php	/^         $t1_chk="";$/;"	v
+t2_chk	php/test/konto_test.php	/^         $t2_chk=" checked";$/;"	v
+t2_chk	php/test/konto_test.php	/^         $t2_chk="";$/;"	v
+tab1	konto_check.c	/^static const int tab1[]={0,4,3,2,6},tab2[]={7,1,5,9,8};$/;"	v	file:
+tab2	konto_check.c	/^static const int tab1[]={0,4,3,2,6},tab2[]={7,1,5,9,8};$/;"	v	file:
+target	php/test/konto_test.php	/^      $target=" target=\\"_blank\\"";$/;"	v
+target	php/test/konto_test.php	/^      $target="";$/;"	v
+test_iban2bic	php/test.php	/^function test_iban2bic($iban)$/;"	f
+test_iban_check	php/test.php	/^function test_iban_check($iban)$/;"	f
+test_ipi_check	php/test.php	/^function test_ipi_check($zweck)$/;"	f
+test_ipi_gen	php/test.php	/^function test_ipi_gen($zweck)$/;"	f
+test_kto	php/test.php	/^function test_kto($blz,$kto)$/;"	f
+txt	php/test/konto_test.php	/^         $txt=kto_check_retval2html($ret);$/;"	v
+txt	php/test/konto_test.php	/^      $txt=htmlspecialchars(lut_methode_txt($methode1,$methode1));$/;"	v
+uk_pz_methoden	konto_check.c	/^static char uk_pz_methoden[256];$/;"	v	file:
+uniq	konto_check.c	/^   int uniq;$/;"	m	struct:__anon2	file:
+usleep	konto_check.c	/^#define usleep(/;"	d	file:
+v	mini/mini.php	/^      $v=trim($v);$/;"	v
+v1	php/test.php	/^$v1=kc_txt($valid1);$/;"	v
+v2	php/test.php	/^$v2=kc_txt($valid2);$/;"	v
+valid1_html	php/test/konto_test.php	/^   $valid1_html=kto_check_retval2txt_short($valid1)." \/ ".kto_check_retval2html($valid1);$/;"	v
+valid2_html	php/test/konto_test.php	/^   $valid2_html=kto_check_retval2txt_short($valid2)." \/ ".kto_check_retval2html($valid2);$/;"	v
+valid_html	php/test/konto_test.php	/^   $valid_html=kto_check_retval2html($valid);$/;"	v
+vc	php/test/konto_test.php	/^   $vc="${var}_chk";$/;"	v
+verbose	konto_check_mini.c	/^int ret,verbose;$/;"	v
+verbose_debug	konto_check.c	/^static int verbose_debug;$/;"	v	file:
+verbose_debug_buffer	konto_check.c	/^static char verbose_debug_buffer[128];$/;"	v	file:
+volltext	konto_check.c	/^            *ort_data,**bic,*bic_buffer,*aenderung,*loeschung,**volltext,*volltext_data;$/;"	v	file:
+volltext_banken	konto_check.c	/^           *own_iban,own_iban_cnt,vt_cnt,vt_cnt_uniq,*volltext_banken,*volltext_start,*iban_regel,$/;"	v	file:
+volltext_data	konto_check.c	/^            *ort_data,**bic,*bic_buffer,*aenderung,*loeschung,**volltext,*volltext_data;$/;"	v	file:
+volltext_start	konto_check.c	/^           *own_iban,own_iban_cnt,vt_cnt,vt_cnt_uniq,*volltext_banken,*volltext_start,*iban_regel,$/;"	v	file:
+volltext_zeichen	konto_check.c	/^static int volltext_zeichen(unsigned char **c)$/;"	f	file:
+vt_cnt	konto_check.c	/^           *own_iban,own_iban_cnt,vt_cnt,vt_cnt_uniq,*volltext_banken,*volltext_start,*iban_regel,$/;"	v	file:
+vt_cnt_uniq	konto_check.c	/^           *own_iban,own_iban_cnt,vt_cnt,vt_cnt_uniq,*volltext_banken,*volltext_start,*iban_regel,$/;"	v	file:
+w24	konto_check.c	/^   w24[]={ 1, 2, 3, 1, 2, 3, 1, 2, 3 },$/;"	v	file:
+w52	konto_check.c	/^static const int w52[] = { 2, 4, 8, 5,10, 9, 7, 3, 6, 1, 2, 4, 0, 0, 0, 0},$/;"	v	file:
+w93	konto_check.c	/^   w93[]= { 2, 3, 4, 5, 6, 7, 2, 3, 4 };$/;"	v	file:
+write_lut_block	konto_check.c	/^DLL_EXPORT int write_lut_block(char *lutname,UINT4 typ,UINT4 len,char *data)$/;"	f
+write_lut_block	php/php_konto_check.h	/^PHP_FUNCTION(write_lut_block);$/;"	v
+write_lut_block_int	konto_check.c	/^static int write_lut_block_int(FILE *lut,UINT4 typ,UINT4 len,char *data)$/;"	f	file:
+write_lutfile_entry_de	konto_check.c	/^static int write_lutfile_entry_de(UINT4 typ,int auch_filialen,int bank_cnt,char *out_buffer,$/;"	f	file:
+wrkmem	konto_check.c	/^static lzo_align_t __LZO_MMODEL wrkmem[LZO1X_1_MEM_COMPRESS];$/;"	v	file:
+zeile	php/test/konto_test.php	/^         $zeile=trim($v);$/;"	v
+zeile_a	php/test/konto_test.php	/^      $zeile_a=split("[ \\t]+",$zeile,3);$/;"	v
+zeilen	mini/mini.php	/^   $zeilen=explode("\\n",$testkonten);   \/* Textfeld in Zeilen aufteilen *\/$/;"	v
+zw	php/test2.php	/^   $zw=$ret_ipi['zweck_out'];$/;"	v
+zw_suche_sort	konto_check.c	/^static int *blz_suche_sort,*zw_suche_sort;   \/* Hilfsvariablen *\/$/;"	v	file:
+zw_titel	php/test/konto_test.php	/^      $zw_titel='<th title="Anzahl Filialen)">Filialen<\/th>';$/;"	v
+zw_titel	php/test/konto_test.php	/^      $zw_titel='<th title="Zweigstellen-Index (Hauptstelle: 0)">Index<\/th>';$/;"	v
+zweck_gen	php/test2.php	/^   $zweck_gen=$_REQUEST["zweck_gen"]; $/;"	v
+zweck_gen	php/test2.php	/^   $zweck_gen=0;$/;"	v
+zweck_test	php/test2.php	/^   $zweck_test=$_REQUEST["zweck_test"];$/;"	v
+zweck_test	php/test2.php	/^   $zweck_test=0;$/;"	v
+zweigstelle_f	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
+zweigstelle_f1	konto_check.c	/^static int *blz_f,*pz_f,*zweigstelle_f,*zweigstelle_f1,*sort_volltext,*sort_bic,*sort_name,*sort_name_kurz,*sort_ort,*sort_blz,*sort_pz_f,*sort_plz,*sort_iban_regel;$/;"	v	file:
