@@ -28,8 +28,10 @@ C_LZMA =
 LD_LZMA = 
 endif
 
-CFLAGS = -Wall $(C_BZ2) $(C_LZO) $(C_LZMA) -DDEBUG=1 -g
-LDFLAGS = -lz $(LD_BZ2) $(LD_LZMA) -g
+DEBUG = -DDEBUG=1 -g
+CFLAGS = -Wall $(C_BZ2) $(C_LZO) $(C_LZMA)
+LDFLAGS = -lz $(LD_BZ2) $(LD_LZMA)
+
 CFLAGS_OPT = $(CFLAGS) -O3 -fexpensive-optimizations -fomit-frame-pointer -funroll-loops
 CFLAGS_OPT1= $(CFLAGS) -O3 -fexpensive-optimizations -funroll-loops
 
