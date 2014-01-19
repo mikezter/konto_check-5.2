@@ -46,7 +46,7 @@
 #ifndef KONTO_CHECK_H_INCLUDED
 #define KONTO_CHECK_H_INCLUDED
 
-/* 
+/*
  * ##########################################################################
  * # Hier eine Info der Flessabank zur IBAN-Berechnung (abgerufen 13.6.12   #
  * # von http://www.flessabank.de/aktuell.php?akt=149)                      #
@@ -91,7 +91,7 @@
 
    /* Änderungen der Prüfziffermethoden zum 9. September 2013 erzwingen
     * (bei 0 werden sie abhängig vom Datum aktiviert).
-   */ 
+   */
 #define FORCE_AENDERUNGEN_2013_09 0
 
    /* die neue Version der Regel 20 wird zum 9. Dezember in den offiziellen IBAN-Regeln veröffentlicht;
@@ -121,15 +121,15 @@
  * einige Arrays damit initialisiert werden.
  */
 
-#define DEFAULT_ENCODING 1
+#define DEFAULT_ENCODING 2
 #define KEEP_RAW_DATA    1
 
-/* 
+/*
  * ##########################################################################
  * # Fallls das folgende Makro auf 1 gesetzt wird, werden unterschiedliche  #
  * # Interpretationen der Prüfziffermethoden interpretiert wie in BAV       #
  * # (Bank Account Validator, http://sourceforge.net/projects/bav)          #
- * # Dieses Makro dient zum Test der beiden Pakete, damit bei den Tests     # 
+ * # Dieses Makro dient zum Test der beiden Pakete, damit bei den Tests     #
  * # nicht immer Unterschiede ausgegeben werden, wo nur (bekannte)          #
  * # unterschiedliche Interpretationen der Berechnungsmethoden existieren.  #
  * ##########################################################################
@@ -221,10 +221,10 @@
 #    endif
 #  else
 #     if BUILD_DLL /* DLL kompilieren */
-#      define DLL_EXPORT __declspec (dllexport) __stdcall 
+#      define DLL_EXPORT __declspec (dllexport) __stdcall
 #      define DLL_EXPORT_V __declspec (dllexport)
 #    elif USE_DLL /* DLL in einem anderen Programm benutzen */
-#      define DLL_EXPORT __declspec (dllimport) __stdcall 
+#      define DLL_EXPORT __declspec (dllimport) __stdcall
 #      define DLL_EXPORT_V __declspec (dllimport)
 #    else /* kein DLL-Krempel erforderlich */
 #      define DLL_EXPORT
