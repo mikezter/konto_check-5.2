@@ -1,0 +1,274 @@
+%%
+%% This is file `position.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% position.dtx  (with options: `package')
+%% 
+%%
+%% File `position.dtx'.
+%%
+%% Copyright (C) 1997 - 2006 Michael Plugge <m.plugge@fh-mannheim.de>
+%% All rights reserved.
+%%
+%% Please send error reports and suggestions for improvements to:
+%%
+%%                          Michael Plugge
+%%                          Neustadter Str. 132
+%%                          D-67360 Lingenfeld
+%%                          Tel. 06344/5737
+%%                          Germany
+%%               Internet:  <m.plugge@hs-mannheim.de>
+%%
+
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+\ifx\documentclass\undefined %this package may be used also with LaTeX 2.09 ;-)))
+ \message{position.sty  1.4.0\space <2000/02/25>}
+\else
+ \NeedsTeXFormat{LaTeX2e}
+ \ProvidesPackage{position}[2000/02/25\space 1.4.0]
+ \typeout{Package: position 1.4.0\space <2000/02/25>}
+\fi
+\ifx\getformat\undefined\newcount\getformat\getformat0\fi
+\newif\ifmfiles\mfilesfalse
+\newif\ifoldlatex\oldlatextrue
+\gdef\pstd{\gdef\mm{\kern0.05em{--}\kern0.05em{}}\gdef\brl{\{}\gdef\brr{\}}}
+\gdef\ptt{\gdef\mm{-}\gdef\brl{\symbol{`\{}}\gdef\brr{\symbol{`\}}}}
+\ifoldlatex
+ \gdef\basefont{\rm\pstd}
+ \gdef\blockfont{\rm\pstd}
+ \gdef\keywordfont{\bf\pstd}
+ \gdef\stringfont{\tt\ptt}
+ \gdef\commentfont{\it\pstd}
+ \gdef\headfont{\sl\pstd}
+ \gdef\footfont{\sl\pstd}
+\else
+ \gdef\basefont{\normalfont\pstd}
+ \gdef\blockfont{\normalfont\pstd}
+ \gdef\keywordfont{\bfseries\pstd}
+ \gdef\stringfont{\ttfamily\ptt}
+ \gdef\commentfont{\itshape\pstd}
+ \gdef\headfont{\slshape\pstd}
+ \gdef\footfont{\slshape\pstd}
+\fi
+\basefont
+\gdef\spy{{\tt \symbol{'040}}}
+\gdef\sq{{\tt\symbol{13}}}
+\gdef\qql{``}
+\gdef\qqr{''}
+\gdef\ul{{\_\kern.1em}}
+
+\gdef\bs#1{$\count255=1\loop\ifnum\count255<#1\advance\count255 by 1
+ \backslash\hspace*{-.2em}\repeat\backslash$}
+\gdef\mlt#1{$\count255=1 \loop\ifnum\count255<#1\advance\count255 by 1
+  <\hspace*{-.4em}\repeat<$}
+\gdef\mgt#1{$\count255=1 \loop\ifnum\count255<#1\advance\count255 by 1
+  >\hspace*{-.4em}\repeat>$}
+\gdef\mast#1{$\count255=0 \loop\ifnum\count255<#1\advance\count255 by 1
+  \ast\repeat$}
+\gdef\mblank#1{\count255=0 \loop\ifnum\count255<#1\advance\count255 by 1
+  ~\repeat}
+\gdef\n{\mbox{}\\}
+\newbox\poutbox
+\newbox\pstartbox
+\newbox\pendbox
+\newif\ifpend
+\newif\ifpbrk
+\newlength\pcur
+\newlength\pcurbr
+\newlength\pcmtstart
+\newlength\plena
+\newlength\plinenowidth
+\newcount\pdecr
+\newcount\pstarta
+\newcount\pstart
+\gdef\pst{$\ast$}
+\pbrktrue
+\ifx\ind\undefined
+\newlength\ind
+\ind.5em
+\fi
+\setbox\pstartbox=\hbox{}
+\setbox\pendbox=\hbox{}
+\gdef\init#1#2{%
+ \par\noindent\hbox to \plinenowidth{\hss {\rm\scriptsize #2}\hspace{1em}}%
+ \plena\textwidth \advance\plena -\plinenowidth
+ \pdecr0
+ \pcurbr0pt
+ \setbox\pstartbox=\hbox{}%
+ \pstart#1\advance\pstart 1 \pstarta\pstart
+ \skip0\ind\multiply\skip0 by #1 \pcur\skip0
+ \ifnum #1>0 \hspace*{\skip0}\fi%
+ \ifpend\advance\plena -\wd\pendbox\fi%
+}
+\gdef\initc#1#2#3#4{%
+ \par\noindent\pdecr0%
+ \hbox to \plinenowidth{\hss {\rm\scriptsize #4}\hspace{1em}}%
+ \ifcase#2
+   \pcurbr\ind\multiply\pcurbr #1 \pcur\pcurbr \gdef\pst{}% 0
+ \or%
+   \pcurbr\ind\multiply\pcurbr #1 \gdef\pst{$\ast$}% 1
+ \or%
+   \pcurbr\ind\multiply\pcurbr #1
+   \advance\pcurbr\pcmtstart \gdef\pst{}% 2
+ \or%
+   \pcurbr\ind\multiply\pcurbr #1
+   \advance\pcurbr\pcmtstart \gdef\pst{$\ast$}% 3
+ \or%
+   \pcurbr\pcmtstart \setbox\poutbox=\hbox{/}%
+   \advance\pcurbr\wd\poutbox \gdef\pst{}% 4
+ \or%
+   \pcurbr\pcmtstart \setbox\poutbox=\hbox{/}%
+   \advance\pcurbr\wd\poutbox \gdef\pst{$\ast$}% 5
+ \or%
+   \pcurbr\pcmtstart \setbox\poutbox=\hbox{/$\ast$}%
+   \advance\pcurbr\wd\poutbox \gdef\pst{}% 6
+ \or%
+   \pcurbr\pcmtstart \setbox\poutbox=\hbox{/$\ast$}%
+   \advance\pcurbr\wd\poutbox \gdef\pst{$\ast$}% 7
+ \or%
+   \pcurbr\ind\multiply\pcurbr #1 \gdef\pst{}% 8
+ \else%
+   \pcurbr0pt \gdef\pst{}%
+ \fi%
+ \setbox\pstartbox=\hbox{\pst\mblank{#3}}%
+ \hspace*{\pcurbr}\copy\pstartbox%
+ \pcur\pcurbr \advance\pcur\wd\pstartbox
+ \ifpend\advance\plena -\wd\pendbox \fi%
+ \ifnum#2=8 \pcurbr0pt\fi%
+}
+\gdef\plcntmargin#1{%
+ \setbox\poutbox=\hbox{#1\hspace{1em}}\global\plinenowidth\wd\poutbox
+}
+\gdef\pee{\advance\plena -\wd\pendbox\pendtrue}
+\gdef\ped{\advance\plena \wd\pendbox\pendfalse}
+\gdef\pes#1#2{%
+ \setbox\pendbox=\hbox{#1}%
+ \advance\plena -\wd\pendbox
+ \ifnum#2 > -1 \pstart#2\fi%
+ \pendtrue%
+}
+\gdef\psinit#1#2{%
+ \ifnum#1>-1 \pstart#1\fi%
+ \ifnum#1=-2 \pstart\pstarta\fi%
+ \setbox\pstartbox=\hbox{#2}%
+}
+\gdef\cmtinit{\pcurbr\pcur \pcmtstart\pcur}
+\gdef\eol{\ifpend\copy\pendbox\else\mbox{}\fi\\\hspace*{\plinenowidth}}
+\gdef\calcindent{%
+ \ifdim\pcurbr>0pt\skip0\pcurbr
+\else%
+ \skip0\ind \multiply\skip0\pstart
+\fi
+}
+\gdef\brkln{%
+ \ifpbrk%
+   \eol %insert line break
+   \calcindent% calculate the indentation for the new line
+   \pdecr\count255 \advance\pdecr-\pstart
+   \pcur\wd\poutbox \advance\pcur\skip0
+   \hspace*{\skip0}\copy\pstartbox%
+   \advance\pcur\wd\pstartbox
+ \else%
+   \hspace*{\skip0}%
+ \fi%
+}
+\gdef\jmpo#1#2{%
+ \ifnum#1>0
+   \count255 #1\advance\count255 -\pdecr
+   \skip0\ind \multiply\skip0\count255 %calculate the output position
+   \advance\skip0-\pcur %calculate the width of the needed space
+   \count255 #1 %current start position (needed for line break)
+ \fi%
+ \ifdim\skip0<0.25em %(current position > target position)
+   \skip0 0.25em% insert a small space
+ \fi%
+ \ifnum #1<1 \skip0 0pt \count255 -#1\fi%
+   %copy #2 to \poutbox and add the width of the box to \pcur
+ \setbox\poutbox=\hbox{#2}%
+%%%% probieren: \advance\pcur\wd\poutbox \advance\pcur\skip0
+%%%% dann ohne \relax
+ \advance\pcur\skip0 \advance\pcur\wd\poutbox %calculate the new position
+ \relax% TeX seems to be tired at this point; give it some rest ;-)))
+ \ifdim\pcur>\plena %requested position > right margin; break line
+   \brkln%
+ \else%
+   \hspace*{\skip0}%
+ \fi%
+ \box\poutbox%
+}
+\gdef\xnjo#1#2#3{%
+ \count255 #2 \advance\count255 -\pdecr
+ \skip0\ind \multiply\skip0\count255
+ \advance\skip0-\pcur \divide\skip0 #1
+ \count255 #2 %current start position (for line break)
+ \ifdim\skip0<0.3em \skip0 0.3em \multiply\skip0 #1\fi%
+ \ifdim\skip0>0.45em \skip0 0.45em \multiply\skip0 #1\fi%
+   %copy #3 to \poutbox and add the width of the box to \pcur
+ \setbox\poutbox=\hbox{#3}%
+ \advance\pcur\wd\poutbox \advance\pcur\skip0
+ \ifdim\pcur>\plena %requested position > right margin
+   \brkln% insert a line break
+ \else%
+   \hspace*{\skip0}%
+ \fi%
+ \box\poutbox%
+}
+\gdef\njo#1#2{%
+ \ifnum#1<0 \count255 -#1 \skip0 0pt\fi%
+ \ifnum#1=0 \count255 0 \skip0 0pt\fi%
+ \ifnum#1>0%
+   \count255 #1 \advance\count255 -\pdecr
+   \skip0\ind \multiply\skip0\count255
+   \advance\skip0-\pcur
+   \count255 #1 %current start position (for line break)
+ \fi%
+ \ifdim\skip0<0.25em \skip0 0.25em\fi%
+ \ifdim\skip0>0.55em \skip0 0.55em\fi%
+ \ifnum#1<1 \skip0 0pt\fi%
+   %copy #2 to \poutbox and add the width of the box to \pcur
+ \setbox\poutbox=\hbox{#2}%
+ \advance\pcur\wd\poutbox \advance\pcur\skip0
+ \ifdim\pcur>\plena %requested position > right margin
+   \brkln% insert a line break
+ \else%
+   \hspace*{\skip0}%
+ \fi%
+ \box\poutbox%
+}
+\gdef\mpout#1#2#3#4{%
+ \ifnum#1>0 \skip0\ind\multiply\skip0 by #1\advance\skip0-\pcur \fi%
+ \ifdim\skip0<0pt \skip0 0pt\fi% don't move back!
+ \ifnum#1>0 \hspace*{\skip0}\advance\pcur\skip0\fi%
+ \setbox\poutbox=\hbox{#3}\skip0\wd\poutbox %width of one output character (#3)
+ \skip1\ind\multiply\skip1 by #2 \skip2\skip1 \advance\skip1-\pcur
+ \pcur\skip2 \advance\pcur\skip0 \skip2\skip1 %total width of line
+ \advance\skip0 #4 %add kern
+ \divide\skip1\skip0 \count255\skip1 \advance\count255 by 1% number of characters
+ \skip1\wd\poutbox \multiply\skip1 by \count255 \advance\skip2 -\skip1
+ \ifdim\skip2<0pt \advance\count255 -1 \advance\skip2 \wd\poutbox \fi%
+ \divide\skip2\count255
+ \copy\poutbox%
+ \loop%
+   \ifnum\count255>0\advance\count255 by -1 \hspace*{\skip2}\copy\poutbox%
+ \repeat%
+}
+
+\endinput
+%%
+%% End of file `position.sty'.

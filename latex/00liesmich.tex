@@ -1,0 +1,2138 @@
+% ########################################################################
+% #               PRÜFZIFFERBERECHNUNG VON KONTONUMMERN                  #
+% #                        C-/Perl/PHP-Bibliothek                        #
+% ########################################################################
+% #                                                                      #
+% # Autor             : Michael Plugge <m.plugge@hs-mannheim.de>         #
+% # Version           : 4.0                                              #
+% # Datum             : 20. Juli 2011                                    #
+% ########################################################################
+
+\documentclass{article}
+\usepackage{german}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{a4wide}
+\usepackage{makeidx}
+\usepackage{longtable}
+\usepackage{mdwlist}
+\usepackage{multind}
+\usepackage{fancyhdr}
+\usepackage{position}
+\usepackage[colorlinks,hyperindex,pdftex,linkcolor=blue]{hyperref}
+\usepackage{mathpazo}
+\makeindex{allgemein}
+\makeindex{funktion.c}
+\makeindex{funktion.php.alt}
+\makeindex{funktion.php}
+
+\pagestyle{fancy}
+\lhead{}
+\LTleft0em
+\ind.46em % mittlere Buchstabenlänge für die Quellcodes (für position.sty)
+
+\author{Michael Plugge}
+\title{Prüfzifferberechnung von Kontonummern\\C-/Perl-/PHP-Bibliothek}
+
+\date{20. Juli 2011}
+\begin{document}
+\thispagestyle{empty}
+\pagenumbering{roman}
+\maketitle
+%\begin{titlepage}
+
+\begin{abstract}
+Die \emph{konto\_check} Bibliothek errechnet anhand von Kontonummer, Bankleitzahl und
+Prüfziffermethode ob eine angegebene Kontonummer plausibel ist
+(Prüfzifferverfahren). Es sind alle 135 definierten Prüfziffermethoden
+(00 bis D4; Stand Juli 2010) implementiert. Die Versionen bis 2.7 der
+Bibliothek waren auf den Test einer Kontonummer beschränkt; ab Version 2.9x/3.0
+ist es möglich, zu einer gegebenen Bankleitzahl alle Felder der Bundesbankdatei
+abzufragen (falls diese in der blz.lut Datei enthalten sind).
+
+Die Bibliothek benutzt für die Informationen zu den einzelnen Banken ein
+eigenes (komprimiertes) Format. In den Versionen 1.x und 2.x von \emph{konto\_check} enthält
+diese Datei (blz.lut) nur die Bankleitzahlen und zugeordneten
+Prüfziffermethoden; ab der Version 3.0 können alle Daten aus der Datei der
+Deutschen Bundesbank. Das Format ist sehr flexibel; es kann eine beliebige
+Kombination der Felder in der LUT-Datei gespeichert werden. Es ist möglich, nur
+die Informationen der Hauptstellen aufzunehmen, oder auch die Nebenstellen mit
+einzubeziehen.
+
+Außerdem können auch eigene Datenblocks in die LUT-Datei geschrieben werden;
+(z.B. Konfigurationsdaten o.ä.); diese werden natürlich nicht verarbeitet,
+sondern nur als Ganzes geschrieben bzw. gelesen. Die zugehörigen Funktionen sind
+momentan nur unter C verfügbar, da dafür noch einige Tests ausstehen.
+
+Diese Datei gibt einen kurzen Überblick über die verfügbaren Funktionen. Sie ist
+vor allem als Kurzreferenz für die Version 3 gedacht; da die Bibliothek jedoch
+voll abwärtskompatibel ist, ist sie mit Einschränkungen auch für die alten Versionen
+zu benutzen.
+
+\bigskip
+{\bf Anmerkung:} Diese Datei bezieht sich vor allem auf die C- und PHP Version. In der
+Perl-Version gibt es -- aufgrund der unterschiedlichen Sprachstruktur --
+größere Unterschiede. Für diese Version ist sie momentan mehr als
+Zusatzinfo gedacht; mittelfristig soll allerdings auch die Perl Dokumentation
+hier integriert werden. Das Perl API ist schon teilweise dokumentiert (via
+perldoc); die Dokumentation findet sich in der Perl-Distribution.
+
+\bigskip Diese Beschreibung ist noch sehr unvollständig, und es gibt auch noch
+manche Wiederholungen; sie wird nach und nach erweitert werden. Aber auch eine
+nur sehr mäßige Dokumentation ist besser als gar keine. Falls Sie Fehler oder
+Unvollständigkeiten finden, wäre es schön, falls Sie sie mir eine kurze
+Nachricht schicken: m.plugge [at] hs-mannheim.de
+
+
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Paketliste}
+\begin{tabular}{ll}
+   00liesmich.pdf:     &   diese Datei \\
+   latex/$\ast$             &   Quellcodes für diese Datei \\
+   0\_history.txt:      &   Versionsgeschichte \\
+   blz.lut:            &   Lookup-Table für Bankleitzahlen (alte Version) \\
+   blz.lut2:           &   Lookup-Table für Bankleitzahlen (neue Version) \\
+   konto\_check.c:      &   C-Datei (komplettes Prüfziffermodul) \\
+   konto\_check.h:      &   Header-Datei mit public interface \\
+   lgpl.txt:           &   GNU Lesser General Public Lizenz \\
+   lgpl-ger.html:      &   deutsche Übersetzung der LGPL \\
+   main.c:             &   Beispielsprogramm \\
+   konto\_check\_mini.c: &   weiteres Beispielsprogramm \\
+   mini.c:             &   noch ein Beispielsprogramm \\
+   mini.pl:            &   dasselbe, in Perl \\
+   mini.old.php:       &   dasselbe, in PHP (altes API) \\
+   mini.php:           &   dasselbe, in PHP (neues API) \\
+   makefile.unix:      &   Makefile für Unix \\
+   php.zip:            &   PHP-Version von konto\_check (kurze Anleitung in 00build.txt) \\
+   php.old.zip:        &   PHP-Version von konto\_check, altes API \\
+   testkonten.txt:     &   diverse Testkonten (mit Prüfziffern) \\
+   testkonten.blz:     &   diverse Testkonten (mit BLZ) \\
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Überblick, Anmerkungen zur Version}
+\subsection{Einführung}
+Die \emph{konto\_check}-Bibliothek errechnet anhand von Kontonummer und
+Bankleitzahl (bzw. Prüf"-ziffer"-methode), ob eine angegebene Kontonummer
+plausibel ist. Die Versionen 1.x und 2.x der Bibliothek waren auf den Test
+einer Kontonummer beschränkt; ab Version 2.9x/3.0 ist es möglich, zu einer gegebenen
+Bankleitzahl alle Felder der Bundesbankdatei abzufragen, falls diese in der
+blz.lut Datei enthalten sind. 
+
+Die Bibliothek benutzt für die Informationen zu den einzelnen Banken ein eigenes
+(komprimiertes) Format. In den Versionen bis 2.7 von \emph{konto\_check}
+enthält diese Datei (blz.lut) nur die Bankleitzahlen und zugeordneten
+Prüfziffermethoden; ab der Version 3.0 können alle Daten aus der Datei der
+Deutschen Bundesbank, sowie auch eigene Dantenblocks in der blz.lut Datei
+gespeichert werden. Das Format ist sehr flexibel; es kann eine beliebige
+Kombination der Felder in der LUT-Datei gespeichert werden. Es ist möglich, nur
+die Informationen der Hauptstellen aufzunehmen, oder auch die Nebenstellen mit
+einzubeziehen. Eigene Datenblocks werden natürlich nicht verarbeitet, sondern
+nur als Ganzes geschrieben bzw. gelesen.
+
+Diese Datei gibt einen kurzen Überblick über die verfügbaren Funktionen. Sie ist
+vor allem als Kurzreferenz für die Version 3 gedacht; da die Bibliothek jedoch
+voll abwärtskompatibel ist, ist sie auch teilweise für die alten Versionen brauchbar.
+
+\subsection{Aktuelle Version}
+Die aktuelle Version (2.9x) wurde intensiv mit der vorhergehenden Version
+(2.6/2.7) verglichen (mit ca. 150 Millionen Testkonten :-) ); dabei wurden
+einige Fehler in der alten Bibliothek gefunden, aber ansonsten keine
+Unterschiede festgestellt. Auch die Routinen für das neue LUT-Dateiformat
+scheinen keine Probleme zu bereiten; daher wird eine der nächsten Versionen
+dann die 3.0 werden. Außerdem wurden die neu definierten Prüfmethoden
+implementiert; es werden alle 133 definierten Prüfmethoden unterstützt (00 bis
+D3; Stand Februar 2009).
+
+Der Windows-Port macht unter PHP und Access noch etwas Probleme; auf der
+Plattform habe ich allerdings schon länger keine Tests mehr gemacht, das müßte
+noch getan werden.
+
+Das Beispielsprogramm kann auch als Filterapplikation verwendet werden. Mit dem
+Befehl \texttt{./konto\_check -h} wird eine kleine Online-Hilfe ausgegeben. Näheres zu
+den Optionen ist in den Sourcen (vor allem main.c) zu finden. Das Eingabe- und
+Ausgabeformat wurde etwas geändert, so daß eine Eingabezeile immer an die
+Ausgabedatei weitergereicht wird, und (falls eine Bankleitzahl und Kontonummer
+gefunden wurde) noch das Testergebnis angehängt wird. Dieses kann vom
+Eingangstext durch ein frei wählbares Trennzeichen (Option -s) getrennt werden.
+Bei Benutzung von Prüfziffermethoden ist bei der Berechnung der Methoden 52, 53, B6
+und C0 auch noch die Bankleitzahl von Bedeutung.
+
+
+\subsection{Installation}
+Die \emph{konto\_check} Bibliothek besteht aus einer einzigen großen C-Datei, die als Objektcode zu
+einem anderen Programm gelinkt werden kann. Die Prototypen aller globalen Funktionen
+und das API sind in der Datei \mbox{\texttt{konto\_check.h}} enthalten; dort finden sich
+für die meisten Funktionen auch kurze Beschreibungen.
+
+Eine kurze Beschreibung einiger \href{#beschreibung}{wichtiger Funktionen}
+erfolgt auch in dieser Datei. Eine eigentliche Installation ist nicht
+erforderlich, sie kann jedoch bei Bedarf (z.B. als shared library) erfolgen.
+
+Eine Aufteilung der Datei in mehrere Module ist weder sinnvoll noch einfach möglich. Der
+größte Teil des Codes besteht aus den Prüfzifferroutinen, die in einem großen switch
+Statement zusammengefaßt sind. Daneben gibt es noch eine Reihe von statischen
+Variablen, in denen die Werte der LUT-Datei gespeichert sind. Bei einer Aufteilung
+der Datei in mehrere Module müßten diese Variablen entweder lokal oder global
+deklariert werden, was in beiden Fällen gravierende Nachteile mit sich bringen würde.
+
+
+\subsection{Bekannte Fehler}
+Momentan sind in den Prüfziffermethoden keine Fehler bekannt (was nicht heißt,
+daß keine da sind!). Auch die LUT2-Routinen scheinen stabil zu sein; die
+Standardoperationen sind relativ gut getestet, für einige (eher selten benutzte)
+Sonderfunktionen stehen noch einige Tests aus. Falls Sie einen Fehler finden,
+würde ich mich sehr freuen, davon zu hören ;-))).
+Bugs und Anregungen bitte an m.plugge@hs-mannheim.de
+
+\subsection{Technische Informationen, Geschwindigkeit}
+Die Bankleitzahl ist immer 8-stellig. Die Länge von Kontonummern ist variabel;
+diese werden auf 10 Stellen erweitert, indem führende Nullen ergänzt werden.
+
+Die Datei testkonten.txt ist eine Testdatei mit knapp 600 Kontonummern
+und Bankleitzahlen Einige sind reale Kontonummern, andere sind Testkonten,
+die von der Deutschen Bundesbank zur Verfügung gestellt werden. Im ersten Feld
+ist die jeweilige Bankleitzahl oder Prüfziffer zu finden, im zweiten Feld
+die Kontonummer.
+
+Die Bibliothek wurde mit allen Testkontonummern der Dokumentation der
+Prüfziffernberechnungmethoden der Deutschen Bundesbank erfolgreich getestet.
+Außerdem wurden etliche Testkontonummern generiert und die Ergebnisse mit
+mehreren anderen Programmen verglichen; dabei konnten (auf beiden Seiten) viele
+Fehler aufgespürt werden.
+
+Die Bibliothek wurde für die Versin 2.0 stark auf Geschwindigkeit hin optimiert.
+Bei den Tests wurde (unter Linux) eine Datei mit 5.000.000 Kontonummern in 
+1,1s geprüft (auf einem 3,4 GHz Pentium 4; Kompilierung mit eingeschalteter
+Optimierung, ohne Debuginfo; Aufruf \texttt{./konto\_check -f testkto.blz testkto.out}.
+Ohne Optimierung, mit -f werden etwa 1,7s benötigt, ohne Optimierung und
+ohne -f etwa 2,6s). Die Version 2.95 ist wieder etwas langsamer und benötigt
+(auf demselben Rechner) 1,3s für diese Aufgabe.
+
+\subsection{Unterschiede zwischen \emph{konto\_check} 2.x und 3.0}
+Außer dem neuen Dateiformat wurde das Aufrufinterface der Bibliothek noch einmal
+komplett überarbeitet:
+
+\begin{itemize}
+\item in der alten Version gab es eine Funktion zur Prüfung, die sowohl
+   Prüfziffermethoden (zwei- bzw. dreistellig) als auch Bankleitzahlen
+   (achtstellig) verarbeitete. Außerdem diente die Funktion zusätzlich noch zur
+   Initialisierung; falls die Bibliothek noch nicht initialisiert war, wurde sie
+   beim Aufruf der Testroutine initialisiert.
+
+   Im neuen Interface gibt es dagegen für Prüfziffermethoden und Bankleitzahlen
+   jeweils eigene Funktionen. Die Initialisierung ist von den Testroutinen
+   getrennt; die Bibliothek muß jetzt \emph{vor} der Prüfung initialisiert
+   werden (falls nicht das alte Interface benutzt wird). 
+
+   \hypertarget{initialisierung.inkrementell}{}Eine Initialisierung kann sowohl als Neuinitialisierung (alle evl. noch vorhandenen
+   Blocks werden gelöscht) als auch inkrementell erfolgen (falls später
+   noch zusätzliche Blocks benötigt werden, können diese noch zusätzlich aus der
+   LUT-Datei gelesen werden, ohne daß die bislang initialisierten Daten
+   verworfen werden müßten). Die inkrementelle Initialisierung ist aus
+   Konsitenzgründen nur von derselben LUT-Datei möglich; zur Identifikation
+   enthält daher jede Datei eine eigene (zufällige) Datei-ID.
+
+\item die alte Version war nicht von vornherein threadfest, da für einige
+   Rückgaben globale Variablen benutzt werden; sie ließ sich zwar (mit einigen
+   schmutzigen Tricks) auch threadfest machen, aber dies war nur durch
+   Einführung einer zusätzlichen (Struktur-) Variablen möglich.
+
+   In der neuen Version wurden sämtliche globalen Variablen, auf die aus den
+   Prüfzifferroutinen schreibend zugegriffen wird, entfernt und durch lokale
+   Variablen ersetzt; dadurch sind alle Testroutinen threadfest. 
+
+   Die einzige Ausnahme sind die Funktionen zur Generierung einer LUT-Datei, die
+   (aufgrund der Quicksort-Funktion der libc) globale Variablen zwingend
+   benötigt. Dies sind allerdings auch nicht kritisch, da die globalen Variablen
+   der Sortierroutinen nicht mit Variablen der Testroutinen kollidieren und ein
+   mehrfacher Aufruf der Funktionen zur Generierung einer LUT-Datei nicht
+   sinnvoll ist und normalerweise nicht vorkommen dürfte.
+
+\item in der alten Version ist es nicht einfach möglich, die Bibliothek neu zu
+   initialisieren; falls dies notwendig ist, muß u.U. der entsprechende Prozess
+   beendet und neu gestartet werden. Die neue Version kann problemlos sowohl
+   komplett als auch inkrementell (nur einzelne Felder) neu initialisiert
+   werden.
+
+\item das alte LUT-Format erlaubt nur einen Datensatz; im neuen Format können
+   zwei Datensätze mit ihrem jeweiligen Gültigkeitszeitraum gespeichert werden
+   (das war eine Anregung von byteripper[at]users.sourceforge.net). Die Auswahl
+   des Datensatzes bei der Initialisierung kann automatisch (aufgrund des
+   Systemdatums) oder manuell erfolgen.
+
+\item die neue Version enthält noch einige Funktionen für IBAN und IPI (Test
+   einer IBAN, Bestimmung des BIC aus einer IBAN (nur für deutsche Bankleitzahlen),
+   Validierung eines strukturierten Verwendungszwecks, Generieren eines
+   strukturierten Verwendungszwecks).
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Die Datendatei blz.lut}
+\subsection{Format der LUT-Datei}
+\hypertarget{lutdatei}{}
+Die Datei blz.lut enthält eine komprimierte Version von Daten der Bankleitzahlendatei
+der Deutschen Bundesbank. Es sind drei Formate definiert:
+
+\begin{itemize}
+\item Das Format 1.0 war das erste Format; es ist mittlerweile obsolet, da die anderen
+   Formate benutzerfreundlicher sind. 
+
+   Die Datei besteht aus einer Identifikationszeile im Klartext
+   (\texttt{BLZ Lookup Table/Format 1.0}); danach kommen direkt die Bankdaten.
+   Es sind nur BLZ und Prüfziffermethode gespeichert. Für die Bankleitzahlen
+   wird üblicherweise die Differenz zur vorigen BLZ gespeichert (meist mit 1 oder 2 Byte),
+   danach kommt ein Byte für die Prüfziffermethode.
+
+\item Das Format 1.1 ist eine kleine Erweiterung von 1.0; die Bankdaten sind mit der Version
+   1.0 identisch; es wird jedoch eine zusätzliche Infozeile geschrieben, wann und aus welcher
+   Datei die LUT-Datei generiert wurde (ebenfalls Klartext). Außerdem kann noch eine benutzerdefinierte
+   Infozeile hinzugefügt werden (z.B. mit dem Gültigkeitszeitraum). Diese Zeile kann von
+   der \emph{konto\_check}-Bibliothek ausgelesen werden; da das Format jedoch vollkommen frei ist, kann sie
+   nicht ausgewertet werden.
+
+\item Das Format 2.0 unterscheidet sich von den Vorgängerversionen wesentlich:
+   \begin{itemize}
+   \item Der Klartextteil des Headers enthält die Daten aus Version 1.1, sowie
+      noch einige zusätzliche Infos (Anzahl Banken, Anzahl Hauptstellen,
+      Angabe, ob nur die Hauptstellen oder auch die Filialen in der Datei
+      enthalten sind).
+
+   \item Jede Datei erhält eine eindeutige (zufällige) Datei-ID; diese dient
+      dazu, beim Nachladen von Blocks zu verifizieren, daß nicht von einer
+      anderen Datei Blocks nachgeladen werden, da dies normalerweise zu
+      Inkonsistenzen der Daten führen würde.
+
+   \item Der Datenbereich enthält zwei Teile: einen Verzeichnisbereich, dessen Größe
+      bei der Erzeugung der Datei festgelegt wird und nicht mehr verändert werden kann,
+      sowie den eigentlichen Datenbereich mit den Blocks.
+
+   \item Im Verzeichnis wird für jeden Block der Blocktyp, die Startadresse
+      innerhalb der Datei, Blockgröße sowie eine Prüfsumme gespeichert. Auf
+      diese Weise können die Blocks unabhängig von einander gelesen werden. Die
+      (internen) Funktionen sehen im Verzeichnisbereich nach, ob und wo ein
+      gewünschter Block innerhalb der Datei zu finden ist, und wie groß er ist,
+      und laden dann genau den einen Block in den Speicher. Die einzelnen
+      Blocks sind mit der \textit{zlib} komprimiert.
+
+   \item \hypertarget{lutdatei.set}{}Innerhalb einer LUT-Datei können zwei verschiedene
+      Bankleitzahlendateien (mit unterschiedlichem Gültigkeitszeitraum)
+      enthalten sein. Die Blocktypen von 1 bis 100 gehören zum ersten Datensatz,
+      die Blocktypen von 101 bis 200 zum zweiten. Jeder Satz enthält einen
+      Info-Block (numerischer Typ 15 bzw. 115), in dem der Dateivorspann für den
+      Block sowie der Gültigkeitszeitraum angegeben ist. Die Ini"-tialis"-ierung der
+      \emph{konto\_check}-Bibliothek kann dann in Abhängigkeit vom aktuellen Datum erfolgen (dabei
+      wird der Gültigkeitszeitraum der beiden Datensätze überprüft und derjenige
+      Satz zur Initialisierung verwendet, der aktuell gültig ist), oder man kann
+      von einem bestimmten Datensatz initialisieren. In der Funktion
+      \href{#parameter.set}{lut\_init} gibt es einen Parameter \texttt{set} mit dem Wert
+      0, 1 oder 2; mit diesem kann man einen Block zur Initialisierung auswählen
+      (1 oder 2) oder die Auswahl abhängig vom Gültigkeitsdatum treffen lassen (0).
+
+   \item Für die Blocktypen sind Werte zwischen 1 und 65535 möglich; die Werte
+      zwischen 1 und 1000 sind dabei für die \emph{konto\_check}-Bibliothek reserviert, während
+      andere Werte auch von anderen Programmen verwendet werden können (z.B. um
+      bestimmte Einstellungen eines Programms o.ä. zu speichern). Es gibt eine
+      Reihe High-Level-Funktionen, die den Zugriff auf Datenblocks (Lesen und
+      Schreiben) mit wenig Aufwand erlauben. Momentan sind sie nur in der
+      C-Bibliothek verfügbar, da sie noch einige Tests benötigen; später werden
+      sie auch in den andern APIs zugänglich gemacht werden.
+   \end{itemize}
+
+\end{itemize}
+\subsection{Aktualisierung der Bankdaten}
+Die LUT-Datei kann mit der Funktion generate\_lut() bzw. generate\_lut2() aus der
+Datei der Deutschen Bundesbank generiert werden. Die aktuelle
+Bankleitzahltabelle wird veröffentlicht von der Deutschen Bundesbank:
+
+\href{http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr\_bankleitzahlen\_download.php}{%
+   http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr\_bankleitzahlen\_download.php}
+
+Dabei ist die Datei blzJJJJMMTTpc.zip herunterzuladen und auszupacken. Die
+Aktualisierung erfolgt alle drei Monate. Die aktuellen Prüfziffermethoden
+werden ebenfalls von der Deutschen Bundesbank veröffentlicht. Dort finden sich
+auch weitere allgemeine Informationen und Links.
+
+\href{http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr\_pruefziffernberechnung.php}{%
+http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr\_pruefziffernberechnung.php}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Für Ungeduldige: einige Minimalbeispiele}
+Für diejenigen, die lieber programmieren als Handbücher lesen, hier einige
+kleine Codebeispiele, die die Verwendung der Bibliothek zeigen. Das C- und
+Perlprogramm liest aus einer Datei Bankleitzahl/Konto-Kombinationen und
+schreibt die Prüfergebnisse in eine zweite Datei; die Dateien werden auf der
+Kommandozeile angegeben. Im PHP-Programm werden die Eingaben in einem Textfeld
+gemacht und die Ergebnisse nach dem Textfeld wieder ausgegeben. Bankleitzahl
+und Konto sind in allen Programmen jeweils durch ein oder mehrere Blanks zu
+trennen.
+
+Die Programme wurden mit \texttt{tiny\_c2l} nach \LaTeX{} konvertiert und teilweise
+mit Hyperlinks zu einigen Funktionen versehen. Das \texttt{tiny\_c2l} ist eigentlich nicht
+für Perl oder PHP gedacht, funktioniert aber (mit kleinen Abstrichen) trotzdem.
+
+\subsection{Mini-Programm in C}
+\input{mini.c.tex}
+\subsection{Mini-Programm in Perl}
+\input{mini.pl.tex}
+\subsection{Mini-Programm in PHP (altes Interface)}
+\input{mini.old.php.tex}
+\subsection{Mini-Programm in PHP (neues Interface)}
+\input{mini.php.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wichtige Funktionen der C Bibliothek (nicht komplett)}
+\subsection{Einführung, Kompatiblität zur Vorversion}
+%c C
+
+Zum Test eines Kontos stehen sowohl die Funktionen der alten Version (bis 2.7)
+sowie das der 2.9x/3.0 Version zur Verfügung.
+
+Das alte API ist relativ klein; es enthält einige Funktionen zum Test eines
+Kontos sowie noch einige Verwaltungsfunktionen (Speicherfreigabe, Generieren
+einer LUT-Datei, Infozeile einer LUT-Datei holen). Diese Funktionen sind in der
+neuen Version nicht eigenständig programmiert, sondern rufen intern die neuen
+Funktionen auf. Sie sind nur noch aus Kompatibilitätsgründen in der Bibliothek
+enthalten; es ist jedoch empfehlenswert, sie durch die neuen Funktionen zu
+ersetzen, da bei diesen der Overhead geringer ist.
+
+Bei der alten Version gab es noch eine Reihe Funktionen, bei denen die
+Threadfestigkeit durch eine zusätzliche Variable (Struktur, in der die
+ansonsten globalen Variablen gehalten wurden) erreicht wird; diese
+Funktionen sind mit einem \_t im Dateinamen gekennzeichnet und enthalten einen
+zusätzlichen Parameter vom Typ \texttt{KTO\_CHK\_CTX} (z.B. \texttt{kto\_check\_t}\/() oder
+\texttt{kto\_check\_str\_t}\/()). Diese Funktionen sind komplett obsolet, da die Bibliothek
+jetzt threadfest ist. Sie sind noch in der Bibliothek enthalten, haben aber die
+gleiche Funktionalität wie die entsprechenden Routinen ohne das \_t (der
+zusätzliche Parameter wird einfach ignoriert). In der folgenden Übersicht sind
+sie nicht mehr aufgeführt; in der Headerdatei konto\_check.h sind sie natürlich
+noch zu finden.
+
+Ein Punkt, an dem die Kompatibilität allerdings gebrochen werden mußte, sind
+globale Variablen; diese werden im neuen API nicht mehr unterstützt, da sie
+nicht threadfest realisiert werden können. Die entsprechenden Variablen
+existieren noch (um evl. Linkerfehler zu vermeiden); sie enthalten jedoch nur
+eine Warnmeldung, daß die entsprechende Variable nicht mehr unterstützt wird.
+
+Das neue API enthält enthält wesentlich mehr Funktionen, da zu einer
+Bankleitzahl alle Felder der BLZ-Datei der Deutschen Bundesbank abgefragt
+werden können. Hinzu kommen noch Funktionen zum Tests von IBAN und
+Strukturiertem Verwendungszweck.
+
+Im neuen API sind Initialisierung der Bibliothek und Test getrennt; außerdem
+ist es möglich, inkrementell zu initialisieren (d.h., zusätzliche Felder einer
+LUT-Datei nachzuladen). In der neuen LUT-Datei können zwei verschiedene
+Datensätze mit unterschiedlichem Gültigkeitsdatum enthalten sein. Die Auswahl
+des Datensatzes kann automatisch (nach Datum) oder manuell erfolgen.
+
+Außerdem ist es möglich, zu testen, ob der Datensatz im Speicher aktuell noch
+gültig ist. Diese Funktion ist momentan noch nicht wichtig; für Perl und PHP
+sind allerdings persistente Datenstrukturen geplant, bei denen die LUT-Datei
+während der Initialisierung \textit{des Servers} geladen wird. In dem Fall wäre die
+Funktion dann in einem Request aufzurufen, um u.U. (falls die Daten nicht mehr
+gültig sind) eine neue Initialisierung durchzuführen
+
+\subsection{Initialisierung der Bibliothek}
+Diese Funktionen allokieren Speicher für interne Arrays, lesen die LUT-Datei und
+tragen die Werte in die Arrays ein. Eine dieser Funktionen muß \_vor\_ Benutzung der
+Bibliothek aufgerufen werden. Sie unterscheiden sich nur in den Aufrufparametern;
+intern rufen die Funktionen lut\_init() und kto\_check\_init\_p() die Funktion
+kto\_check\_init() auf. \href{#beispiel.funktion.c.lutinit}{(Beispiel)}
+
+\begin{itemize}
+   \item \hypertarget{funktion.c.lutinit}{}\index{funktion.c}{lut\_init}%
+      \texttt{int lut\_init(char $\ast$lut\_name,int required,int set)}\par
+      Diese Funktion dient zur einfachen Initialisierung der Bibliothek.
+
+   \item \hypertarget{funktion.c.ktocheckinitp}{}\index{funktion.c}{kto\_check\_init\_p}%
+      \texttt{int kto\_check\_init\_p(char $\ast$lut\_name,int required,int set,int incremental)}\par
+   Diese Funktion hat Ähnlichkeit mit der Funktion lut\_init(); der
+   zusätzliche Parameter \texttt{incremental} dient zur inkrementellen
+   Initialisierung der Bibliothek. Sie wurde eingeführt, da für Perl keine
+   Arrays als Parameter übergeben werden können, daher auch das \texttt{\_p} im Funktionsnamen.
+
+   \item \hypertarget{funktion.c.ktocheckinit}{}\index{funktion.c}{kto\_check\_init}%
+      \texttt{int kto\_check\_init(char $\ast$lut\_name,int $\ast$required,int $\ast$$\ast$status,int set,int incremental)}\par
+   Dies ist die allgemeine Funktion zur Initialisierung der Bibliothek.
+   Der Parameter \texttt{required} ist hier ein Array; außerdem gibt es noch die
+   Variable \texttt{status} in dem der Status jedes einzelnen Blocks zurückgegeben
+   wird.
+
+\end{itemize}
+
+\subsection{Aufrufparameter:}
+\begin{description}
+\item[char $\ast$lut\_name] (bei allen Funktionen):\par
+   Dateiname der Datei mit den komprimierten Bankdaten (LUT-Datei).
+
+\item[int required] (\texttt{lut\_init}\/(), \texttt{kto\_check\_init\_p}\/()):\par
+\hypertarget{aufrufparameter}{}
+   Dieser Parameter (Integerzahl) gibt die zu ladenden Datenblocks an; er kann die Werte 0...9
+   annehmen. Die Zuordnung zu den zu ladenden Blocks ist im \href{#parameter.required.int}{Anhang} aufgeführt.
+
+\item[int $\ast$required] (bei \texttt{kto\_check\_init}\/()):\par
+   \hypertarget{parameter.required.array}{}{}Dieser Parameter (als Integer-Array) gibt die zu ladenden Datenblocks an (wie
+   oben); man ist in der Auswahl der einzelnen Blocks jedoch komplett frei. Die Liste muß durch ein
+   Element mit 0 abgeschlossen werden. Die definierten Blocktypen sind im \href{#datenblock.namen}{Anhang} definiert.
+
+\item[int set] (bei allen Funktionen):\par
+      \hypertarget{parameter.set}{}Dieser Parametergibt den zu ladenden Datensatz an (0, 1 oder 2).
+      Bei 0 wird der aktuell gültige Datensatz geladen (bzw. falls keiner
+      aktuell ist oder die Datei kein Gültigkeitsdatum enthält, der erste);
+      ansonsten der angegebene Satz. Nähere Angaben zum Gültigkeitsdatum finden
+      sich bei der Funktion \href{#generatelut2}{generate\_lut2} bzw. in der
+      \href{#lutdatei.set}{Beschreibung} der LUT-Datei.
+
+\item[int $\ast$$\ast$status] (bei \texttt{kto\_check\_init}\/()):\par
+   Diese Variable wird auf ein Integer-Array gesetzt, in dem der Status jedes
+   einzelnen Blocks zurückgegeben wird. Damit kann man beim Rückgabewert von
+   \texttt{LUT2\_PARTIAL\_OK} nachsehen, welche Blocks geladen wurden, und welche Fehler bei den
+   fehlenden Blocks auftraten.
+
+\item[int incremental] (bei \texttt{kto\_check\_init\_p}\/(), \texttt{kto\_check\_init}\/()):\par
+   Falls dieser Parameter 1 ist, wird versucht, die Bibliothek \href{#initialisierung.inkrementell}{inkrementell} zu
+   initialisieren (d.h., nur die fehlenden Blocks nachzuladen). Falls eine
+   inkrementelle Initialisierung von einer anderen Datei als der ursprünglichen
+   versucht wird, werden keine zusätzlichen Blocks geladen, um Inkonsistenzen zu
+   vermeiden; stattdessen wird die Fehlermeldung \texttt{INCREMENTAL\_INIT\_FROM\_DIFFERENT\_FILE} zurückgegeben.
+\end{description}
+
+\subsection{Konvertierung der numerischen Rückgabewerte in Klartext}
+\hypertarget{beschreibung}{}\hypertarget{funktion.c.konvertierung}{}Die folgenden Funktionen konvertieren die
+\href{#rueckgabewerte}{numerischen Rückgabewerte} in Klartext in verschiedene
+Formate:
+
+\begin{itemize}
+   \item \hypertarget{funktion.c.ktocheckretval2txt}{}\index{funktion.c}{kto\_check\_retval2txt}%
+      \texttt{char $\ast$kto\_check\_retval2txt(int retval)}
+      Diese Funktion wandelt den Rückgabewert retval in einen String um. Die
+      Kodierung der Umlaute erfolgt mit der Kodierung, die durch die Funktion
+      kto\_check\_encoding() spezifiziert wurde.
+
+   \item \hypertarget{funktion.c.ktocheckretval2iso}{}\index{funktion.c}{kto\_check\_retval2iso}%
+      \texttt{char $\ast$kto\_check\_retval2iso(int retval)}
+      Diese Funktion wandelt den Rückgabewert retval in einen String um. Die
+      Kodierung der Umlaute erfolgt mit ISO-8859-1.
+
+   \item \hypertarget{funktion.c.ktocheckretval2txtshort}{}\index{funktion.c}{kto\_check\_retval2txt\_short}%
+      \texttt{char $\ast$kto\_check\_retval2txt\_short(int retval)}
+      Diese Funktion wandelt den Rückgabewert retval in einen String um, der dem Makronamen
+      des Rückgabeparameters entspricht.
+
+   \item \hypertarget{funktion.c.ktocheckretval2html}{}\index{funktion.c}{kto\_check\_retval2html}%
+      \texttt{char $\ast$kto\_check\_retval2html(int retval)}
+      \hypertarget{funktion.c.ktocheckretval2html}{}Diese Funktion wandelt den Rückgabewert retval in einen String um. Die
+      Kodierung der Umlaute erfolgt mit HTML Entities. \href{#beispiel.funktion.c.ktocheckretval2html}{(Beispiel)}
+
+   \item \hypertarget{funktion.c.ktocheckretval2dos}{}\index{funktion.c}{kto\_check\_retval2dos}%
+      \texttt{char $\ast$kto\_check\_retval2dos(int retval)}
+      Diese Funktion wandelt den Rückgabewert retval in einen String um. Die
+      Kodierung der Umlaute erfolgt mit cp850 (DOS).
+
+   \item \hypertarget{funktion.c.ktocheckretval2utf8}{}\index{funktion.c}{kto\_check\_retval2utf8}%
+      \texttt{char $\ast$kto\_check\_retval2utf8(int retval)}
+      Diese Funktion wandelt den Rückgabewert retval in einen String um. Die
+      Kodierung der Umlaute erfolgt mit UTF-8.
+\end{itemize}
+
+
+
+\subsection{Test einer Bankverbindung}
+Die folgenden Funktionen sind für das C API noch nicht beschrieben; eine Beschreibung
+findet sich jedoch im PHP API.
+
+\begin{itemize}
+   \item \hypertarget{funktion.c.ktocheckblz}{}\index{funktion.c}{kto\_check\_blz}%
+      \texttt{int kto\_check\_blz(char $\ast$blz,char $\ast$kto)}\\
+      \href{#beispiel.funktion.c.ktocheckblz}{(Beispiel)}
+   \item \hypertarget{funktion.c.ktocheckpz}{}\index{funktion.c}{kto\_check\_pz}%
+      \texttt{int kto\_check\_pz(char $\ast$pz,char $\ast$kto,char $\ast$blz)}
+   \item \hypertarget{funktion.c.ktocheckblzdbg}{}\index{funktion.c}{kto\_check\_blz\_dbg}%
+      \texttt{int kto\_check\_blz\_dbg(char $\ast$blz,char $\ast$kto,RETVAL $\ast$retvals)}
+   \item \hypertarget{funktion.c.ktocheckpzdbg}{}\index{funktion.c}{kto\_check\_pz\_dbg}%
+      \texttt{int kto\_check\_pz\_dbg(char $\ast$pz,char $\ast$kto,char $\ast$blz,RETVAL $\ast$retvals)}
+   \item \hypertarget{funktion.c.ktocheck}{}\index{funktion.c}{kto\_check}%
+      \texttt{int kto\_check(char $\ast$pz\_or\_blz,char $\ast$kto,char $\ast$lut\_name)}
+   \item \hypertarget{funktion.c.ktocheckstr}{}\index{funktion.c}{kto\_check\_str}%
+      \texttt{char $\ast$kto\_check\_str(char $\ast$pz\_or\_blz,char $\ast$kto,char $\ast$lut\_name)}
+\end{itemize}
+
+
+\subsection{Test von IBAN und strukturiertem Verwendungszweck}
+\begin{itemize}
+   \item \hypertarget{funktion.c.iban2bic}{}\index{funktion.c}{iban2bic}%
+      \texttt{char $\ast$iban2bic(char $\ast$iban,int $\ast$retval)}
+   \item \hypertarget{funktion.c.ibangen}{}\index{funktion.c}{iban\_gen}%
+      \texttt{char $\ast$iban\_gen(char $\ast$kto,char $\ast$blz,int $\ast$retval)}
+   \item \hypertarget{funktion.c.ibancheck}{}\index{funktion.c}{iban\_check}%
+      \texttt{int iban\_check(char $\ast$iban,int $\ast$retval)}
+   \item \hypertarget{funktion.c.ipicheck}{}\index{funktion.c}{ipi\_check}%
+      \texttt{int ipi\_check(char $\ast$zweck)}
+   \item \hypertarget{funktion.c.ipigen}{}\index{funktion.c}{ipi\_gen}%
+      \texttt{int ipi\_gen(char $\ast$zweck,char $\ast$dst,char $\ast$papier)}
+\end{itemize}
+
+
+\subsection{Abfrage von Bankdaten (aus der BLZ)}
+
+\begin{itemize}
+   \item \hypertarget{funktion.c.lutblz}{}\index{funktion.c}{lut\_blz}%
+      \texttt{int lut\_blz(char $\ast$b,int zweigstelle)}
+   \item \hypertarget{funktion.c.lutfilialen}{}\index{funktion.c}{lut\_filialen}%
+      \texttt{int lut\_filialen(char $\ast$b,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutname}{}\index{funktion.c}{lut\_name}%
+      \texttt{char $\ast$lut\_name(char $\ast$b,int zweigstelle,int $\ast$retval)}\\
+      \href{#beispiel.funktion.c.lutname}{(Beispiel)}
+   \item \hypertarget{funktion.c.lutnamekurz}{}\index{funktion.c}{lut\_name\_kurz}%
+      \texttt{char $\ast$lut\_name\_kurz(char $\ast$b,int zweigstelle,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutplz}{}\index{funktion.c}{lut\_plz}%
+      \texttt{int lut\_plz(char $\ast$b,int zweigstelle,int $\ast$retval)}\\
+      \href{#beispiel.funktion.c.lutplz}{(Beispiel)}
+   \item \hypertarget{funktion.c.lutort}{}\index{funktion.c}{lut\_ort}%
+      \texttt{char $\ast$lut\_ort(char $\ast$b,int zweigstelle,int $\ast$retval)}\\
+      \href{#beispiel.funktion.c.lutort}{(Beispiel)}
+   \item \hypertarget{funktion.c.lutpan}{}\index{funktion.c}{lut\_pan}%
+      \texttt{int lut\_pan(char $\ast$b,int zweigstelle,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutbic}{}\index{funktion.c}{lut\_bic}%
+      \texttt{char $\ast$lut\_bic(char $\ast$b,int zweigstelle,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutpz}{}\index{funktion.c}{lut\_pz}%
+      \texttt{int lut\_pz(char $\ast$b,int zweigstelle,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutaenderung}{}\index{funktion.c}{lut\_aenderung}%
+      \texttt{int lut\_aenderung(char $\ast$b,int zweigstelle,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutloeschung}{}\index{funktion.c}{lut\_loeschung}%
+      \texttt{int lut\_loeschung(char $\ast$b,int zweigstelle,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutnachfolgeblz}{}\index{funktion.c}{lut\_nachfolge\_blz}%
+      \texttt{int lut\_nachfolge\_blz(char $\ast$b,int zweigstelle,int $\ast$retval)}
+   \item \hypertarget{funktion.c.lutmultiple}{}\index{funktion.c}{lut\_multiple}%
+      \texttt{int lut\_multiple(char $\ast$b, int $\ast$cnt, int $\ast$$\ast$p\_blz, char  $\ast$$\ast$$\ast$p\_name, char $\ast$$\ast$$\ast$p\_name\_kurz, 
+         int $\ast$$\ast$p\_plz, char $\ast$$\ast$$\ast$p\_ort, int $\ast$$\ast$p\_pan, char $\ast$$\ast$$\ast$p\_bic, int $\ast$p\_pz, int $\ast$$\ast$p\_nr, char $\ast$$\ast$p\_aenderung, 
+         char $\ast$$\ast$p\_loeschung, int $\ast$$\ast$p\_nachfolge\_blz, int $\ast$id, int $\ast$cnt\_all, int $\ast$$\ast$start\_idx)}
+\end{itemize}
+
+
+\subsection{Sonstige Funktionen}
+
+\begin{itemize}
+\item \hypertarget{funktion.c.lutcleanup}{}\index{funktion.c}{lut\_cleanup}%
+      \texttt{void lut\_cleanup(void)}\\
+\hypertarget{funktion.c.cleanupkto}{}\index{funktion.c}{cleanup\_kto}%
+      \texttt{int cleanup\_kto(void)}\par
+
+   Diese Funktionen sind synonym; sie geben den allokierten Speicher wieder
+   frei. Eine dieser Funktionen sollte nach Benutzung der Bibliothek aufgerufen
+   werden. \href{#beispiel.funktion.c.lutcleanup}{(Beispiel)}
+
+
+\item \hypertarget{funktion.c.lutvalid}{}\index{funktion.c}{lut\_valid}%
+      \texttt{int lut\_valid(void)}\par
+Die Funktion lut\_valid() testet, ob die geladene LUT-Datei im Gültigkeitszeitraum
+liegt; Rückgabewerte sind:
+
+\begin{tabular}{ll}
+LUT2\_NO\_VALID\_DATE   &  kein Gültigkeitsdatum in der Datei \\
+LUT2\_VALID           &  die Datei ist aktuell gültig \\
+LUT2\_NOT\_YET\_VALID   &  die Datei ist noch nicht gültig \\
+LUT2\_NO\_LONGER\_VALID &  die Datei ist nicht mehr gültig \\
+\end{tabular}
+
+
+\item \hypertarget{funktion.c.lutinfo}{}\index{funktion.c}{lut\_info}%
+      \texttt{int lut\_info(char $\ast$lut\_name,char $\ast$$\ast$info1,char $\ast$$\ast$info2,int $\ast$valid1,int $\ast$valid2)}
+\item \hypertarget{funktion.c.getlutinfob}{}\index{funktion.c}{get\_lut\_info\_b}%
+      \texttt{int get\_lut\_info\_b(char $\ast$$\ast$info,char $\ast$lutname)}
+\item \hypertarget{funktion.c.generatelut}{}\index{funktion.c}{generate\_lut}%
+      \texttt{int generate\_lut(char $\ast$inputname,char $\ast$outputname,char $\ast$user\_info,int lut\_version)}
+\item \hypertarget{funktion.c.generatelut2}{}\index{funktion.c}{generate\_lut2}%
+      \texttt{int generate\_lut2(char $\ast$inputname,char $\ast$outputname,char $\ast$user\_info,char $\ast$gueltigkeit,
+      UINT4 $\ast$felder,int slots,int lut\_version,UINT4 set)}
+\item \hypertarget{funktion.c.generatelut2p}{}\index{funktion.c}{generate\_lut2\_p}%
+      \texttt{int generate\_lut2\_p(char $\ast$inputname,char $\ast$outputname,char $\ast$user\_info,char $\ast$gueltigkeit,
+      UINT4 felder,UINT4 filialen,int slots,int lut\_version,int set)}
+\item \hypertarget{funktion.c.getktocheckversion}{}\index{funktion.c}{get\_kto\_check\_version}%
+      \texttt{char $\ast$get\_kto\_check\_version(void)}
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Die PHP-Version von \emph{konto\_check}}
+\subsection{Einführung}
+Es gibt zwei verschiedene Versionen der PHP-Bibliothek, die sich in der
+Aufrufkonvention unterscheiden. Sie werden hier ebenfalls als altes und neues API
+bezeichnet; diese Bezeichnungen haben jedoch mit den beiden APIs der C-Version
+nichts zu tun. Das PHP-Modul läßt sich mit der alten C-Bibliothek (bis 2.7) nicht
+gut anwenden, da einige grundlegende Funktionen und Locking-Mechanismen einfach
+fehlen.
+
+Das Problem bei der PHP-Bibliothek war, daß viele Funktionen mehrere Rückgabewerte
+haben. In der ersten Version wurde dies so gelöst, daß ein Array mit den
+verschiedenen Werten zurückgegeben wurde. Die Funktionen sind dadurch jedoch etwas
+sperrig und unhandlich; es war das erste PHP-Modul, das ich schrieb, und ich kannte
+die Möglichkeiten der ZEND Engine einfach noch nicht.
+
+In der neuen Version wird dagegen grundsätzlich mit skalaren Rückgabeparametern
+gearbeitet. In den Funktionen, die mehrere Rückgabeparameter haben, werden
+stattdessen Funktionsargumente benutzt, deren Aufrufkonvention als Call by Reference
+erzwungen wird (transparent für den Benutzer); diese Parameter sind in den
+meisten Fällen auch optional, so daß sie nur bei Bedarf angegeben werden müssen.
+Dadurch ergibt sich ein wesentlich anwenderfreundlicheres API als in der alten
+Version. 
+
+Die Reihenfolge der Aufrufparameter weicht bei einer Reihe Funktionen von der des C
+API ab. Das liegt daran, daß in C nur feste Parameterlisten verwendet werden; in PHP
+ist es allerdings manchmal geschickter, die Parameter in einer anderen Reihenfolge zu
+benutzen. So entspricht z.B. die PHP-Funktion \texttt{lut\_ort(\$blz[,""\$retval[,""\$zweigstelle]])} der
+C-Funktion \texttt{lut\_ort(blz,""zweigstelle,""retval)}; da man jedoch öfter den Rückgabewert der
+Funktion benötigt als eine Zweigstelle, wurden die Parameter vertauscht. Ansonsten
+müsste man immer die Zweigstelle mit angeben, auch wenn man sie eigentlich gar nicht
+braucht.
+
+\subsection{Installation der PHP-Version}
+\index{allgemein}{Installation: PHP-Version}
+Aktuell ist nur die $\ast$nix-Version von \emph{konto\_check} getestet; die Windows-Version wird in einer späteren Version
+folgen, sie benötigt noch einige Tests.
+
+Die Installation ist relativ einfach: Die Datei php.zip (bzw. php.old.zip) ist auszupacken;
+sie generiert ein Verzeichnis php/, in dem alle benötigten Dateien zu finden sind. Wechseln
+Sie in dieses Verzeichnis und geben Sie dann die folgenden Befehle ein:
+
+\begin{verbatim}
+phpize
+./configure
+make
+make install
+\end{verbatim}
+
+(der letzte Schritt muß als Root erfolgen). Danach ist noch die Datei
+konto\_check.ini in das Systemverzeichnis \texttt{/etc/php.d/} zu kopieren (unter
+Fedora/RedHat; bei anderen Distributionen liegt das Verzeichnis \texttt{php.d/} u.U.
+anderswo), und die Installation ist beendet. Mit \texttt{php -a} können Sie die
+PHP-Shell aufrufen und dann einige Tests machen. Anschließend muß noch der
+Webserver neu gestartet werden, und die Installation ist abgeschlossen.
+
+\section{Das alte PHP API}
+%php.alt PHP, alt
+\subsection{Initialisierung, Infos zur LUT-Datei, Speicherfreigabe}
+\begin{itemize}
+
+\item \hypertarget{funktion.php.alt.lutinit}{}\index{funktion.php.alt}{lut\_init}%
+      \texttt{\$ret=lut\_init([\$lut\_name[,\$required[,\$set[,\$used\_lutfile]]]])}\par
+Diese Funktion dient zur einfachen Initialisierung der Bibliothek. Alle
+Parameter sind optional; für nicht übergebene Parameter werden die
+Standardwerte aus der INI-Datei bzw. \textit{konto\_check.h} genommen.
+
+Der Parameter \texttt{\$lut\_name} ist der Name der LUT-Datei; falls er nicht angegeben
+werden soll, kann auch ein Leerstring benutzt werden. In diesem Fall wird der
+Default-Wert der INI-Datei benutzt.
+
+Der Parameter \texttt{\$required} ist in dieser Funktion ein skalarer Wert zwischen
+0 und 9; die Zuordnung der mit den einzelnen Werten verknüpften Blocks ist
+im \href{#parameter.required.int}{Anhang} aufgeführt.
+
+Der Parameter \texttt{\$set} ist ein Skalar mit dem Wert 0, 1 oder 2; er gibt den zu ladenden 
+Datensatz der LUT-Datei an. Näheres dazu auch die \href{#parameter.set}{C Funktion} und in der 
+\href{#lutdatei.set}{Beschreibung} des LUT-Dateiformats.
+
+\href{#beispiel.funktion.php.alt.lutinit}{(Beispiel)} von lut\_init()
+
+\item \hypertarget{funktion.php.alt.ktocheckinit}{}\index{funktion.php.alt}{kto\_check\_init}%
+      \texttt{\$ret=kto\_check\_init([\$lut\_name[,\$required[,\$set[,\$incremental[,\$used\_lutfile]]]]])}\par
+Diese Funktion ist weitgehend identisch mit lut\_init; nur der Parameter \texttt{\$incremental}
+ist dazugekommen, der angibt, ob \href{#initialisierung.inkrementell}{inkrementell} initialisiert werden soll oder nicht.
+
+Diese Funktion hat weniger Möglichkeiten als die des neuen Interfaces; insbesondere kann
+der Parameter \texttt{\$required} nur ein \textit{Skalar} sein, kein Array.
+
+\item \hypertarget{funktion.php.alt.lutvalid}{}\index{funktion.php.alt}{lut\_valid}%
+      \texttt{\$ret=lut\_valid()}\par
+Diese Funktion testet, ob der aktuell \textit{geladene} Datensatz aktuell gültig ist.
+Mögliche Rückgabewerte sind:
+
+\begin{tabular}{rll}
+  5 & LUT2\_NO\_VALID\_DATE   &  kein Gültigkeitsdatum in der Datei \\
+  3 & LUT2\_VALID           &  die Datei ist aktuell gültig \\
+-59  & LUT2\_NOT\_YET\_VALID   &  die Datei ist noch nicht gültig \\
+-58  & LUT2\_NO\_LONGER\_VALID &  die Datei ist nicht mehr gültig \\
+\end{tabular}
+
+Zurückgegeben wird nur ein skalarer Wert (numerisch).
+
+\item \hypertarget{funktion.php.alt.lut2status}{}\index{funktion.php.alt}{lut2\_status}%
+      \texttt{\$ret=lut2\_status()}\par
+Dies Funktion gibt ein Array zurück, in dem für jeden
+angeforderten Block der aktuelle Status zurückgegeben wird. Die Werte entsprechen der
+Variablen \texttt{\$status} der Funktion \texttt{kto\_check\_init()}. Es werden sowohl symbolische
+als auch numerische Index-Werte für die Blocks gesetzt.
+
+\item \hypertarget{funktion.php.alt.lutfree}{}\index{funktion.php.alt}{lut\_free}%
+      \texttt{\$ret=lut\_free()}\\
+\hypertarget{funktion.php.alt.lutcleanup}{}\index{funktion.php.alt}{lut\_cleanup}%
+      \texttt{\$ret=lut\_cleanup()}\par
+Diese Funktionen sind synonym. Sie geben allokierten Speicher wieder frei und
+löschen die entsprechenden Variablen, so daß die Bibliothek als nicht initialisiert
+gekennzeichnet ist.
+\href{#beispiel.funktion.php.alt.lutfree}{(Beispiel)}
+\end{itemize}
+
+\subsection{Konvertierung der numerischen Rückgabewerte in Klartext}
+\hypertarget{funktion.php.alt.konvertierung}{}Die folgenden Funktionen konvertieren die
+\href{#rueckgabewerte}{numerischen Rückgabewerte} in Klartext in verschiedenen
+Formaten:
+
+\begin{itemize}
+\item \hypertarget{funktion.php.alt.ktocheckretval}{}\index{funktion.php.alt}{kto\_check\_retval}%
+      \texttt{\$r=kto\_check\_retval(\$ret)}\par
+Diese Funktion liefert ein assoziatives Array zurück, das als Index die Makronamen
+aus \textit{konto\_check.h} benutzt und den entsprechenden numerischen Wert zurückgibt.
+Das Array kann gut benutzt werden, wenn man die Makronamen nicht als globale Konstanten
+deklarieren will (Option --enable-symbolic\_retvals beim configure-Aufruf).
+
+\item \hypertarget{funktion.php.alt.ktocheckretval2txtshort}{}\index{funktion.php.alt}{kto\_check\_retval2txt\_short}%
+      \texttt{\$ret=kto\_check\_retval2txt\_short(\$ret)}\par
+Ausgabe als kurzer String, der den Makronamen aus \textit{konto\_check.h} entspricht.
+
+\item \hypertarget{funktion.php.alt.ktocheckretval2txt}{}\index{funktion.php.alt}{kto\_check\_retval2txt}%
+      \texttt{\$ret=kto\_check\_retval2txt(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute so, wie es mittels der Funktion kto\_check\_encoding()
+spezifiziert wurde.
+
+\item \hypertarget{funktion.php.alt.ktocheckretval2iso}{}\index{funktion.php.alt}{kto\_check\_retval2iso}%
+      \texttt{\$ret=kto\_check\_retval2iso(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute mit ISO-8859-1.
+
+\item \hypertarget{funktion.php.alt.ktocheckretval2html}{}\index{funktion.php.alt}{kto\_check\_retval2html}%
+      \texttt{\$ret=kto\_check\_retval2html(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute mit HTML Entities.
+\href{#beispiel.funktion.php.alt.ktocheckretval2html}{(Beispiel)}
+
+\item \hypertarget{funktion.php.alt.ktocheckretval2dos}{}\index{funktion.php.alt}{kto\_check\_retval2dos}%
+      \texttt{\$ret=kto\_check\_retval2dos(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute mit cp850 (DOS).
+
+\item \hypertarget{funktion.php.alt.ktocheckretval2utf8}{}\index{funktion.php.alt}{kto\_check\_retval2utf8}%
+      \texttt{\$ret=kto\_check\_retval2utf8(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute mit UTF-8.
+
+\end{itemize}
+
+\subsection{Testfunktionen: BLZ/Prüfziffer und Konto}
+\begin{itemize}
+
+\item \hypertarget{funktion.php.alt.ktocheck}{}\index{funktion.php.alt}{kto\_check}%
+      \texttt{\$retval=kto\_check(\$blz,\$kto[,\$lut\_name])}\par
+Diese Funktion testet, ob die BLZ/Konto Kombination gültig ist. Die Funktion
+gehört noch zu den alten C-Funktionen; falls die Bibliothek noch nicht initialisiert
+war, wird sie automatisch initialisiert. Der (optionale) Parameter \texttt{\$lut\_name} gibt den
+Dateinamen der LUT-Datei an; falls er nicht angegeben ist, werden die Standardwerte benutzt.
+
+\item \hypertarget{funktion.php.alt.ktocheckstr}{}\index{funktion.php.alt}{kto\_check\_str}%
+      \texttt{\$retval=kto\_check\_str(\$blz,\$kto[,\$lut\_name])}\par
+Diese Funktion entspricht der Funktion \texttt{kto\_check()}; der Rückgabewert ist allerdings nicht
+wie bei dieser ein Skalar, sondern ein assoziatives Array mit den folgenden Elementen:
+
+\begin{tabular}{ll}
+\texttt{retval['ret']}  & Numerischer Rückgabewert \\
+\texttt{retval['ret1']} & Rückgabewert in ISO-8859-1 Kodierung \\
+\texttt{retval['ret2']} & Rückgabewert als kurzer String (Makroname) \\
+\texttt{retval['ret3']} & Rückgabewert in HTML-Kodierung \\
+\end{tabular}
+
+\item \hypertarget{funktion.php.alt.ktocheckpz}{}\index{funktion.php.alt}{kto\_check\_pz}%
+      \texttt{\$ret=kto\_check\_pz(\$pruefziffer,\$kto[,\$blz])}
+Diese Funktion testet eine Kontonummer mit einer Prüfziffermethode; mögliche Werte
+für die Prüfziffer sind 00 bis D8. Die Funktion setzt \textit{nicht} voraus, daß die
+Bibliothek bereits initialisiert ist.
+
+Der Parameter \texttt{\$blz} wird bei Prüfung mit den Methoden 52, 53, B6 und C0 benötigt;
+ansonsten kann er weggelassen werden.
+
+\item \hypertarget{funktion.php.alt.ktocheckblz}{}\index{funktion.php.alt}{kto\_check\_blz}%
+      \texttt{\$ret=kto\_check\_blz(\$blz,\$kto)}
+Diese Funktion testet eine Kontonummer mit einer vorgegebenen Bankleitzahl.
+Die Funktion setzt voraus, daß die Bibliothek bereits initialisiert ist.
+\href{#beispiel.funktion.php.alt.ktocheckblz}{(Beispiel)}
+
+\end{itemize}
+
+\subsection{Testfunktionen: IBAN, Strukturierter Verwendungszweck}
+Die Funktionen zu IBAN und Strukturiertem Verwendungszweck haben alle als
+Rückgabewert ein assoziatives Array. \hypertarget{useargs}{}Bei den Funktionen wird --
+falls dies in \textit{php\_konto\_check.h} eingeschaltet ist -- das Funktionsargument
+ebenfalls zurückgegeben; dieser Parameter ist allerdings standardmäßig nicht
+gesetzt.
+
+Im neuen API wird statt eines assoziativen Arrays in allen Fällen ein skalarer
+Wert zurückgegeben; die zusätzlichen Rückgabeparameter werden \textit{by reference}
+zurückgegeben. Das Funktionsargument wird im neuen API grundsätzlich \textit{nicht}
+zurückgegeben (es ist auch in im alten API nur noch aus Kompatibilitätsgründen
+vorhanden, nicht aus Überzeugung ;-) ).
+
+\begin{itemize}
+\item \hypertarget{funktion.php.alt.ibancheck}{}\index{funktion.php.alt}{iban\_check}%
+      \texttt{\$ret=iban\_check(\$iban)}\par
+Diese Funktion testet die IBAN auf Gültigkeit; falls es ein deutsches Konto
+ist, wird außerdem die enthaltene Kontonummer auf Gültigkeit geprüft.
+Zurückgegeben wird ein assoziatives Array mit den folgenden Elementen:
+
+\begin{tabular}{ll}
+\texttt{retval['ret']}  & Numerischer Rückgabewert \\
+\texttt{retval['ret1']} & Rückgabewert in ISO-8859-1 Kodierung \\
+\texttt{retval['ret2']} & Rückgabewert als kurzer String (Makroname) \\
+\texttt{retval['ret3']} & Rückgabewert in HTML-Kodierung \\
+\texttt{retval['ret\_kto']}  & Numerischer Rückgabewert der Konto-Prüfung \\
+\texttt{retval['ret1\_kto']} & Rückgabewert der Konto-Prüfung in ISO-8859-1 Kodierung \\
+\texttt{retval['ret2\_kto']} & Rückgabewert der Konto-Prüfung als kurzer String (Makroname) \\
+\texttt{retval['ret3\_kto']} & Rückgabewert der Konto-Prüfung in HTML-Kodierung \\
+\texttt{retval['iban']}     & das Argument \texttt{\$iban} (nur bei \href{#useargs}{USE\_ARGS}) \\
+\end{tabular}
+
+\item \hypertarget{funktion.php.alt.iban2bic}{}\index{funktion.php.alt}{iban2bic}%
+      \texttt{\$ret=iban2bic(\$iban)}\par
+Diese Funktion bestimmt zu einer gegebenen IBAN den zugehörigen BIC (Bank
+Identifier Code). Die Funktion arbeitet nur mit deutschen Banken; außerdem muß
+natürlich der Block mit den BICs aus der LUT-Datei geladen sein. Es werden
+außerdem noch die BLZ und Kontonummer der vorgegebenen IBAN bestimmt. Die
+folgenden Werte werden zurückgegeben:
+
+\begin{tabular}{ll}
+\texttt{retval['ret']}  & Numerischer Rückgabewert \\
+\texttt{retval['ret1']} & Rückgabewert in ISO-8859-1 Kodierung \\
+\texttt{retval['ret2']} & Rückgabewert als kurzer String (Makroname) \\
+\texttt{retval['ret3']} & Rückgabewert in HTML-Kodierung \\
+\texttt{retval['bic']}  & der gesuchte BIC \\
+\texttt{retval['blz']}  & die Bankleitzahl des IBAN \\
+\texttt{retval['kto']}  & die Kontonummer des IBAN \\
+\texttt{retval['iban']} & das Argument \texttt{\$iban} (nur bei \href{#useargs}{USE\_ARGS}) \\
+\end{tabular}
+
+\item \hypertarget{funktion.php.alt.ipigen}{}\index{funktion.php.alt}{ipi\_gen}%
+      \texttt{\$ret=ipi\_gen(\$zweck)}
+Diese Funktion generiert einen Strukturierten Verwendungszweck. Der Zweck darf
+nur Buchstaben und Zahlen enthalten; Buchstaben werden dabei in Großbuchstaben
+umgewandelt. Andere Zeichen sind hier nicht zulässig. Der Verwendungszweck wird
+links mit Nullen bis auf 18 Byte aufgefüllt, dann die Prüfsumme berechnet und
+eingesetzt. Die folgenden Werte werden zurückgegeben:
+
+\begin{tabular}{ll}
+\texttt{retval['ret']}  & Numerischer Rückgabewert \\
+\texttt{retval['ret1']} & Rückgabewert in ISO-8859-1 Kodierung \\
+\texttt{retval['ret2']} & Rückgabewert als kurzer String (Makroname) \\
+\texttt{retval['ret3']} & Rückgabewert in HTML-Kodierung \\
+\texttt{retval['zweck\_out']}  & der generierte Verwendungszweck  \\
+\texttt{retval['papier']}  & Papierform des generierten Verwendungszwecks (mit Blanks) \\
+\texttt{retval['zweck']}  & der Parameter \texttt{\$zweck} (nur bei \href{#useargs}{USE\_ARGS}) \\
+\end{tabular}
+
+\item \hypertarget{funktion.php.alt.ipicheck}{}\index{funktion.php.alt}{ipi\_check}%
+      \texttt{\$ret=ipi\_check(\$zweck)}\par
+Diese Funktion testet einen Strukturierten Verwendungszweck für eine IPI
+(International Payment Instruction). Der Zweck darf nur Buchstaben und Zahlen
+enthalten und muß genau 20 Byte lang sein, wobei eingestreute Blanks oder Tabs
+ignoriert werden. Die folgenden Werte werden zurückgegeben:
+
+\begin{tabular}{ll}
+\texttt{retval['ret']}  & Numerischer Rückgabewert \\
+\texttt{retval['ret1']} & Rückgabewert in ISO-8859-1 Kodierung \\
+\texttt{retval['ret2']} & Rückgabewert als kurzer String (Makroname) \\
+\texttt{retval['ret3']} & Rückgabewert in HTML-Kodierung \\
+\texttt{retval['zweck']}  & der Parameter \texttt{\$zweck} (nur bei \href{#useargs}{USE\_ARGS}) \\
+\end{tabular}
+
+
+
+\item \hypertarget{funktion.php.alt.lutcleanup}{}\index{funktion.php.alt}{lut\_cleanup}%
+   \texttt{lut\_cleanup()}
+\item \hypertarget{funktion.php.alt.lutfilialen}{}\index{funktion.php.alt}{lut\_filialen}%
+   \texttt{lut\_filialen()}
+\item \hypertarget{funktion.php.alt.lutmultiple}{}\index{funktion.php.alt}{lut\_multiple}%
+   \texttt{lut\_multiple()}
+\item \hypertarget{funktion.php.alt.lutinfo}{}\index{funktion.php.alt}{lut\_info}%
+   \texttt{lut\_info()}
+\item \hypertarget{funktion.php.alt.lutname}{}\index{funktion.php.alt}{lut\_name}%
+   \texttt{lut\_name()}
+\item \hypertarget{funktion.php.alt.lutnamekurz}{}\index{funktion.php.alt}{lut\_name\_kurz}%
+   \texttt{lut\_name\_kurz()}
+\item \hypertarget{funktion.php.alt.lutplz}{}\index{funktion.php.alt}{lut\_plz}%
+   \texttt{lut\_plz()}
+\item \hypertarget{funktion.php.alt.lutort}{}\index{funktion.php.alt}{lut\_ort}%
+   \texttt{lut\_ort()}
+\item \hypertarget{funktion.php.alt.lutpan}{}\index{funktion.php.alt}{lut\_pan}%
+   \texttt{lut\_pan()}
+\item \hypertarget{funktion.php.alt.lutbic}{}\index{funktion.php.alt}{lut\_bic}%
+   \texttt{lut\_bic()}
+\item \hypertarget{funktion.php.alt.lutpz}{}\index{funktion.php.alt}{lut\_pz}%
+   \texttt{lut\_pz()}
+\item \hypertarget{funktion.php.alt.lutaenderung}{}\index{funktion.php.alt}{lut\_aenderung}%
+   \texttt{lut\_aenderung()}
+\item \hypertarget{funktion.php.alt.lutloeschung}{}\index{funktion.php.alt}{lut\_loeschung}%
+   \texttt{lut\_loeschung()}
+\item \hypertarget{funktion.php.alt.lutnachfolgeblz}{}\index{funktion.php.alt}{lut\_nachfolge\_blz}%
+   \texttt{lut\_nachfolge\_blz()}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Das neue PHP API}
+%php PHP
+\subsection{Einführung}
+In diesem Interface werden für die Rückgabe praktisch nur Skalare benutzt; sie können
+so direkt verwendet werden. Falls eine Funktion mehrere Werte zurückgibt, erfolgt dies
+über (i.A. optionale) Parameter. Diese Rückgabeparameter sind in der folgenden Liste
+mit \texttt{\&\$variablenname} gekennzeichnet, Parameter die \textit{by value} übergeben werden,
+werden einfach als \texttt{\$variablenname} angegeben. Die Übergabe \textit{by reference} wird
+durch die Bibliothek erzwungen; es ist nicht notwendig, beim Funktionsaufruf den
+\textit{call-by-reference} Operator \texttt{\&} zu verwenden.
+
+\subsection{Initialisierung, Infos zur LUT-Datei etc., Speicherfreigabe}
+\begin{itemize}
+\item \hypertarget{funktion.php.lutinit}{}\index{funktion.php}{lut\_init}%
+      \texttt{\$ret=lut\_init([\$lut\_name[,\$required[,\$set[,\$used\_lutfile]]]])}\par
+Diese Funktion dient zur einfachen Initialisierung der Bibliothek. Alle Parameter
+sind optional; für nicht übergebene Parameter werden die Standardwerte aus
+\textit{konto\_check.h} bzw. der INI-Datei genommen.
+
+Der Parameter \texttt{\$lut\_name} ist der Name der LUT-Datei; falls er nicht angegeben
+werden soll, kann auch ein Leerstring benutzt werden. In diesem Fall wird der
+Default-Wert der INI-Datei benutzt.
+
+Der Parameter \texttt{\$required} ist ein skalarer Wert zwischen
+0 und 9; die Zuordnung der mit den einzelnen Werten verknüpften Blocks ist
+im \href{#parameter.required.int}{Anhang} aufgeführt.
+
+Der Parameter \texttt{\$set} ist ein Skalar mit dem Wert 0, 1 oder 2; er gibt den zu ladenden 
+Datensatz der LUT-Datei an. Näheres dazu auch die \href{#parameter.set}{C Funktion} und in der 
+\href{#lutdatei.set}{Beschreibung} des LUT-Dateiformats.
+
+\href{#beispiel.funktion.php.alt.lutinit}{(Beispiel)} von lut\_init()
+
+\item \hypertarget{funktion.php.ktocheckinit}{}\index{funktion.php}{kto\_check\_init}%
+      \texttt{\$ret=kto\_check\_init([lut\_name[,\$required[,\$set[,\$incremental[,\&\$status[,\$used\_lutfile]]]]]])}\par
+Dies ist die allgemeine Initialisierungsfunktion der Bibliothek mit allen
+Optionen der C-Datei; im Gegensatz zur C-Version wird allerdings der Parameter
+\texttt{\$status} hier als letzter Parameter übergeben, um die Kompatibilität zur
+alten Version zu wahren. Der Parameter \href{#parameter.required.array}{\texttt{\$required}}
+kann in dieser Funktion auch ein Array sein; in dem Fall werden nur die
+angegebenen Blocks geladen.Falls der Parameter \texttt{\$status} angegeben wird,
+wird in dieser Variablen ein assoziatives Array zurückgegeben, bei dem für
+jeden angeforderten Block der Status zurückgegeben wird.
+
+\item \hypertarget{funktion.php.lutstatus}{}\index{funktion.php}{lut\_status}%
+      \texttt{\$ret=lut\_status()}\\
+\texttt{\$ret=lut2\_status(}\par
+Diese beiden Funktionen sind synonym; zurückgegeben wird ein Array, in dem für jeden
+angeforderten Block der aktuelle Status zurückgegeben wird. Die Werte entsprechen der
+Variablen \texttt{\$status} der Funktion \texttt{kto\_check\_init()}.
+
+\item \hypertarget{funktion.php.lutinfo}{}\index{funktion.php}{lut\_info}%
+      \texttt{\$ret=lut\_info([lut\_name[,\&\$info1[,\&\$valid1[,\&\$info2[,\&\$valid2[,\&\$info3[,\&\$slots]]]]]]])}\par
+Diese Funktion liest aus einer LUT-Datei die Infoblocks und die Gültigkeitsdaten
+(falls vorhanden) und gibt sie in den entsprechenden Variablen zurück. Die
+Reihenfolge der Variablen entspricht nicht der C-Funktion; diese Reihenfolge ist hier
+günstiger, da die Variablen optional sind.
+
+Falls für den Parameter lut\_name ein Leerstring übergeben wird, werden Infoblock und
+Gültigkeitszeitraum der \textit{geladenen} LUT-Datei getestet.
+
+Falls die Variable \texttt{\$info3} angegeben wird, werden in ihr einige statistische Daten zu der LUT-Datei
+sowie die in der Datei enthaltenen Blocktypen zurüückgeliefert.
+
+In der Variablen \texttt{\$slots} wird ein Array zurückgeliefert, das für jeden Slot der LUT-Datei
+detaillierte Informationen enthält. Die Überschrift zu den Zeilen findet sich im Element 0.
+
+\item \hypertarget{funktion.php.readlutblock}{}\index{funktion.php}{read\_lut\_block}%
+      \texttt{\$ret=read\_lut\_block(\$lut\_name,\$typ[,\$retval])}\par
+Diese Funktion liest einen Block mit dem Typ \texttt{\$typ} aus der angegebenen LUT-Datei. Der Rückgabestatus
+der Funktion läßt sich durch den optionalen Parameter \texttt{\$retval} ermitteln.
+
+\item \hypertarget{funktion.php.writelutblock}{}\index{funktion.php}{write\_lut\_block}%
+      \texttt{\$ret=write\_lut\_block(\$lut\_name,\$typ,\$data)}\par
+Diese Funktion schreibt einen Block mit dem Typ \texttt{\$typ} in die angegebenen LUT-Datei; die Daten befinden sich in
+der Variablen \texttt{\$data}. Der Wert von \texttt{\$typ} muß eine Integerzahl über 1000 sein; Werte bis 1000 sind für
+die \emph{konto\_check} Bibliothek reserviert.
+
+\item \hypertarget{funktion.php.copylutfile}{}\index{funktion.php}{copy\_lutfile}%
+      \texttt{\$ret=copy\_lutfile(\$old\_name,\$new\_name,\$slots)}\par
+
+\item \hypertarget{funktion.php.generatelut2}{}\index{funktion.php}{generate\_lut2}%
+      \texttt{\$ret=generate\_lut2(inputname,outputname,[user\_info[,gueltigkeit[,felder[,slots [,lut\_version[,set]]]]]])}\par
+
+Diese Funktion dient zur Generierung einer LUT-Datei. Die Parameter entsprechen
+denen der C-Funktion. Alle Parameter außer inputname und outputname sind
+optional. Hier eine kurze Beschreibung:
+
+\begin{description}
+\item[inputname:]     Dateiname der Bundesbank-Datei
+
+\item[outputname:]    Dateiname der generierten LUT-Datei
+
+\item[user\_info:]     Info-Zeile für die Datei (Benutzer-Info)
+
+\item[gueltigkeit:]   Gültigkeitszeitraum für den Datensatz. Der Gültigkeitszeitraum
+               ist im Format JJJJMMTT-JJJJMMTT anzugeben, also z.B.
+               20090309-20090607 für den Zeitraum 9.3.2009 - 6.7.2009.
+
+\item[felder:]        Diese Variable ist ein Skalar oder Array, in dem die in
+               die Ausgabedatei aufzunehmenden Felder angegeben werden.
+               Bei einem skalaren Wert sind die Felder im Anhang von
+               00liesmich.pdf aufgezählt; bei einem Array kann man explizit
+               bestimmen, welche Felder in die Ausgabedatei aufgenommen
+               werden sollen. Falls die LUT-Datei auch die Filialen enthalten
+               soll, ist zusätzlich zu den Datenblocks noch der Wert
+               LUT2\_FILIALEN in das Array einzufügen; andernfalls werden nur
+               die Hauptstellen berücksichtigt.
+
+               Falls ein negativer skalarer Wert angegeben wird, werden die
+               Werte des entsprechenden Levels mit den Filialen eingebunen.
+
+               Falls der Parameter nicht angegeben wird: Level 5 ohne Filialen
+
+\item[slots:]         Anzahl Slots im Inhaltsverzeichnis der LUT-Datei. Die Anzahl Slots
+               kann später nicht mehr geändert werden; wenn alle Slots einer Datei
+               belegt sind, kann kein zusätzlicher Block mehr geschrieben werden.
+               Der Defaultwert ist 40.
+
+
+\item[lut\_version:]   Dateiversion der LUT-Datei, die geschrieben werden soll. 
+               Der Parameter kann die folgenden Werte annehmen:
+
+               0: default (aktuelle Version, jetzt 2.0)
+               1: Version 1.0 (obsolet)
+               2: Version 1.1 (enthält nur BLZ und Prüfziffermethoden)
+               3: Version 2.0 (kann alle Felder enthalten)
+
+\item[set:]   Datensatz, der geschrieben werden soll. Eine LUT-Datei kann zwei
+               Datensätze mit unterschiedlichem Gültigkeitsdatum enthalten. Dieser
+               Parameter legt fest, welcher Datensatz geschrieben werden soll
+               (1 oder 2).
+
+               Falls für set der Wert 0 angegeben wird, wird eine neue Datei angelegt und der Datensatz
+               1 benutzt; falls set>0 ist, wird der Datensatz an eine bestehende Datei angehängt.
+\end{description}
+
+
+
+\item \hypertarget{funktion.php.lutvalid}{}\index{funktion.php}{lut\_valid}%
+      \texttt{\$ret=lut\_valid()}\par
+Diese Funktion testet, ob der aktuell \textit{geladene} Datensatz aktuell gültig ist.
+Mögliche Rückgabewerte sind:
+
+\begin{tabular}{rll}
+  5 & LUT2\_NO\_VALID\_DATE   &  kein Gültigkeitsdatum in der Datei \\
+  3 & LUT2\_VALID           &  die Datei ist aktuell gültig \\
+-59  & LUT2\_NOT\_YET\_VALID   &  die Datei ist noch nicht gültig \\
+-58  & LUT2\_NO\_LONGER\_VALID &  die Datei ist nicht mehr gültig \\
+\end{tabular}
+
+
+\item \hypertarget{funktion.php.lutfree}{}\index{funktion.php}{lut\_free}%
+      \texttt{\$ret=lut\_free()}\\
+\hypertarget{funktion.php.lutcleanup}{}\index{funktion.php}{lut\_cleanup}%
+      \texttt{\$ret=lut\_cleanup()}\par
+Diese Funktionen sind synonym. Sie geben allokierten Speicher wieder frei und
+löschen die entsprechenden Variablen, so daß die Bibliothek als nicht initialisiert
+gekennzeichnet ist.
+\href{#beispiel.funktion.php.lutfree}{(Beispiel)}
+
+\item \hypertarget{funktion.php.getktocheckversion}{}\index{funktion.php}{get\_kto\_check\_version}%
+      \texttt{\$ret=get\_kto\_check\_version(\$typ)}\par
+
+\end{itemize}
+
+\subsection{Konvertierung der numerischen Rückgabewerte in Klartext}
+\hypertarget{funktion.php.neu.konvertierung}{}Die folgenden Funktionen konvertieren die
+\href{#rueckgabewerte}{numerischen Rückgabewerte} in Klartext in verschiedenen
+Formaten. Es gibt jeweils zwei Funktionsnamen; die kurze Variante ist als
+Funktionsalias zu der Langform definiert.
+
+\begin{itemize}
+\item \hypertarget{funktion.php.ktocheckretval}{}\index{funktion.php}{kto\_check\_retval}%
+      \texttt{\$r=kto\_check\_retval(\$ret)}\par
+Diese Funktion liefert ein assoziatives Array zurück, das als Index die Makronamen
+aus \textit{konto\_check.h} benutzt und den entsprechenden numerischen Wert zurückgibt.
+Das Array kann gut benutzt werden, wenn man die Makronamen nicht als globale Konstanten
+deklarieren will (Option --enable-symbolic\_retvals beim configure-Aufruf).
+
+\item \hypertarget{funktion.php.ktocheckretval2txtshort}{}\index{funktion.php}{kto\_check\_retval2txt\_short}%
+      \texttt{\$ret\_txt=kto\_check\_retval2txt\_short(\$ret)}\\
+\hypertarget{funktion.php.kcshort}{}\index{funktion.php}{kc\_short}%
+      \texttt{\$ret\_txt=kc\_short(\$ret)}\par
+Ausgabe als kurzer String, der den Makronamen aus \textit{konto\_check.h} entspricht.
+
+\item \hypertarget{funktion.php.ktocheckretval2txt}{}\index{funktion.php}{kto\_check\_retval2txt}%
+      \texttt{\$ret\_txt=kto\_check\_retval2txt(\$ret)}\\
+\hypertarget{funktion.php.kctxt}{}\index{funktion.php}{kc\_txt}%
+      \texttt{\$ret\_txt=kc\_txt(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute so, wie es mittels der Funktion kto\_check\_encoding()
+spezifiziert wurde.
+
+\item \hypertarget{funktion.php.ktocheckretval2iso}{}\index{funktion.php}{kto\_check\_retval2iso}%
+      \texttt{\$ret\_txt=kto\_check\_retval2iso(\$ret)}\\
+\hypertarget{funktion.php.kciso}{}\index{funktion.php}{kc\_iso}%
+      \texttt{\$ret\_txt=kc\_iso(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute mit ISO-8859-1.
+
+\item \hypertarget{funktion.php.ktocheckretval2html}{}\index{funktion.php}{kto\_check\_retval2html}%
+      \texttt{\$ret\_txt=kto\_check\_retval2html(\$ret)}\\
+\hypertarget{funktion.php.kchtml}{}\index{funktion.php}{kc\_html}%
+      \texttt{\$ret\_txt=kc\_html(\$ret)}\par
+\hypertarget{funktion.php.ktocheckretval2html}{}Ausgabe als Text, Kodierung der Umlaute mit HTML Entities.
+\href{#beispiel.funktion.php.ktocheckretval2html}{(Beispiel)}
+
+\item \hypertarget{funktion.php.ktocheckretval2dos}{}\index{funktion.php}{kto\_check\_retval2dos}%
+      \texttt{\$ret\_txt=kto\_check\_retval2dos(\$ret)}\\
+\hypertarget{funktion.php.kcdos}{}\index{funktion.php}{kc\_dos}%
+      \texttt{\$ret\_txt=kc\_dos(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute mit cp850 (DOS).
+
+\item \hypertarget{funktion.php.ktocheckretval2utf8}{}\index{funktion.php}{kto\_check\_retval2utf8}%
+      \texttt{\$ret\_txt=kto\_check\_retval2utf8(\$ret)}\\
+\hypertarget{funktion.php.kcutf8}{}\index{funktion.php}{kc\_utf8}%
+      \texttt{\$ret\_txt=kc\_utf8(\$ret)}\par
+Ausgabe als Text, Kodierung der Umlaute mit UTF-8.
+
+\end{itemize}
+
+\subsection{Testfunktionen: BLZ/Prüfziffer und Konto}
+\begin{itemize}
+\item \hypertarget{funktion.php.ktocheck}{}\index{funktion.php}{kto\_check}%
+      \texttt{\$ret=kto\_check(blz,\$kto[,\$lut\_name])}\par
+Diese Funktion stammt aus dem alten C API; sie dient zum Test eines Kontos. Falls die
+Bibliothek noch nicht initialisiert wurde, wird sie in dieser Funktion implizit
+initialisiert, entweder mit der Datei \texttt{\$lut\_name} oder Defaultwerten (falls der
+Parameter nicht angegeben ist). Bei der Initialisierung werden nur die Bankleitzahlen
+und Prüfziffermethoden geladen. Der Rückgabewert ist numerisch.
+
+\item \hypertarget{funktion.php.ktocheckstr}{}\index{funktion.php}{kto\_check\_str}%
+      \texttt{\$ret=kto\_check\_str(blz,\$kto[,\$ret\_type[,\$lut\_name]])}\par
+Diese Funktion entspricht der Funktion \texttt{kto\_check()}; allerdings ist der
+Rückgabewert ein String. Diese Funktion ist \textit{nicht} kompatibel zum alten
+API; in diesem war der dritte Parameter \texttt{\$lut\_name}, während im neuen API
+\texttt{\$lut\_name} als vierter Parameter übergeben wird.
+
+Der Typ der Rückgabe läßt sich über den dritten Parameter
+festlegen:
+
+\begin{description}
+\item[1:] Ausgabe als kurzer String
+\item[2:] Ausgabe als Text; Umlaute in ISO-8859-1
+\item[3:] Ausgabe als Text; Umlaute als HTML Entities
+\item[4:] Ausgabe als Text; Umlaute in cp850 (DOS)
+\item[5:] Ausgabe als Text; Umlaute in UTF-8
+\item[(anderer Wert):] Ausgabe als Text; Umlaute als HTML Entities
+\end{description}
+
+\item \hypertarget{funktion.php.ktocheckpz}{}\index{funktion.php}{kto\_check\_pz}%
+      \texttt{\$ret=kto\_check\_pz(\$pz,\$kto[,\$blz])}\par
+Diese Funktion testet eine Kontonummer mit einer Prüfziffermethode; mögliche Werte
+für die Prüfziffer sind 00 bis D8. Die Funktion setzt \textit{nicht} voraus, daß die
+Bibliothek bereits initialisiert ist.
+
+Der Parameter \texttt{\$blz} wird bei Prüfung mit den Methoden 52, 53, B6 und C0 benötigt;
+ansonsten kann er weggelassen werden.
+
+\item \hypertarget{funktion.php.ktocheckblz}{}\index{funktion.php}{kto\_check\_blz}%
+      \texttt{\$ret=kto\_check\_blz(\$blz,\$kto)}\par
+Diese Funktion testet eine Kontonummer mit einer vorgegebenen Bankleitzahl.
+Die Funktion setzt voraus, daß die Bibliothek bereits initialisiert ist.
+\href{#beispiel.funktion.php.ktocheckblz}{(Beispiel)}
+
+\item \hypertarget{funktion.php.ktocheckpzdbg}{}\index{funktion.php}{kto\_check\_pz\_dbg}%
+      \texttt{\$ret=kto\_check\_pz\_dbg(\$pz,\$kto[,\$blz[,\&\$methode[,\&\$pz\_methode[,\&\$pz[,\&\$pz\_pos]]]]])}\\
+\hypertarget{funktion.php.ktocheckblzdbg}{}\index{funktion.php}{kto\_check\_blz\_dbg}%
+      \texttt{\$ret=kto\_check\_blz\_dbg(\$blz,\$kto[,\&\$methode[,\&\$pz\_methode[,\&\$pz[,\&\$pz\_pos]]]])}\par
+Diese beiden Funktionen sind nur verfügbar, wenn die Bibliothek mit der
+DEBUG-Option kompiliert wurde. Sie entsprechen den Funktionen
+\texttt{kto\_check\_pz()} bzw. \texttt{kto\_check\_blz()}; in den zusätzlichen Variablen
+werden jedoch noch einige Testparameter zurückgegeben:
+
+\begin{description}
+\item[\texttt{\$methode:}] die verwendete Prüfziffermethode (alphanumerisch mit zwei
+      oder drei Stellen, inklusive Untermethode, z.B. 90c)
+
+\item[\texttt{\$pz\_methode:}] ebenfalls die Prüfziffermethode, jedoch rein
+   numerisch. Die Untermethode wird mit 1000 multipliziert und addiert (dies
+   ist die interne Darstellung innerhalb der \emph{konto\_check} Bibliothek, z.B. 3090 für Methode 90c)
+
+\item[\texttt{\$pz:}] die \textit{berechnete} Prüfziffer. Falls keine Prüfung
+   stattfindet, wird -1 zurückgegeben.
+
+\item[\texttt{\$pz\_pos:}] die Position der  Prüfziffer (beginnend mit 0 für die 1.
+      Stelle). Falls keine Prüfung stattfindet, wird für auch für diesen Wert
+      -1 zurückgegeben.
+\end{description}
+
+Bei der Funktion \texttt{kto\_check\_pz\_dbg()} ist darauf zu achten, daß die BLZ
+vor den anderen Parametern übergeben werden muß; falls sie nicht benötigt wird,
+kann für den Parameter auch 0 oder ein Leerstring übergeben werden.
+\end{itemize}
+
+\subsection{Testfunktionen: IBAN, Strukturierter Verwendungszweck}
+\begin{itemize}
+
+\item \hypertarget{funktion.php.ibancheck}{}\index{funktion.php}{iban\_check}%
+      \texttt{\$ret=iban\_check(iban[,\&\$ret\_kto])}\par
+Diese Funktion testet die Gültigkeit einer IBAN. Falls der Parameter
+\texttt{\$ret\_kto} angegeben ist, wird für deutsche Bankverbindungen wird außerdem
+noch die Gültigkeit der Bankverbindung mit den normalen Testroutinen geprüft und
+das Ergebnis in diesem Parameter zurückgegeben.
+
+
+\item \hypertarget{funktion.php.iban2bic}{}\index{funktion.php}{iban2bic}%
+      \texttt{\$bic=iban2bic(iban[,\&\$ret[,\&\$blz[,\&\$kto]]])}\par
+Diese Funktion bestimmt zu einer gegebenen IBAN den BIC (Bank Identifier Code).
+Die Funktion arbeitet nur mit deutschen Banken; außerdem muß natürlich der
+Block mit den BICs aus der LUT-Datei geladen sein. Der Rückgabestatus der
+Funktion wird optional \textit{by reference} in der Funktion \texttt{\$ret}
+zurückgegeben; ebenfalls können auf Wunsch BLZ und Kontonummer aus der IBAN
+bestimmt werden.
+
+
+\item \hypertarget{funktion.php.ipigen}{}\index{funktion.php}{ipi\_gen}%
+      \texttt{\$zweck\_out=ipi\_gen(zweck[,\&\$ret[,\&\$papier]])}\par
+Diese Funktion generiert einen Strukturierten Verwendungszweck. Der Zweck darf
+nur Buchstaben und Zahlen enthalten; Buchstaben werden dabei in Großbuchstaben
+umgewandelt. Andere Zeichen sind hier nicht zulässig. Der Verwendungszweck wird
+links mit Nullen bis auf 18 Byte aufgefüllt, dann die Prüfsumme berechnet und
+eingesetzt. Falls der Parameter \texttt{\$ret} angegeben ist, wird in ihm der
+Funktionsstatus zurückgeliefert.
+
+Falls der Parameter \texttt{\$papier} angegeben ist, wird in ihm die "`Papierform"'
+des generierten Verwendungszwecks (mit jeweils einem Blank nach vier Zeichen)
+zurückgegeben.
+
+\item \hypertarget{funktion.php.ipicheck}{}\index{funktion.php}{ipi\_check}%
+      \texttt{\$ret=ipi\_check(zweck)}\par
+Diese Funktion testet einen Strukturierten Verwendungszweck für eine IPI
+(International Payment Instruction). Der Zweck darf nur Buchstaben und Zahlen
+enthalten und muß genau 20 Byte lang sein, wobei eingestreute Blanks oder Tabs
+ignoriert werden.
+
+\end{itemize}
+
+\subsection{Abfrage von Bankdaten (Felder der Bundesbank-Datei)}
+Die folgenden Funktionen liefern die verschiedenen Felder der Bankleitzahlendatei zu einer
+vorgegebenen Bankleitzahl. Die Funktionen liefern das Ergebnis direkt zurück; der Funktionsstatus
+kann jeweils durch den (optionalen) Parameter \texttt{\$retval} erhalten werden. Eine ausführliche
+Beschreibung der einzelnen Datensätze findet sich im \href{#anhang.felder\_bundesbankdatei}{Anhang}.
+
+Der Parameter \texttt{\$zweigstelle} ist die Zweigstelle, zu der das entsprechende
+Feld bestimmt werden soll. Die Hauptstelle hat immer den Wert 0; die Anzahl der Filialen
+kann über die Funktion \texttt{lut\_filialen()} bestimmt werden. Die zurückgelieferte Anzahl ist die
+Gesamtanzahl, inklusive der Hauptstelle. Wird ein zu hoher Wert angegeben, wird \texttt{\$ret} auf die
+Fehlermeldung LUT2\_""INDEX\_""OUT\_""OF\_""RANGE gesetzt und NULL zurückgeliefert.
+
+
+\begin{itemize}
+\item \hypertarget{funktion.php.lutblz}{}\index{funktion.php}{lut\_blz}%
+      \texttt{\$filialen=lut\_blz(\$blz[,\$zweigstelle])}\par
+Diese Funktion testet die Gültigkeit einer Bankleitzahl (inklusive der Zweigstelle).
+
+\item \hypertarget{funktion.php.lutfilialen}{}\index{funktion.php}{lut\_filialen}%
+      \texttt{\$filialen=lut\_filialen(\$blz[,\&\$retval])}\par
+Diese Funktion bestimmt die Anzahl der Filialen (inklusive der Hauptstelle) einer Bank.
+
+\item \hypertarget{funktion.php.lutname}{}\index{funktion.php}{lut\_name}%
+      \texttt{\$bankname=lut\_name(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt den (Lang-)Namen der Bank.
+\href{#beispiel.funktion.php.lutname}{(Beispiel)}
+
+\item \hypertarget{funktion.php.lutnamekurz}{}\index{funktion.php}{lut\_name\_kurz}%
+      \texttt{\$bankname\_kurz=lut\_name\_kurz(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt den Kurzbezeichnung mit Ort der Bank.
+
+\item \hypertarget{funktion.php.lutplz}{}\index{funktion.php}{lut\_plz}%
+      \texttt{\$plz=lut\_plz(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt die Postleitzahl der Bank.
+\href{#beispiel.funktion.php.lutplz}{(Beispiel)}
+
+\item \hypertarget{funktion.php.lutort}{}\index{funktion.php}{lut\_ort}%
+      \texttt{\$ort=lut\_ort(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt den Ort der Bank.
+\href{#beispiel.funktion.php.lutort}{(Beispiel)}
+
+\item \hypertarget{funktion.php.lutpan}{}\index{funktion.php}{lut\_pan}%
+      \texttt{\$pan=lut\_pan(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt die Institutsnummer für PAN der Bank.
+
+\item \hypertarget{funktion.php.lutbic}{}\index{funktion.php}{lut\_bic}%
+      \texttt{\$bic=lut\_bic(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt den BIC (Bank Identifier Code) der Bank.
+
+\item \hypertarget{funktion.php.lutnr}{}\index{funktion.php}{lut\_nr}%
+      \texttt{\$nr=lut\_nr(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt die Datensatznummer zu einer angegebenen Bank.
+Die Filialen haben jeweils eigene Datensatznummern.
+
+\item \hypertarget{funktion.php.lutpz}{}\index{funktion.php}{lut\_pz}%
+      \texttt{\$pruefziffer=lut\_pz(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt das Prüfzifferverfahren (00 bis D8) der Bank.
+
+\item \hypertarget{funktion.php.lutaenderung}{}\index{funktion.php}{lut\_aenderung}%
+      \texttt{\$aenderung=lut\_aenderung(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Änderungskennzeichen: Seit dem letzten Abschluss der Bankleitzahlendatei neu
+hinzugekommene Datensätze werden mit "`A"' (Addition), geänderte Datensätze mit
+"`M"' (Modified), unveränderte Datensätze mit "`U"' (Unchanged) gekennzeichnet.
+Gelöschte Datensätze werden mit "`D"' (Deletion) gekennzeichnet und sind -- als
+Hinweis -- letztmalig in der Bankleitzahlendatei enthalten. Diese Datensätze
+sind ab dem Gültigkeitstermin der Bankleitzahlendatei im Zahlungsverkehr nicht
+mehr zu verwenden.
+
+\item \hypertarget{funktion.php.lutloeschung}{}\index{funktion.php}{lut\_loeschung}%
+      \texttt{\$loeschung=lut\_loeschung(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt das Flag, ob eine BLZ zur Löschung vorgesehen ist.
+Das Feld enthält das Merkmal "`0"' (keine Angabe) oder "`1"' (Bankleitzahl ist zur
+Löschung vorgesehen).
+
+\item \hypertarget{funktion.php.lutnachfolgeblz}{}\index{funktion.php}{lut\_nachfolge\_blz}%
+      \texttt{\$nachfolge\_blz=lut\_nachfolge\_blz(\$blz[,\&\$retval[,\$zweigstelle]])}\par
+Diese Funktion bestimmt die Nachfolge-BLZ für Banken, die bald aus der Datei
+gelöscht werden sollen.
+
+\item \hypertarget{funktion.php.lutmultiple}{}\index{funktion.php}{lut\_multiple}%
+      \texttt{\$ret=lut\_multiple(\$blz[,\$zweigstelle[,\&\$cnt[,\&\$name[,\&\$name\_kurz[,\&\$plz\break
+    [,\&\$ort[,\&\$pan[,\&\$bic[,\&\$pz[,\&\$nr[,\&\$aenderung[,\&\$loeschung\break
+    [,\&\$nachfolge\_blz]]]]]]]]]]]]])}\par
+Dies ist eine Universalfunktion, die mehrere Felder der LUT-Datei gleichzeitig bestimmt.
+Anders als die C-Version kopiert die PHP-Version die gewünschten Felder für
+\textit{eine} Zweigstelle (in C werden nur Pointer auf die internen Arrays sowie
+die Anzahl der Datensätze zurückgegeben).
+
+\medskip{\bf Rückgabewerte:}
+
+\begin{tabular}{ll}
+\texttt{LUT2\_NOT\_INITIALIZED} & die Bibliothek wurde noch nicht initialisiert\\
+\texttt{LUT2\_PARTIAL\_OK} & es wurden nicht alle angeforderten Blocks geladen\\
+\texttt{OK} & alles ok
+\end{tabular}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Die Perl-Version von \emph{konto\_check}}
+%perl Perl
+\subsection{Einführung}
+{\bf Anmerkung:} Dies ist momentan nur ein Platzhalter; hier wird später noch etwas mehr kommen.
+
+In Perl ist es möglich, zu unterscheiden, ob die aufrufende Funktion als
+Rückgabewert ein Array oder einen skalaren Wert erwartet; entsprechend kann man
+die Rückgabe flexibel gestalten. Davon wird vor allem in den Funktionen für LUT2
+viel Gebrauch gemacht. So wird z.B. in der Funktion lut\_name, falls sie in
+skalarem Kontext aufgerufen wird, nur der Name der Bank zurückgegeben; falls sie
+jedoch in Arraykontext aufgerufen wird, wird eine Liste zurückgegeben, die den
+Banknamen, den Rückgabestatus der Funktion als Integerwert sowie als langen und
+kurzen Text enthält.
+
+Ein Nachteil in Perl ist, daß sich Arrayvariablen nicht leicht übergeben lassen;
+alle Übergabevariablen werden in \emph{eine} flache Liste konvertiert, und es ist bei
+Übergabe mehrerer Arrays für die aufgerufene Funktion nicht mehr möglich, zu
+sagen, welcher Parameter welchem Array zuzuordnen ist (oder auch nur, wo ein skalarer
+Parameter in der Liste war). Daher wurde im Perl-API beim Aufruf auf die
+Übergabe von Arrays komplett verzichtet.
+
+Auch bei der Rückgabe enthält das C-API einige Funktionen, die Pointer auf
+(interne) Arrays zurückliefern wie z.B. lut\_multiple(); dies läßt sich in Perl
+nicht gut implementieren. Diese Funktionen haben dann in den diversen APIs
+unterschiedliche Repräsentationen (dies betrifft die Funktionen lut\_multiple(),
+generate\_lut2(), kto\_check\_init() und dump\_lutfile()). Für Perl (und auch andere
+Sprachen wie PHP oder VB) gibt es in der C-Bibliothek die Funktionen
+generate\_lut2\_p(), kto\_check\_init\_p() und dump\_lutfile\_p(), die eine etwas
+andere Aufrufkonvention haben und dann in diesen Sprachen benutzt werden können.
+
+\subsection{Installation der Perl-Version}
+\index{allgemein}{Installation: Perl-Version}
+Die Perl-Version wurde von den
+\href{http://bbbike.radzeit.de/~slaven/cpantestersmatrix.cgi?dist=Business-KontoCheck 2.95;reports=1}{CPAN Testern}
+getestet; die deutsche Version von \emph{konto\_check} läßt sich auf vielen Rechnern und
+Plattformen ohne Probleme kompilieren, und auch die Tests ergeben keine Fehler.
+
+Ab der aktuellen Version sollte sich das Paket auch unter Windows kompilieren
+lassen. Die Datei Makefile.PL wurde von Grund auf neu geschrieben und unter
+Strawberry Perl getestet.
+
+Die Installation folgt der Standardmethode für die Pakete: Laden Sie die Datei
+Business-KontoCheck-N.N.tar.gz herunter, und geben Sie die folgenden Befehle ein:
+
+\begin{verbatim}
+tar xzf Business-KontoCheck-N.N.tar.gz
+perl Makefile.PL
+make
+make test
+make install
+\end{verbatim}
+
+(der letzte Schritt muß als Root erfolgen). Danach ist die Installation abgeschlossen,
+und das Modul kann benutzt werden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Die Windows-Version von \emph{konto\_check} (DLL, VBA)}
+%win Windows
+Dies ist momentan nur ein Platzhalter; hier wird später noch etwas kommen.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Anhang: Diverse Tabellen}
+%allgemein Anhang
+\subsection{Felder der Bundesbankdatei bzw. der LUT-Datei}
+\hypertarget{anhang.felder_bundesbankdatei}{}\index{allgemein}{Felder der Bundesbankdatei}
+Die verschiedenen Felder der Bankleitzahlendatei bzw. LUT-Datei können mit den
+Funktionen \texttt{lut\_$\ast$} abgefragt werden. Um die Beschreibungen nicht für jedes
+API zu wiederholen, sind sie hier gesammelt. Sie stammen aus der
+\href{http://www.bundesbank.de/download/zahlungsverkehr/zv\_blz\_richtlinie.pdf}{Bankleitzahlen-Richtlinie},
+die von der Deutschen Bundesbank veröffentlicht wird.
+
+\begin{itemize}
+\item \hypertarget{allgemein.}{}\index{allgemein}{}%
+      \texttt{(keine Funktion)} [{\bf Feld 1: Bankleitzahl}]\par
+Die Bankleitzahl dient der eindeutigen Identifizierung eines Kreditinstitutes.
+
+\item \hypertarget{allgemein.}{}\index{allgemein}{}%
+      \texttt{(keine Funktion)} [{\bf Feld 2: Merkmal, ob bankleitzahlführendes Kreditinstitut oder nicht}]\par
+Innerhalb der \emph{konto\_check} Bibliothek sind Hauptstellen \textit{immer} die Zweigstelle mit
+dem Index 0, danach folgen die anderen Zweigstellen. In der Bundesbankdatei
+sind oft Filialen vor der Hauptstelle eingeordnet.
+
+Für jede gemeldete Bankleitzahl wird genau ein Datensatz mit dem Merkmal "`1"' im Feld 2
+der Bankleitzahlendatei angelegt. Diese Datensätze sind im Zahlungsverkehr zu
+verwenden.
+
+Sofern die gleiche Bankleitzahl an anderen Orten für weitere Filialen eines Kreditinstitutes
+verwendet wird, werden diese Datensätze mit dem Merkmal "`2"' im Feld 2 versehen.
+Datensätze mit dem Merkmal "`2"' dienen nicht dem Zahlungsverkehr (Ausnahme siehe II.
+Ziffer 2 Feld 7), sondern unterstützen die ortsbezogene Suche der Bankleitzahl eines
+Kreditinstitutes.
+
+\item \hypertarget{allgemein.lutname}{}\index{allgemein}{lut\_name}%
+      \texttt{bankname=lut\_name()} [{\bf Feld 3: Bezeichnung des Kreditinstitutes}]\par
+Für die Bezeichnung ist die Firmierung lt. Registerauszug bzw. Gesetz oder Satzung
+maßgeblich. Notwendige Kürzungen müssen sinnwahrend erfolgen. Filial- oder
+geschäftsfeldbezogene Zusätze sind hinter die Firmierung zu setzen. Die Eintragung
+erfolgt ohne Rechtsform. Führt ein Kreditinstitut am selben Ort eine zweite Bankleitzahl für
+Geschäftsfelder mit bedeutendem Zahlungsverkehr, ist der Firmierung ein deutlich
+unterscheidender Zusatz hinzuzufügen.
+
+Im Rahmen von Fusionen ist es vorübergehend zulässig, ein Kreditinstitut an einem Ort
+mit zwei Bankleitzahlen in der Bankleitzahlendatei zu führen. Hierbei muss zur
+Unterscheidung die Bezeichnung des Kreditinstitutes im Datensatz der ¿alten¿
+Bankleitzahl mit dem Zusatz "`-alt-"' versehen werden.
+
+\item \hypertarget{allgemein.lutplz}{}\index{allgemein}{lut\_plz}%
+      \texttt{plz=lut\_plz()} [{\bf Felder 4 und 5: Postleitzahl und Ort}]\\
+\hypertarget{allgemein.lutort}{}\index{allgemein}{lut\_ort}%
+      \texttt{ort=lut\_ort()}\par
+Die Angaben dienen zusammen mit der Bezeichnung des Kreditinstitutes in Feld 3 der
+eindeutigen Identifizierung. Anzugeben sind die Postleitzahl und der Ort des Sitzes des
+Kreditinstitutes bzw. der Filiale, wobei die Postleitzahl der eindeutigen Identifizierung des
+Ortes und nicht der postalischen Adressierung dient. Maßgeblich ist das Postleitzahlenund
+Ortsverzeichnis (Datafactory Postalcode) der Deutschen Post AG.
+
+\item \hypertarget{allgemein.lutnamekurz}{}\index{allgemein}{lut\_name\_kurz}%
+      \texttt{bankname\_kurz=lut\_name\_kurz()} [{\bf Feld 6: Kurzbezeichnung des Kreditinstitutes mit Ort}]\par
+Kurzbezeichnung und Ort sollen für die Empfängerangaben auf Rechnungen und
+Formularen angegeben werden. Hierdurch wird eine eindeutige Zuordnung der
+eingereichten Zahlungsaufträge ermöglicht. Auf Grund der Regelungen in den Richtlinien
+beziehungsweise Zahlungsverkehrs-Abkommen der deutschen Kreditwirtschaft ist die
+Länge der Angaben für die Bezeichnung des Kreditinstituts begrenzt.
+
+Die Kurzbezeichnung wird von dem Antragsteller selbst bzw. seinem Zentralinstitut
+festgelegt. Grundlage ist die Firmierung des Kreditinstitutes. Sofern erforderlich, sind die
+im Anhang 3 der Bankleitzahlen-Richtlinie aufgeführten Abkürzungen zu verwenden. Die
+Eintragung erfolgt ohne Rechtsform. Führt ein Kreditinstitut am selben Ort eine zweite
+Bankleitzahl für Geschäftsfelder mit bedeutendem Zahlungsverkehr, ist der Firmierung ein
+deutlich unterscheidender Zusatz hinzuzufügen.
+
+Im Rahmen von Fusionen ist es vorübergehend zulässig, ein Kreditinstitut an einem Ort
+mit zwei Bankleitzahlen in der Bankleitzahlendatei zu führen. Hierbei muss zur
+Unterscheidung, die Kurzbezeichnung des Kreditinstitutes im Datensatz der "`alten"'
+Bankleitzahl mit dem Zusatz "`-alt-"' versehen werden.
+
+\item \hypertarget{allgemein.lutpan}{}\index{allgemein}{lut\_pan}%
+      \texttt{pan=lut\_pan()} [{\bf Feld 7: Institutsnummer für PAN}]\par
+Für den internationalen Kartenzahlungsverkehr mittels Bankkundenkarten haben die
+Spitzenverbände des Kreditgewerbes und die Deutsche Bundesbank eine gesonderte
+Institutsnummerierung festgelegt; danach erhält das kartenausgebende Kreditinstitut eine
+fünfstellige Institutsnummer für PAN (= Primary Account Number). Diese setzt sich
+zusammen aus der Institutsgruppennummer (grundsätzlich = vierte Stelle der
+Bankleitzahl) und einer nachfolgenden vierstelligen, von den einzelnen Institutionen frei
+gewählten Nummer. Abweichend hiervon ist den Mitgliedsinstituten des Bundesverbandes
+deutscher Banken e.V. sowie den Stellen der Deutschen Bundesbank stets die
+Institutsgruppennummer "`2"' zugewiesen worden.
+Zusätzliche Institutsnummer(n) für PAN
+Sofern ein Kreditinstitut weitere Institutsnummern für PAN zu einer Bankleitzahl führt,
+werden zu dem Datensatz mit dem Merkmal "`1"' im Feld 2 unter dem gleichen Ort
+zusätzliche Datensätze mit dem Merkmal "`2"' im Feld 2 aufgenommen. Die Datensätze
+sind bis auf das Merkmal im Feld 2 und die Institutsnummern für PAN im Feld 7 identisch.
+
+\item \hypertarget{allgemein.lutbic}{}\index{allgemein}{lut\_bic}%
+      \texttt{bic=lut\_bic()} [{\bf Feld 8: Bank Identifier Code (BIC)}]\par
+Der Bank Identifier Code (BIC) besteht aus acht oder elf zusammenhängenden Stellen
+und setzt sich aus den Komponenten BANKCODE (4 Stellen), LÄNDERCODE (2 Stellen),
+ORTSCODE (2 Stellen) sowie ggf. einem FILIALCODE (3 Stellen) zusammen.
+
+Jedes Kreditinstitut führt grundsätzlich einen BIC je Bankleitzahl und teilt diesen der
+Deutschen Bundesbank mit. Ausnahmen hiervon können auf Antrag für Bankleitzahlen
+zugelassen werden, die im BIC-gestützten Zahlungsverkehr (grenzüberschreitender
+Zahlungsverkehr und inländischer Individualzahlungsverkehr) nicht verwendet werden.
+Vergabe
+
+Der BIC wird von SWIFT vergeben. Die Einreichungsfristen für das BIC-Directory von
+SWIFT erfordern eine frühzeitige Antragstellung bei SWIFT. Die Deutsche Bundesbank ist
+berechtigt, ihr auf anderem Wege, z. B. im Rahmen ihrer Kundenbeziehung oder über das
+BIC-Directory von SWIFT bekannt gewordene BIC der Kreditinstitute in die
+Bankleitzahlendatei zu übernehmen; sie informiert das betroffene Kreditinstitut über die
+Änderung mit einem Kontrollausdruck des Datensatzes der Bankleitzahlendatei.
+Neue BIC sind frühestens zum gleichen Gültigkeitstermin wie bei SWIFT in die
+Bankleitzahlendatei aufzunehmen. Bei SWIFT abgemeldete BIC sind spätestens zum
+gleichen Termin wie bei SWIFT in der Bankleitzahlendatei abzumelden. Anträge auf
+Zuteilung, Änderung oder Löschung von BIC sind zusammen mit dem entsprechenden
+Antrag zur Bankleitzahlendatei -- ggf. über die zuständige Zentralstelle -- an die Deutsche
+Bundesbank zu leiten, die den Antrag an SWIFT weiterreicht.
+
+\medskip{\bf Hinweis}\\
+Es ist zu beachten, dass durch die zurzeit unterschiedlichen Aktualisierungsrhythmen der
+Bankleitzahlendatei (vierteljährlich, siehe II. Ziffer 3) und des BIC-Directory (monatlich
+zum ersten Samstag eines Monats) in der Bankleitzahlendatei ggf. neue gültige BIC nicht
+bzw. bereits gelöschte BIC noch enthalten sind. Bei Anträgen für das BIC-Directory zur
+Aufnahme beziehungsweise Löschung eines BIC sollten die Gültigkeitstermine der
+Bankleitzahlendatei beachtet werden, sofern es sich um einen BIC handelt, der im
+europäischen Zahlungsverkehr Anwendung findet und der in die Bankleitzahlendatei
+aufgenommen beziehungsweise dort gelöscht werden sollte.
+
+\item \hypertarget{allgemein.lutpz}{}\index{allgemein}{lut\_pz}%
+      \texttt{pruefziffer=lut\_pz()} [{\bf Feld 9: Kennzeichen für Prüfzifferberechnungsmethode}]\par
+Kreditinstitute sind verpflichtet, zum Zahlungsverkehr ausschließlich prüfziffergesicherte
+Kontonummern gemäß ihrer in der Bankleitzahlendatei angegebenen Prüfzifferberechnungsmethode
+zu verwenden. Die Angabe der Prüfzifferberechnungsmethode "`09"'
+(keine Prüfzifferberechnung) ist zulässig.
+
+Datensätze, die in Feld 2 der Bankleitzahlendatei mit dem Merkmal "`2"' versehen sind,
+erhalten dasselbe Kennzeichen zugeordnet, wie der in Feld 2 mit "`1"' gekennzeichnete
+Datensatz derselben Bankleitzahl.
+
+\medskip{\bf Vergabe}\\
+Die Deutsche Bundesbank führt eine Übersicht der im Kreditgewerbe angewandten
+Prüfzifferberechnungsmethoden. Die Vergabe neuer Kennzeichen für Prüfzifferberechnungsmethoden
+wird von der Deutschen Bundesbank zentral für die gesamte
+Kreditwirtschaft vorgenommen. Das Kennzeichen kann aus Buchstaben und Ziffern in
+beliebiger Kombination mit der Ausnahme des Buchstabens "`O"' bestehen.
+Wird ein Verfahren gewählt, dem bisher kein Kennzeichen zugeordnet war, ist eine
+Mitteilung an die Deutsche Bundesbank ggf. über die jeweilige Zentralstelle (oder den
+jeweiligen Spitzenverband) notwendig, die eine exakte Beschreibung des Verfahrens, ein
+Rechenbeispiel und sowohl richtige als auch falsche Testkontonummern enthält. Soll die
+Beschreibung einer Prüfzifferberechnungsmethode geändert werden, so ist es
+erforderlich, dass sich alle Kreditinstitute, die diese Methode verwenden, abstimmen und
+die Deutsche Bundesbank informieren. Für die Einführung bzw. Änderung von
+Prüfziffernberechnungsmethoden sollte eine Vorlaufzeit von mindestens einem halben
+Jahr berücksichtigt werden.
+
+Die Einführung bzw. Änderung von Prüfzifferberechnungsmethoden sowie deren
+Gültigkeitstermin wird ebenso wie die Übersicht mit den Beschreibungen der
+Prüfzifferberechnungsmethoden auf der Internetseite der Deutschen Bundesbank sowie
+durch Veröffentlichungen der Spitzenverbände des Kreditgewerbes bekannt gegeben.
+Anfragen zu Beschreibungen von Prüfzifferberechnungsmethoden sind an die
+Kreditinstitute zu richten, die diese verwenden.
+
+\item \hypertarget{allgemein.lutnr}{}\index{allgemein}{lut\_nr}%
+      \texttt{nr=lut\_nr()} [{\bf Feld 10: Nummer des Datensatzes}]\par
+Bei jeder Neuanlage eines Datensatzes wird automatisiert eine eindeutige Nummer
+vergeben. Eine einmal verwendete Nummer wird nicht noch einmal vergeben.
+
+\item \hypertarget{allgemein.lutaenderung}{}\index{allgemein}{lut\_aenderung}%
+      \texttt{aenderung=lut\_aenderung()} [{\bf Feld 11: Änderungskennzeichen}]\par
+Seit dem letzten Abschluss der Bankleitzahlendatei neu hinzugekommene Datensätze
+werden mit "`A"' (Addition), geänderte Datensätze mit "`M"' (Modified), unveränderte
+Datensätze mit "`U"' (Unchanged) gekennzeichnet. Gelöschte Datensätze werden mit "`D"'
+(Deletion) gekennzeichnet und sind -- als Hinweis -- letztmalig in der Bankleitzahlendatei
+enthalten. Diese Datensätze sind ab dem Gültigkeitstermin der Bankleitzahlendatei im
+Zahlungsverkehr nicht mehr zu verwenden.
+
+\item \hypertarget{allgemein.lutloeschung}{}\index{allgemein}{lut\_loeschung}%
+      \texttt{loeschung=lut\_loeschung()} [{\bf Feld 12: Hinweis auf eine beabsichtigte Bankleitzahllöschung}]\par
+Zur frühzeitigen Information der Teilnehmer am Zahlungsverkehr und zur Beschleunigung
+der Umstellung der Bankverbindung kann ein Kreditinstitut, das die Löschung einer
+Bankleitzahl mit dem Merkmal "`1"' im Feld 2 beabsichtigt, die Löschung ankündigen. Die
+Ankündigung kann erfolgen, sobald das Kreditinstitut seine Kunden über die geänderte
+Kontoverbindung informiert hat. Es wird empfohlen, diese Ankündigung mindestens eine
+Änderungsperiode vor der eigentlichen Löschung anzuzeigen.
+
+Das Feld enthält das Merkmal "`0"' (keine Angabe) oder "`1"' (Bankleitzahl im Feld 1 ist zur
+Löschung vorgesehen).
+
+\medskip{\bf Hinweise}
+\begin{itemize}
+\item Die Löschung einer Bankleitzahl kann auch ohne eine vorherige Ankündigung der
+beabsichtigten Löschung vorgenommen werden.
+\item Die Ankündigung der beabsichtigten Löschung einer Bankleitzahl dient nur als
+Hinweis und darf nicht zur vorzeitigen Löschung der Bankleitzahl führen; die
+Bankleitzahl ist bis zu ihrer endgültigen Löschung weiterhin im Zahlungsverkehr zu
+verwenden.
+\end{itemize}
+
+\item \hypertarget{allgemein.lutnachfolgeblz}{}\index{allgemein}{lut\_nachfolge\_blz}%
+      \texttt{nachfolge\_blz=lut\_nachfolge\_blz()} [{\bf Feld 13: Hinweis auf Nachfolge-Bankleitzahl}]\par
+Das Feld enthält entweder den Wert "`00000000"' (Bankleitzahl ist nicht zur Löschung
+vorgesehen bzw. das Kreditinstitut hat keine Nachfolge-Bankleitzahl veröffentlicht) oder
+die Angabe einer "`Bankleitzahl"'. Eine Bankleitzahl kann angegeben sein, wenn das Feld 2
+das Merkmal "`1"' enthält und entweder die bevorstehende Löschung der Bankleitzahl
+angekündigt wurde (Feld 12 = "`1"') oder die Bankleitzahl zum aktuellen Gültigkeitstermin
+gelöscht wird (Feld 11 = "`D"').
+
+Ein Kreditinstitut kann die Veröffentlichung einer Nachfolge-Bankleitzahl veranlassen,
+sofern
+
+\begin{itemize}
+\item Kontonummern in Verbindung mit der alten und neuen Bankleitzahl nicht doppelt vergeben sind und
+\item die Prüfzifferberechnungsmethoden beider Bankleitzahlen gleich oder
+\item die Prüfzifferberechnungsmethode der Bankleitzahl des übernehmenden Kreditinstitutes
+so gestaltet wird, dass alle Konten zur alten Bankleitzahl auch nach der
+neuen Prüfzifferberechnungsmethode richtig sind.
+\end{itemize}
+
+Die Angabe einer Nachfolge-Bankleitzahl ist unwiderruflich.
+
+Auf Grund der Veröffentlichung einer Nachfolge-Bankleitzahl können Anwender diese in
+Zahlungsverkehrsdateien verwenden. Dazu wird in den Kontostammdaten -- unter
+Beibehaltung der Kontonummer -- die zur Löschung angekündigte Bankleitzahl bzw. die
+gelöschte Bankleitzahl im Feld 1 der Bankleitzahlendatei durch die Nachfolge-Bankleitzahl
+dauerhaft ersetzt.
+Kreditinstitute sind -- wie bisher -- nicht berechtigt, in Zahlungsverkehrsdateien
+Bankleitzahlen durch Nachfolge-Bankleitzahlen zu ersetzen
+
+\end{itemize}
+
+\subsection{Namen der Datenblocks}
+\hypertarget{datenblock.namen}{}Hier ist eine Liste der definierten Blocktypen und zugehörigen symbolischen Namen bzw. Makros:
+
+   \LTleft3em
+   \begin{longtable}{rll}
+     \bf Num. & \bf Symbol/Makro & \bf Beschreibung\\\hline\endhead
+     0~~~ & (keins) & Abschluß der Liste \textit{(notwendig)} \\
+ 1~~~ & BLZ & BLZ \\
+ 2~~~ & FILIALEN & Anzahl Fil. \\
+ 3~~~ & NAME & Name \\
+ 4~~~ & PLZ & Plz \\
+ 5~~~ & ORT & Ort \\
+ 6~~~ & NAME\_KURZ & Name (kurz) \\
+ 7~~~ & PAN & PAN \\
+ 8~~~ & BIC & BIC \\
+ 9~~~ & PZ & Pruefziffer \\
+ 10~~~ & NR & Lfd. Nr. \\
+ 11~~~ & AENDERUNG & Aenderung \\
+ 12~~~ & LOESCHUNG & Loeschung \\
+ 13~~~ & NACHFOLGE\_BLZ & NachfolgeBLZ \\
+ 14~~~ & NAME\_NAME\_KURZ & Name, Kurzn. \\
+ 15~~~ & INFO & Infoblock \\
+ 16~~~ & BIC\_SORT & BIC idx \\
+ 17~~~ & NAME\_SORT & Name idx \\
+ 18~~~ & NAME\_KURZ\_SORT & Kurzname idx \\
+ 19~~~ & ORT\_SORT & Ort idx \\
+ 20~~~ & PLZ\_SORT & PLZ idx \\
+ 21~~~ & PZ\_SORT & PZ idx \\
+ 22~~~ & OWN\_IBAN & Eigene IBAN \\
+   \end{longtable}
+   \LTleft0em
+
+Für die Banknamen (Lang- und Kurzform) sind zwei verschiedene Varianten zur
+Speicherung möglich: Lang- und Kurzname können in einem Block zusammengefaßt
+werden, was zu einer kleineren Gesamtdatei führt (der Lang- und Kurzname
+jeweils einer Bank wird dabei als ein Datensatz geschrieben; aufgrund der
+räumlichen Nähe lassen sich die Daten so besser komprimieren), oder sie können
+als zwei getrennte Blocks geschrieben werden. Diese Variante führt zu einer
+größeren LUT-Datei, benötigt beim Entpacken jedoch weniger Speicher und ist vor
+allem vorteilhaft, wenn nur einer der beiden Blocks benötigt wird.
+
+\subsection{Datenblocks für verschiedene (skalare) Werte von \texttt{required}}
+\index{allgemein}{required (skalar): Datenblocks}\hypertarget{parameter.required.int}{}Der Parameter required (Integerzahl) gibt die zu
+ladenden Datenblocks an; er kann die Werte 0...9 annehmen. Es werden immer die
+Datenblocks von BLZ, Prüfziffer und Filialen sowie die folgenden zusätzlichen
+Datenblocks geladen:
+\makecompactlist{desc}{description}
+\begin{desc}
+    \item[0:~~] (keine zusätzlichen)
+    \item[1:~~] Kurzname
+    \item[2:~~] Kurzname, BIC
+    \item[3:~~] Name, PLZ, Ort
+    \item[4:~~] Name, PLZ, Ort, BIC
+    \item[5:~~] Name+Kurzname, PLZ, Ort, BIC
+    \item[6:~~] Name+Kurzname, PLZ, Ort, BIC, Nachfolge-BLZ
+    \item[7:~~] Name+Kurzname, PLZ, Ort, BIC, Nachfolge-BLZ, Änderungsdatum
+    \item[8:~~] Name+Kurzname, PLZ, Ort, BIC, Nachfolge-BLZ, Änderungsdatum, Löschdatum
+    \item[9:~~] Name+Kurzname, PLZ, Ort, BIC, Nachfolge-BLZ, Änderungsdatum,
+       Löschdatum, PAN, Laufende Nr. des Datensatzes (kompletter Datensatz)
+\end{desc}
+
+Mit der Bezeichnung Name+Kurzname ist der Blocktyp 14 bezeichnet; auch falls
+nur der Name oder Kurzname angefordert wird, werden beide geladen, da sie in
+einem gemeinsamen Block gespeichert sind.
+
+\subsection{Rückgabewerte der Bibliothek}
+\index{allgemein}{numerische Rückgabewerte}
+\hypertarget{rueckgabewerte}{}
+Hier sind die Rückgabewerte der verschiedenen Funktionen. In den verschiedenen Versionen
+gibt Funktionen, die diese Umwandlung machen:
+\href{#funktion.php.alt.konvertierung}{PHP(alt)},
+   \href{#funktion.php.neu.konvertierung}{PHP(neu)},   \href{#funktion.c.konvertierung}{C}
+
+\subsection{Klartextbeschreibung der Rückgabewerte}
+In dieser Tabelle sind die Makronamen in Klammern mit angegeben;
+unten sind sie alphabetisch sortiert noch einmal aufgeführt.
+\begin{sloppypar}
+\noindent\begin{longtable}{rp{.9\textwidth}}
+-113 & (NO\_""OWN\_""IBAN\_""CALCULATION) das Institut erlaubt keine eigene IBAN-Berechnung\\
+-112 & (KTO\_""CHECK\_""UNSUPPORTED\_""COMPRESSION) die notwendige Kompressions-Bibliothek wurden beim Kompilieren nicht eingebunden\\
+-111 & (KTO\_""CHECK\_""INVALID\_""COMPRESSION\_""LIB) der angegebene Wert für die Default-Kompression ist ungültig\\
+-110 & (OK\_""UNTERKONTO\_""ATTACHED) wahrscheinlich OK; es wurde allerdings ein (weggelassenes) Unterkonto angefügt\\
+-109 & (KTO\_""CHECK\_""DEFAULT\_""BLOCK\_""INVALID) Ungültige Signatur im Default-Block\\
+-108 & (KTO\_""CHECK\_""DEFAULT\_""BLOCK\_""FULL) Die maximale Anzahl Einträge für den Default-Block wurde erreicht\\
+-107 & (KTO\_""CHECK\_""NO\_""DEFAULT\_""BLOCK) Es wurde noch kein Default-Block angelegt\\
+-106 & (KTO\_""CHECK\_""KEY\_""NOT\_""FOUND) Der angegebene Schlüssel wurde im Default-Block nicht gefunden\\
+-105 & (LUT2\_""NO\_""LONGER\_""VALID\_""BETTER) Beide Datensätze sind nicht mehr gültig; dieser ist  aber jünger als der andere\\
+-104 & (DTA\_""SRC\_""KTO\_""DIFFERENT) Die Auftraggeber-Kontonummer des C-Datensatzes unterscheidet sich von der des A-Satzes\\
+-103 & (DTA\_""SRC\_""BLZ\_""DIFFERENT) Die Auftraggeber-Bankleitzahl des C-Datensatzes unterscheidet sich von der des A-Satzes\\
+-102 & (DTA\_""CR\_""LF\_""IN\_""FILE) Die DTA-Datei enthält (unzulässige) Zeilenvorschübe\\
+-101 & (DTA\_""INVALID\_""C\_""EXTENSION) ungültiger Typ bei einem Erweiterungsblock eines C-Datensatzes\\
+-100 & (DTA\_""FOUND\_""SET\_""A\_""NOT\_""C) Es wurde ein C-Datensatz erwartet, jedoch ein E-Satz gefunden\\
+-99 & (DTA\_""FOUND\_""SET\_""E\_""NOT\_""C) Es wurde ein C-Datensatz erwartet, jedoch ein E-Satz gefunden\\
+-98 & (DTA\_""FOUND\_""SET\_""C\_""NOT\_""EXTENSION) Es wurde ein C-Datensatzerweiterung erwartet, jedoch ein C-Satz gefunden\\
+-97 & (DTA\_""FOUND\_""SET\_""E\_""NOT\_""EXTENSION) Es wurde ein C-Datensatzerweiterung erwartet, jedoch ein E-Satz gefunden\\
+-96 & (DTA\_""INVALID\_""EXTENSION\_""COUNT) Die Anzahl Erweiterungen paßt nicht zur Blocklänge\\
+-95 & (DTA\_""INVALID\_""NUM) Ungültige Zeichen in numerischem Feld\\
+-94 & (DTA\_""INVALID\_""CHARS) Ungültige Zeichen im Textfeld\\
+-93 & (DTA\_""CURRENCY\_""NOT\_""EURO) Die Währung des DTA-Datensatzes ist nicht Euro\\
+-92 & (DTA\_""EMPTY\_""AMOUNT) In einem DTA-Datensatz wurde kein Betrag angegeben\\
+-91 & (DTA\_""INVALID\_""TEXT\_""KEY) Ungültiger Textschlüssel in der DTA-Datei\\
+-90 & (DTA\_""EMPTY\_""STRING) Für ein (alphanumerisches) Feld wurde kein Wert angegeben\\
+-89 & (DTA\_""MARKER\_""A\_""NOT\_""FOUND) Die Startmarkierung des A-Datensatzes wurde nicht gefunden\\
+-88 & (DTA\_""MARKER\_""C\_""NOT\_""FOUND) Die Startmarkierung des C-Datensatzes wurde nicht gefunden\\
+-87 & (DTA\_""MARKER\_""E\_""NOT\_""FOUND) Die Startmarkierung des E-Datensatzes wurde nicht gefunden\\
+-86 & (DTA\_""INVALID\_""SET\_""C\_""LEN) Die Satzlänge eines C-Datensatzes muß zwischen 187 und 622 Byte betragen\\
+-85 & (DTA\_""INVALID\_""SET\_""LEN) Die Satzlänge eines A- bzw. E-Satzes muß 128 Byte betragen\\
+-84 & (DTA\_""WAERUNG\_""NOT\_""EURO) als Währung in der DTA-Datei ist nicht Euro eingetragen\\
+-83 & (DTA\_""INVALID\_""ISSUE\_""DATE) das Ausführungsdatum ist zu früh oder zu spät (max. 15 Tage nach Dateierstellung)\\
+-82 & (DTA\_""INVALID\_""DATE) das Datum ist ungültig\\
+-81 & (DTA\_""FORMAT\_""ERROR) Formatfehler in der DTA-Datei\\
+-80 & (DTA\_""FILE\_""WITH\_""ERRORS) die DTA-Datei enthält Fehler\\
+-79 & (INVALID\_""SEARCH\_""RANGE) ungültiger Suchbereich angegeben (unten>oben)\\
+-78 & (KEY\_""NOT\_""FOUND) Die Suche lieferte kein Ergebnis\\
+-77 & (BAV\_""FALSE) BAV denkt, das Konto ist falsch (konto\_""check hält es für richtig)\\
+-76 & (LUT2\_""NO\_""USER\_""BLOCK) User-Blocks müssen einen Typ > 500 haben\\
+-75 & (INVALID\_""SET) für ein LUT-Set sind nur die Werte 0, 1 oder 2 möglich\\
+-74 & (NO\_""GERMAN\_""BIC) Ein Konto kann kann nur für deutsche Banken geprüft werden\\
+-73 & (IPI\_""CHECK\_""INVALID\_""LENGTH) Der zu validierende strukturierete Verwendungszweck muß genau 20 Zeichen enthalten\\
+-72 & (IPI\_""INVALID\_""CHARACTER) Im strukturierten Verwendungszweck dürfen nur alphanumerische Zeichen vorkommen\\
+-71 & (IPI\_""INVALID\_""LENGTH) Die Länge des IPI-Verwendungszwecks darf maximal 18 Byte sein\\
+-70 & (LUT1\_""FILE\_""USED) Es wurde eine LUT-Datei im Format 1.0/1.1 geladen\\
+-69 & (MISSING\_""PARAMETER) Bei der Kontoprüfung fehlt ein notwendiger Parameter (BLZ oder Konto)\\
+-68 & (IBAN2BIC\_""ONLY\_""GERMAN) Die Funktion iban2bic() arbeitet nur mit deutschen Bankleitzahlen\\
+-67 & (IBAN\_""OK\_""KTO\_""NOT) Die Prüfziffer der IBAN stimmt, die der Kontonummer nicht\\
+-66 & (KTO\_""OK\_""IBAN\_""NOT) Die Prüfziffer der Kontonummer stimmt, die der IBAN nicht\\
+-65 & (TOO\_""MANY\_""SLOTS) Es sind nur maximal 500 Slots pro LUT-Datei möglich (Neukompilieren erforderlich)\\
+-64 & (INIT\_""FATAL\_""ERROR) Initialisierung fehlgeschlagen (init\_""wait geblockt)\\
+-63 & (INCREMENTAL\_""INIT\_""NEEDS\_""INFO) Ein inkrementelles Initialisieren benötigt einen Info-Block in der LUT-Datei\\
+-62 & (INCREMENTAL\_""INIT\_""FROM\_""DIFFERENT\_""FILE) Ein inkrementelles Initialisieren mit einer anderen LUT-Datei ist nicht möglich\\
+-61 & (DEBUG\_""ONLY\_""FUNCTION) Die Funktion ist nur in der Debug-Version vorhanden\\
+-60 & (LUT2\_""INVALID) Kein Datensatz der LUT-Datei ist aktuell gültig\\
+-59 & (LUT2\_""NOT\_""YET\_""VALID) Der Datensatz ist noch nicht gültig\\
+-58 & (LUT2\_""NO\_""LONGER\_""VALID) Der Datensatz ist nicht mehr gültig\\
+-57 & (LUT2\_""GUELTIGKEIT\_""SWAPPED) Im Gültigkeitsdatum sind Anfangs- und Enddatum vertauscht\\
+-56 & (LUT2\_""INVALID\_""GUELTIGKEIT) Das angegebene Gültigkeitsdatum ist ungültig (Soll: JJJJMMTT-JJJJMMTT)\\
+-55 & (LUT2\_""INDEX\_""OUT\_""OF\_""RANGE) Der Index für die Filiale ist ungültig\\
+-54 & (LUT2\_""INIT\_""IN\_""PROGRESS) Die Bibliothek wird gerade neu initialisiert\\
+-53 & (LUT2\_""BLZ\_""NOT\_""INITIALIZED) Das Feld BLZ wurde nicht initialisiert\\
+-52 & (LUT2\_""FILIALEN\_""NOT\_""INITIALIZED) Das Feld Filialen wurde nicht initialisiert\\
+-51 & (LUT2\_""NAME\_""NOT\_""INITIALIZED) Das Feld Bankname wurde nicht initialisiert\\
+-50 & (LUT2\_""PLZ\_""NOT\_""INITIALIZED) Das Feld PLZ wurde nicht initialisiert\\
+-49 & (LUT2\_""ORT\_""NOT\_""INITIALIZED) Das Feld Ort wurde nicht initialisiert\\
+-48 & (LUT2\_""NAME\_""KURZ\_""NOT\_""INITIALIZED) Das Feld Kurzname wurde nicht initialisiert\\
+-47 & (LUT2\_""PAN\_""NOT\_""INITIALIZED) Das Feld PAN wurde nicht initialisiert\\
+-46 & (LUT2\_""BIC\_""NOT\_""INITIALIZED) Das Feld BIC wurde nicht initialisiert\\
+-45 & (LUT2\_""PZ\_""NOT\_""INITIALIZED) Das Feld Prüfziffer wurde nicht initialisiert\\
+-44 & (LUT2\_""NR\_""NOT\_""INITIALIZED) Das Feld NR wurde nicht initialisiert\\
+-43 & (LUT2\_""AENDERUNG\_""NOT\_""INITIALIZED) Das Feld Änderung wurde nicht initialisiert\\
+-42 & (LUT2\_""LOESCHUNG\_""NOT\_""INITIALIZED) Das Feld Löschung wurde nicht initialisiert\\
+-41 & (LUT2\_""NACHFOLGE\_""BLZ\_""NOT\_""INITIALIZED) Das Feld Nachfolge-BLZ wurde nicht initialisiert\\
+-40 & (LUT2\_""NOT\_""INITIALIZED) die Programmbibliothek wurde noch nicht initialisiert\\
+-39 & (LUT2\_""FILIALEN\_""MISSING) der Block mit der Filialenanzahl fehlt in der LUT-Datei\\
+-38 & (LUT2\_""PARTIAL\_""OK) es wurden nicht alle Blocks geladen\\
+-37 & (LUT2\_""Z\_""BUF\_""ERROR) Buffer error in den ZLIB Routinen\\
+-36 & (LUT2\_""Z\_""MEM\_""ERROR) Memory error in den ZLIB-Routinen\\
+-35 & (LUT2\_""Z\_""DATA\_""ERROR) Datenfehler im komprimierten LUT-Block\\
+-34 & (LUT2\_""BLOCK\_""NOT\_""IN\_""FILE) Der Block ist nicht in der LUT-Datei enthalten\\
+-33 & (LUT2\_""DECOMPRESS\_""ERROR) Fehler beim Dekomprimieren eines LUT-Blocks\\
+-32 & (LUT2\_""COMPRESS\_""ERROR) Fehler beim Komprimieren eines LUT-Blocks\\
+-31 & (LUT2\_""FILE\_""CORRUPTED) Die LUT-Datei ist korrumpiert\\
+-30 & (LUT2\_""NO\_""SLOT\_""FREE) Im Inhaltsverzeichnis der LUT-Datei ist kein Slot mehr frei\\
+-29 & (UNDEFINED\_""SUBMETHOD) Die (Unter)Methode ist nicht definiert\\
+-28 & (EXCLUDED\_""AT\_""COMPILETIME) Der benötigte Programmteil wurde beim Kompilieren deaktiviert\\
+-27 & (INVALID\_""LUT\_""VERSION) Die Versionsnummer für die LUT-Datei ist ungültig\\
+-26 & (INVALID\_""PARAMETER\_""STELLE1) ungültiger Prüfparameter (erste zu prüfende Stelle)\\
+-25 & (INVALID\_""PARAMETER\_""COUNT) ungültiger Prüfparameter (Anzahl zu prüfender Stellen)\\
+-24 & (INVALID\_""PARAMETER\_""PRUEFZIFFER) ungültiger Prüfparameter (Position der Prüfziffer)\\
+-23 & (INVALID\_""PARAMETER\_""WICHTUNG) ungültiger Prüfparameter (Wichtung)\\
+-22 & (INVALID\_""PARAMETER\_""METHODE) ungültiger Prüfparameter (Rechenmethode)\\
+-21 & (LIBRARY\_""INIT\_""ERROR) Problem beim Initialisieren der globalen Variablen\\
+-20 & (LUT\_""CRC\_""ERROR) Prüfsummenfehler in der blz.lut Datei\\
+-19 & (FALSE\_""GELOESCHT) falsch (die BLZ wurde außerdem gelöscht)\\
+-18 & (OK\_""NO\_""CHK\_""GELOESCHT) ok, ohne Prüfung (die BLZ wurde allerdings gelöscht)\\
+-17 & (OK\_""GELOESCHT) ok (die BLZ wurde allerdings gelöscht)\\
+-16 & (BLZ\_""GELOESCHT) die Bankleitzahl wurde gelöscht\\
+-15 & (INVALID\_""BLZ\_""FILE) Fehler in der blz.txt Datei (falsche Zeilenlänge)\\
+-14 & (LIBRARY\_""IS\_""NOT\_""THREAD\_""SAFE) undefinierte Funktion; die library wurde mit THREAD\_""SAFE=0 kompiliert\\
+-13 & (FATAL\_""ERROR) schwerer Fehler im Konto\_""check-Modul\\
+-12 & (INVALID\_""KTO\_""LENGTH) ein Konto muß zwischen 1 und 10 Stellen haben\\
+-11 & (FILE\_""WRITE\_""ERROR) kann Datei nicht schreiben\\
+-10 & (FILE\_""READ\_""ERROR) kann Datei nicht lesen\\
+-9 & (ERROR\_""MALLOC) kann keinen Speicher allokieren\\
+-8 & (NO\_""BLZ\_""FILE) die blz.txt Datei wurde nicht gefunden\\
+-7 & (INVALID\_""LUT\_""FILE) die blz.lut Datei ist inkosistent/ungültig\\
+-6 & (NO\_""LUT\_""FILE) die blz.lut Datei wurde nicht gefunden\\
+-5 & (INVALID\_""BLZ\_""LENGTH) die Bankleitzahl ist nicht achtstellig\\
+-4 & (INVALID\_""BLZ) die Bankleitzahl ist ungültig\\
+-3 & (INVALID\_""KTO) das Konto ist ungültig\\
+-2 & (NOT\_""IMPLEMENTED) die Methode wurde noch nicht implementiert\\
+-1 & (NOT\_""DEFINED) die Methode ist nicht definiert\\
+0 & (FALSE) falsch\\
+1 & (OK) ok\\
+2 & (OK\_""NO\_""CHK) ok, ohne Prüfung\\
+3 & (OK\_""TEST\_""BLZ\_""USED) ok; für den Test wurde eine Test-BLZ verwendet\\
+4 & (LUT2\_""VALID) Der Datensatz ist aktuell gültig\\
+5 & (LUT2\_""NO\_""VALID\_""DATE) Der Datensatz enthält kein Gültigkeitsdatum\\
+6 & (LUT1\_""SET\_""LOADED) Die Datei ist im alten LUT-Format (1.0/1.1)\\
+7 & (LUT1\_""FILE\_""GENERATED) ok; es wurde allerdings eine LUT-Datei im alten Format (1.0/1.1) generiert\\
+8 & (DTA\_""FILE\_""WITH\_""WARNINGS) In der DTAUS-Datei wurden kleinere Fehler gefunden\\
+9 & (LUT\_""V2\_""FILE\_""GENERATED) ok; es wurde allerdings eine LUT-Datei im Format 2.0 generiert (Compilerswitch)\\
+10 & (KTO\_""CHECK\_""VALUE\_""REPLACED) ok; der Wert für den Schlüssel wurde überschrieben\\
+11 & (OK\_""UNTERKONTO\_""POSSIBLE) wahrscheinlich ok; die Kontonummer kann allerdings (nicht angegebene) Unterkonten enthalten\\
+12 & (OK\_""UNTERKONTO\_""GIVEN) wahrscheinlich ok; die Kontonummer enthält eine Unterkontonummer\\
+13 & (OK\_""SLOT\_""CNT\_""MIN\_""USED) ok; die Anzahl Slots wurde auf SLOT\_""CNT\_""MIN hochgesetzt\\
+\end{longtable}
+\end{sloppypar}
+
+\subsection{Makronamen bzw. Kurznamen der Rückgabewerte (alphabetisch sortiert)}
+Die folgenden Makronamen (in C) bzw. Konstanten (in PHP, falls SYMBOLIC\_RETVALS
+in \textit{konto\_check.h} gesetzt ist) sind definiert:
+
+\noindent\begin{longtable}{rl}
+-77 & BAV\_FALSE  \\
+-16 & BLZ\_GELOESCHT  \\
+-61 & DEBUG\_ONLY\_FUNCTION  \\
+-102 & DTA\_CR\_LF\_IN\_FILE  \\
+-93 & DTA\_CURRENCY\_NOT\_EURO  \\
+-92 & DTA\_EMPTY\_AMOUNT  \\
+-90 & DTA\_EMPTY\_STRING  \\
+-80 & DTA\_FILE\_WITH\_ERRORS  \\
+8 & DTA\_FILE\_WITH\_WARNINGS  \\
+-81 & DTA\_FORMAT\_ERROR  \\
+-100 & DTA\_FOUND\_SET\_A\_NOT\_C  \\
+-98 & DTA\_FOUND\_SET\_C\_NOT\_EXTENSION  \\
+-99 & DTA\_FOUND\_SET\_E\_NOT\_C  \\
+-97 & DTA\_FOUND\_SET\_E\_NOT\_EXTENSION  \\
+-101 & DTA\_INVALID\_C\_EXTENSION  \\
+-94 & DTA\_INVALID\_CHARS  \\
+-82 & DTA\_INVALID\_DATE  \\
+-96 & DTA\_INVALID\_EXTENSION\_COUNT  \\
+-83 & DTA\_INVALID\_ISSUE\_DATE  \\
+-95 & DTA\_INVALID\_NUM  \\
+-86 & DTA\_INVALID\_SET\_C\_LEN  \\
+-85 & DTA\_INVALID\_SET\_LEN  \\
+-91 & DTA\_INVALID\_TEXT\_KEY  \\
+-89 & DTA\_MARKER\_A\_NOT\_FOUND  \\
+-88 & DTA\_MARKER\_C\_NOT\_FOUND  \\
+-87 & DTA\_MARKER\_E\_NOT\_FOUND  \\
+-103 & DTA\_SRC\_BLZ\_DIFFERENT  \\
+-104 & DTA\_SRC\_KTO\_DIFFERENT  \\
+-84 & DTA\_WAERUNG\_NOT\_EURO  \\
+-9 & ERROR\_MALLOC  \\
+-28 & EXCLUDED\_AT\_COMPILETIME  \\
+0 & FALSE  \\
+-19 & FALSE\_GELOESCHT  \\
+-13 & FATAL\_ERROR  \\
+-10 & FILE\_READ\_ERROR  \\
+-11 & FILE\_WRITE\_ERROR  \\
+-67 & IBAN\_OK\_KTO\_NOT  \\
+-68 & IBAN2BIC\_ONLY\_GERMAN  \\
+-62 & INCREMENTAL\_INIT\_FROM\_DIFFERENT\_FILE  \\
+-63 & INCREMENTAL\_INIT\_NEEDS\_INFO  \\
+-64 & INIT\_FATAL\_ERROR  \\
+-4 & INVALID\_BLZ  \\
+-15 & INVALID\_BLZ\_FILE  \\
+-5 & INVALID\_BLZ\_LENGTH  \\
+-3 & INVALID\_KTO  \\
+-12 & INVALID\_KTO\_LENGTH  \\
+-7 & INVALID\_LUT\_FILE  \\
+-27 & INVALID\_LUT\_VERSION  \\
+-25 & INVALID\_PARAMETER\_COUNT  \\
+-22 & INVALID\_PARAMETER\_METHODE  \\
+-24 & INVALID\_PARAMETER\_PRUEFZIFFER  \\
+-26 & INVALID\_PARAMETER\_STELLE1  \\
+-23 & INVALID\_PARAMETER\_WICHTUNG  \\
+-79 & INVALID\_SEARCH\_RANGE  \\
+-75 & INVALID\_SET  \\
+-73 & IPI\_CHECK\_INVALID\_LENGTH  \\
+-72 & IPI\_INVALID\_CHARACTER  \\
+-71 & IPI\_INVALID\_LENGTH  \\
+-78 & KEY\_NOT\_FOUND  \\
+-108 & KTO\_CHECK\_DEFAULT\_BLOCK\_FULL  \\
+-109 & KTO\_CHECK\_DEFAULT\_BLOCK\_INVALID  \\
+-111 & KTO\_CHECK\_INVALID\_COMPRESSION\_LIB  \\
+-106 & KTO\_CHECK\_KEY\_NOT\_FOUND  \\
+-107 & KTO\_CHECK\_NO\_DEFAULT\_BLOCK  \\
+-112 & KTO\_CHECK\_UNSUPPORTED\_COMPRESSION  \\
+10 & KTO\_CHECK\_VALUE\_REPLACED  \\
+-66 & KTO\_OK\_IBAN\_NOT  \\
+-21 & LIBRARY\_INIT\_ERROR  \\
+-14 & LIBRARY\_IS\_NOT\_THREAD\_SAFE  \\
+-20 & LUT\_CRC\_ERROR  \\
+9 & LUT\_V2\_FILE\_GENERATED  \\
+7 & LUT1\_FILE\_GENERATED  \\
+-70 & LUT1\_FILE\_USED  \\
+6 & LUT1\_SET\_LOADED  \\
+-43 & LUT2\_AENDERUNG\_NOT\_INITIALIZED  \\
+-46 & LUT2\_BIC\_NOT\_INITIALIZED  \\
+-34 & LUT2\_BLOCK\_NOT\_IN\_FILE  \\
+-53 & LUT2\_BLZ\_NOT\_INITIALIZED  \\
+-32 & LUT2\_COMPRESS\_ERROR  \\
+-33 & LUT2\_DECOMPRESS\_ERROR  \\
+-31 & LUT2\_FILE\_CORRUPTED  \\
+-39 & LUT2\_FILIALEN\_MISSING  \\
+-52 & LUT2\_FILIALEN\_NOT\_INITIALIZED  \\
+-57 & LUT2\_GUELTIGKEIT\_SWAPPED  \\
+-55 & LUT2\_INDEX\_OUT\_OF\_RANGE  \\
+-54 & LUT2\_INIT\_IN\_PROGRESS  \\
+-60 & LUT2\_INVALID  \\
+-56 & LUT2\_INVALID\_GUELTIGKEIT  \\
+-42 & LUT2\_LOESCHUNG\_NOT\_INITIALIZED  \\
+-41 & LUT2\_NACHFOLGE\_BLZ\_NOT\_INITIALIZED  \\
+-48 & LUT2\_NAME\_KURZ\_NOT\_INITIALIZED  \\
+-51 & LUT2\_NAME\_NOT\_INITIALIZED  \\
+-58 & LUT2\_NO\_LONGER\_VALID  \\
+-105 & LUT2\_NO\_LONGER\_VALID\_BETTER  \\
+-30 & LUT2\_NO\_SLOT\_FREE  \\
+-76 & LUT2\_NO\_USER\_BLOCK  \\
+5 & LUT2\_NO\_VALID\_DATE  \\
+-40 & LUT2\_NOT\_INITIALIZED  \\
+-59 & LUT2\_NOT\_YET\_VALID  \\
+-44 & LUT2\_NR\_NOT\_INITIALIZED  \\
+-49 & LUT2\_ORT\_NOT\_INITIALIZED  \\
+-47 & LUT2\_PAN\_NOT\_INITIALIZED  \\
+-38 & LUT2\_PARTIAL\_OK  \\
+-50 & LUT2\_PLZ\_NOT\_INITIALIZED  \\
+-45 & LUT2\_PZ\_NOT\_INITIALIZED  \\
+4 & LUT2\_VALID  \\
+-37 & LUT2\_Z\_BUF\_ERROR  \\
+-35 & LUT2\_Z\_DATA\_ERROR  \\
+-36 & LUT2\_Z\_MEM\_ERROR  \\
+-69 & MISSING\_PARAMETER  \\
+-8 & NO\_BLZ\_FILE  \\
+-74 & NO\_GERMAN\_BIC  \\
+-6 & NO\_LUT\_FILE  \\
+-113 & NO\_OWN\_IBAN\_CALCULATION  \\
+-1 & NOT\_DEFINED  \\
+-2 & NOT\_IMPLEMENTED  \\
+1 & OK  \\
+-17 & OK\_GELOESCHT  \\
+2 & OK\_NO\_CHK  \\
+-18 & OK\_NO\_CHK\_GELOESCHT  \\
+13 & OK\_SLOT\_CNT\_MIN\_USED  \\
+3 & OK\_TEST\_BLZ\_USED  \\
+-110 & OK\_UNTERKONTO\_ATTACHED  \\
+12 & OK\_UNTERKONTO\_GIVEN  \\
+11 & OK\_UNTERKONTO\_POSSIBLE  \\
+-65 & TOO\_MANY\_SLOTS  \\
+-29 & UNDEFINED\_SUBMETHOD  \\
+\end{longtable}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{VERSIONEN}
+\begin{longtable}{ll}
+\bf Datum & \bf Version\\\hline\endhead
+01.05.02 & Version 0.1 \\
+13.06.02 & Version 0.2 \\
+10.07.02 & Version 0.3 \\
+13.09.02 & Version 1.0 \\
+10.10.02 & Version 1.0.1 \\
+06.11.02 & Version 1.0.2 \\
+04.02.03 & Version 1.0.3 \\
+13.03.03 & Version 1.1.0 \\
+16.04.03 & Version 1.1.1 \\
+25.06.03 & Version 1.1.2 \\
+16.01.04 & Version 1.1.3 \\
+12.10.04 & Version 1.1.4 \\
+16.12.04 & Version 1.1.5 \\[1ex]
+16.01.04 & Version 2.0-Alpha-1 \\
+12.10.04 & Version 2.0-Beta-1 \\
+16.12.04 & Version 2.0-Beta-2 \\
+06.08.05 & Version 2.0 final \\
+01.12.05 & Version 2.0.1 \\
+26.05.06 & Version 2.0.2 \\
+23.08.06 & Version 2.0.3 \\
+20.11.06 & Version 2.0.4 \\
+13.03.07 & Version 2.0.5 \\
+26.05.07 & Version 2.1 \\
+21.08.07 & Version 2.2 \\
+25.08.07 & Version 2.3 (nur für Perl, Bugfix release) \\
+13.11.07 & Version 2.4 \\
+16.02.08 & Version 2.5 \\
+10.04.08 & Version 2.6 \\
+23.08.08 & Version 2.7 (parallel mit 2.92) \\[1ex]
+23.04.08 & Version 2.91 \\
+23.08.08 & Version 2.92 \\
+08.09.08 & Version 2.93 \\
+13.01.09 & Version 2.94/2.95 (bei 2.94 war ein kleiner Fehler in den Perl-Testroutinen)\\
+02.03.09 & Version 2.96 \\
+08.03.09 & Version 2.97 (in 2.96 war ein fataler Fehler in den PHP-Routinen) \\
+09.05.09 & Version 2.98 \\
+13.09.09 & Version 2.99 \\
+24.10.09 & Version 3.0 \\
+22.05.10 & Version 3.1 \\
+02.07.10 & Version 3.2 (vor allem für Perl) \\
+20.06.10 & Version 3.3 \\
+13.11.10 & Version 3.4 \\
+06.01.11 & Version 3.5 \\ 
+13.04.11 & Version 3.6 \\ 
+\end{longtable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Copyright}
+
+Copyright \copyright{} 2002-2011 Michael Plugge.
+
+\medskip
+Diese Bibliothek ist freie Software; Sie dürfen sie unter den Bedingungen der
+GNU Lesser General Public License, wie von der Free Software Foundation
+veröffentlicht, weiterverteilen und/oder modifizieren; entweder gemäß
+Version 2.1 der Lizenz oder (nach Ihrer Option) jeder späteren Version.
+
+\medskip
+Die GNU LGPL ist weniger infektiös als die normale GPL; Code, der von
+Ihnen hinzugefügt wird, unterliegt nicht der Offenlegungspflicht (wie
+bei der normalen GPL); außerdem müssen Programme, die diese Bibliothek
+benutzen, nicht (L)GPL lizensiert sein, sondern können beliebig
+kommerziell verwertet werden. Die Offenlegung des Sourcecodes bezieht
+sich bei der LGPL \emph{nur} auf geänderten Bibliothekscode.
+
+\medskip
+Diese Bibliothek wird in der Hoffnung weiterverbreitet, daß sie nützlich sein
+wird, jedoch OHNE IRGENDEINE GARANTIE, auch ohne die implizierte Garantie
+der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Mehr
+Details finden Sie in der GNU Lesser General Public License.
+
+Sie sollten eine Kopie der GNU Lesser General Public License zusammen mit
+dieser Bibliothek erhalten haben; falls nicht, können Sie sie im Internet unter
+
+\medskip \hspace*{3em}http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+\medskip\noindent herunterladen.
+\printindex{allgemein}{Allgemeiner Index}
+\printindex{funktion.c}{Index der C-Funktionen}
+\printindex{funktion.php.alt}{Index der PHP-Funktionen (alt)}
+\printindex{funktion.php}{Index der PHP-Funktionen (neu)}
+\end{document}
