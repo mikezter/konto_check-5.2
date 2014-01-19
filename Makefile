@@ -31,9 +31,7 @@ endif
 DEBUG = -DDEBUG=1 -g
 CFLAGS = -Wall $(C_BZ2) $(C_LZO) $(C_LZMA)
 LDFLAGS = -lz $(LD_BZ2) $(LD_LZMA)
-
-CFLAGS_OPT = $(CFLAGS) -O3 -fexpensive-optimizations -fomit-frame-pointer -funroll-loops
-CFLAGS_OPT1= $(CFLAGS) -O3 -fexpensive-optimizations -funroll-loops
+CFLAGS_OPT = $(CFLAGS) -O3 -funroll-loops
 
 BLZ_LEVEL   = -g37
 BLZ_LEVELF  = -g39f
@@ -96,7 +94,7 @@ blz.lut2fx: konto_check
 
 lib: libkonto_check.so.$(LIB_VERSION)
 libkonto_check.so.$(LIB_VERSION): konto_check.c konto_check.h
-	gcc -fPIC -c $(CFLAGS_OPT1) konto_check.c
+	gcc -fPIC -c $(CFLAGS_OPT) konto_check.c
 	gcc -shared -Wl,-soname,libkonto_check.so.$(LIB_VERSION) -o libkonto_check.so.$(LIB_VERSION) konto_check.o -lc -s
 
 install: lib #you must be root to do this
