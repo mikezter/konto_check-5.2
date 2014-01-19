@@ -25,7 +25,9 @@ input
 
 ---------------------------------------------------------
 
-TODO: Build on Linux
+ * TODO: Build on Linux
+ * TODO: Use CGO
 
-TODO: Use CGO
+---------------------------------------------------------
 
+This projected is licensed under the terms of the GNU Lesser General Public License.
