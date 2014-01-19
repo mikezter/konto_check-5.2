@@ -120,7 +120,7 @@ int gettimeofday(struct timeval *tv, void *tz)
          frequency=qpf.QuadPart;
          QueryPerformanceCounter(&qpc);
          ct=time(NULL)-qpc.QuadPart/frequency;  /* for Unix compatibility */
-      }      
+      }
    }
    if(frequency==-1){ /* use ftime; this yields only milliseconds resolution */
       _ftime(&tb);
@@ -283,38 +283,38 @@ int main(int argc,char **argv)
    struct tm *timeptr,timebuf;
 
 #if WIN32 && 0
-   cmd_help="in diesem Modus knnen auch Befehle (als Simulation realer nderungen)\n"
-"eingegeben werden. Momentan untersttzte Befehle (die Auswahl kann sich\n"
-" ndern, sie fangen allerdings alle mit - an):\n"
+   cmd_help="in diesem Modus können auch Befehle (als Simulation realer Änderungen)\n"
+"eingegeben werden. Momentan unterstützte Befehle (die Auswahl kann sich\n"
+"ändern, sie fangen allerdings alle mit - an):\n"
 "\n"
 "   -bBLZ          Infos zu der Bank anzeigen\n"
-"   -biidx [zw]    Infos zu der Bank mit Index idx anzeigen (Index z hlt ab 1)\n"
+"   -biidx [zw]    Infos zu der Bank mit Index idx anzeigen (Index zählt ab 1)\n"
 "                  optional kann noch eine Zweigstelle angegeben werden\n"
 "                  (Zahl, ab 1). Die Zweigstellen sind in der LUT-Datei\n"
-"                  u.U. nach Postleitzahlen sortiert (abh ngig von dem\n"
+"                  u.U. nach Postleitzahlen sortiert (abhängig von dem\n"
 "                  Compiler-Schalter SORT_PLZ in konto_check.h) und stimmen\n"
-"                  dann **nicht** mit denen der Bundesbankdatei berein.\n"
-"   -Biban         IBAN -> BIC fr deutsche IBANs\n"
+"                  dann **nicht** mit denen der Bundesbankdatei überein.\n"
+"   -Biban         IBAN -> BIC für deutsche IBANs\n"
 "   -ciban         IBAN validieren\n"
 "   -Cblz kto      IBAN zu BLZ und kto generieren (vorher Konto testen)\n"
-"   -d             'Systemdatum' fr LUT-Datei (simuliert) lschen\n"
-"   -ddatum        'Systemdatum' fr LUT-Datei (simuliert) setzen (Format: JJJJMMTT)\n"
-"   -D             Systemdatum fr LUT-Datei (simuliert und echt) anzeigen\n"
+"   -d             'Systemdatum' für LUT-Datei (simuliert) löschen\n"
+"   -ddatum        'Systemdatum' für LUT-Datei (simuliert) setzen (Format: JJJJMMTT)\n"
+"   -D             Systemdatum für LUT-Datei (simuliert und echt) anzeigen\n"
 "   -E[dihsu]      Ausgabe-Kodierung festlegen\n"
 "   -i[1-7]dateiname [set]  Bibliothek mit der angegebenen Datei initialisieren\n"
 "                  Die Zahl gibt die zu ladenden Blocks an (wie bei -g3)\n"
 "                  Der Parameter set kann weggelassen werden; dann wird das\n"
-"                  aktuell gltige Set (bzw. das prim re Set, falls keines gltig ist)\n"
-"                  geladen; falls er angegeben ist, sollte er 1 (fr das prim re Set)\n"
-"                  oder 2 (fr das sekund re Set) sein.\n"
+"                  aktuell gültige Set (bzw. das primäre Set, falls keines gültig ist)\n"
+"                  geladen; falls er angegeben ist, sollte er 1 (für das primäre Set)\n"
+"                  oder 2 (für das sekundäre Set) sein.\n"
 "   -Idateiname    Infoblocks der angegebenen LUT-Datei anzeigen\n"
 "   -I             Infoblock der geladenen LUT-Datei anzeigen\n"
 "   -ldateiname    Verzeichnis der angegebenen LUT-Datei anzeigen\n"
 "   -sname         Namens(anfang) suchen -> BLZ\n"
 "   -Sort          Ort suchen -> BLZ\n"
-"   -v             geladenen Datensatz auf Gltigkeit testen\n"
-"   -zgzweck       Prfziffer fr strukturieren IPI-Verwendungszweck erzeugen\n"
-"   -ztzweck       Prfziffer fr strukturieren IPI-Verwendungszweck testen\n"
+"   -v             geladenen Datensatz auf Gültigkeit testen\n"
+"   -zgzweck       Prüfziffer für strukturieren IPI-Verwendungszweck erzeugen\n"
+"   -ztzweck       Prüfziffer für strukturieren IPI-Verwendungszweck testen\n"
 "   -Zkompression  Kompressionsbibliothek (0 keine, 1 zlib, 2 bzlib2)\n"
 "   -h             (diese) Hilfe anzeigen\n"
 "   -?             dto.";
@@ -361,7 +361,7 @@ int main(int argc,char **argv)
    gueltigkeit=NULL;
    keine_iban_berechnung=NULL;
    trennzeile="----------------------------------------------------------------\n";
-   set=zeige_namen=verbose=gen_lut=lf_error=0; 
+   set=zeige_namen=verbose=gen_lut=lf_error=0;
    schreiben=0.;
    action=CHECK;
    inputname=outputname=lutname=user_info=extra_opt=NULL;
@@ -1124,667 +1124,667 @@ if(!inputname)inputname="blz_in.txt";
           * Werte aufzunehmen.
           */
       switch(ret){
-         case IBAN_CHKSUM_OK_NACHFOLGE_BLZ_DEFINED: 
+         case IBAN_CHKSUM_OK_NACHFOLGE_BLZ_DEFINED:
             memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, für die Bank gibt es allerdings eine (andere) Nachfolge-BLZ\n",93);
             dptr+=93;
             break;
-         case LUT2_NOT_ALL_IBAN_BLOCKS_LOADED: 
+         case LUT2_NOT_ALL_IBAN_BLOCKS_LOADED:
             memcpy(dptr,": ### es konnten nicht alle Datenblocks die für die IBAN-Berechnung notwendig sind geladen werden\n",98);
             dptr+=98;
             break;
-         case LUT2_NOT_YET_VALID_PARTIAL_OK: 
+         case LUT2_NOT_YET_VALID_PARTIAL_OK:
             memcpy(dptr,": ### Der Datensatz ist noch nicht gültig, außerdem konnten nicht alle Blocks geladen werden\n",93);
             dptr+=93;
             break;
-         case LUT2_NO_LONGER_VALID_PARTIAL_OK: 
+         case LUT2_NO_LONGER_VALID_PARTIAL_OK:
             memcpy(dptr,": ### Der Datensatz ist nicht mehr gültig, außerdem konnten nicht alle Blocks geladen werdeng\n",94);
             dptr+=94;
             break;
-         case LUT2_BLOCKS_MISSING: 
+         case LUT2_BLOCKS_MISSING:
             memcpy(dptr,": ### ok, bei der Initialisierung konnten allerdings ein oder mehrere Blocks nicht geladen werden\n",98);
             dptr+=98;
             break;
-         case FALSE_UNTERKONTO_ATTACHED: 
+         case FALSE_UNTERKONTO_ATTACHED:
             memcpy(dptr,": ### falsch, es wurde ein Unterkonto hinzugefügt (IBAN-Regel)\n",63);
             dptr+=63;
             break;
-         case BLZ_BLACKLISTED: 
+         case BLZ_BLACKLISTED:
             memcpy(dptr,": ### Die BLZ findet sich in der Ausschlussliste für IBAN-Berechnungen\n",71);
             dptr+=71;
             break;
-         case BLZ_MARKED_AS_DELETED: 
+         case BLZ_MARKED_AS_DELETED:
             memcpy(dptr,": ### Die BLZ ist in der Bundesbank-Datei als gelöscht markiert und somit ungültig\n",83);
             dptr+=83;
             break;
-         case IBAN_CHKSUM_OK_SOMETHING_WRONG: 
+         case IBAN_CHKSUM_OK_SOMETHING_WRONG:
             memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, es gibt allerdings einen Fehler in der eigenen IBAN-Bestimmung (wahrscheinlich falsch)\n",120);
             dptr+=120;
             break;
-         case IBAN_CHKSUM_OK_NO_IBAN_CALCULATION: 
+         case IBAN_CHKSUM_OK_NO_IBAN_CALCULATION:
             memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, eine IBAN-Berechnung ist allerdings nicht erlaubt (wahrscheinlich falsch)\n",107);
             dptr+=107;
             break;
-         case IBAN_CHKSUM_OK_RULE_IGNORED: 
+         case IBAN_CHKSUM_OK_RULE_IGNORED:
             memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, es wurde allerdings eine IBAN-Regel nicht beachtet (wahrscheinlich falsch)\n",108);
             dptr+=108;
             break;
-         case IBAN_CHKSUM_OK_UNTERKTO_MISSING: 
+         case IBAN_CHKSUM_OK_UNTERKTO_MISSING:
             memcpy(dptr,": ### Die IBAN-Prüfsumme stimmt, es fehlt aber ein Unterkonto (wahrscheinlich falsch)\n",86);
             dptr+=86;
             break;
-         case IBAN_INVALID_RULE: 
+         case IBAN_INVALID_RULE:
             memcpy(dptr,": ### Die BLZ passt nicht zur angegebenen IBAN-Regel\n",53);
             dptr+=53;
             break;
-         case IBAN_AMBIGUOUS_KTO: 
+         case IBAN_AMBIGUOUS_KTO:
             memcpy(dptr,": ### Die Kontonummer ist nicht eindeutig (es gibt mehrere Möglichkeiten)\n",74);
             dptr+=74;
             break;
-         case IBAN_RULE_NOT_IMPLEMENTED: 
+         case IBAN_RULE_NOT_IMPLEMENTED:
             memcpy(dptr,": ### Die IBAN-Regel ist noch nicht implementiert\n",50);
             dptr+=50;
             break;
-         case IBAN_RULE_UNKNOWN: 
+         case IBAN_RULE_UNKNOWN:
             memcpy(dptr,": ### Die IBAN-Regel ist nicht bekannt\n",39);
             dptr+=39;
             break;
-         case NO_IBAN_CALCULATION: 
+         case NO_IBAN_CALCULATION:
             memcpy(dptr,": ### Für die Bankverbindung ist keine IBAN-Berechnung erlaubt\n",63);
             dptr+=63;
             break;
-         case OLD_BLZ_OK_NEW_NOT: 
+         case OLD_BLZ_OK_NEW_NOT:
             memcpy(dptr,": ### Die Bankverbindung ist mit der alten BLZ stimmig, mit der Nachfolge-BLZ nicht\n",84);
             dptr+=84;
             break;
-         case LUT2_IBAN_REGEL_NOT_INITIALIZED: 
+         case LUT2_IBAN_REGEL_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld IBAN-Regel wurde nicht initialisiert\n",52);
             dptr+=52;
             break;
-         case INVALID_IBAN_LENGTH: 
+         case INVALID_IBAN_LENGTH:
             memcpy(dptr,": ### Die Länge der IBAN für das angegebene Länderkürzel ist falsch\n",68);
             dptr+=68;
             break;
-         case LUT2_NO_ACCOUNT_GIVEN: 
+         case LUT2_NO_ACCOUNT_GIVEN:
             memcpy(dptr,": ### Keine Bankverbindung/IBAN angegeben\n",42);
             dptr+=42;
             break;
-         case LUT2_VOLLTEXT_INVALID_CHAR: 
+         case LUT2_VOLLTEXT_INVALID_CHAR:
             memcpy(dptr,": ### Ungültiges Zeichen ( ()+-/&.,\' ) für die Volltextsuche gefunden\n",71);
             dptr+=71;
             break;
-         case LUT2_VOLLTEXT_SINGLE_WORD_ONLY: 
+         case LUT2_VOLLTEXT_SINGLE_WORD_ONLY:
             memcpy(dptr,": ### Die Volltextsuche sucht jeweils nur ein einzelnes Wort, benutzen Sie lut_suche_multiple() zur Suche nach mehreren Worten\n",127);
             dptr+=127;
             break;
-         case LUT_SUCHE_INVALID_RSC: 
+         case LUT_SUCHE_INVALID_RSC:
             memcpy(dptr,": ### die angegebene Suchresource ist ungültig\n",47);
             dptr+=47;
             break;
-         case LUT_SUCHE_INVALID_CMD: 
+         case LUT_SUCHE_INVALID_CMD:
             memcpy(dptr,": ### Suche: im Verknüpfungsstring sind nur die Zeichen a-z sowie + und - erlaubt\n",82);
             dptr+=82;
             break;
-         case LUT_SUCHE_INVALID_CNT: 
+         case LUT_SUCHE_INVALID_CNT:
             memcpy(dptr,": ### Suche: es müssen zwischen 1 und 26 Suchmuster angegeben werden\n",69);
             dptr+=69;
             break;
-         case LUT2_VOLLTEXT_NOT_INITIALIZED: 
+         case LUT2_VOLLTEXT_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Volltext wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
-         case NO_OWN_IBAN_CALCULATION: 
+         case NO_OWN_IBAN_CALCULATION:
             memcpy(dptr,": ### das Institut erlaubt keine eigene IBAN-Berechnung\n",56);
             dptr+=56;
             break;
-         case KTO_CHECK_UNSUPPORTED_COMPRESSION: 
+         case KTO_CHECK_UNSUPPORTED_COMPRESSION:
             memcpy(dptr,": ### die notwendige Kompressions-Bibliothek wurden beim Kompilieren nicht eingebunden\n",87);
             dptr+=87;
             break;
-         case KTO_CHECK_INVALID_COMPRESSION_LIB: 
+         case KTO_CHECK_INVALID_COMPRESSION_LIB:
             memcpy(dptr,": ### der angegebene Wert für die Default-Kompression ist ungültig\n",67);
             dptr+=67;
             break;
-         case OK_UNTERKONTO_ATTACHED_OLD: 
+         case OK_UNTERKONTO_ATTACHED_OLD:
             memcpy(dptr,": ### (nicht mehr als Fehler, sondern positive Ausgabe - Dummy für den alten Wert)\n",83);
             dptr+=83;
             break;
-         case KTO_CHECK_DEFAULT_BLOCK_INVALID: 
+         case KTO_CHECK_DEFAULT_BLOCK_INVALID:
             memcpy(dptr,": ### Ungültige Signatur im Default-Block\n",42);
             dptr+=42;
             break;
-         case KTO_CHECK_DEFAULT_BLOCK_FULL: 
+         case KTO_CHECK_DEFAULT_BLOCK_FULL:
             memcpy(dptr,": ### Die maximale Anzahl Einträge für den Default-Block wurde erreicht\n",72);
             dptr+=72;
             break;
-         case KTO_CHECK_NO_DEFAULT_BLOCK: 
+         case KTO_CHECK_NO_DEFAULT_BLOCK:
             memcpy(dptr,": ### Es wurde noch kein Default-Block angelegt\n",48);
             dptr+=48;
             break;
-         case KTO_CHECK_KEY_NOT_FOUND: 
+         case KTO_CHECK_KEY_NOT_FOUND:
             memcpy(dptr,": ### Der angegebene Schlüssel wurde im Default-Block nicht gefunden\n",69);
             dptr+=69;
             break;
-         case LUT2_NO_LONGER_VALID_BETTER: 
+         case LUT2_NO_LONGER_VALID_BETTER:
             memcpy(dptr,": ### Beide Datensätze sind nicht mehr gültig, dieser ist aber jünger als der andere\n",85);
             dptr+=85;
             break;
-         case DTA_SRC_KTO_DIFFERENT: 
+         case DTA_SRC_KTO_DIFFERENT:
             memcpy(dptr,": ### Die Auftraggeber-Kontonummer des C-Datensatzes unterscheidet sich von der des A-Satzes\n",93);
             dptr+=93;
             break;
-         case DTA_SRC_BLZ_DIFFERENT: 
+         case DTA_SRC_BLZ_DIFFERENT:
             memcpy(dptr,": ### Die Auftraggeber-Bankleitzahl des C-Datensatzes unterscheidet sich von der des A-Satzes\n",94);
             dptr+=94;
             break;
-         case DTA_CR_LF_IN_FILE: 
+         case DTA_CR_LF_IN_FILE:
             memcpy(dptr,": ### Die DTA-Datei enthält (unzulässige) Zeilenvorschübe\n",58);
             dptr+=58;
             break;
-         case DTA_INVALID_C_EXTENSION: 
+         case DTA_INVALID_C_EXTENSION:
             memcpy(dptr,": ### ungültiger Typ bei einem Erweiterungsblock eines C-Datensatzes\n",69);
             dptr+=69;
             break;
-         case DTA_FOUND_SET_A_NOT_C: 
+         case DTA_FOUND_SET_A_NOT_C:
             memcpy(dptr,": ### Es wurde ein C-Datensatz erwartet, jedoch ein E-Satz gefunden\n",68);
             dptr+=68;
             break;
-         case DTA_FOUND_SET_E_NOT_C: 
+         case DTA_FOUND_SET_E_NOT_C:
             memcpy(dptr,": ### Es wurde ein C-Datensatz erwartet, jedoch ein E-Satz gefunden\n",68);
             dptr+=68;
             break;
-         case DTA_FOUND_SET_C_NOT_EXTENSION: 
+         case DTA_FOUND_SET_C_NOT_EXTENSION:
             memcpy(dptr,": ### Es wurde ein C-Datensatzerweiterung erwartet, jedoch ein C-Satz gefunden\n",79);
             dptr+=79;
             break;
-         case DTA_FOUND_SET_E_NOT_EXTENSION: 
+         case DTA_FOUND_SET_E_NOT_EXTENSION:
             memcpy(dptr,": ### Es wurde ein C-Datensatzerweiterung erwartet, jedoch ein E-Satz gefunden\n",79);
             dptr+=79;
             break;
-         case DTA_INVALID_EXTENSION_COUNT: 
+         case DTA_INVALID_EXTENSION_COUNT:
             memcpy(dptr,": ### Die Anzahl Erweiterungen paßt nicht zur Blocklänge\n",57);
             dptr+=57;
             break;
-         case DTA_INVALID_NUM: 
+         case DTA_INVALID_NUM:
             memcpy(dptr,": ### Ungültige Zeichen in numerischem Feld\n",44);
             dptr+=44;
             break;
-         case DTA_INVALID_CHARS: 
+         case DTA_INVALID_CHARS:
             memcpy(dptr,": ### Ungültige Zeichen im Textfeld\n",36);
             dptr+=36;
             break;
-         case DTA_CURRENCY_NOT_EURO: 
+         case DTA_CURRENCY_NOT_EURO:
             memcpy(dptr,": ### Die Währung des DTA-Datensatzes ist nicht Euro\n",53);
             dptr+=53;
             break;
-         case DTA_EMPTY_AMOUNT: 
+         case DTA_EMPTY_AMOUNT:
             memcpy(dptr,": ### In einem DTA-Datensatz wurde kein Betrag angegeben\n",57);
             dptr+=57;
             break;
-         case DTA_INVALID_TEXT_KEY: 
+         case DTA_INVALID_TEXT_KEY:
             memcpy(dptr,": ### Ungültiger Textschlüssel in der DTA-Datei\n",48);
             dptr+=48;
             break;
-         case DTA_EMPTY_STRING: 
+         case DTA_EMPTY_STRING:
             memcpy(dptr,": ### Für ein (alphanumerisches) Feld wurde kein Wert angegeben\n",64);
             dptr+=64;
             break;
-         case DTA_MARKER_A_NOT_FOUND: 
+         case DTA_MARKER_A_NOT_FOUND:
             memcpy(dptr,": ### Die Startmarkierung des A-Datensatzes wurde nicht gefunden\n",65);
             dptr+=65;
             break;
-         case DTA_MARKER_C_NOT_FOUND: 
+         case DTA_MARKER_C_NOT_FOUND:
             memcpy(dptr,": ### Die Startmarkierung des C-Datensatzes wurde nicht gefunden\n",65);
             dptr+=65;
             break;
-         case DTA_MARKER_E_NOT_FOUND: 
+         case DTA_MARKER_E_NOT_FOUND:
             memcpy(dptr,": ### Die Startmarkierung des E-Datensatzes wurde nicht gefunden\n",65);
             dptr+=65;
             break;
-         case DTA_INVALID_SET_C_LEN: 
+         case DTA_INVALID_SET_C_LEN:
             memcpy(dptr,": ### Die Satzlänge eines C-Datensatzes muß zwischen 187 und 622 Byte betragen\n",79);
             dptr+=79;
             break;
-         case DTA_INVALID_SET_LEN: 
+         case DTA_INVALID_SET_LEN:
             memcpy(dptr,": ### Die Satzlänge eines A- bzw. E-Satzes muß 128 Byte betragen\n",65);
             dptr+=65;
             break;
-         case DTA_WAERUNG_NOT_EURO: 
+         case DTA_WAERUNG_NOT_EURO:
             memcpy(dptr,": ### als Währung in der DTA-Datei ist nicht Euro eingetragen\n",62);
             dptr+=62;
             break;
-         case DTA_INVALID_ISSUE_DATE: 
+         case DTA_INVALID_ISSUE_DATE:
             memcpy(dptr,": ### das Ausführungsdatum ist zu früh oder zu spät (max. 15 Tage nach Dateierstellung)\n",88);
             dptr+=88;
             break;
-         case DTA_INVALID_DATE: 
+         case DTA_INVALID_DATE:
             memcpy(dptr,": ### das Datum ist ungültig\n",29);
             dptr+=29;
             break;
-         case DTA_FORMAT_ERROR: 
+         case DTA_FORMAT_ERROR:
             memcpy(dptr,": ### Formatfehler in der DTA-Datei\n",36);
             dptr+=36;
             break;
-         case DTA_FILE_WITH_ERRORS: 
+         case DTA_FILE_WITH_ERRORS:
             memcpy(dptr,": ### die DTA-Datei enthält Fehler\n",35);
             dptr+=35;
             break;
-         case INVALID_SEARCH_RANGE: 
+         case INVALID_SEARCH_RANGE:
             memcpy(dptr,": ### ungültiger Suchbereich angegeben (unten>oben)\n",52);
             dptr+=52;
             break;
-         case KEY_NOT_FOUND: 
+         case KEY_NOT_FOUND:
             memcpy(dptr,": ### Die Suche lieferte kein Ergebnis\n",39);
             dptr+=39;
             break;
-         case BAV_FALSE: 
+         case BAV_FALSE:
             memcpy(dptr,": ### BAV denkt, das Konto ist falsch (konto_check hält es für richtig)\n",72);
             dptr+=72;
             break;
-         case LUT2_NO_USER_BLOCK: 
+         case LUT2_NO_USER_BLOCK:
             memcpy(dptr,": ### User-Blocks müssen einen Typ > 500 haben\n",47);
             dptr+=47;
             break;
-         case INVALID_SET: 
+         case INVALID_SET:
             memcpy(dptr,": ### für ein LUT-Set sind nur die Werte 0, 1 oder 2 möglich\n",61);
             dptr+=61;
             break;
-         case NO_GERMAN_BIC: 
+         case NO_GERMAN_BIC:
             memcpy(dptr,": ### Ein Konto kann kann nur für deutsche Banken geprüft werden\n",65);
             dptr+=65;
             break;
-         case IPI_CHECK_INVALID_LENGTH: 
+         case IPI_CHECK_INVALID_LENGTH:
             memcpy(dptr,": ### Der zu validierende strukturierete Verwendungszweck muß genau 20 Zeichen enthalten\n",89);
             dptr+=89;
             break;
-         case IPI_INVALID_CHARACTER: 
+         case IPI_INVALID_CHARACTER:
             memcpy(dptr,": ### Im strukturierten Verwendungszweck dürfen nur alphanumerische Zeichen vorkommen\n",86);
             dptr+=86;
             break;
-         case IPI_INVALID_LENGTH: 
+         case IPI_INVALID_LENGTH:
             memcpy(dptr,": ### Die Länge des IPI-Verwendungszwecks darf maximal 18 Byte sein\n",68);
             dptr+=68;
             break;
-         case LUT1_FILE_USED: 
+         case LUT1_FILE_USED:
             memcpy(dptr,": ### Es wurde eine LUT-Datei im Format 1.0/1.1 geladen\n",56);
             dptr+=56;
             break;
-         case MISSING_PARAMETER: 
+         case MISSING_PARAMETER:
             memcpy(dptr,": ### Für die aufgerufene Funktion fehlt ein notwendiger Parameter\n",67);
             dptr+=67;
             break;
-         case IBAN2BIC_ONLY_GERMAN: 
+         case IBAN2BIC_ONLY_GERMAN:
             memcpy(dptr,": ### Die Funktion iban2bic() arbeitet nur mit deutschen Bankleitzahlen\n",72);
             dptr+=72;
             break;
-         case IBAN_OK_KTO_NOT: 
+         case IBAN_OK_KTO_NOT:
             memcpy(dptr,": ### Die Prüfziffer der IBAN stimmt, die der Kontonummer nicht\n",64);
             dptr+=64;
             break;
-         case KTO_OK_IBAN_NOT: 
+         case KTO_OK_IBAN_NOT:
             memcpy(dptr,": ### Die Prüfziffer der Kontonummer stimmt, die der IBAN nicht\n",64);
             dptr+=64;
             break;
-         case TOO_MANY_SLOTS: 
+         case TOO_MANY_SLOTS:
             memcpy(dptr,": ### Es sind nur maximal 500 Slots pro LUT-Datei möglich (Neukompilieren erforderlich)\n",88);
             dptr+=88;
             break;
-         case INIT_FATAL_ERROR: 
+         case INIT_FATAL_ERROR:
             memcpy(dptr,": ### Initialisierung fehlgeschlagen (init_wait geblockt)\n",58);
             dptr+=58;
             break;
-         case INCREMENTAL_INIT_NEEDS_INFO: 
+         case INCREMENTAL_INIT_NEEDS_INFO:
             memcpy(dptr,": ### Ein inkrementelles Initialisieren benötigt einen Info-Block in der LUT-Datei\n",83);
             dptr+=83;
             break;
-         case INCREMENTAL_INIT_FROM_DIFFERENT_FILE: 
+         case INCREMENTAL_INIT_FROM_DIFFERENT_FILE:
             memcpy(dptr,": ### Ein inkrementelles Initialisieren mit einer anderen LUT-Datei ist nicht möglich\n",86);
             dptr+=86;
             break;
-         case DEBUG_ONLY_FUNCTION: 
+         case DEBUG_ONLY_FUNCTION:
             memcpy(dptr,": ### Die Funktion ist nur in der Debug-Version vorhanden\n",58);
             dptr+=58;
             break;
-         case LUT2_INVALID: 
+         case LUT2_INVALID:
             memcpy(dptr,": ### Kein Datensatz der LUT-Datei ist aktuell gültig\n",54);
             dptr+=54;
             break;
-         case LUT2_NOT_YET_VALID: 
+         case LUT2_NOT_YET_VALID:
             memcpy(dptr,": ### Der Datensatz ist noch nicht gültig\n",42);
             dptr+=42;
             break;
-         case LUT2_NO_LONGER_VALID: 
+         case LUT2_NO_LONGER_VALID:
             memcpy(dptr,": ### Der Datensatz ist nicht mehr gültig\n",42);
             dptr+=42;
             break;
-         case LUT2_GUELTIGKEIT_SWAPPED: 
+         case LUT2_GUELTIGKEIT_SWAPPED:
             memcpy(dptr,": ### Im Gültigkeitsdatum sind Anfangs- und Enddatum vertauscht\n",64);
             dptr+=64;
             break;
-         case LUT2_INVALID_GUELTIGKEIT: 
+         case LUT2_INVALID_GUELTIGKEIT:
             memcpy(dptr,": ### Das angegebene Gültigkeitsdatum ist ungültig (Soll: JJJJMMTT-JJJJMMTT)\n",77);
             dptr+=77;
             break;
-         case LUT2_INDEX_OUT_OF_RANGE: 
+         case LUT2_INDEX_OUT_OF_RANGE:
             memcpy(dptr,": ### Der Index für die Filiale ist ungültig\n",45);
             dptr+=45;
             break;
-         case LUT2_INIT_IN_PROGRESS: 
+         case LUT2_INIT_IN_PROGRESS:
             memcpy(dptr,": ### Die Bibliothek wird gerade neu initialisiert\n",51);
             dptr+=51;
             break;
-         case LUT2_BLZ_NOT_INITIALIZED: 
+         case LUT2_BLZ_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld BLZ wurde nicht initialisiert\n",45);
             dptr+=45;
             break;
-         case LUT2_FILIALEN_NOT_INITIALIZED: 
+         case LUT2_FILIALEN_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Filialen wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
-         case LUT2_NAME_NOT_INITIALIZED: 
+         case LUT2_NAME_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Bankname wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
-         case LUT2_PLZ_NOT_INITIALIZED: 
+         case LUT2_PLZ_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld PLZ wurde nicht initialisiert\n",45);
             dptr+=45;
             break;
-         case LUT2_ORT_NOT_INITIALIZED: 
+         case LUT2_ORT_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Ort wurde nicht initialisiert\n",45);
             dptr+=45;
             break;
-         case LUT2_NAME_KURZ_NOT_INITIALIZED: 
+         case LUT2_NAME_KURZ_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Kurzname wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
-         case LUT2_PAN_NOT_INITIALIZED: 
+         case LUT2_PAN_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld PAN wurde nicht initialisiert\n",45);
             dptr+=45;
             break;
-         case LUT2_BIC_NOT_INITIALIZED: 
+         case LUT2_BIC_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld BIC wurde nicht initialisiert\n",45);
             dptr+=45;
             break;
-         case LUT2_PZ_NOT_INITIALIZED: 
+         case LUT2_PZ_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Prüfziffer wurde nicht initialisiert\n",52);
             dptr+=52;
             break;
-         case LUT2_NR_NOT_INITIALIZED: 
+         case LUT2_NR_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld NR wurde nicht initialisiert\n",44);
             dptr+=44;
             break;
-         case LUT2_AENDERUNG_NOT_INITIALIZED: 
+         case LUT2_AENDERUNG_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Änderung wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
-         case LUT2_LOESCHUNG_NOT_INITIALIZED: 
+         case LUT2_LOESCHUNG_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Löschung wurde nicht initialisiert\n",50);
             dptr+=50;
             break;
-         case LUT2_NACHFOLGE_BLZ_NOT_INITIALIZED: 
+         case LUT2_NACHFOLGE_BLZ_NOT_INITIALIZED:
             memcpy(dptr,": ### Das Feld Nachfolge-BLZ wurde nicht initialisiert\n",55);
             dptr+=55;
             break;
-         case LUT2_NOT_INITIALIZED: 
+         case LUT2_NOT_INITIALIZED:
             memcpy(dptr,": ### die Programmbibliothek wurde noch nicht initialisiert\n",60);
             dptr+=60;
             break;
-         case LUT2_FILIALEN_MISSING: 
+         case LUT2_FILIALEN_MISSING:
             memcpy(dptr,": ### der Block mit der Filialenanzahl fehlt in der LUT-Datei\n",62);
             dptr+=62;
             break;
-         case LUT2_PARTIAL_OK: 
+         case LUT2_PARTIAL_OK:
             memcpy(dptr,": ### es wurden nicht alle Blocks geladen\n",42);
             dptr+=42;
             break;
-         case LUT2_Z_BUF_ERROR: 
+         case LUT2_Z_BUF_ERROR:
             memcpy(dptr,": ### Buffer error in den ZLIB Routinen\n",40);
             dptr+=40;
             break;
-         case LUT2_Z_MEM_ERROR: 
+         case LUT2_Z_MEM_ERROR:
             memcpy(dptr,": ### Memory error in den ZLIB-Routinen\n",40);
             dptr+=40;
             break;
-         case LUT2_Z_DATA_ERROR: 
+         case LUT2_Z_DATA_ERROR:
             memcpy(dptr,": ### Datenfehler im komprimierten LUT-Block\n",45);
             dptr+=45;
             break;
-         case LUT2_BLOCK_NOT_IN_FILE: 
+         case LUT2_BLOCK_NOT_IN_FILE:
             memcpy(dptr,": ### Der Block ist nicht in der LUT-Datei enthalten\n",53);
             dptr+=53;
             break;
-         case LUT2_DECOMPRESS_ERROR: 
+         case LUT2_DECOMPRESS_ERROR:
             memcpy(dptr,": ### Fehler beim Dekomprimieren eines LUT-Blocks\n",50);
             dptr+=50;
             break;
-         case LUT2_COMPRESS_ERROR: 
+         case LUT2_COMPRESS_ERROR:
             memcpy(dptr,": ### Fehler beim Komprimieren eines LUT-Blocks\n",48);
             dptr+=48;
             break;
-         case LUT2_FILE_CORRUPTED: 
+         case LUT2_FILE_CORRUPTED:
             memcpy(dptr,": ### Die LUT-Datei ist korrumpiert\n",36);
             dptr+=36;
             break;
-         case LUT2_NO_SLOT_FREE: 
+         case LUT2_NO_SLOT_FREE:
             memcpy(dptr,": ### Im Inhaltsverzeichnis der LUT-Datei ist kein Slot mehr frei\n",66);
             dptr+=66;
             break;
-         case UNDEFINED_SUBMETHOD: 
+         case UNDEFINED_SUBMETHOD:
             memcpy(dptr,": ### Die (Unter)Methode ist nicht definiert\n",45);
             dptr+=45;
             break;
-         case EXCLUDED_AT_COMPILETIME: 
+         case EXCLUDED_AT_COMPILETIME:
             memcpy(dptr,": ### Der benötigte Programmteil wurde beim Kompilieren deaktiviert\n",68);
             dptr+=68;
             break;
-         case INVALID_LUT_VERSION: 
+         case INVALID_LUT_VERSION:
             memcpy(dptr,": ### Die Versionsnummer für die LUT-Datei ist ungültig\n",56);
             dptr+=56;
             break;
-         case INVALID_PARAMETER_STELLE1: 
+         case INVALID_PARAMETER_STELLE1:
             memcpy(dptr,": ### ungültiger Prüfparameter (erste zu prüfende Stelle)\n",58);
             dptr+=58;
             break;
-         case INVALID_PARAMETER_COUNT: 
+         case INVALID_PARAMETER_COUNT:
             memcpy(dptr,": ### ungültiger Prüfparameter (Anzahl zu prüfender Stellen)\n",61);
             dptr+=61;
             break;
-         case INVALID_PARAMETER_PRUEFZIFFER: 
+         case INVALID_PARAMETER_PRUEFZIFFER:
             memcpy(dptr,": ### ungültiger Prüfparameter (Position der Prüfziffer)\n",57);
             dptr+=57;
             break;
-         case INVALID_PARAMETER_WICHTUNG: 
+         case INVALID_PARAMETER_WICHTUNG:
             memcpy(dptr,": ### ungültiger Prüfparameter (Wichtung)\n",42);
             dptr+=42;
             break;
-         case INVALID_PARAMETER_METHODE: 
+         case INVALID_PARAMETER_METHODE:
             memcpy(dptr,": ### ungültiger Prüfparameter (Rechenmethode)\n",47);
             dptr+=47;
             break;
-         case LIBRARY_INIT_ERROR: 
+         case LIBRARY_INIT_ERROR:
             memcpy(dptr,": ### Problem beim Initialisieren der globalen Variablen\n",57);
             dptr+=57;
             break;
-         case LUT_CRC_ERROR: 
+         case LUT_CRC_ERROR:
             memcpy(dptr,": ### Prüfsummenfehler in der blz.lut Datei\n",44);
             dptr+=44;
             break;
-         case FALSE_GELOESCHT: 
+         case FALSE_GELOESCHT:
             memcpy(dptr,": ### falsch (die BLZ wurde außerdem gelöscht)\n",47);
             dptr+=47;
             break;
-         case OK_NO_CHK_GELOESCHT: 
+         case OK_NO_CHK_GELOESCHT:
             memcpy(dptr,": ### ok, ohne Prüfung (die BLZ wurde allerdings gelöscht)\n",59);
             dptr+=59;
             break;
-         case OK_GELOESCHT: 
+         case OK_GELOESCHT:
             memcpy(dptr,": ### ok (die BLZ wurde allerdings gelöscht)\n",45);
             dptr+=45;
             break;
-         case BLZ_GELOESCHT: 
+         case BLZ_GELOESCHT:
             memcpy(dptr,": ### die Bankleitzahl wurde gelöscht\n",38);
             dptr+=38;
             break;
-         case INVALID_BLZ_FILE: 
+         case INVALID_BLZ_FILE:
             memcpy(dptr,": ### Fehler in der blz.txt Datei (falsche Zeilenlänge)\n",56);
             dptr+=56;
             break;
-         case LIBRARY_IS_NOT_THREAD_SAFE: 
+         case LIBRARY_IS_NOT_THREAD_SAFE:
             memcpy(dptr,": ### undefinierte Funktion, die library wurde mit THREAD_SAFE=0 kompiliert\n",76);
             dptr+=76;
             break;
-         case FATAL_ERROR: 
+         case FATAL_ERROR:
             memcpy(dptr,": ### schwerer Fehler im Konto_check-Modul\n",43);
             dptr+=43;
             break;
-         case INVALID_KTO_LENGTH: 
+         case INVALID_KTO_LENGTH:
             memcpy(dptr,": ### ein Konto muß zwischen 1 und 10 Stellen haben\n",52);
             dptr+=52;
             break;
-         case FILE_WRITE_ERROR: 
+         case FILE_WRITE_ERROR:
             memcpy(dptr,": ### kann Datei nicht schreiben\n",33);
             dptr+=33;
             break;
-         case FILE_READ_ERROR: 
+         case FILE_READ_ERROR:
             memcpy(dptr,": ### kann Datei nicht lesen\n",29);
             dptr+=29;
             break;
-         case ERROR_MALLOC: 
+         case ERROR_MALLOC:
             memcpy(dptr,": ### kann keinen Speicher allokieren\n",38);
             dptr+=38;
             break;
-         case NO_BLZ_FILE: 
+         case NO_BLZ_FILE:
             memcpy(dptr,": ### die blz.txt Datei wurde nicht gefunden\n",45);
             dptr+=45;
             break;
-         case INVALID_LUT_FILE: 
+         case INVALID_LUT_FILE:
             memcpy(dptr,": ### die blz.lut Datei ist inkosistent/ungültig\n",49);
             dptr+=49;
             break;
-         case NO_LUT_FILE: 
+         case NO_LUT_FILE:
             memcpy(dptr,": ### die blz.lut Datei wurde nicht gefunden\n",45);
             dptr+=45;
             break;
-         case INVALID_BLZ_LENGTH: 
+         case INVALID_BLZ_LENGTH:
             memcpy(dptr,": ### die Bankleitzahl ist nicht achtstellig\n",45);
             dptr+=45;
             break;
-         case INVALID_BLZ: 
+         case INVALID_BLZ:
             memcpy(dptr,": ### die Bankleitzahl ist ungültig\n",36);
             dptr+=36;
             break;
-         case INVALID_KTO: 
+         case INVALID_KTO:
             memcpy(dptr,": ### das Konto ist ungültig\n",29);
             dptr+=29;
             break;
-         case NOT_IMPLEMENTED: 
+         case NOT_IMPLEMENTED:
             memcpy(dptr,": ### die Methode wurde noch nicht implementiert\n",49);
             dptr+=49;
             break;
-         case NOT_DEFINED: 
+         case NOT_DEFINED:
             memcpy(dptr,": ### die Methode ist nicht definiert\n",38);
             dptr+=38;
             break;
-         case FALSE: 
+         case FALSE:
             memcpy(dptr,": ### falsch\n",13);
             dptr+=13;
             break;
-         case OK: 
+         case OK:
             memcpy(dptr,": ok\n",5);
             dptr+=5;
             break;
-         case OK_NO_CHK: 
+         case OK_NO_CHK:
             memcpy(dptr,": ok, ohne Prüfung\n",19);
             dptr+=19;
             break;
-         case OK_TEST_BLZ_USED: 
+         case OK_TEST_BLZ_USED:
             memcpy(dptr,": ok, für den Test wurde eine Test-BLZ verwendet\n",49);
             dptr+=49;
             break;
-         case LUT2_VALID: 
+         case LUT2_VALID:
             memcpy(dptr,": Der Datensatz ist aktuell gültig\n",35);
             dptr+=35;
             break;
-         case LUT2_NO_VALID_DATE: 
+         case LUT2_NO_VALID_DATE:
             memcpy(dptr,": Der Datensatz enthält kein Gültigkeitsdatum\n",46);
             dptr+=46;
             break;
-         case LUT1_SET_LOADED: 
+         case LUT1_SET_LOADED:
             memcpy(dptr,": Die Datei ist im alten LUT-Format (1.0/1.1)\n",46);
             dptr+=46;
             break;
-         case LUT1_FILE_GENERATED: 
+         case LUT1_FILE_GENERATED:
             memcpy(dptr,": ok, es wurde allerdings eine LUT-Datei im alten Format (1.0/1.1) generiert\n",77);
             dptr+=77;
             break;
-         case DTA_FILE_WITH_WARNINGS: 
+         case DTA_FILE_WITH_WARNINGS:
             memcpy(dptr,": In der DTAUS-Datei wurden kleinere Fehler gefunden\n",53);
             dptr+=53;
             break;
-         case LUT_V2_FILE_GENERATED: 
+         case LUT_V2_FILE_GENERATED:
             memcpy(dptr,": ok, es wurde allerdings eine LUT-Datei im Format 2.0 generiert (Compilerswitch)\n",82);
             dptr+=82;
             break;
-         case KTO_CHECK_VALUE_REPLACED: 
+         case KTO_CHECK_VALUE_REPLACED:
             memcpy(dptr,": ok, der Wert für den Schlüssel wurde überschrieben\n",53);
             dptr+=53;
             break;
-         case OK_UNTERKONTO_POSSIBLE: 
+         case OK_UNTERKONTO_POSSIBLE:
             memcpy(dptr,": wahrscheinlich ok, die Kontonummer kann allerdings (nicht angegebene) Unterkonten enthalten\n",94);
             dptr+=94;
             break;
-         case OK_UNTERKONTO_GIVEN: 
+         case OK_UNTERKONTO_GIVEN:
             memcpy(dptr,": wahrscheinlich ok, die Kontonummer enthält eine Unterkontonummer\n",67);
             dptr+=67;
             break;
-         case OK_SLOT_CNT_MIN_USED: 
+         case OK_SLOT_CNT_MIN_USED:
             memcpy(dptr,": ok, die Anzahl Slots wurde auf SLOT_CNT_MIN (60) hochgesetzt\n",63);
             dptr+=63;
             break;
-         case SOME_KEYS_NOT_FOUND: 
+         case SOME_KEYS_NOT_FOUND:
             memcpy(dptr,": ok, ein(ige) Schlüssel wurden nicht gefunden\n",47);
             dptr+=47;
             break;
-         case LUT2_KTO_NOT_CHECKED: 
+         case LUT2_KTO_NOT_CHECKED:
             memcpy(dptr,": Die Bankverbindung wurde nicht getestet\n",42);
             dptr+=42;
             break;
-         case LUT2_OK_WITHOUT_IBAN_RULES: 
+         case LUT2_OK_WITHOUT_IBAN_RULES:
             memcpy(dptr,": Es wurden fast alle Blocks (außer den IBAN-Regeln) geladen\n",61);
             dptr+=61;
             break;
-         case OK_NACHFOLGE_BLZ_USED: 
+         case OK_NACHFOLGE_BLZ_USED:
             memcpy(dptr,": ok, für die BLZ wurde allerdings die Nachfolge-BLZ eingesetzt\n",64);
             dptr+=64;
             break;
-         case OK_KTO_REPLACED: 
+         case OK_KTO_REPLACED:
             memcpy(dptr,": ok, die Kontonummer wurde allerdings ersetzt\n",47);
             dptr+=47;
             break;
-         case OK_BLZ_REPLACED: 
+         case OK_BLZ_REPLACED:
             memcpy(dptr,": ok, die Bankleitzahl wurde allerdings ersetzt\n",48);
             dptr+=48;
             break;
-         case OK_BLZ_KTO_REPLACED: 
+         case OK_BLZ_KTO_REPLACED:
             memcpy(dptr,": ok, die Bankleitzahl und Kontonummer wurde allerdings ersetzt\n",64);
             dptr+=64;
             break;
-         case OK_IBAN_WITHOUT_KC_TEST: 
+         case OK_IBAN_WITHOUT_KC_TEST:
             memcpy(dptr,": ok, die Bankverbindung ist (ohne Test) als richtig anzusehen\n",63);
             dptr+=63;
             break;
-         case OK_INVALID_FOR_IBAN: 
+         case OK_INVALID_FOR_IBAN:
             memcpy(dptr,": ok, für IBAN ist (durch eine Regel) allerdings ein anderer BIC definiert\n",75);
             dptr+=75;
             break;
-         case OK_HYPO_REQUIRES_KTO: 
+         case OK_HYPO_REQUIRES_KTO:
             memcpy(dptr,": ok, für die BIC-Bestimmung der ehemaligen Hypo-Bank für IBAN wird i.A. zusätzlich die Kontonummer benötigt\n",109);
             dptr+=109;
             break;
-         case OK_KTO_REPLACED_NO_PZ: 
+         case OK_KTO_REPLACED_NO_PZ:
             memcpy(dptr,": ok, die Kontonummer wurde ersetzt, die neue Kontonummer hat keine Prüfziffer\n",79);
             dptr+=79;
             break;
-         case OK_UNTERKONTO_ATTACHED: 
+         case OK_UNTERKONTO_ATTACHED:
             memcpy(dptr,": ok, es wurde ein (weggelassenes) Unterkonto angefügt\n",55);
             dptr+=55;
             break;
@@ -1890,7 +1890,7 @@ if(!inputname)inputname="blz_in.txt";
    if(cnt!=(dptr-dbuffer))perror("Schreibfehler bei Ausgabe");
 
       /* Die Datei muß noch auf die richtige Länge abgeschnitten werden,
-       * denn, falls sie schon existierte,wurden existierende Sektoren 
+       * denn, falls sie schon existierte,wurden existierende Sektoren
        * nicht freigegeben, sondern nur überschrieben (etwas schneller);
        * ein einfaches ftruncate() mit der Anzahl geschriebener Bytes geht
        * allerdings bei M$* daneben, da hier immer statt \n ein \r\n
