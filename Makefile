@@ -49,7 +49,7 @@ LIB_VERSION = $(LIB_MAJOR_VERSION).$(LIB_MINOR_VERSION).$(LIB_PATCHLEVEL)
 all: konto_check konto_check_mini lut test
 
 test: konto_check testkonten
-	./konto_check testkonten.txt testkonten.out
+	./konto_check testkonten.txt testkonten.out && cat testkonten.out
 
 testkonten:
 	touch testkonten.txt
