@@ -1,0 +1,2 @@
+#!/bin/sh
+astyle -UjcfpHs2xe $@
